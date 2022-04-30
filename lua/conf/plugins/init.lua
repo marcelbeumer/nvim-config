@@ -47,6 +47,8 @@ M.register = function()
 end
 
 M.setup = function()
+	M.register()
+
 	require("which-key").setup({})
 	require("zen-mode").setup({ width = 80 })
 	require("dap-go").setup()
