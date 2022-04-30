@@ -1,49 +1,49 @@
 local M = {}
 
-local packages = {
-	"JoosepAlviste/nvim-ts-context-commentstring",
-	"NTBBloodbath/color-converter.nvim",
-	"RRethy/nvim-treesitter-textsubjects",
-	"editorconfig/editorconfig-vim",
-	"folke/lua-dev.nvim",
-	"folke/persistence.nvim",
-	"folke/tokyonight.nvim",
-	"folke/which-key.nvim",
-	"folke/zen-mode.nvim",
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/cmp-nvim-lsp-signature-help",
-	"hrsh7th/cmp-vsnip",
-	"hrsh7th/nvim-cmp",
-	"hrsh7th/vim-vsnip",
-	"jose-elias-alvarez/null-ls.nvim",
-	"jose-elias-alvarez/nvim-lsp-ts-utils",
-	"kazhala/close-buffers.nvim",
-	"kdheepak/lazygit.nvim",
-	"leoluz/nvim-dap-go",
-	"mfussenegger/nvim-dap",
-	"neovim/nvim-lspconfig",
-	"norcalli/nvim-colorizer.lua",
-	"nvim-lua/plenary.nvim",
-	"nvim-telescope/telescope-fzy-native.nvim",
-	"nvim-telescope/telescope.nvim",
-	"nvim-treesitter/nvim-treesitter",
-	"preservim/nerdtree",
-	"rafcamlet/nvim-luapad",
-	"ray-x/go.nvim",
-	"rcarriga/nvim-dap-ui",
-	"rmagatti/goto-preview",
-	"sbdchd/neoformat",
-	"terrortylor/nvim-comment",
-	"tpope/vim-fugitive",
-	"tpope/vim-surround",
-	"wbthomason/packer.nvim",
-	"windwp/nvim-autopairs",
-}
-
 M.register = function()
-	local paq = require("paq")
-	paq(packages)
+	local packer = require("packer")
+	local use = packer.use
+	packer.init()
+	packer.reset()
+
+	use("JoosepAlviste/nvim-ts-context-commentstring")
+	use("NTBBloodbath/color-converter.nvim")
+	use("RRethy/nvim-treesitter-textsubjects")
+	use("editorconfig/editorconfig-vim")
+	use("folke/lua-dev.nvim")
+	use("folke/persistence.nvim")
+	use("folke/tokyonight.nvim")
+	use("folke/which-key.nvim")
+	use("folke/zen-mode.nvim")
+	use("hrsh7th/cmp-buffer")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-nvim-lsp-signature-help")
+	use("hrsh7th/cmp-vsnip")
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/vim-vsnip")
+	use("jose-elias-alvarez/null-ls.nvim")
+	use("jose-elias-alvarez/nvim-lsp-ts-utils")
+	use("kazhala/close-buffers.nvim")
+	use("kdheepak/lazygit.nvim")
+	use("leoluz/nvim-dap-go")
+	use("mfussenegger/nvim-dap")
+	use("neovim/nvim-lspconfig")
+	use("norcalli/nvim-colorizer.lua")
+	use("nvim-lua/plenary.nvim")
+	use("nvim-telescope/telescope-fzy-native.nvim")
+	use("nvim-telescope/telescope.nvim")
+	use("nvim-treesitter/nvim-treesitter")
+	use("preservim/nerdtree")
+	use("rafcamlet/nvim-luapad")
+	use("ray-x/go.nvim")
+	use("rcarriga/nvim-dap-ui")
+	use("rmagatti/goto-preview")
+	use("sbdchd/neoformat")
+	use("terrortylor/nvim-comment")
+	use("tpope/vim-fugitive")
+	use("tpope/vim-surround")
+	use("wbthomason/packer.nvim")
+	use("windwp/nvim-autopairs")
 end
 
 M.setup = function()
