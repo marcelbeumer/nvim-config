@@ -19,8 +19,15 @@ Optionally use following environment variables:
   - `normal`: normal startup (default)
   - `bare`: bare nvim without config
   - `plugreg`: only register plugins
-  - example: `NVIM_STARTUP=plugreg nvim +PackerSync`
-- `NVIM_TS_LSP=<tsserver|volar>`
+- `NVIM_LSP=<on|off>`
+  - `on`: set up LSP (default)
+  - `off`: do not setup LSP
+- `NVIM_LSP_AUTO_FORMAT=<on|off>`
+  - `on`: enable LSP auto formatting (default)
+  - `off`: disable LSP auto formatting
+- `NVIM_TS_LSP=<tsserver|volar|none>`
   - `tsserver`: use `tsserver` LSP server (default)
   - `volar`: use `volar` vue LSP server
-  - example: `NVIM_TS_LSP=volar nvim`
+  - `none`: no TS LSP server
+
+Example: `NVIM_LSP_AUTO_FORMAT=off NVIM_TS_LSP=volar nvim`
