@@ -1,5 +1,7 @@
 # nvim-config
 
+Personal nvim config for [neovim nightly](https://github.com/marcelbeumer/neovim). Implicit system dependencies may cause errors on other machines.
+
 ## Install
 
 - `rm -rf ~/.config/nvim` to remove old config
