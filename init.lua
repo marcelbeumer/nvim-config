@@ -1,7 +1,9 @@
-if vim.env.NO_PLUGINS == "1" then
+local env = require("conf.env")
+
+if env.NVIM_STARTUP == "bare" then
 	-- nothing
-elseif vim.env.PLUGIN_REGISTER_ONLY == "1" then
+elseif env.NVIM_STARTUP == "plugreg" then
 	require("conf.plugins").register()
-else
+elseif env.NVIM_STARTUP == "normal" then
 	require("conf").setup()
 end

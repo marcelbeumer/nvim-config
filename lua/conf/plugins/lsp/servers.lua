@@ -1,6 +1,7 @@
 local M = {}
 
 M.setup = function()
+	local env = require("conf.env")
 	local lspconfig = require("lspconfig")
 	local config = require("conf.plugins.lsp.server_config")
 
@@ -21,42 +22,44 @@ M.setup = function()
 		on_attach = config.on_attach,
 	})
 
-	lspconfig.tsserver.setup(config.config({
-		-- init_options = {
-		-- 	preferences = {
-		-- 	  importModuleSpecifierEnding = "js",
-		-- 	},
-		-- },
-		on_attach = function(lsp_client, bufnr)
-			config.disable_formatting(lsp_client)
-			local lsp_ts_utils = require("nvim-lsp-ts-utils")
-			lsp_ts_utils.setup({
-				eslint_enable_code_actions = false,
-				update_imports_on_move = true,
-				require_confirmation_on_move = true,
-			})
-			lsp_ts_utils.setup_client(lsp_client)
-			vim.cmd([[command! -buffer OrganizeImports TSLspOrganize]])
-			config.on_attach(lsp_client, bufnr)
-			-- vim.cmd("TSLspOrganizeSync")
-			-- vim.lsp.buf.formatting_sync()
-			-- vim.cmd("up")
-			-- vim.defer_fn(function()
-			--   vim.cmd("next")
-			-- end, 100)
-		end,
-	}))
-
-	-- lspconfig.volar.setup(config.config_no_formatting({
-	-- 	filetypes = {
-	-- 		"typescript",
-	-- 		"javascript",
-	-- 		"javascriptreact",
-	-- 		"typescriptreact",
-	-- 		"vue",
-	-- 		"json",
-	-- 	},
-	-- }))
+	if env.NVIM_TS_LSP == "tsserver" then
+		lspconfig.tsserver.setup(config.config({
+			-- init_options = {
+			-- 	preferences = {
+			-- 	  importModuleSpecifierEnding = "js",
+			-- 	},
+			-- },
+			on_attach = function(lsp_client, bufnr)
+				config.disable_formatting(lsp_client)
+				local lsp_ts_utils = require("nvim-lsp-ts-utils")
+				lsp_ts_utils.setup({
+					eslint_enable_code_actions = false,
+					update_imports_on_move = true,
+					require_confirmation_on_move = true,
+				})
+				lsp_ts_utils.setup_client(lsp_client)
+				vim.cmd([[command! -buffer OrganizeImports TSLspOrganize]])
+				config.on_attach(lsp_client, bufnr)
+				-- vim.cmd("TSLspOrganizeSync")
+				-- vim.lsp.buf.formatting_sync()
+				-- vim.cmd("up")
+				-- vim.defer_fn(function()
+				--   vim.cmd("next")
+				-- end, 100)
+			end,
+		}))
+	elseif env.NVIM_TS_LSP == "volar" then
+		lspconfig.volar.setup(config.config_no_formatting({
+			filetypes = {
+				"typescript",
+				"javascript",
+				"javascriptreact",
+				"typescriptreact",
+				"vue",
+				"json",
+			},
+		}))
+	end
 
 	lspconfig.gopls.setup(config.config_no_formatting())
 
