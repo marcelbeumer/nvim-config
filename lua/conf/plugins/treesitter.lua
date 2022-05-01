@@ -1,6 +1,7 @@
 local M = {}
 
 M.setup = function()
+	-- Add gotmpl support
 	local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 	parser_config.gotmpl = {
 		install_info = {
@@ -11,9 +12,10 @@ M.setup = function()
 		used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" },
 	}
 
+	-- Get parser names (filtered)
 	local parser_names = {}
 	local exclude_parsers = {
-		"phpdoc", -- does not compile on Apple M1
+		"phpdoc", -- Does not compile on Apple M1
 	}
 	local parsers = require("nvim-treesitter.parsers").get_parser_configs()
 	for k, _ in pairs(parsers) do
@@ -22,6 +24,7 @@ M.setup = function()
 		end
 	end
 
+	-- Setup treesitter itself
 	require("nvim-treesitter.configs").setup({
 		ensure_installed = parser_names,
 		indent = { enable = false }, -- indenting is too quirky still
