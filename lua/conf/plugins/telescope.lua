@@ -100,10 +100,11 @@ M.setup = function()
     nnoremap <leader>f/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
     nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
     nnoremap <leader>flr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-    nnoremap <leader>fli <cmd>lua require('telescope.builtin').lsp_implementations()<cr>
+    nnoremap <leader>fli <cmd>lua require('telescope.builtin').lsp_implementations({jump_type = "never"})<cr>
     nnoremap <leader>fls <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
     nnoremap <leader>flS <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
-    nnoremap <leader>fld <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
+    nnoremap <leader>fld <cmd>lua require('telescope.builtin').lsp_definitions({jump_type = "never"})<cr>
+    nnoremap <leader>flt <cmd>lua require('telescope.builtin').lsp_type_definitions({jump_type = "never"})<cr>
     nnoremap <leader>fla <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
     nnoremap <leader>flq <cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>
     nnoremap <leader>flQ <cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>
