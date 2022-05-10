@@ -1,94 +1,94 @@
 local M = {}
 
 local function split_str(v)
-	local args = {}
-	for s in string.gmatch(v, "%S+") do
-		table.insert(args, s)
-	end
-	return args
+  local args = {}
+  for s in string.gmatch(v, "%S+") do
+    table.insert(args, s)
+  end
+  return args
 end
 
 M.live_grep = function(v)
-	local opts = {}
-	if #v > 0 then
-		opts.search_dirs = split_str(v)
-	end
-	require("telescope.builtin").live_grep(opts)
+  local opts = {}
+  if #v > 0 then
+    opts.search_dirs = split_str(v)
+  end
+  require("telescope.builtin").live_grep(opts)
 end
 
 M.find_files = function(v)
-	local opts = {}
-	if #v > 0 then
-		opts.search_dirs = split_str(v)
-	end
-	require("telescope.builtin").find_files(opts)
+  local opts = {}
+  if #v > 0 then
+    opts.search_dirs = split_str(v)
+  end
+  require("telescope.builtin").find_files(opts)
 end
 
 -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory
 M.project_files = function()
-	local opts = {
-		previewer = false,
-		layout_strategy = "vertical",
-		layout_config = { width = 0.5, height = 20, prompt_position = "top" },
-	}
-	local ok = pcall(require("telescope.builtin").git_files, opts)
-	if not ok then
-		require("telescope.builtin").find_files(opts)
-	end
+  local opts = {
+    previewer = false,
+    layout_strategy = "vertical",
+    layout_config = { width = 0.5, height = 20, prompt_position = "top" },
+  }
+  local ok = pcall(require("telescope.builtin").git_files, opts)
+  if not ok then
+    require("telescope.builtin").find_files(opts)
+  end
 end
 
 M.dirs = function()
-	local opts = {
-		previewer = false,
-		prompt_title = "Find dirs",
-		layout_strategy = "vertical",
-		layout_config = { width = 0.5, height = 20, prompt_position = "top" },
-		find_command = { "find", ".", "-type", "d" },
-	}
-	require("telescope.builtin").find_files(opts)
+  local opts = {
+    previewer = false,
+    prompt_title = "Find dirs",
+    layout_strategy = "vertical",
+    layout_config = { width = 0.5, height = 20, prompt_position = "top" },
+    find_command = { "find", ".", "-type", "d" },
+  }
+  require("telescope.builtin").find_files(opts)
 end
 
 M.buffers = function()
-	local opts = {
-		previewer = false,
-		layout_strategy = "vertical",
-		layout_config = { width = 0.5, height = 20, prompt_position = "top" },
-	}
-	require("telescope.builtin").buffers(opts)
+  local opts = {
+    previewer = false,
+    layout_strategy = "vertical",
+    layout_config = { width = 0.5, height = 20, prompt_position = "top" },
+  }
+  require("telescope.builtin").buffers(opts)
 end
 
 M.setup = function()
-	local action_set = require("telescope.actions.set")
-	require("telescope").setup({
-		defaults = {
-			layout_config = {
-				prompt_position = "top",
-			},
-			mappings = {
-				i = {
-					["<C-q>"] = require("telescope.actions").send_to_qflist,
-				},
-			},
-		},
-		pickers = {
-			find_files = {
-				-- workaround for folds not working when opening a file
-				-- https://github.com/nvim-telescope/telescope.nvim/issues/559
-				attach_mappings = function()
-					action_set.select:enhance({
-						post = function()
-							vim.cmd(":normal! zx")
-						end,
-					})
-					return true
-				end,
-			},
-		},
-	})
+  local action_set = require("telescope.actions.set")
+  require("telescope").setup({
+    defaults = {
+      layout_config = {
+        prompt_position = "top",
+      },
+      mappings = {
+        i = {
+          ["<C-q>"] = require("telescope.actions").send_to_qflist,
+        },
+      },
+    },
+    pickers = {
+      find_files = {
+        -- workaround for folds not working when opening a file
+        -- https://github.com/nvim-telescope/telescope.nvim/issues/559
+        attach_mappings = function()
+          action_set.select:enhance({
+            post = function()
+              vim.cmd(":normal! zx")
+            end,
+          })
+          return true
+        end,
+      },
+    },
+  })
 
-	require("telescope").load_extension("fzy_native")
+  require("telescope").load_extension("fzy_native")
 
-	vim.cmd([[
+  vim.cmd([[
     command! -nargs=* -complete=file TelescopeLiveGrep lua require('conf.plugins.telescope').live_grep(<q-args>)
     command! -nargs=* -complete=file TelescopeFindFiles lua require('conf.plugins.telescope').find_files(<q-args>)
 
