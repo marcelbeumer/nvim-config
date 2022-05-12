@@ -5,28 +5,33 @@ end
 local M = {}
 
 M.setup = function()
-  -- Visuals
-  vim.opt.termguicolors = true
-  -- vim.opt.laststatus = 3
-  vim.opt.signcolumn = "yes"
-  vim.opt.number = true
-  -- Backup, swap
-  vim.opt.swapfile = false
-  -- Editing
-  vim.opt.clipboard = "unnamed"
-  vim.opt.hidden = true
-  vim.opt.shortmess:append("c")
-  vim.opt.updatetime = 800 -- for CursorHold event
-  vim.opt.mouse = "nv" -- nice for window sizing
-  vim.opt.expandtab = true
-  vim.opt.shiftwidth = 2
-  vim.opt.softtabstop = 2
-  vim.opt.tabstop = 2
-  vim.opt.smartindent = true
-  vim.opt.ignorecase = true
-  vim.opt.joinspaces = true
-  vim.opt.linebreak = true
-  vim.opt.timeoutlen = 500 -- for which_key
+  -- Use 2 spaces tab as default
+  vim.o.expandtab = true
+  vim.o.shiftwidth = 2
+  vim.o.softtabstop = 2
+  vim.o.tabstop = 2
+  --Set highlight on search
+  vim.o.hlsearch = false
+  -- Line numbers on
+  vim.o.number = true
+  --Enable mouse mode in all modes
+  vim.o.mouse = "a"
+  --Enable break indent
+  vim.o.breakindent = true
+  --Save undo history
+  vim.o.undofile = true
+  --Case insensitive searching UNLESS /C or capital in search
+  vim.o.ignorecase = true
+  vim.o.smartcase = true
+  --Decrease update time
+  vim.o.updatetime = 250
+  -- Space for LSP signs etc
+  vim.o.signcolumn = "yes"
+  vim.o.termguicolors = true
+  -- Copy paste from and to nvim
+  vim.o.clipboard = "unnamed"
+  -- Set completeopt to have a better completion experience
+  vim.o.completeopt = "menuone,noselect"
 
   -- Commands
   vim.cmd([[command W w]])
