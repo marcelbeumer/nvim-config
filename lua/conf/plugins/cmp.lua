@@ -33,6 +33,7 @@ M.setup = function()
       comparators = {
         -- Sorting with gopls is good as it is
         -- so we disable additional sorting.
+        cmp.config.compare.sort_text,
       },
     },
   })
