@@ -36,28 +36,6 @@ M.setup = function()
       },
     },
   })
-
-  cmp.setup.filetype({
-    "typescript",
-    "typescriptreact",
-    "javascript",
-    "javascriptreact",
-    "vue",
-  }, {
-    sorting = {
-      -- Specific for typescript-language-server/volar
-      comparators = {
-        cmp.config.compare.offset,
-        cmp.config.compare.exact,
-        cmp.config.compare.locality,
-        -- cmp.config.compare.kind,
-        cmp.config.compare.sort_text,
-        cmp.config.compare.score,
-        cmp.config.compare.length,
-        cmp.config.compare.order,
-      },
-    },
-  })
 end
 
 M.get_lsp_capabilities = function()
