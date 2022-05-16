@@ -22,7 +22,7 @@ M.register = function()
   use("hrsh7th/cmp-vsnip")
   use("hrsh7th/nvim-cmp")
   use("hrsh7th/vim-vsnip")
-  -- pin null-ls: issue on my outdated 0.8, need to upgrade closer to HEAD
+  -- pin null-ls: issue with 0.8 (null-ls/client.lua:39: bad argument #1 to 'unpack' (table expected, got string))
   use({ "jose-elias-alvarez/null-ls.nvim", commit = "d871b418c67867a11a43eb1412a1a21aee888ae3" })
   use("jose-elias-alvarez/nvim-lsp-ts-utils")
   use("kazhala/close-buffers.nvim")
