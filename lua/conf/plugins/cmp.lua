@@ -2,6 +2,7 @@ local M = {}
 
 M.setup = function()
   local cmp = require("cmp")
+  local types = require("cmp.types")
   local luasnip = require("luasnip")
 
   vim.o.completeopt = "menu,menuone,noselect"
@@ -29,10 +30,11 @@ M.setup = function()
   })
 
   cmp.setup.filetype({ "go" }, {
+    preselect = types.cmp.PreselectMode.None,
     sorting = {
       comparators = {
-        -- Sorting with gopls is good as it is
-        -- so we disable additional sorting.
+        cmp.config.compare.length,
+        cmp.config.compare.locality,
         cmp.config.compare.sort_text,
       },
     },
