@@ -82,6 +82,8 @@ M.setup = function()
       },
     },
   }))
+
+  lspconfig.clangd.setup(config.config({}))
 end
 
 return M
