@@ -35,7 +35,7 @@ M.on_attach = function(lsp_client, bufnr)
   bufmap("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
   bufmap("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
 
-  if lsp_client.resolved_capabilities.document_formatting then
+  if lsp_client.server_capabilities.documentFormattingProvider then
     bufmap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
 
     if env.NVIM_LSP_AUTO_FORMAT == "on" then
@@ -48,11 +48,11 @@ M.on_attach = function(lsp_client, bufnr)
     end
   end
 
-  if lsp_client.resolved_capabilities.document_range_formatting then
+  if lsp_client.server_capabilities.documentRangeFormattingProvider then
     bufmap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
   end
 
-  if lsp_client.resolved_capabilities.document_highlight then
+  if lsp_client.server_capabilities.documentHighlightProvider then
     vim.cmd([[
       augroup lsp_buffer_highlight
         autocmd! * <buffer>
@@ -64,8 +64,8 @@ M.on_attach = function(lsp_client, bufnr)
 end
 
 M.disable_formatting = function(lsp_client)
-  lsp_client.resolved_capabilities.document_formatting = false
-  lsp_client.resolved_capabilities.document_range_formatting = false
+  lsp_client.server_capabilities.documentFormattingProvider = false
+  lsp_client.server_capabilities.documentRangeFormattingProvider = false
 end
 
 M.config = function(config)
