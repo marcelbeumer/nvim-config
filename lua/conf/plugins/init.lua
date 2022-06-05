@@ -48,6 +48,9 @@ M.register = function()
   use("tpope/vim-surround")
   use("wbthomason/packer.nvim")
   use("windwp/nvim-autopairs")
+  use("NTBBloodbath/doom-one.nvim")
+  use("sainnhe/everforest")
+  use("olimorris/onedarkpro.nvim")
 end
 
 M.setup = function()
@@ -75,6 +78,13 @@ M.setup = function()
   vim.g.tokyonight_italic_comments = false
   vim.g.tokyonight_italic_keywords = false
   vim.cmd([[colorscheme tokyonight]])
+
+  vim.g.everforest_background = "hard"
+  -- vim.g.everforest_colors_override = { bg0 = { "#202020", "234" }, bg2 = { "#282828", "235" } }
+  -- vim.cmd([[colorscheme everforest]])
+
+  require("onedarkpro").setup({ dark_theme = "onedark_dark" })
+  -- vim.cmd([[colorscheme onedarkpro]])
 end
 
 return M
