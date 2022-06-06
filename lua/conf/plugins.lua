@@ -116,7 +116,7 @@ end
 local setup_nvim_comment = function()
   require("nvim_comment").setup({
     hook = function()
-      require("ts_context_commentstring.internal").update_commentstring()
+      require("ts_context_commentstring.internal").update_commentstring({})
     end,
   })
 end
