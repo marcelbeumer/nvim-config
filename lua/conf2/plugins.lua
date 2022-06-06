@@ -16,7 +16,7 @@ local setup_cmp = function()
     },
     sources = {
       { name = "nvim_lsp" },
-      -- { name = "nvim_lsp_signature_help" },
+      { name = "nvim_lsp_signature_help" },
       { name = "luasnip" },
     },
     mapping = cmp.mapping.preset.insert({
@@ -105,8 +105,24 @@ local setup_treesitter = function()
   require("nvim-treesitter.configs").setup({
     ensure_installed = "all",
     ignore_install = { "phpdoc" },
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
+    },
     highlight = { enable = true },
   })
+end
+
+local setup_nvim_comment = function()
+  require("nvim_comment").setup({
+    hook = function()
+      require("ts_context_commentstring.internal").update_commentstring()
+    end,
+  })
+end
+
+local setup_autopairs = function()
+  require("nvim-autopairs").setup({})
 end
 
 M.register = function()
@@ -118,6 +134,7 @@ M.register = function()
   use("wbthomason/packer.nvim")
   use("editorconfig/editorconfig-vim")
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  use("JoosepAlviste/nvim-ts-context-commentstring")
   use("nvim-lua/plenary.nvim")
   use("preservim/nerdtree")
   use("folke/persistence.nvim")
@@ -134,6 +151,9 @@ M.register = function()
   use("nvim-telescope/telescope-fzy-native.nvim")
   use("ray-x/go.nvim")
   use("folke/tokyonight.nvim")
+  use("folke/lua-dev.nvim")
+  use("terrortylor/nvim-comment")
+  use("windwp/nvim-autopairs")
 end
 
 M.setup = function()
@@ -144,6 +164,8 @@ M.setup = function()
   setup_treesitter()
   setup_persistence()
   setup_telescope()
+  setup_nvim_comment()
+  setup_autopairs()
   require("go").setup()
 end
 
