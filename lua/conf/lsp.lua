@@ -44,7 +44,7 @@ local on_attach = function(client, bufnr)
 end
 
 M.setup = function()
-  local env = require("conf2.env")
+  local env = require("conf.env")
   local lspconfig = require("lspconfig")
 
   vim.diagnostic.config({
@@ -66,7 +66,7 @@ M.setup = function()
   vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
   local null_ls = require("null-ls")
-  local staticcheck = require("conf2.staticcheck")
+  local staticcheck = require("conf.staticcheck")
   null_ls.setup({
     sources = {
       null_ls.builtins.formatting.prettierd,
