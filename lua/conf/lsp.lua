@@ -46,6 +46,7 @@ end
 M.setup = function()
   local env = require("conf.env")
   local lspconfig = require("lspconfig")
+  local capabilities = require("conf.plugins").make_lsp_capabilities()
 
   vim.diagnostic.config({
     virtual_text = false,
@@ -75,6 +76,7 @@ M.setup = function()
       null_ls.builtins.formatting.golines,
       staticcheck,
     },
+    capabilities = capabilities,
     on_attach = on_attach,
   })
 
@@ -85,6 +87,7 @@ M.setup = function()
       -- 	  importModuleSpecifierEnding = "js",
       -- 	},
       -- },
+      capabilities = capabilities,
       on_attach = function(lsp_client, bufnr)
         disable_formatting(lsp_client)
         local lsp_ts_utils = require("nvim-lsp-ts-utils")
@@ -108,6 +111,7 @@ M.setup = function()
         "vue",
         "json",
       },
+      capabilities = capabilities,
       on_attach = function(lsp_client, bufnr)
         disable_formatting(lsp_client)
         on_attach(lsp_client, bufnr)
@@ -116,6 +120,7 @@ M.setup = function()
   end
 
   lspconfig.gopls.setup({
+    capabilities = capabilities,
     on_attach = function(lsp_client, bufnr)
       disable_formatting(lsp_client)
       on_attach(lsp_client, bufnr)
@@ -126,6 +131,7 @@ M.setup = function()
     lspconfig = {
       cmd = { "lua-language-server" },
     },
+    capabilities = capabilities,
     on_attach = function(lsp_client, bufnr)
       disable_formatting(lsp_client)
       on_attach(lsp_client, bufnr)
@@ -134,6 +140,7 @@ M.setup = function()
   lspconfig.sumneko_lua.setup(luadev)
 
   lspconfig.clangd.setup({
+    capabilities = capabilities,
     on_attach = function(lsp_client, bufnr)
       disable_formatting(lsp_client)
       on_attach(lsp_client, bufnr)
