@@ -26,6 +26,12 @@ M.setup = function()
   -- Copy paste from and to nvim
   vim.o.clipboard = "unnamed"
 
+  vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+      vim.highlight.on_yank()
+    end,
+  })
+
   vim.cmd([[command W w]])
   vim.cmd([[command FilePath let @*=expand("%")]])
   vim.cmd([[command FilePathAbs let @*=expand("%:p")]])
