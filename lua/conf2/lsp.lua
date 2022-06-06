@@ -44,7 +44,7 @@ local on_attach = function(client, bufnr)
 end
 
 M.setup = function()
-  local env = require("conf.env")
+  local env = require("conf2.env")
   local lspconfig = require("lspconfig")
 
   vim.diagnostic.config({
