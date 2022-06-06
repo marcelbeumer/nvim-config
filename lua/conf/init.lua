@@ -3,8 +3,10 @@ local M = {}
 M.setup = function()
   local env = require("conf.env")
 
-  if env.NVIM_STARTUP == "bare" then
+  if env.NVIM_STARTUP == "safe" then
     -- do nothing
+  elseif env.NVIM_STARTUP == "base" then
+    require("conf.base").setup()
   elseif env.NVIM_STARTUP == "plugreg" then
     require("conf.plugins").register()
   elseif env.NVIM_STARTUP == "normal" then

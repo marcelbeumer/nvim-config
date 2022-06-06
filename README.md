@@ -17,7 +17,8 @@ Optionally use following environment variables:
 
 - `NVIM_STARTUP=<normal|bare|plugreg>`
   - `normal`: normal startup (default)
-  - `bare`: bare nvim without config
+  - `base`: only base settings, no plugin/lsp setup
+  - `safe`: nvim without any user config
   - `plugreg`: only register plugins
 - `NVIM_LSP=<on|off>`
   - `on`: set up LSP (default)
