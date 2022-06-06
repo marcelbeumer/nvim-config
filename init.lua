@@ -1,9 +1,11 @@
 local env = require("conf.env")
 
 if env.NVIM_STARTUP == "bare" then
-	-- nothing
+  -- nothing
 elseif env.NVIM_STARTUP == "plugreg" then
-	require("conf.plugins").register()
+  require("conf2.plugins").register()
 elseif env.NVIM_STARTUP == "normal" then
-	require("conf").setup()
+  require("conf2").setup()
+elseif env.NVIM_STARTUP == "old" then
+  require("conf").setup()
 end
