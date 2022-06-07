@@ -9,7 +9,7 @@ Personal nvim config for [neovim nightly](https://github.com/marcelbeumer/neovim
 - `git clone --depth=1 https://github.com/marcelbeumer/nvim-config ~/.config/nvim` to clone this config
 - `git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim` to install [packer](https://github.com/wbthomason/packer.nvim)
 - `NVIM_STARTUP=plugreg nvim +PackerSync` to install plugins (quit when done; run again when some plugins [fail to install](https://github.com/wbthomason/packer.nvim/issues/897))
-- `nvim`, treesitter will compile parsers automatically (from now on manually do `:TSUpdate` when `treesitter` updates)
+- `nvim`, treesitter will compile parsers automatically
 
 ## Usage
 
