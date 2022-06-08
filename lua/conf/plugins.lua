@@ -71,7 +71,12 @@ local setup_telescope = function()
     },
   })
 
-  vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+  vim.keymap.set("n", "<leader>ff", function()
+    local ok = pcall(require("telescope.builtin").git_files, {})
+    if not ok then
+      require("telescope.builtin").find_files({})
+    end
+  end, {})
   vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
   vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
   vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
