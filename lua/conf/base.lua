@@ -1,38 +1,42 @@
 local M = {}
 
 M.setup = function()
+  -- For pretty printing lua objects (`:lua dump(vim.fn)`)
   function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, { ... })
     print(unpack(objects))
     return ...
   end
 
-  -- Line numbers on
+  -- Line numbers on.
   vim.o.number = true
-  --Enable mouse mode in all modes
+  --Enable mouse mode in all modes.
   vim.o.mouse = "a"
-  --Enable break indent
+  --Enable break indent.
   vim.o.breakindent = true
-  --Save undo history
+  --Save undo history.
   vim.o.undofile = true
-  --Case insensitive searching UNLESS /C or capital in search
+  --Case insensitive searching UNLESS /C or capital in search.
   vim.o.ignorecase = true
   vim.o.smartcase = true
-  --Decrease update time
+  --Decrease update time.
   vim.o.updatetime = 250
-  -- Space for LSP signs etc
+  -- Space for LSP signs etc.
   vim.o.signcolumn = "yes"
   vim.o.termguicolors = true
-  -- Copy paste from and to nvim
+  -- Copy paste from and to nvim.
   vim.o.clipboard = "unnamed"
 
+  -- Highlight yanked text.
   vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
       vim.highlight.on_yank()
     end,
   })
 
+  -- Too many typos but too stubborn to map to smth else.
   vim.cmd([[command W w]])
+  -- FilePath* commands to grab file paths.
   vim.cmd([[command FilePath let @*=expand("%")]])
   vim.cmd([[command FilePathAbs let @*=expand("%:p")]])
   vim.cmd([[command FilePathHead let @*=expand("%:h")]])
@@ -49,12 +53,13 @@ M.setup = function()
   vim.keymap.set("n", "<C-H>", ":tabprev<CR>")
   vim.keymap.set("n", "<C-s>", ":w<CR>")
   vim.keymap.set("n", "<C-w>N", ":vnew<CR>")
-  vim.keymap.set("n", "<leader>s", ":w<CR>")
   vim.keymap.set("n", "<leader>tn", ":tabnew<CR>")
   vim.keymap.set("n", "<leader>tb", ":tab sb %<CR>")
   vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
   vim.keymap.set("n", "<leader>bd", ":bdel<CR>")
 
+  -- DateStr* commands used in insert mode (<ctrl>r=DateStr<variant>)
+  -- for inserting current datetime.
   vim.cmd([[
     function! DateStrPretty() range
       return system('date "+%Y-%m-%d %H:%M:%S" | tr -d "\n"')
