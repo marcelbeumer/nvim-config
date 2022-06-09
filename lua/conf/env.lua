@@ -1,5 +1,5 @@
 return {
-  -- NVIM_STARTUP=<normal|base|safe|plugreg>`
+  -- NVIM_STARTUP=<normal|base|safe|plugreg>
   -- normal: normal startup (default)
   -- base: only base settings, no plugin/lsp setup
   -- safe: nvim without any user config
