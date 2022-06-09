@@ -10,4 +10,4 @@ Personal nvim config for [neovim nightly](https://github.com/marcelbeumer/neovim
 
 ## Usage
 
-Just `nvim`. Optionally use following [environment variables defined here](./lua/conf/env.lua). For example: `NVIM_LSP_AUTO_FORMAT=off NVIM_TS_LSP=volar nvim`.
+Just `nvim`. Optionally use environment variables [defined here](./lua/conf/env.lua). For example: `NVIM_LSP_AUTO_FORMAT=off NVIM_TS_LSP=volar nvim`.
