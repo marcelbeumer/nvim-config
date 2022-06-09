@@ -1,6 +1,6 @@
 # nvim-config
 
-Personal nvim config for [neovim nightly](https://github.com/marcelbeumer/neovim). Implicit system dependencies may cause errors on other machines. I put effort in keeping the config clean and documented, mostly as a hobby and a bit of OCD, but maybe benefits other nvimmers too.
+Personal nvim config for [neovim nightly](https://github.com/marcelbeumer/neovim). Implicit system dependencies may cause errors on other machines. I put effort in keeping the config clean and documented, mostly as a hobby and a bit of OCD, but maybe it benefits other nvimmers too.
 
 ## Install
 
