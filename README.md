@@ -13,22 +13,4 @@ Personal nvim config for [neovim nightly](https://github.com/marcelbeumer/neovim
 
 ## Usage
 
-Optionally use following environment variables:
-
-- `NVIM_STARTUP=<normal|bare|plugreg>`
-  - `normal`: normal startup (default)
-  - `base`: only base settings, no plugin/lsp setup
-  - `safe`: nvim without any user config
-  - `plugreg`: only register plugins
-- `NVIM_LSP=<on|off>`
-  - `on`: set up LSP (default)
-  - `off`: do not setup LSP
-- `NVIM_LSP_AUTO_FORMAT=<on|off>`
-  - `on`: enable LSP auto formatting (default)
-  - `off`: disable LSP auto formatting
-- `NVIM_TS_LSP=<tsserver|volar|none>`
-  - `tsserver`: use `tsserver` LSP server (default)
-  - `volar`: use `volar` vue LSP server
-  - `none`: no TS LSP server
-
-Example: `NVIM_LSP_AUTO_FORMAT=off NVIM_TS_LSP=volar nvim`
+Optionally use following [environment variables defined here](./lua/conf/env.lua). For example: `NVIM_LSP_AUTO_FORMAT=off NVIM_TS_LSP=volar nvim`
