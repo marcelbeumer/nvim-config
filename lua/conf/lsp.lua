@@ -1,18 +1,19 @@
 local M = {}
 
+-- disable_formatting disables lsp client formatting capabilities.
+-- This is used for many LSP servers as most often we do formatting with
+-- the null-ls LSP server separately.
 local disable_formatting = function(lsp_client)
   lsp_client.server_capabilities.documentFormattingProvider = false
   lsp_client.server_capabilities.documentRangeFormattingProvider = false
 end
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+-- on_attach configures the lsp client for a specific buffer.
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
@@ -47,26 +48,35 @@ end
 M.setup = function()
   local env = require("conf.env")
   local lspconfig = require("lspconfig")
+  -- Our autocomplete plugin will update the default LSP capabilities
+  -- options normally passed to the LSP servers.
   local capabilities = require("conf.plugins").make_lsp_capabilities()
 
   vim.diagnostic.config({
+    -- Virtual text is too noisy IMO. Downside is that you have to manually
+    -- trigger showing diagnostics (with K on a specific line).
     virtual_text = false,
+    -- Without noisy virtual text it's ok to update in insert mode.
     update_in_insert = true,
+    -- Put errors on top.
     severity_sort = true,
   })
 
+  -- Configure prettier gutter diagnostic signs.
   local signs = { Error = "●", Warn = "●", Hint = "●", Info = "●" }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl })
   end
 
+  -- Global mappings.
   local opts = { noremap = true, silent = true }
   vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
   vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
+  -- We use null-ls for most formatting and linting.
   local null_ls = require("null-ls")
   local staticcheck = require("conf.staticcheck")
   null_ls.setup({
@@ -81,8 +91,11 @@ M.setup = function()
     on_attach = on_attach,
   })
 
+  -- Different LSP severs for TypeScript
   if env.NVIM_TS_LSP == "tsserver" then
     lspconfig.tsserver.setup({
+      -- Uncomment if you want auto imports to be ES modules paths
+      -- with file extensions.
       -- init_options = {
       -- 	preferences = {
       -- 	  importModuleSpecifierEnding = "js",
@@ -91,6 +104,7 @@ M.setup = function()
       capabilities = capabilities,
       on_attach = function(lsp_client, bufnr)
         disable_formatting(lsp_client)
+        -- Add some extra LSP features on top of what the server provides.
         local lsp_ts_utils = require("nvim-lsp-ts-utils")
         lsp_ts_utils.setup({
           eslint_enable_code_actions = false,
