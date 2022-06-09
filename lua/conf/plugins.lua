@@ -27,8 +27,10 @@ local setup_cmp = function()
   })
 
   cmp.setup.filetype({ "go" }, {
+    -- gopls preselects items which I don't like.
     preselect = types.cmp.PreselectMode.None,
     sorting = {
+      -- IMO these comparator settings work better with gopls.
       comparators = {
         cmp.config.compare.length,
         cmp.config.compare.locality,
@@ -108,6 +110,7 @@ end
 local setup_treesitter = function()
   require("nvim-treesitter.configs").setup({
     ensure_installed = "all",
+    -- phpdoc gave errors on darwin-arm64.
     ignore_install = { "phpdoc" },
     context_commentstring = {
       enable = true,
@@ -135,28 +138,46 @@ M.register = function()
   packer.init()
   packer.reset()
 
+  -- Packer updates itself.
   use("wbthomason/packer.nvim")
-  use("editorconfig/editorconfig-vim")
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-  use("JoosepAlviste/nvim-ts-context-commentstring")
+  -- Dependancy of many plugins.
   use("nvim-lua/plenary.nvim")
+  -- Official LSP setup helper plugin.
+  use("neovim/nvim-lspconfig")
+  -- Editor config support.
+  use("editorconfig/editorconfig-vim")
+  -- Tresitter.
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  -- TypeScript: support different comment styles depending on context.
+  use("JoosepAlviste/nvim-ts-context-commentstring")
+  -- TypeScript: extra LSP features.
+  use("jose-elias-alvarez/nvim-lsp-ts-utils")
+  -- File explorer.
   use("preservim/nerdtree")
+  -- Simple session management.
   use("folke/persistence.nvim")
+  -- Autocompletion and plugins.
+  use("hrsh7th/nvim-cmp")
   use("hrsh7th/cmp-nvim-lsp")
   use("hrsh7th/cmp-nvim-lsp-signature-help")
   use("saadparwaiz1/cmp_luasnip")
-  use("hrsh7th/nvim-cmp")
+  -- Snippets (required by cmp autocomplete).
   use("L3MON4D3/LuaSnip")
+  -- General purpose LSP server, mostly for linting and formatting.
   use("jose-elias-alvarez/null-ls.nvim")
-  use("jose-elias-alvarez/nvim-lsp-ts-utils")
+  -- Lazygit integration.
   use("kdheepak/lazygit.nvim")
-  use("neovim/nvim-lspconfig")
+  -- Quick file/buffer/lsp/etc pickers.
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-fzy-native.nvim")
+  -- Go specific features.
   use("ray-x/go.nvim")
-  use("folke/tokyonight.nvim")
+  -- Commenting plugin.
   use("terrortylor/nvim-comment")
+  -- Automagically insert closing tags etc.
   use("windwp/nvim-autopairs")
+  -- Colorscheme.
+  use("folke/tokyonight.nvim")
 end
 
 M.setup = function()
@@ -175,6 +196,8 @@ M.setup = function()
   require("go").setup()
 end
 
+-- make_lsp_capabilities updates the default LSP capabilities options
+-- with features that our autocomplete plugin supports.
 M.make_lsp_capabilities = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   return require("cmp_nvim_lsp").update_capabilities(capabilities)
