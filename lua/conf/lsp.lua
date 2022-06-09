@@ -145,7 +145,6 @@ M.setup = function()
   lspconfig.clangd.setup({
     capabilities = capabilities,
     on_attach = function(lsp_client, bufnr)
-      disable_formatting(lsp_client)
       on_attach(lsp_client, bufnr)
     end,
   })
