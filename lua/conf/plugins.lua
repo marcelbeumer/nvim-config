@@ -103,7 +103,6 @@ local setup_tokyonight = function()
   vim.g.tokyonight_style = "night"
   vim.g.tokyonight_italic_comments = false
   vim.g.tokyonight_italic_keywords = false
-  vim.cmd([[colorscheme tokyonight]])
 end
 
 local setup_treesitter = function()
@@ -162,7 +161,10 @@ end
 
 M.setup = function()
   M.register()
+
   setup_tokyonight()
+  vim.cmd([[colorscheme tokyonight]])
+
   setup_cmp()
   setup_nerd()
   setup_treesitter()
