@@ -144,7 +144,7 @@ M.register = function()
 
   -- Packer updates itself.
   use("wbthomason/packer.nvim")
-  -- Dependancy of many plugins.
+  -- Common plugin dependency.
   use("nvim-lua/plenary.nvim")
   -- Official LSP setup helper plugin.
   use("neovim/nvim-lspconfig")
