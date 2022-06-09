@@ -13,7 +13,7 @@ local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  -- Mappings.
+  -- Buffer specific mappings.
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
@@ -31,6 +31,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
   vim.keymap.set("n", "<space>f", vim.lsp.buf.formatting, bufopts)
 
+  -- Format on save.
   local env = require("conf.env")
   if env.NVIM_LSP_AUTO_FORMAT == "on" and client.supports_method("textDocument/formatting") then
     local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
@@ -91,11 +92,10 @@ M.setup = function()
     on_attach = on_attach,
   })
 
-  -- Different LSP severs for TypeScript
+  -- Different LSP severs for TypeScript.
   if env.NVIM_TS_LSP == "tsserver" then
     lspconfig.tsserver.setup({
-      -- Uncomment if you want auto imports to be ES modules paths
-      -- with file extensions.
+      -- Uncomment for ES module auto-imports with file extensions.
       -- init_options = {
       -- 	preferences = {
       -- 	  importModuleSpecifierEnding = "js",
