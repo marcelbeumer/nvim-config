@@ -156,7 +156,6 @@ M.register = function()
   use("nvim-telescope/telescope-fzy-native.nvim")
   use("ray-x/go.nvim")
   use("folke/tokyonight.nvim")
-  use("folke/lua-dev.nvim")
   use("terrortylor/nvim-comment")
   use("windwp/nvim-autopairs")
 end

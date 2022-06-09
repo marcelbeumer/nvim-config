@@ -128,18 +128,6 @@ M.setup = function()
     end,
   })
 
-  local luadev = require("lua-dev").setup({
-    lspconfig = {
-      cmd = { "lua-language-server" },
-    },
-    capabilities = capabilities,
-    on_attach = function(lsp_client, bufnr)
-      disable_formatting(lsp_client)
-      on_attach(lsp_client, bufnr)
-    end,
-  })
-  lspconfig.sumneko_lua.setup(luadev)
-
   lspconfig.clangd.setup({
     capabilities = capabilities,
     on_attach = function(lsp_client, bufnr)
