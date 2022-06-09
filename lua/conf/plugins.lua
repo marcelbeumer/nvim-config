@@ -135,7 +135,7 @@ end
 -- register registers all plugins with packer. We are not using packer's APIs
 -- to configure plugins or manage their dependencies because explicitly
 -- calling a few setup functions and keeping deps implicit keeps the code
--- much simpler. Also it will be easy to swap packer for something else.
+-- so much simpler. Also it will be easy to swap packer for something else.
 M.register = function()
   local packer = require("packer")
   local use = packer.use
