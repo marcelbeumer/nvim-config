@@ -44,6 +44,7 @@ local setup_nerd = function()
   vim.cmd([[
     let NERDTreeShowHidden=1
     let NERDTreeWinSize=35
+    let NERDTreeHijackNetrw=0
     nnoremap <silent><leader>; :NERDTreeToggle<CR>
     nnoremap <silent><leader>' :NERDTreeFind<CR>
   ]])
@@ -180,6 +181,8 @@ M.register = function()
   use("terrortylor/nvim-comment")
   -- Automagically insert closing tags etc.
   use("windwp/nvim-autopairs")
+  -- Netrw enhancements (mainly for `-`)
+  use("tpope/vim-vinegar")
   -- Colorscheme.
   use("folke/tokyonight.nvim")
 end

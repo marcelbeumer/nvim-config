@@ -27,6 +27,10 @@ M.setup = function()
   -- Copy paste from and to nvim.
   vim.o.clipboard = "unnamed"
 
+  -- Netrw settings.
+  vim.api.nvim_set_var("netrw_banner", 0)
+  vim.api.nvim_set_var("netrw_altv", 1)
+
   -- Highlight yanked text.
   vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
