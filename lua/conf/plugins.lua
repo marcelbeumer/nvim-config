@@ -109,15 +109,47 @@ local setup_tokyonight = function()
 end
 
 local setup_treesitter = function()
+  -- Add gotmpl support. Requires scm file(s) in <repo>/queries/gotmpl.
+  -- Not using the language injection because yaml and gotmpl don't play well
+  -- together when mixed (probably bugs in parser). Instead, we implement
+  -- automatic filetype switching for yaml.
+  require("nvim-treesitter.parsers").get_parser_configs().gotmpl = {
+    filetype = "gotmpl",
+    used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl" },
+    install_info = {
+      url = "https://github.com/ngalaiko/tree-sitter-go-template",
+      files = { "src/parser.c" },
+    },
+  }
+
+  -- Treat .tpl as gotmpl
+  vim.cmd([[au BufNewFile,BufRead *.tpl set ft=gotmpl ]])
+
+  -- Treat .y(a)ml as gotmpl when buffer has template tags. Updates on save.
+  vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "BufWritePre" }, {
+    pattern = { "*.yaml", "*.yml" },
+    callback = function()
+      lines = vim.api.nvim_buf_get_lines(0, 0, -1, {})
+      for _, line in ipairs(lines) do
+        if line:match("{{.+}}") then
+          vim.bo.ft = "gotmpl"
+          return
+        end
+      end
+      vim.bo.ft = "yaml"
+    end,
+  })
+
+  -- Set up treesitter itself.
   require("nvim-treesitter.configs").setup({
     ensure_installed = "all",
     -- phpdoc gave errors on darwin-arm64.
     ignore_install = { "phpdoc" },
+    highlight = { enable = true },
     context_commentstring = {
       enable = true,
       enable_autocmd = false,
     },
-    highlight = { enable = true },
   })
 end
 
