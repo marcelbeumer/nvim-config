@@ -85,9 +85,18 @@ M.setup = function()
       null_ls.builtins.formatting.prettierd,
       null_ls.builtins.formatting.black,
       null_ls.builtins.formatting.stylua,
-      staticcheck,
       null_ls.builtins.formatting.golines.with({
         extra_args = { "-m", "80" },
+      }),
+      null_ls.builtins.diagnostics.staticcheck.with({
+        cwd = function(params)
+          return vim.fn.getcwd()
+        end,
+        diagnostics_postprocess = function(diagnostic)
+          if diagnostic.severity == vim.diagnostic.severity["ERROR"] then
+            diagnostic.severity = vim.diagnostic.severity["WARN"]
+          end
+        end,
       }),
     },
     capabilities = capabilities,
