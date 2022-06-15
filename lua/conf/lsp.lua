@@ -79,7 +79,6 @@ M.setup = function()
 
   -- We use null-ls for most formatting and linting.
   local null_ls = require("null-ls")
-  local staticcheck = require("conf.staticcheck")
   null_ls.setup({
     sources = {
       null_ls.builtins.formatting.prettierd,
