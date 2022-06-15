@@ -85,8 +85,10 @@ M.setup = function()
       null_ls.builtins.formatting.prettierd,
       null_ls.builtins.formatting.black,
       null_ls.builtins.formatting.stylua,
-      null_ls.builtins.formatting.golines,
       staticcheck,
+      null_ls.builtins.formatting.golines.with({
+        extra_args = { "-m", "80" },
+      }),
     },
     capabilities = capabilities,
     on_attach = on_attach,
