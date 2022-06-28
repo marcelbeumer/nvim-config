@@ -20,9 +20,9 @@ local setup_cmp = function()
       { name = "luasnip" },
     },
     mapping = cmp.mapping.preset.insert({
-      ["<CR>"] = {
-        i = cmp.mapping.confirm({ select = true }),
-      },
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-e>"] = cmp.mapping.abort(),
+      ["<CR>"] = cmp.mapping.confirm({ select = true }),
     }),
   })
 
