@@ -184,7 +184,7 @@ M.register = function()
   -- Editor config support.
   use("editorconfig/editorconfig-vim")
   -- Tresitter.
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", commit = "d810c386341fbf0d49895a2cdd6a2b63b945b71a" })
   -- TypeScript: support different comment styles depending on context.
   use("JoosepAlviste/nvim-ts-context-commentstring")
   -- TypeScript: extra LSP features.
