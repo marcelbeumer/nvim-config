@@ -62,8 +62,10 @@ end
 
 local setup_telescope = function()
   local builtin = require("telescope.builtin")
+  local extensions = require("telescope").extensions
 
   require("telescope").load_extension("fzy_native")
+  require("telescope").load_extension("projects")
   require("telescope").setup({
     defaults = {
       mappings = {
@@ -89,6 +91,7 @@ local setup_telescope = function()
   vim.keymap.set("n", "<leader>fx", builtin.builtin, {})
   vim.keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, {})
 
+  vim.keymap.set("n", "<leader>fp", extensions.projects.projects, {})
   vim.keymap.set("n", "<leader>flq", builtin.diagnostics, {})
   vim.keymap.set("n", "<leader>flr", builtin.lsp_references, {})
   vim.keymap.set("n", "<leader>fli", function()
@@ -218,6 +221,8 @@ M.register = function()
   use("tpope/vim-vinegar")
   -- Colorscheme.
   use("folke/tokyonight.nvim")
+  -- Project.
+  use("ahmedkhalf/project.nvim")
 end
 
 M.setup = function()
@@ -233,6 +238,10 @@ M.setup = function()
   setup_telescope()
   setup_nvim_comment()
   setup_autopairs()
+  require("project_nvim").setup({
+    manual_mode = true,
+    detection_methods = { "pattern" },
+  })
   require("go").setup()
 end
 
