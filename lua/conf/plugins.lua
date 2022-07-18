@@ -170,6 +170,21 @@ local setup_autopairs = function()
   require("nvim-autopairs").setup({})
 end
 
+local setup_symbols_outline = function()
+  vim.keymap.set("n", "<leader>/", "<cmd>SymbolsOutline<cr>", {})
+  vim.g.symbols_outline = {
+    highlight_hovered_item = false,
+    show_guides = true,
+    auto_preview = false,
+    position = "left",
+    keymaps = {
+      close = { "q" },
+      hover_symbol = "K",
+      toggle_preview = "P",
+    },
+  }
+end
+
 -- register registers all plugins with packer. We are not using packer's APIs
 -- to configure plugins or manage their dependencies because explicitly
 -- calling a few setup functions and keeping deps implicit keeps the code
@@ -225,6 +240,7 @@ M.register = function()
   use("folke/tokyonight.nvim")
   -- Project.
   use("ahmedkhalf/project.nvim")
+  use("simrat39/symbols-outline.nvim")
 end
 
 M.setup = function()
@@ -240,6 +256,7 @@ M.setup = function()
   setup_telescope()
   setup_nvim_comment()
   setup_autopairs()
+  setup_symbols_outline()
   require("project_nvim").setup({
     manual_mode = true,
     detection_methods = { "pattern" },
