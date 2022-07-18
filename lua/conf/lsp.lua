@@ -158,6 +158,9 @@ M.setup = function()
       on_attach(lsp_client, bufnr)
     end,
   })
+
+  local luadev = require("lua-dev").setup({})
+  lspconfig.sumneko_lua.setup(luadev)
 end
 
 return M

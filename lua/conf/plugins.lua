@@ -213,6 +213,8 @@ M.register = function()
   use("preservim/nerdtree")
   -- Simple session management.
   use("folke/persistence.nvim")
+  -- Lua dev setup
+  use("folke/lua-dev.nvim")
   -- Autocompletion and plugins.
   use("hrsh7th/nvim-cmp")
   use("hrsh7th/cmp-nvim-lsp")
