@@ -213,8 +213,8 @@ M.register = function()
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-fzy-native.nvim")
   -- Go specific features.
-  use("ray-x/go.nvim") -- lots of features
-  -- use("olexsmir/gopher.nvim") -- minimal
+  -- use("ray-x/go.nvim") -- lots of features
+  use("olexsmir/gopher.nvim") -- minimal
   -- Commenting plugin.
   use("terrortylor/nvim-comment")
   -- Automagically insert closing tags etc.
