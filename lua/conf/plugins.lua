@@ -244,7 +244,7 @@ M.setup = function()
     manual_mode = true,
     detection_methods = { "pattern" },
   })
-  require("go").setup()
+  -- require("go").setup()
 end
 
 -- make_lsp_capabilities updates the default LSP capabilities options
