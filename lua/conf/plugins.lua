@@ -135,7 +135,7 @@ local setup_treesitter = function()
   vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "BufWritePre" }, {
     pattern = { "*.yaml", "*.yml" },
     callback = function()
-      lines = vim.api.nvim_buf_get_lines(0, 0, -1, {})
+      local lines = vim.api.nvim_buf_get_lines(0, 0, -1, {})
       for _, line in ipairs(lines) do
         if line:match("{{.+}}") then
           vim.bo.ft = "gotmpl"
