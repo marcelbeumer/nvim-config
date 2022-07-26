@@ -127,8 +127,9 @@ local setup_treesitter = function()
     },
   }
 
-  -- Treat .tpl as gotmpl
+  -- Treat .tpl and tmpl as gotmpl
   vim.cmd([[au BufNewFile,BufRead *.tpl set ft=gotmpl ]])
+  vim.cmd([[au BufNewFile,BufRead *.tmpl set ft=gotmpl ]])
 
   -- Treat .y(a)ml as gotmpl when buffer has template tags. Updates on save.
   vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "BufWritePre" }, {
