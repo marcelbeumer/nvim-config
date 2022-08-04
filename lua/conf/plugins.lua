@@ -157,6 +157,12 @@ local setup_treesitter = function()
       enable_autocmd = false,
     },
   })
+
+  -- Workaround for slow go files:
+  -- https://github.com/NvChad/NvChad/issues/1415#issuecomment-1203723816
+  -- https://github.com/nvim-treesitter/nvim-treesitter/issues/3263
+  -- https://github.com/nvim-treesitter/nvim-treesitter/issues/3187
+  require("vim.treesitter.query").set_query("go", "injections", "(comment) @comment")
 end
 
 local setup_nvim_comment = function()
