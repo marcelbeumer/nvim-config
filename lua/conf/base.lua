@@ -73,6 +73,11 @@ M.setup = function()
       return system('date "+%Y-%m-%d-%H%M-%S" | tr -d "\n"')
     endfunction
   ]])
+
+  -- Terraform
+  vim.cmd([[au BufNewFile,BufRead *.tf set ft=terraform ]])
+  vim.cmd([[au BufNewFile,BufRead *.hcl,*.terraformrc,terraform.rc set ft=hcl ]])
+  vim.cmd([[au BufNewFile,BufRead *.tfstate,*.tfstate.backup set ft=json ]])
 end
 
 return M

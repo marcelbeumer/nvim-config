@@ -82,6 +82,7 @@ M.setup = function()
   local null_ls = require("null-ls")
   null_ls.setup({
     sources = {
+      null_ls.builtins.formatting.terraform_fmt,
       null_ls.builtins.formatting.prettierd,
       null_ls.builtins.formatting.black,
       null_ls.builtins.formatting.stylua,
@@ -155,6 +156,13 @@ M.setup = function()
   })
 
   lspconfig.clangd.setup({
+    capabilities = capabilities,
+    on_attach = function(lsp_client, bufnr)
+      on_attach(lsp_client, bufnr)
+    end,
+  })
+
+  lspconfig.terraformls.setup({
     capabilities = capabilities,
     on_attach = function(lsp_client, bufnr)
       on_attach(lsp_client, bufnr)
