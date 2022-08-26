@@ -204,8 +204,13 @@ end
 -- so much simpler. Also it will be easy to swap packer for something else.
 M.register = function()
   local packer = require("packer")
+  local util = require("packer.util")
   local use = packer.use
-  packer.init()
+
+  packer.init({
+    -- Add all packages to the <nvim config folder>/pack so we can commit them to vcs
+    package_root = util.join_paths(vim.fn.stdpath("config"), "pack"),
+  })
   packer.reset()
 
   -- Packer updates itself.
