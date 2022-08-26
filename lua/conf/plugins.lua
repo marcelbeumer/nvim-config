@@ -208,8 +208,7 @@ M.register = function()
   local use = packer.use
 
   packer.init({
-    -- Add all packages to the <nvim config folder>/pack so we can commit them to vcs
-    package_root = util.join_paths(vim.fn.stdpath("config"), "pack"),
+    snapshot_path = util.join_paths(vim.fn.stdpath("config"), "snapshots"),
   })
   packer.reset()
 
