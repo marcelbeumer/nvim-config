@@ -33,25 +33,27 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<space>f", vim.lsp.buf.formatting, bufopts)
 
   -- Highlight symbol under cursor.
-  local hl = vim.api.nvim_create_augroup("LspHighlight", { clear = false })
-  local opts = { group = hl, buffer = bufnr }
-  vim.api.nvim_clear_autocmds(opts)
+  if client.supports_method("textDocument/documentHighlight") then
+    local hl = vim.api.nvim_create_augroup("LspHighlight", { clear = false })
+    local opts = { group = hl, buffer = bufnr }
+    vim.api.nvim_clear_autocmds(opts)
 
-  vim.api.nvim_create_autocmd("CursorHold", {
-    group = hl,
-    buffer = bufnr,
-    callback = vim.lsp.buf.document_highlight,
-  })
-  vim.api.nvim_create_autocmd("CursorHoldI", {
-    group = hl,
-    buffer = bufnr,
-    callback = vim.lsp.buf.document_highlight,
-  })
-  vim.api.nvim_create_autocmd("CursorMoved", {
-    group = hl,
-    buffer = bufnr,
-    callback = vim.lsp.buf.clear_references,
-  })
+    vim.api.nvim_create_autocmd("CursorHold", {
+      group = hl,
+      buffer = bufnr,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd("CursorHoldI", {
+      group = hl,
+      buffer = bufnr,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = hl,
+      buffer = bufnr,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
 
   -- Format on save.
   local env = require("conf.env")
