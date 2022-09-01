@@ -68,6 +68,7 @@ local setup_telescope = function()
   require("telescope").load_extension("projects")
   require("telescope").setup({
     defaults = {
+      layout_strategy = "vertical",
       mappings = {
         i = {
           ["<C-q>"] = require("telescope.actions").send_to_qflist,
