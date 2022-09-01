@@ -32,13 +32,34 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
   vim.keymap.set("n", "<space>f", vim.lsp.buf.formatting, bufopts)
 
+  -- Highlight symbol under cursor.
+  local hl = vim.api.nvim_create_augroup("LspHighlight", { clear = false })
+  local opts = { group = hl, buffer = bufnr }
+  vim.api.nvim_clear_autocmds(opts)
+
+  vim.api.nvim_create_autocmd("CursorHold", {
+    group = hl,
+    buffer = bufnr,
+    callback = vim.lsp.buf.document_highlight,
+  })
+  vim.api.nvim_create_autocmd("CursorHoldI", {
+    group = hl,
+    buffer = bufnr,
+    callback = vim.lsp.buf.document_highlight,
+  })
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    group = hl,
+    buffer = bufnr,
+    callback = vim.lsp.buf.clear_references,
+  })
+
   -- Format on save.
   local env = require("conf.env")
   if env.NVIM_LSP_AUTO_FORMAT == "on" and client.supports_method("textDocument/formatting") then
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    local fmt = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
+    vim.api.nvim_clear_autocmds({ group = fmt, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
+      group = fmt,
       buffer = bufnr,
       callback = function()
         vim.lsp.buf.format({ bufnr = bufnr })
