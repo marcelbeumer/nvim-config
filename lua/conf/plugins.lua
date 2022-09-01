@@ -242,8 +242,9 @@ M.register = function()
   use("L3MON4D3/LuaSnip")
   -- General purpose LSP server, mostly for linting and formatting.
   use("jose-elias-alvarez/null-ls.nvim")
-  -- Lazygit integration.
+  -- Git.
   use("kdheepak/lazygit.nvim")
+  use("tpope/vim-fugitive")
   -- Quick file/buffer/lsp/etc pickers.
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-fzy-native.nvim")
