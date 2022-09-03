@@ -8,6 +8,11 @@ local disable_formatting = function(lsp_client)
   lsp_client.server_capabilities.documentRangeFormattingProvider = false
 end
 
+local handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "solid" }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "solid" }),
+}
+
 -- on_attach configures the lsp client for a specific buffer.
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -137,6 +142,7 @@ M.setup = function()
       -- 	  importModuleSpecifierEnding = "js",
       -- 	},
       -- },
+      handlers = handlers,
       capabilities = capabilities,
       on_attach = function(lsp_client, bufnr)
         disable_formatting(lsp_client)
