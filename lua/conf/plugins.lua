@@ -114,7 +114,7 @@ local setup_tokyonight = function()
     styles = {
       comments = "NONE",
       keywords = "NONE",
-    }
+    },
   })
 end
 
@@ -249,6 +249,7 @@ M.register = function()
   -- Git.
   use("kdheepak/lazygit.nvim")
   use("tpope/vim-fugitive")
+  use("sindrets/diffview.nvim")
   -- Quick file/buffer/lsp/etc pickers.
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-fzy-native.nvim")
