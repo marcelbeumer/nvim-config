@@ -131,6 +131,7 @@ M.setup = function()
     },
     capabilities = capabilities,
     on_attach = on_attach,
+    handlers = handlers,
   })
 
   -- Different LSP severs for TypeScript.
@@ -178,6 +179,7 @@ M.setup = function()
 
   lspconfig.gopls.setup({
     capabilities = capabilities,
+    handlers = handlers,
     on_attach = function(lsp_client, bufnr)
       disable_formatting(lsp_client)
       on_attach(lsp_client, bufnr)
@@ -186,6 +188,7 @@ M.setup = function()
 
   lspconfig.clangd.setup({
     capabilities = capabilities,
+    handlers = handlers,
     on_attach = function(lsp_client, bufnr)
       on_attach(lsp_client, bufnr)
     end,
@@ -193,6 +196,7 @@ M.setup = function()
 
   lspconfig.terraformls.setup({
     capabilities = capabilities,
+    handlers = handlers,
     on_attach = function(lsp_client, bufnr)
       on_attach(lsp_client, bufnr)
     end,
