@@ -77,6 +77,7 @@ local setup_fzf_lua = function()
     fzf.tabs(args_small)
   end, opts)
 
+  vim.keymap.set("n", "<leader>fc", fzf.commands, opts)
   vim.keymap.set("n", "<leader>fgp", fzf.live_grep_native, opts)
   vim.keymap.set("n", "<leader>fgb", fzf.grep_curbuf, opts)
 
