@@ -221,6 +221,10 @@ local setup_hop = function()
   vim.keymap.set("n", "<leader>o", ":HopWordMW<cr>", opts)
 end
 
+local setup_gitsigns = function()
+  require("gitsigns").setup({ signcolumn = false })
+end
+
 -- make_lsp_capabilities updates the default LSP capabilities options
 -- with features that our autocomplete plugin supports.
 M.make_lsp_capabilities = function()
@@ -275,6 +279,7 @@ M.register = function()
   use("kdheepak/lazygit.nvim")
   use("tpope/vim-fugitive")
   use("sindrets/diffview.nvim")
+  use("lewis6991/gitsigns.nvim")
   -- Quick file/buffer/lsp/etc pickers.
   use("ibhagwan/fzf-lua")
   -- Go specific features.
@@ -312,6 +317,7 @@ M.setup = function()
   setup_nvim_tree()
   -- require("go").setup()
   setup_hop()
+  setup_gitsigns()
 end
 
 return M
