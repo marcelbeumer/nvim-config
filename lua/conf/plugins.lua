@@ -210,6 +210,14 @@ local setup_nvim_tree = function()
   vim.keymap.set("n", "<leader>'", ":NvimTreeFindFile<cr>", opts)
 end
 
+local setup_hop = function()
+  require("hop").setup()
+  local opts = { noremap = true, silent = true }
+  vim.keymap.set("n", "<leader>w", ":HopWordAC<cr>", opts)
+  vim.keymap.set("n", "<leader>W", ":HopWordBC<cr>", opts)
+  vim.keymap.set("n", "<leader>o", ":HopWordMW<cr>", opts)
+end
+
 -- register registers all plugins with packer. We are not using packer's APIs
 -- to configure plugins or manage their dependencies because explicitly
 -- calling a few setup functions and keeping deps implicit keeps the code
@@ -274,6 +282,8 @@ M.register = function()
   use("kyazdani42/nvim-web-devicons")
   -- Code navigation.
   use("simrat39/symbols-outline.nvim")
+  -- Motion.
+  use("phaazon/hop.nvim")
 end
 
 M.setup = function()
@@ -291,6 +301,7 @@ M.setup = function()
   setup_symbols_outline()
   setup_nvim_tree()
   -- require("go").setup()
+  setup_hop()
 end
 
 -- make_lsp_capabilities updates the default LSP capabilities options
