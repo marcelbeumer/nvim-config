@@ -118,6 +118,7 @@ M.setup = function()
       -- null_ls.builtins.formatting.golines.with({
       --   extra_args = { "-m", "80" },
       -- }),
+      null_ls.builtins.diagnostics.eslint_d,
       null_ls.builtins.diagnostics.staticcheck.with({
         cwd = function(params)
           return vim.fn.getcwd()
