@@ -60,52 +60,23 @@ local setup_persistence = function()
   vim.api.nvim_create_user_command("StopSession", persistence.stop, {})
 end
 
-local setup_telescope = function()
-  local builtin = require("telescope.builtin")
-  local extensions = require("telescope").extensions
+local setup_lua_fzf = function()
+  local opts = { noremap = true, silent = true }
+  local fzf = require("fzf-lua")
+  vim.keymap.set("n", "<leader>ff", fzf.files, opts)
+  vim.keymap.set("n", "<leader>fb", fzf.buffers, opts)
+  vim.keymap.set("n", "<leader>ft", fzf.tabs, opts)
+  vim.keymap.set("n", "<leader>fgp", fzf.live_grep_native, opts)
+  vim.keymap.set("n", "<leader>fgb", fzf.grep_curbuf, opts)
 
-  require("telescope").load_extension("fzy_native")
-  require("telescope").load_extension("projects")
-  require("telescope").setup({
-    defaults = {
-      layout_strategy = "vertical",
-      mappings = {
-        i = {
-          ["<C-q>"] = require("telescope.actions").send_to_qflist,
-        },
-      },
-    },
-  })
-
-  vim.keymap.set("n", "<leader>ff", function()
-    local ok = pcall(require("telescope.builtin").git_files, {})
-    if not ok then
-      require("telescope.builtin").find_files({})
-    end
-  end, {})
-  vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-  vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-  vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-  vim.keymap.set("n", "<leader>fd", function()
-    builtin.find_files({ find_command = { "find", ".", "-type", "d" } })
-  end, {})
-  vim.keymap.set("n", "<leader>fx", builtin.builtin, {})
-  vim.keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, {})
-
-  vim.keymap.set("n", "<leader>fp", extensions.projects.projects, {})
-  vim.keymap.set("n", "<leader>flq", builtin.diagnostics, {})
-  vim.keymap.set("n", "<leader>flr", builtin.lsp_references, {})
-  vim.keymap.set("n", "<leader>fls", builtin.lsp_document_symbols, {})
-  vim.keymap.set("n", "<leader>flS", builtin.lsp_workspace_symbols, {})
-  vim.keymap.set("n", "<leader>fli", function()
-    builtin.lsp_implementations({ jump_type = "never" })
-  end, {})
-  vim.keymap.set("n", "<leader>fld", function()
-    builtin.lsp_definitions({ jump_type = "never" })
-  end, {})
-  vim.keymap.set("n", "<leader>flt", function()
-    builtin.lsp_type_definitions({ jump_type = "never" })
-  end, {})
+  vim.keymap.set("n", "<leader>flq", fzf.diagnostics_document, {})
+  vim.keymap.set("n", "<leader>flr", fzf.lsp_references, {})
+  vim.keymap.set("n", "<leader>fls", fzf.lsp_document_symbols, {})
+  vim.keymap.set("n", "<leader>flS", fzf.lsp_workspace_symbols, {})
+  vim.keymap.set("n", "<leader>fli", fzf.lsp_implementations, {})
+  vim.keymap.set("n", "<leader>fld", fzf.lsp_definitions, {})
+  vim.keymap.set("n", "<leader>flD", fzf.lsp_declarations, {})
+  vim.keymap.set("n", "<leader>flt", fzf.lsp_typedefs, {})
 end
 
 local setup_tokyonight = function()
@@ -251,8 +222,7 @@ M.register = function()
   use("tpope/vim-fugitive")
   use("sindrets/diffview.nvim")
   -- Quick file/buffer/lsp/etc pickers.
-  use("nvim-telescope/telescope.nvim")
-  use("nvim-telescope/telescope-fzy-native.nvim")
+  use("ibhagwan/fzf-lua")
   -- Go specific features.
   -- use("ray-x/go.nvim") -- lots of features
   use("olexsmir/gopher.nvim") -- minimal
@@ -274,13 +244,12 @@ M.setup = function()
 
   setup_tokyonight()
   vim.cmd([[colorscheme tokyonight]])
-  -- vim.cmd([[set background=light]])
 
   setup_cmp()
   setup_nerd()
   setup_treesitter()
   setup_persistence()
-  setup_telescope()
+  setup_lua_fzf()
   setup_nvim_comment()
   setup_autopairs()
   setup_symbols_outline()
