@@ -52,9 +52,11 @@ end
 
 local setup_fzf_lua = function()
   local opts = { noremap = true, silent = true }
-  local args_small = { previewer = false, winopts = { height = 0.20, width = 0.80 } }
   local fzf = require("fzf-lua")
 
+  fzf.setup({ winopts = { preview = { layout = "vertical" } } })
+
+  local args_small = { previewer = false, winopts = { height = 0.20, width = 0.80 } }
   vim.keymap.set("n", "<leader>ff", function()
     fzf.files(args_small)
   end, opts)
@@ -72,6 +74,7 @@ local setup_fzf_lua = function()
   vim.keymap.set("n", "<leader>fgb", fzf.grep_curbuf, opts)
 
   vim.keymap.set("n", "<leader>flq", fzf.diagnostics_document, {})
+  vim.keymap.set("n", "<leader>flQ", fzf.diagnostics_workspace, {})
   vim.keymap.set("n", "<leader>flr", fzf.lsp_references, {})
   vim.keymap.set("n", "<leader>fls", fzf.lsp_document_symbols, {})
   vim.keymap.set("n", "<leader>flS", fzf.lsp_workspace_symbols, {})
