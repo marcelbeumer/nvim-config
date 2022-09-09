@@ -251,8 +251,6 @@ M.register = function()
   use("folke/tokyonight.nvim")
   -- Icons.
   use("kyazdani42/nvim-web-devicons")
-  -- Project.
-  use("ahmedkhalf/project.nvim")
   use("simrat39/symbols-outline.nvim")
 end
 
@@ -270,10 +268,6 @@ M.setup = function()
   setup_nvim_comment()
   setup_autopairs()
   setup_symbols_outline()
-  require("project_nvim").setup({
-    manual_mode = true,
-    detection_methods = { "pattern" },
-  })
   -- require("go").setup()
 end
 
