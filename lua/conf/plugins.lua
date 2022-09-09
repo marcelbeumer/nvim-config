@@ -221,6 +221,10 @@ local setup_hop = function()
   vim.keymap.set("n", "<leader>o", ":HopWordMW<cr>", opts)
 end
 
+local setup_scrollbar = function()
+  require("scrollbar").setup()
+end
+
 local setup_gitsigns = function()
   require("gitsigns").setup({ signcolumn = false })
 end
@@ -299,6 +303,8 @@ M.register = function()
   use("simrat39/symbols-outline.nvim")
   -- Motion.
   use("phaazon/hop.nvim")
+  -- UI.
+  use("petertriho/nvim-scrollbar")
 end
 
 M.setup = function()
@@ -317,6 +323,7 @@ M.setup = function()
   setup_nvim_tree()
   -- require("go").setup()
   setup_hop()
+  setup_scrollbar()
   setup_gitsigns()
 end
 
