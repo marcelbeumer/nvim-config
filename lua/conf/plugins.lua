@@ -40,16 +40,6 @@ local setup_cmp = function()
   })
 end
 
-local setup_nerd = function()
-  vim.cmd([[
-    let NERDTreeShowHidden=1
-    let NERDTreeWinSize=35
-    let NERDTreeHijackNetrw=0
-    nnoremap <silent><leader>; :NERDTreeToggle<CR>
-    nnoremap <silent><leader>' :NERDTreeFind<CR>
-  ]])
-end
-
 local setup_persistence = function()
   local path = vim.fn.stdpath("data") .. "/sessions/"
   local dir = vim.fn.expand(path, false, nil)
@@ -190,6 +180,36 @@ local setup_symbols_outline = function()
   }
 end
 
+local setup_nvim_tree = function()
+  require("nvim-tree").setup({
+    view = {
+      mappings = {
+        list = {
+          { key = "[d", action = "prev_diag_item" },
+          { key = "]d", action = "next_diag_item" },
+        },
+      },
+    },
+    diagnostics = {
+      enable = true,
+      show_on_dirs = true,
+      icons = { error = "●", warning = "●", hint = "●", info = "●" },
+    },
+    renderer = {
+      icons = {
+        show = {
+          folder = false,
+          file = false,
+        },
+      },
+    },
+  })
+
+  local opts = { noremap = true, silent = true }
+  vim.keymap.set("n", "<leader>;", ":NvimTreeToggle<cr>", opts)
+  vim.keymap.set("n", "<leader>'", ":NvimTreeFindFile<cr>", opts)
+end
+
 -- register registers all plugins with packer. We are not using packer's APIs
 -- to configure plugins or manage their dependencies because explicitly
 -- calling a few setup functions and keeping deps implicit keeps the code
@@ -219,7 +239,7 @@ M.register = function()
   -- TypeScript: extra LSP features.
   use("jose-elias-alvarez/nvim-lsp-ts-utils")
   -- File explorer.
-  use("preservim/nerdtree")
+  use("kyazdani42/nvim-tree.lua")
   -- Simple session management.
   use("folke/persistence.nvim")
   -- Lua dev setup
@@ -263,13 +283,13 @@ M.setup = function()
   vim.cmd([[colorscheme tokyonight]])
 
   setup_cmp()
-  setup_nerd()
   setup_treesitter()
   setup_persistence()
   setup_fzf_lua()
   setup_nvim_comment()
   setup_autopairs()
   setup_symbols_outline()
+  setup_nvim_tree()
   -- require("go").setup()
 end
 
