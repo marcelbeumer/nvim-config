@@ -252,6 +252,7 @@ M.register = function()
   use("folke/tokyonight.nvim")
   -- Icons.
   use("kyazdani42/nvim-web-devicons")
+  -- Code navigation.
   use("simrat39/symbols-outline.nvim")
 end
 
