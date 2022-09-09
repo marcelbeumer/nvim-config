@@ -8,8 +8,8 @@ M.setup = function()
     return ...
   end
 
-  -- Line numbers on.
-  vim.o.number = true
+  -- Line numbers off.
+  vim.o.number = false
   --Enable mouse mode in all modes.
   vim.o.mouse = "a"
   --Enable break indent.
@@ -61,6 +61,7 @@ M.setup = function()
   vim.keymap.set("n", "<leader>tb", ":tab sb %<CR>")
   vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
   vim.keymap.set("n", "<leader>bd", ":bdel<CR>")
+  vim.keymap.set("n", "<leader>n", ":set nu!<CR>")
 
   -- DateStr* commands used in insert mode (<ctrl>r=DateStr<variant>)
   -- for inserting current datetime.
