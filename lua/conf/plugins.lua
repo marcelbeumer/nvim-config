@@ -218,6 +218,13 @@ local setup_hop = function()
   vim.keymap.set("n", "<leader>o", ":HopWordMW<cr>", opts)
 end
 
+-- make_lsp_capabilities updates the default LSP capabilities options
+-- with features that our autocomplete plugin supports.
+M.make_lsp_capabilities = function()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  return require("cmp_nvim_lsp").update_capabilities(capabilities)
+end
+
 -- register registers all plugins with packer. We are not using packer's APIs
 -- to configure plugins or manage their dependencies because explicitly
 -- calling a few setup functions and keeping deps implicit keeps the code
@@ -302,13 +309,6 @@ M.setup = function()
   setup_nvim_tree()
   -- require("go").setup()
   setup_hop()
-end
-
--- make_lsp_capabilities updates the default LSP capabilities options
--- with features that our autocomplete plugin supports.
-M.make_lsp_capabilities = function()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  return require("cmp_nvim_lsp").update_capabilities(capabilities)
 end
 
 return M
