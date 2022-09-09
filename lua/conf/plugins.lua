@@ -62,10 +62,21 @@ end
 
 local setup_lua_fzf = function()
   local opts = { noremap = true, silent = true }
+  local args_small = { previewer = false, winopts = { height = 0.20, width = 0.80 } }
   local fzf = require("fzf-lua")
-  vim.keymap.set("n", "<leader>ff", fzf.files, opts)
-  vim.keymap.set("n", "<leader>fb", fzf.buffers, opts)
-  vim.keymap.set("n", "<leader>ft", fzf.tabs, opts)
+
+  vim.keymap.set("n", "<leader>ff", function()
+    fzf.files(args_small)
+  end, opts)
+
+  vim.keymap.set("n", "<leader>fb", function()
+    fzf.buffers(args_small)
+  end, opts)
+
+  vim.keymap.set("n", "<leader>ft", function()
+    fzf.tabs(args_small)
+  end, opts)
+
   vim.keymap.set("n", "<leader>fgp", fzf.live_grep_native, opts)
   vim.keymap.set("n", "<leader>fgb", fzf.grep_curbuf, opts)
 
