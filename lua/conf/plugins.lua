@@ -60,7 +60,7 @@ local setup_persistence = function()
   vim.api.nvim_create_user_command("StopSession", persistence.stop, {})
 end
 
-local setup_lua_fzf = function()
+local setup_fzf_lua = function()
   local opts = { noremap = true, silent = true }
   local args_small = { previewer = false, winopts = { height = 0.20, width = 0.80 } }
   local fzf = require("fzf-lua")
@@ -264,7 +264,7 @@ M.setup = function()
   setup_nerd()
   setup_treesitter()
   setup_persistence()
-  setup_lua_fzf()
+  setup_fzf_lua()
   setup_nvim_comment()
   setup_autopairs()
   setup_symbols_outline()
