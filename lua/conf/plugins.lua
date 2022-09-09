@@ -208,7 +208,7 @@ M.register = function()
   -- Editor config support.
   use("editorconfig/editorconfig-vim")
   -- Tresitter.
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", commit = "d810c386341fbf0d49895a2cdd6a2b63b945b71a" })
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", commit = "d810c38" })
   -- TypeScript: support different comment styles depending on context.
   use("JoosepAlviste/nvim-ts-context-commentstring")
   -- TypeScript: extra LSP features.
@@ -222,7 +222,7 @@ M.register = function()
   -- Autocompletion and plugins.
   use("hrsh7th/nvim-cmp")
   use("hrsh7th/cmp-nvim-lsp")
-  use("hrsh7th/cmp-nvim-lsp-signature-help")
+  use({ "hrsh7th/cmp-nvim-lsp-signature-help", commit = "57c4db7" })
   use("saadparwaiz1/cmp_luasnip")
   -- Snippets (required by cmp autocomplete).
   use("L3MON4D3/LuaSnip")
