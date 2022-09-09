@@ -245,6 +245,8 @@ M.register = function()
   use("tpope/vim-vinegar")
   -- Colorscheme.
   use("folke/tokyonight.nvim")
+  -- Icons.
+  use("kyazdani42/nvim-web-devicons")
   -- Project.
   use("ahmedkhalf/project.nvim")
   use("simrat39/symbols-outline.nvim")
