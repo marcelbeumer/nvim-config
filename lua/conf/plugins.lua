@@ -199,6 +199,9 @@ local setup_nvim_tree = function()
       show_on_dirs = true,
       icons = { error = "●", warning = "●", hint = "●", info = "●" },
     },
+    live_filter = {
+      always_show_folders = false,
+    },
     renderer = {
       icons = {
         show = {
