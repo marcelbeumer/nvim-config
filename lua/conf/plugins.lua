@@ -186,6 +186,7 @@ end
 local setup_nvim_tree = function()
   require("nvim-tree").setup({
     view = {
+      adaptive_size = true,
       mappings = {
         list = {
           { key = "[d", action = "prev_diag_item" },
