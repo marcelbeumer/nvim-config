@@ -212,6 +212,9 @@ local setup_nvim_tree = function()
   local opts = { noremap = true, silent = true }
   vim.keymap.set("n", "<leader>;", ":NvimTreeToggle<cr>", opts)
   vim.keymap.set("n", "<leader>'", ":NvimTreeFindFile<cr>", opts)
+  vim.api.nvim_create_user_command("NvimTreePushCwd", function()
+    require("nvim-tree.api").tree.change_root(vim.fn.getcwd())
+  end, {})
 end
 
 local setup_hop = function()
