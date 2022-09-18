@@ -304,7 +304,7 @@ M.register = function()
   -- Netrw enhancements (mainly for `-`)
   use("tpope/vim-vinegar")
   -- Colorscheme.
-  use("folke/tokyonight.nvim")
+  use("marcelbeumer/tokyonight.nvim")
   -- Icons.
   use("kyazdani42/nvim-web-devicons")
   -- Code navigation.
