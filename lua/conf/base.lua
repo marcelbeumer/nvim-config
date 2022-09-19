@@ -64,6 +64,12 @@ M.setup = function()
   vim.keymap.set("n", "<leader>bd", ":bdel<CR>")
   vim.keymap.set("n", "<leader>n", ":set nu!<CR>")
 
+  -- https://vi.stackexchange.com/questions/21260/how-to-clear-neovim-terminal-buffer#21364
+  vim.cmd([[
+    nmap <c-w><c-l> :set scrollback=1 \| sleep 100m \| set scrollback=10000<cr>
+    tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
+  ]])
+
   -- DateStr* commands used in insert mode (<ctrl>r=DateStr<variant>)
   -- for inserting current datetime.
   vim.cmd([[
