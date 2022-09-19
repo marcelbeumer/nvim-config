@@ -213,12 +213,20 @@ local setup_nvim_tree = function()
     },
   })
 
-  local opts = { noremap = true, silent = true }
-  vim.keymap.set("n", "<leader>;", ":NvimTreeToggle<cr>", opts)
-  vim.keymap.set("n", "<leader>'", ":NvimTreeFindFile<cr>", opts)
+  vim.api.nvim_create_user_command("NvimTreePullCwd", function()
+    local cwd = require("nvim-tree.core").get_cwd()
+    vim.cmd("cd " .. vim.fn.fnameescape(cwd))
+  end, {})
+
   vim.api.nvim_create_user_command("NvimTreePushCwd", function()
     require("nvim-tree.api").tree.change_root(vim.fn.getcwd())
   end, {})
+
+  local opts = { noremap = true, silent = true }
+  vim.keymap.set("n", "<leader>;", ":NvimTreeToggle<cr>", opts)
+  vim.keymap.set("n", "<leader>'", ":NvimTreeFindFile<cr>", opts)
+  vim.keymap.set("n", "<leader>,", ":NvimTreePullCwd<cr>", opts)
+  vim.keymap.set("n", "<leader>.", ":NvimTreePushCwd<cr>", opts)
 end
 
 local setup_hop = function()
