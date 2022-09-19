@@ -150,6 +150,13 @@ local setup_treesitter = function()
     },
   })
 
+  -- TODO: make lua API
+  vim.cmd([[
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
+    set foldlevel=99
+  ]])
+
   -- Workaround for slow go files:
   -- https://github.com/NvChad/NvChad/issues/1415#issuecomment-1203723816
   -- https://github.com/nvim-treesitter/nvim-treesitter/issues/3263
