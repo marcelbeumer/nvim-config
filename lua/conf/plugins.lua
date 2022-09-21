@@ -64,6 +64,12 @@ local setup_fzf_lua = function()
   vim.keymap.set("n", "<leader>fb", function()
     fzf.buffers(args_small)
   end, opts)
+  vim.keymap.set("n", "<leader>fq", function()
+    fzf.quickfix(args_small)
+  end, opts)
+  vim.keymap.set("n", "<leader>fl", function()
+    fzf.loclist(args_small)
+  end, opts)
 
   vim.keymap.set("n", "<leader>ft", function()
     fzf.tabs(args_small)
@@ -252,6 +258,14 @@ local setup_gitsigns = function()
   require("gitsigns").setup({ signcolumn = false })
 end
 
+local setup_harpoon = function()
+  vim.keymap.set("n", "<space><space>", require("harpoon.ui").toggle_quick_menu)
+  vim.keymap.set("n", "<leader>hh", require("harpoon.ui").toggle_quick_menu)
+  vim.keymap.set("n", "<leader>ha", require("harpoon.mark").add_file)
+  vim.keymap.set("n", "<leader>hn", require("harpoon.ui").nav_next)
+  vim.keymap.set("n", "<leader>hp", require("harpoon.ui").nav_prev)
+end
+
 -- make_lsp_capabilities updates the default LSP capabilities options
 -- with features that our autocomplete plugin supports.
 M.make_lsp_capabilities = function()
@@ -328,6 +342,7 @@ M.register = function()
   use("phaazon/hop.nvim")
   -- UI.
   use("petertriho/nvim-scrollbar")
+  use("ThePrimeagen/harpoon")
 end
 
 M.setup = function()
@@ -348,6 +363,7 @@ M.setup = function()
   setup_hop()
   setup_scrollbar()
   setup_gitsigns()
+  setup_harpoon()
 end
 
 return M
