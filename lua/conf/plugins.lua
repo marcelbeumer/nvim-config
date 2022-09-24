@@ -343,9 +343,16 @@ M.register = function()
   -- UI.
   use("petertriho/nvim-scrollbar")
   use("ThePrimeagen/harpoon")
+  use("zefei/vim-wintabs")
 end
 
 M.setup = function()
+  vim.cmd([[
+    let g:wintabs_display="statusline"
+  ]])
+  vim.keymap.set("n", "<C-x>", ":WintabsClose<CR>")
+  vim.keymap.set("n", "<C-L>", ":WintabsNext<CR>")
+  vim.keymap.set("n", "<C-H>", ":WintabsPrevious<CR>")
   M.register()
 
   setup_tokyonight()
