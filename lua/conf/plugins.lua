@@ -266,6 +266,13 @@ local setup_harpoon = function()
   vim.keymap.set("n", "<leader>hp", require("harpoon.ui").nav_prev)
 end
 
+local setup_wintabs = function()
+  vim.o.ruler = false -- this way ctrl-g will show line+col
+  vim.keymap.set("n", "<C-x>", ":WintabsClose<CR>")
+  vim.keymap.set("n", "<C-L>", ":WintabsNext<CR>")
+  vim.keymap.set("n", "<C-H>", ":WintabsPrevious<CR>")
+end
+
 -- make_lsp_capabilities updates the default LSP capabilities options
 -- with features that our autocomplete plugin supports.
 M.make_lsp_capabilities = function()
@@ -343,16 +350,12 @@ M.register = function()
   -- UI.
   use("petertriho/nvim-scrollbar")
   use("ThePrimeagen/harpoon")
-  use("zefei/vim-wintabs")
+  use("marcelbeumer/vim-wintabs")
+  -- Disabled but here for reference.
+  -- use("NvChad/nvim-colorizer.lua")
 end
 
 M.setup = function()
-  vim.cmd([[
-    let g:wintabs_display="statusline"
-  ]])
-  vim.keymap.set("n", "<C-x>", ":WintabsClose<CR>")
-  vim.keymap.set("n", "<C-L>", ":WintabsNext<CR>")
-  vim.keymap.set("n", "<C-H>", ":WintabsPrevious<CR>")
   M.register()
 
   setup_tokyonight()
@@ -371,6 +374,7 @@ M.setup = function()
   setup_scrollbar()
   setup_gitsigns()
   setup_harpoon()
+  setup_wintabs()
 end
 
 return M
