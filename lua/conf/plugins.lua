@@ -51,7 +51,9 @@ local setup_persistence = function()
 end
 
 local setup_fzf_lua = function()
-  local opts = { noremap = true, silent = true }
+  local get_opts = function(desc)
+    return { noremap = true, silent = true, desc = desc }
+  end
   local fzf = require("fzf-lua")
 
   fzf.setup({ winopts = { preview = { layout = "vertical" } } })
@@ -59,36 +61,36 @@ local setup_fzf_lua = function()
   local args_small = { previewer = false, winopts = { height = 0.20, width = 0.80 } }
   vim.keymap.set("n", "<leader>ff", function()
     fzf.files(args_small)
-  end, opts)
+  end, get_opts("Find files"))
 
   vim.keymap.set("n", "<leader>fb", function()
     fzf.buffers(args_small)
-  end, opts)
+  end, get_opts("Find buffers"))
   vim.keymap.set("n", "<leader>fq", function()
     fzf.quickfix(args_small)
-  end, opts)
+  end, get_opts("Find quickfix"))
   vim.keymap.set("n", "<leader>fl", function()
     fzf.loclist(args_small)
-  end, opts)
+  end, get_opts("Find loclist"))
 
   vim.keymap.set("n", "<leader>ft", function()
     fzf.tabs(args_small)
-  end, opts)
+  end, get_opts("Find tabs"))
 
-  vim.keymap.set("n", "<leader>fc", fzf.commands, opts)
-  vim.keymap.set("n", "<leader>fh", fzf.help_tags, opts)
-  vim.keymap.set("n", "<leader>fgp", fzf.live_grep_native, opts)
-  vim.keymap.set("n", "<leader>fgb", fzf.grep_curbuf, opts)
+  vim.keymap.set("n", "<leader>fc", fzf.commands, get_opts("Find commands"))
+  vim.keymap.set("n", "<leader>fh", fzf.help_tags, get_opts("Find help"))
+  vim.keymap.set("n", "<leader>fgp", fzf.live_grep_native, get_opts("Live grep"))
+  vim.keymap.set("n", "<leader>fgb", fzf.grep_curbuf, get_opts("Grep current buffer"))
 
-  vim.keymap.set("n", "<leader>flq", fzf.diagnostics_document, {})
-  vim.keymap.set("n", "<leader>flQ", fzf.diagnostics_workspace, {})
-  vim.keymap.set("n", "<leader>flr", fzf.lsp_references, {})
-  vim.keymap.set("n", "<leader>fls", fzf.lsp_document_symbols, {})
-  vim.keymap.set("n", "<leader>flS", fzf.lsp_workspace_symbols, {})
-  vim.keymap.set("n", "<leader>fli", fzf.lsp_implementations, {})
-  vim.keymap.set("n", "<leader>fld", fzf.lsp_definitions, {})
-  vim.keymap.set("n", "<leader>flD", fzf.lsp_declarations, {})
-  vim.keymap.set("n", "<leader>flt", fzf.lsp_typedefs, {})
+  vim.keymap.set("n", "<leader>flq", fzf.diagnostics_document, get_opts("Find document diagnostic"))
+  vim.keymap.set("n", "<leader>flQ", fzf.diagnostics_workspace, get_opts("Find workspace diagnostic"))
+  vim.keymap.set("n", "<leader>flr", fzf.lsp_references, get_opts("Find LSP references"))
+  vim.keymap.set("n", "<leader>fls", fzf.lsp_document_symbols, get_opts("Find LSP document symbols"))
+  vim.keymap.set("n", "<leader>flS", fzf.lsp_workspace_symbols, get_opts("Find LSP workspace symbols"))
+  vim.keymap.set("n", "<leader>fli", fzf.lsp_implementations, get_opts("Find LSP implementations"))
+  vim.keymap.set("n", "<leader>fld", fzf.lsp_definitions, get_opts("Find LSP definitions"))
+  vim.keymap.set("n", "<leader>flD", fzf.lsp_declarations, get_opts("Find LSP declarations"))
+  vim.keymap.set("n", "<leader>flt", fzf.lsp_typedefs, get_opts("Find LSP type defs"))
 end
 
 local setup_tokyonight = function()
@@ -255,22 +257,52 @@ local setup_scrollbar = function()
 end
 
 local setup_gitsigns = function()
-  require("gitsigns").setup({ signcolumn = false })
+  require("gitsigns").setup({ signcolumn = true, numhl = true })
 end
 
 local setup_harpoon = function()
-  vim.keymap.set("n", "<space><space>", require("harpoon.ui").toggle_quick_menu)
-  vim.keymap.set("n", "<leader>hh", require("harpoon.ui").toggle_quick_menu)
-  vim.keymap.set("n", "<leader>ha", require("harpoon.mark").add_file)
-  vim.keymap.set("n", "<leader>hn", require("harpoon.ui").nav_next)
-  vim.keymap.set("n", "<leader>hp", require("harpoon.ui").nav_prev)
+  local get_opts = function(desc)
+    return { desc = desc }
+  end
+  vim.keymap.set("n", "<space><space>", require("harpoon.ui").toggle_quick_menu, get_opts("Harpoon UI"))
+  vim.keymap.set("n", "<leader>hh", require("harpoon.ui").toggle_quick_menu, get_opts("Harpoon UI"))
+  vim.keymap.set("n", "<leader>ha", require("harpoon.mark").add_file, get_opts("Harpoon mark file"))
+  vim.keymap.set("n", "<leader>hn", require("harpoon.ui").nav_next, get_opts("Harpoon goto next"))
+  vim.keymap.set("n", "<leader>hp", require("harpoon.ui").nav_prev, get_opts("Harpoon goto previous"))
 end
 
 local setup_wintabs = function()
   vim.o.ruler = false -- this way ctrl-g will show line+col
-  vim.keymap.set("n", "<C-x>", ":WintabsClose<CR>")
-  vim.keymap.set("n", "<C-L>", ":WintabsNext<CR>")
-  vim.keymap.set("n", "<C-H>", ":WintabsPrevious<CR>")
+  local get_opts = function(desc)
+    return { desc = desc }
+  end
+  vim.keymap.set("n", "<C-x>", ":WintabsClose<CR>", get_opts())
+  vim.keymap.set("n", "<C-L>", ":WintabsNext<CR>", get_opts())
+  vim.keymap.set("n", "<C-H>", ":WintabsPrevious<CR>", get_opts())
+end
+
+local setup_which_key = function()
+  vim.o.timeoutlen = 500
+  require("which-key").setup()
+end
+
+local setup_lsp_lines = function()
+  vim.diagnostic.config({ virtual_lines = false })
+  require("lsp_lines").setup()
+
+  vim.api.nvim_create_user_command("LspLinesToggle", function()
+    require("lsp_lines").toggle()
+  end, {})
+  vim.api.nvim_create_user_command("LspLinesDisable", function()
+    vim.diagnostic.config({ virtual_lines = false })
+  end, {})
+  vim.api.nvim_create_user_command("LspLinesEnable", function()
+    vim.diagnostic.config({ virtual_lines = true })
+  end, {})
+  vim.api.nvim_create_user_command("LspLinesEnableCurrentLine", function()
+    vim.diagnostic.config({ virtual_lines = { only_current_line = true } })
+  end, {})
+  vim.keymap.set("n", "<leader>l", require("lsp_lines").toggle, { desc = "Toggle diagnostic virtual lines" })
 end
 
 -- make_lsp_capabilities updates the default LSP capabilities options
@@ -300,6 +332,8 @@ M.register = function()
   use("nvim-lua/plenary.nvim")
   -- Official LSP setup helper plugin.
   use("neovim/nvim-lspconfig")
+  -- LSP
+  use("https://git.sr.ht/~whynothugo/lsp_lines.nvim")
   -- Editor config support.
   use("editorconfig/editorconfig-vim")
   -- Tresitter.
@@ -351,6 +385,7 @@ M.register = function()
   use("petertriho/nvim-scrollbar")
   use("ThePrimeagen/harpoon")
   use("marcelbeumer/vim-wintabs")
+  use("folke/which-key.nvim")
   -- Disabled but here for reference.
   -- use("NvChad/nvim-colorizer.lua")
 end
@@ -375,6 +410,8 @@ M.setup = function()
   setup_gitsigns()
   setup_harpoon()
   setup_wintabs()
+  setup_which_key()
+  setup_lsp_lines()
 end
 
 return M
