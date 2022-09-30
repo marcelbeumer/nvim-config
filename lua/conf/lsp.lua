@@ -80,9 +80,10 @@ end
 M.setup = function()
   local env = require("conf.env")
   local lspconfig = require("lspconfig")
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
   -- Our autocomplete plugin will update the default LSP capabilities
   -- options normally passed to the LSP servers.
-  local capabilities = require("conf.plugins").make_lsp_capabilities()
+  require("cmp_nvim_lsp").update_capabilities(capabilities)
 
   vim.diagnostic.config({
     -- Virtual text is too noisy IMO. Downside is that you have to manually
