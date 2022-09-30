@@ -63,15 +63,16 @@ local on_attach = function(client, bufnr)
   end
 
   -- Format on save.
-  local env = require("conf.env")
-  if env.NVIM_LSP_AUTO_FORMAT == "on" and client.supports_method("textDocument/formatting") then
+  if client.supports_method("textDocument/formatting") then
     local fmt = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
     vim.api.nvim_clear_autocmds({ group = fmt, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = fmt,
       buffer = bufnr,
       callback = function()
-        vim.lsp.buf.format({ bufnr = bufnr })
+        if require("conf.env").NVIM_LSP_AUTO_FORMAT == "on" then
+          vim.lsp.buf.format({ bufnr = bufnr })
+        end
       end,
     })
   end
@@ -124,6 +125,17 @@ M.setup = function()
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
   vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+
+  -- Global commands.
+  vim.api.nvim_create_user_command("LspAutoFormatStatus", function()
+    print(require("conf.env").NVIM_LSP_AUTO_FORMAT)
+  end, {})
+  vim.api.nvim_create_user_command("LspAutoFormatEnable", function()
+    require("conf.env").NVIM_LSP_AUTO_FORMAT = "on"
+  end, {})
+  vim.api.nvim_create_user_command("LspAutoFormatDisable", function()
+    require("conf.env").NVIM_LSP_AUTO_FORMAT = "off"
+  end, {})
 
   -- We use null-ls for most formatting and linting.
   local null_ls = require("null-ls")
