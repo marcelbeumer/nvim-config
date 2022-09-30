@@ -7,9 +7,10 @@ M.setup = function()
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
-      local function map(mode, l, r, opts)
-        opts = opts or {}
+      local function map(mode, l, r, desc)
+        local opts = {}
         opts.buffer = bufnr
+        opts.desc = desc
         vim.keymap.set(mode, l, r, opts)
       end
 
@@ -35,24 +36,23 @@ M.setup = function()
       end, { expr = true })
 
       -- Actions
-      map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-      map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-      map("n", "<leader>hS", gs.stage_buffer)
-      map("n", "<leader>hu", gs.undo_stage_hunk)
-      map("n", "<leader>hR", gs.reset_buffer)
-      map("n", "<leader>hp", gs.preview_hunk)
-      map("n", "<leader>hb", function()
+      map({ "n", "v" }, "<leader>xhs", ":Gitsigns stage_hunk<CR>", "Git stage hunk")
+      map({ "n", "v" }, "<leader>xhr", ":Gitsigns reset_hunk<CR>", "Git reset hunk")
+      map("n", "<leader>xhS", gs.stage_buffer, "Git stage buffer")
+      map("n", "<leader>xhu", gs.undo_stage_hunk, "Git undo stage hunk")
+      map("n", "<leader>xhR", gs.reset_buffer, "Git reset buffer")
+      map("n", "<leader>xhp", gs.preview_hunk, "Git preview hunk")
+      map("n", "<leader>xhb", function()
         gs.blame_line({ full = true })
-      end)
-      map("n", "<leader>tb", gs.toggle_current_line_blame)
-      map("n", "<leader>hd", gs.diffthis)
-      map("n", "<leader>hD", function()
+      end, "Git full line blame")
+      map("n", "<leader>xtb", gs.toggle_current_line_blame, "Git toggle blame current line")
+      map("n", "<leader>xhd", gs.diffthis, "Git diffthis")
+      map("n", "<leader>xhD", function()
         gs.diffthis("~")
-      end)
-      map("n", "<leader>td", gs.toggle_deleted)
-
+      end, "Git diffthis prev commit")
+      map("n", "<leader>xtd", gs.toggle_deleted, "Git toggle delete")
       -- Text object
-      map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+      map({ "o", "x" }, "xih", ":<C-U>Gitsigns select_hunk<CR>", "Git select hunk")
     end,
   })
 end
