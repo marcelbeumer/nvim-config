@@ -73,7 +73,7 @@ M.register = function()
   use("mfussenegger/nvim-dap")
   use("rcarriga/nvim-dap-ui")
   -- Tests.
-  use("nvim-neotest/neotest")
+  use({ "marcelbeumer/neotest", branch = "output-last" })
   use("haydenmeade/neotest-jest")
   -- UI.
   use("petertriho/nvim-scrollbar")
