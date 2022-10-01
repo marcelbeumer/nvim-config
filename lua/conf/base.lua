@@ -8,7 +8,7 @@ M.setup = function()
     return ...
   end
 
-  -- Line numbers off.
+  -- Line numbers.
   vim.o.number = true
   --Enable mouse mode in all modes.
   vim.o.mouse = "a"
