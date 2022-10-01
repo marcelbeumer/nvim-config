@@ -33,7 +33,7 @@ M.register = function()
   -- File explorer.
   use("kyazdani42/nvim-tree.lua")
   -- Simple session management.
-  use("folke/persistence.nvim")
+  use("olimorris/persisted.nvim")
   -- Lua dev setup
   use("folke/lua-dev.nvim")
   -- Autocompletion and plugins.
@@ -92,7 +92,7 @@ M.setup = function()
 
   require("conf.plugins.setup.cmp").setup()
   require("conf.plugins.setup.treesitter").setup()
-  require("conf.plugins.setup.persistence").setup()
+  require("conf.plugins.setup.persisted").setup()
   require("conf.plugins.setup.fzf_lua").setup()
   require("conf.plugins.setup.nvim_comment").setup()
   require("conf.plugins.setup.autopairs").setup()

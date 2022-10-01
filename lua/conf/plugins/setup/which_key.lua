@@ -1,9 +1,9 @@
 local M = {}
 
 M.setup = function()
+  local wk = require("which-key")
   vim.o.timeoutlen = 500
-  require("which-key").setup({
-    triggers = { "<leader>" },
+  wk.setup({
     plugins = {
       spelling = {
         enabled = true,
