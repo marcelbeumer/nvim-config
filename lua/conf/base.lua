@@ -63,6 +63,8 @@ M.setup = function()
   vim.keymap.set("n", "<leader>tb", ":tab sb %<CR>")
   vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
   vim.keymap.set("n", "<leader>n", ":set nu!<CR>")
+  vim.keymap.set("n", "<leader>v", ":vsplit")
+  vim.keymap.set("n", "<leader>s", ":split")
 
   -- https://vi.stackexchange.com/questions/21260/how-to-clear-neovim-terminal-buffer#21364
   vim.cmd([[
