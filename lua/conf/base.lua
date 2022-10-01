@@ -47,7 +47,6 @@ M.setup = function()
   vim.cmd([[command FilePathTail let @*=expand("%:t")]])
   vim.cmd([[command Cwd let @*=getcwd()]])
 
-  vim.keymap.set("n", "]q", ":cnext")
   vim.keymap.set("n", "]q", ":cnext<CR>")
   vim.keymap.set("n", "[q", ":cprev<CR>")
   vim.keymap.set("n", "]Q", ":lnext<CR>")
@@ -63,8 +62,8 @@ M.setup = function()
   vim.keymap.set("n", "<leader>tb", ":tab sb %<CR>")
   vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
   vim.keymap.set("n", "<leader>n", ":set nu!<CR>")
-  vim.keymap.set("n", "<leader>v", ":vsplit")
-  vim.keymap.set("n", "<leader>s", ":split")
+  vim.keymap.set("n", "<leader>v", ":vsplit<CR>")
+  vim.keymap.set("n", "<leader>s", ":split<CR>")
 
   -- https://vi.stackexchange.com/questions/21260/how-to-clear-neovim-terminal-buffer#21364
   vim.cmd([[
