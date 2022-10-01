@@ -60,12 +60,14 @@ M.setup = function()
   -- vim.keymap.set("n", "<C-H>", ":tabprev<CR>")
   vim.keymap.set("n", "<C-s>", ":w<CR>")
   vim.keymap.set("n", "<C-w>N", ":vnew<CR>")
+  vim.keymap.set("n", "<leader>t", function() end, { desc = "Tabs..." })
   vim.keymap.set("n", "<leader>tn", ":tabnew<CR>")
   vim.keymap.set("n", "<leader>tb", ":tab sb %<CR>")
   vim.keymap.set("n", "<leader>tc", ":tabclose<CR>")
   vim.keymap.set("n", "<leader>n", ":set nu!<CR>")
   vim.keymap.set("n", "<leader>v", ":vsplit<CR>")
   vim.keymap.set("n", "<leader>s", ":split<CR>")
+  vim.keymap.set("n", "<leader>x", function() end, { desc = "Misc..." })
 
   -- https://vi.stackexchange.com/questions/21260/how-to-clear-neovim-terminal-buffer#21364
   vim.cmd([[
