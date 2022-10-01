@@ -25,6 +25,10 @@ M.setup = function()
     require("neotest").run.run()
   end, { desc = "Run the nearest test" })
 
+  vim.keymap.set("n", "<leader>xtl", function()
+    require("neotest").run.run_last()
+  end, { desc = "Run last test" })
+
   vim.keymap.set("n", "<leader>xtR", function()
     require("neotest").run.run(vim.fn.expand("%"))
   end, { desc = "Run the current file" })
