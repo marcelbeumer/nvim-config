@@ -9,7 +9,7 @@ M.setup = function()
   end
 
   -- Line numbers off.
-  vim.o.number = false
+  vim.o.number = true
   --Enable mouse mode in all modes.
   vim.o.mouse = "a"
   --Enable break indent.
