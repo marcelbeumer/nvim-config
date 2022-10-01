@@ -36,6 +36,7 @@ M.setup = function()
       end, { expr = true })
 
       -- Actions
+      map({ "n", "v" }, "<leader>xh", function() end, "Git...")
       map({ "n", "v" }, "<leader>xhs", ":Gitsigns stage_hunk<CR>", "Git stage hunk")
       map({ "n", "v" }, "<leader>xhr", ":Gitsigns reset_hunk<CR>", "Git reset hunk")
       map("n", "<leader>xhS", gs.stage_buffer, "Git stage buffer")

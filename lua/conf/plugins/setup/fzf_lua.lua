@@ -27,11 +27,13 @@ M.setup = function()
     fzf.tabs(args_small)
   end, get_opts("Find tabs"))
 
+  vim.keymap.set("n", "<leader>f", function() end, get_opts("Find..."))
   vim.keymap.set("n", "<leader>fc", fzf.commands, get_opts("Find commands"))
   vim.keymap.set("n", "<leader>fh", fzf.help_tags, get_opts("Find help"))
   vim.keymap.set("n", "<leader>fgp", fzf.live_grep_native, get_opts("Live grep"))
   vim.keymap.set("n", "<leader>fgb", fzf.grep_curbuf, get_opts("Grep current buffer"))
 
+  vim.keymap.set("n", "<leader>fl", function() end, get_opts("Find LSP..."))
   vim.keymap.set("n", "<leader>flq", fzf.diagnostics_document, get_opts("Find document diagnostic"))
   vim.keymap.set("n", "<leader>flQ", fzf.diagnostics_workspace, get_opts("Find workspace diagnostic"))
   vim.keymap.set("n", "<leader>flr", fzf.lsp_references, get_opts("Find LSP references"))

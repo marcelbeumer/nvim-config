@@ -13,6 +13,8 @@ M.setup = function()
     },
   })
 
+  vim.keymap.set("n", "<leader>xt", function() end, { desc = "Test..." })
+
   vim.keymap.set("n", "<leader>xts", function()
     require("neotest").summary.toggle()
   end, { desc = "Toggle test summary" })
