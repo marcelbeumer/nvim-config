@@ -72,6 +72,9 @@ M.register = function()
   -- Debugging.
   use("mfussenegger/nvim-dap")
   use("rcarriga/nvim-dap-ui")
+  -- Tests.
+  use("nvim-neotest/neotest")
+  use("haydenmeade/neotest-jest")
   -- UI.
   use("petertriho/nvim-scrollbar")
   use("ThePrimeagen/harpoon")
@@ -103,6 +106,7 @@ M.setup = function()
   require("conf.plugins.setup.which_key").setup()
   require("conf.plugins.setup.lsp_lines").setup()
   require("conf.plugins.setup.nvim_dap").setup()
+  require("conf.plugins.setup.neotest").setup()
   -- require("go").setup()
 end
 
