@@ -26,6 +26,8 @@ M.setup = function()
   vim.o.termguicolors = true
   -- Copy paste from and to nvim.
   vim.o.clipboard = "unnamed"
+  -- Keep some space when scrolling.
+  vim.o.scrolloff = 5
 
   -- Netrw settings.
   vim.api.nvim_set_var("netrw_banner", 0)
