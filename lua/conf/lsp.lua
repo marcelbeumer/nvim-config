@@ -37,7 +37,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, get_buf_opts("LSP rename"))
   vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, get_buf_opts("LSP code actions"))
   vim.keymap.set("n", "gr", vim.lsp.buf.references, get_buf_opts("LSP goto references"))
-  vim.keymap.set("n", "<space>f", vim.lsp.buf.formatting, get_buf_opts("LSP formatting"))
+  vim.keymap.set("n", "<space>f", vim.lsp.buf.format, get_buf_opts("LSP formatting"))
 
   -- Highlight symbol under cursor.
   if client.supports_method("textDocument/documentHighlight") then
