@@ -6,8 +6,8 @@ M.setup = function()
     return { desc = desc }
   end
   vim.keymap.set("n", "<C-x>", ":WintabsClose<CR>", get_opts())
-  vim.keymap.set("n", "<C-L>", ":WintabsNext<CR>", get_opts())
-  vim.keymap.set("n", "<C-H>", ":WintabsPrevious<CR>", get_opts())
+  vim.keymap.set("n", "<C-p>", ":WintabsNext<CR>", get_opts())
+  vim.keymap.set("n", "<C-o>", ":WintabsPrevious<CR>", get_opts())
 end
 
 return M
