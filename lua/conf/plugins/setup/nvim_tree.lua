@@ -29,16 +29,19 @@ M.setup = function()
     },
   })
 
+  local print_cwd = function()
+    print("cwd is now: " .. vim.fn.getcwd())
+  end
+
   vim.api.nvim_create_user_command("NvimTreePullCwd", function()
     local cwd = require("nvim-tree.core").get_cwd()
     vim.cmd("cd " .. vim.fn.fnameescape(cwd))
-    print("cwd is now: " .. cwd)
+    print_cwd()
   end, {})
 
   vim.api.nvim_create_user_command("NvimTreePushCwd", function()
-    local cwd = vim.fn.getcwd()
     require("nvim-tree.api").tree.change_root(vim.fn.getcwd())
-    print("cwd is now: " .. cwd)
+    print_cwd()
   end, {})
 
   local opts = { noremap = true, silent = true }
