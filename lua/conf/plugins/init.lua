@@ -18,7 +18,7 @@ M.register = function()
   use("wbthomason/packer.nvim")
   -- Common plugin dependency.
   use("nvim-lua/plenary.nvim")
-  -- Official LSP setup helper plugin.
+  -- Official LSP setup helper plugin, required by lua-dev.
   use("neovim/nvim-lspconfig")
   -- LSP
   use("https://git.sr.ht/~whynothugo/lsp_lines.nvim")
