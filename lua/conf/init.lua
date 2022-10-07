@@ -12,6 +12,7 @@ M.setup = function()
   elseif env.NVIM_STARTUP == "normal" then
     require("conf.base").setup()
     require("conf.plugins").setup()
+    require("conf.diagnostic").setup()
     if env.NVIM_LSP == "on" then
       require("conf.lsp").setup()
     end
