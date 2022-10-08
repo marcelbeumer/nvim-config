@@ -6,8 +6,11 @@ M.setup = function()
   local luasnip = require("luasnip")
 
   vim.o.completeopt = "menu,menuone,noselect"
-  vim.o.pumheight = 10
+  vim.o.pumheight = 5
   cmp.setup.global({
+    -- view = {
+    --   entries = "wildmenu", -- can be "custom", "wildmenu" or "native"
+    -- },
     experimental = { ghost_text = true },
     snippet = {
       expand = function(args)
