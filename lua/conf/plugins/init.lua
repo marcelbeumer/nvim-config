@@ -63,6 +63,7 @@ M.register = function()
   use("tpope/vim-vinegar")
   -- Colorscheme.
   use("marcelbeumer/tokyonight.nvim")
+  use({ "catppuccin/nvim", as = "catppuccin" })
   -- Icons.
   use("kyazdani42/nvim-web-devicons")
   -- Code navigation.
@@ -86,10 +87,7 @@ end
 
 M.setup = function()
   M.register()
-
-  require("conf.plugins.setup.tokyonight").setup()
-  vim.cmd([[colorscheme tokyonight]])
-
+  require("conf.plugins.setup.colorscheme").setup()
   require("conf.plugins.setup.cmp").setup()
   require("conf.plugins.setup.treesitter").setup()
   require("conf.plugins.setup.persisted").setup()
