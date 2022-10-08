@@ -83,6 +83,7 @@ M.register = function()
   use("folke/which-key.nvim")
   -- Disabled but here for reference.
   -- use("NvChad/nvim-colorizer.lua")
+  use("nvim-telescope/telescope.nvim")
 end
 
 M.setup = function()
@@ -106,6 +107,84 @@ M.setup = function()
   require("conf.plugins.setup.nvim_dap").setup()
   require("conf.plugins.setup.neotest").setup()
   -- require("go").setup()
+  --
+  --
+  --
+  local get_filename_fn = function()
+    local bufnr_name_cache = {}
+    return function(bufnr)
+      bufnr = vim.F.if_nil(bufnr, 0)
+      local c = bufnr_name_cache[bufnr]
+      if c then
+        return c
+      end
+
+      local n = vim.api.nvim_buf_get_name(bufnr)
+      bufnr_name_cache[bufnr] = n
+      return n
+    end
+  end
+
+  local utils = require("telescope.utils")
+  local x = function(opts)
+    opts = opts or {}
+    local hidden = utils.is_path_hidden(opts)
+    local make_display = function(entry)
+      return string.format("%s:%d:%d:%s", utils.transform_path(opts, entry.filename), entry.lnum, entry.col, entry.text)
+    end
+
+    local get_filename = get_filename_fn()
+    return function(entry)
+      local filename = vim.F.if_nil(entry.filename, get_filename(entry.bufnr))
+
+      return require("telescope.make_entry").set_default_entry_mt({
+        value = entry,
+        ordinal = (not hidden and filename or "") .. " " .. entry.text,
+        display = make_display,
+        bufnr = entry.bufnr,
+        filename = filename,
+        lnum = entry.lnum,
+        col = entry.col,
+        text = entry.text,
+        start = entry.start,
+        finish = entry.finish,
+      }, opts)
+    end
+  end
+
+  require("telescope").setup({
+    defaults = {
+      sorting_strategy = "ascending",
+      layout_strategy = "vertical",
+      layout_config = {
+        vertical = {
+          mirror = true,
+          anchor = "N",
+          prompt_position = "top",
+          width = 0.8,
+          height = 0.9,
+        },
+      },
+    },
+    pickers = {
+      find_files = {
+        disable_devicons = true,
+        previewer = false,
+        layout_config = {
+          height = 20,
+        },
+      },
+      live_grep = {
+        disable_devicons = true,
+      },
+      lsp_references = {
+        entry_maker = x({}),
+        -- entry_maker = require('telescope.make_entry').gen_from_vimgrep({}),
+        -- path_display = {
+        -- },
+      },
+    },
+  })
 end
 
 return M
