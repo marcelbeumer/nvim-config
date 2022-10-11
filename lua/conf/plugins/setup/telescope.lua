@@ -23,9 +23,18 @@ M.setup = function()
     },
     pickers = {
       find_files = {
-        follow = true,
+        find_command = { "fd" },
+        -- follow = true,
         hidden = true,
         disable_devicons = true,
+        previewer = false,
+        layout_config = {
+          height = 20,
+        },
+      },
+      git_files = {
+        disable_devicons = true,
+        show_untracked = true,
         previewer = false,
         layout_config = {
           height = 20,
@@ -45,17 +54,18 @@ M.setup = function()
 
   vim.keymap.set("n", "<leader>f", function() end, get_opts("Find..."))
   vim.keymap.set("n", "<leader>ff", builtin.find_files, get_opts("Find files"))
+  vim.keymap.set("n", "<leader>fg", builtin.git_files, get_opts("Git files"))
   vim.keymap.set("n", "<leader>fF", function()
-    builtin.find_files({ follow = true, hidden = true, no_ignore = true })
+    builtin.find_files({ hidden = true, no_ignore = true })
   end, get_opts("Find files"))
   vim.keymap.set("n", "<leader>fb", builtin.buffers, get_opts("Find buffers"))
   vim.keymap.set("n", "<leader>fq", builtin.quickfix, get_opts("Find quickfix"))
-  vim.keymap.set("n", "<leader>fq", builtin.loclist, get_opts("Find loclist"))
+  vim.keymap.set("n", "<leader>fl", builtin.loclist, get_opts("Find loclist"))
 
-  vim.keymap.set("n", "<leader>fc", builtin.commands, get_opts("Find commands"))
-  vim.keymap.set("n", "<leader>fh", builtin.help_tags, get_opts("Find help"))
-  vim.keymap.set("n", "<leader>fgp", builtin.live_grep, get_opts("Live grep"))
-  vim.keymap.set("n", "<leader>fgb", builtin.current_buffer_fuzzy_find, get_opts("Grep current buffer"))
+  vim.keymap.set("n", "<leader>frp", builtin.live_grep, get_opts("Live grep"))
+  vim.keymap.set("n", "<leader>frb", builtin.current_buffer_fuzzy_find, get_opts("Grep current buffer"))
+  vim.keymap.set("n", "<leader>fC", builtin.commands, get_opts("Find commands"))
+  vim.keymap.set("n", "<leader>fH", builtin.help_tags, get_opts("Find help"))
 
   vim.keymap.set("n", "<leader>fl", function() end, get_opts("Find LSP..."))
 
