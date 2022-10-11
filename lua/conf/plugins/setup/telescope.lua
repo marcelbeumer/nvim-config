@@ -16,7 +16,7 @@ M.setup = function()
           mirror = true,
           anchor = "N",
           prompt_position = "top",
-          width = 0.8,
+          width = 0.7,
           height = 0.9,
         },
       },

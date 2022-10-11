@@ -35,7 +35,7 @@ M.register = function()
   -- Simple session management.
   use("olimorris/persisted.nvim")
   -- Project switching.
-  use("ahmedkhalf/project.nvim")
+  use({ "marcelbeumer/project.nvim", branch = "remove-fixed-widths" })
   -- Lua dev setup
   use("folke/lua-dev.nvim")
   -- Autocompletion and plugins.
