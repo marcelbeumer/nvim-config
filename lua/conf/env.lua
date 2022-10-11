@@ -22,8 +22,8 @@ return {
   -- on: enable autodetecting yaml as gotmpl (default)
   -- off: disable autodetecting yaml as gotmpl
   NVIM_GOTMPL_YAML = vim.env.NVIM_GOTMPL_YAML or "on",
-  -- NVIM_USE_TELESCOPE=<on|off>
-  -- on: use telescope instead of fzf-lua
-  -- off: do not use telescope (default)
-  NVIM_USE_TELESCOPE = vim.env.NVIM_USE_TELESCOPE or "off",
+  -- NVIM_USE_FZF_LUA=<on|off>
+  -- on: use fzf_lua instead of telescope
+  -- off: do not use fzf_lua (default)
+  NVIM_USE_FZF_LUA = vim.env.NVIM_USE_FZF_LUA or "off",
 }

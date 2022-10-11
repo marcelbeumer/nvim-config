@@ -35,6 +35,8 @@ M.setup = function()
     },
   })
 
+  telescope.load_extension("fzf")
+
   local get_opts = function(desc)
     return { noremap = true, silent = true, desc = desc }
   end

@@ -34,6 +34,8 @@ M.register = function()
   use("kyazdani42/nvim-tree.lua")
   -- Simple session management.
   use("olimorris/persisted.nvim")
+  -- Project switching.
+  use("ahmedkhalf/project.nvim")
   -- Lua dev setup
   use("folke/lua-dev.nvim")
   -- Autocompletion and plugins.
@@ -53,6 +55,10 @@ M.register = function()
   -- Quick file/buffer/lsp/etc pickers.
   use("ibhagwan/fzf-lua")
   use({ "marcelbeumer/telescope.nvim", branch = "remove-fixed-widths" })
+  use({
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+  })
   -- Go specific features.
   -- use("ray-x/go.nvim") -- lots of features
   use("olexsmir/gopher.nvim") -- minimal
@@ -93,10 +99,11 @@ M.setup = function()
   require("conf.plugins.setup.cmp").setup()
   require("conf.plugins.setup.treesitter").setup()
   require("conf.plugins.setup.persisted").setup()
-  if require("conf.env").NVIM_USE_TELESCOPE == "on" then
-    require("conf.plugins.setup.telescope").setup()
-  else
+  if require("conf.env").NVIM_USE_FZF_LUA == "on" then
     require("conf.plugins.setup.fzf_lua").setup()
+  else
+    require("conf.plugins.setup.telescope").setup()
+    require("conf.plugins.setup.project_nvim").setup()
   end
   require("conf.plugins.setup.nvim_comment").setup()
   require("conf.plugins.setup.autopairs").setup()
