@@ -23,6 +23,8 @@ M.setup = function()
     },
     pickers = {
       find_files = {
+        follow = true,
+        hidden = true,
         disable_devicons = true,
         previewer = false,
         layout_config = {
@@ -42,9 +44,7 @@ M.setup = function()
   end
 
   vim.keymap.set("n", "<leader>f", function() end, get_opts("Find..."))
-  vim.keymap.set("n", "<leader>ff", function()
-    builtin.find_files({ follow = true })
-  end, get_opts("Find files"))
+  vim.keymap.set("n", "<leader>ff", builtin.find_files, get_opts("Find files"))
   vim.keymap.set("n", "<leader>fF", function()
     builtin.find_files({ follow = true, hidden = true, no_ignore = true })
   end, get_opts("Find files"))
