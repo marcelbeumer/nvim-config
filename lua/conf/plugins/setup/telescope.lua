@@ -42,7 +42,9 @@ M.setup = function()
   end
 
   vim.keymap.set("n", "<leader>f", function() end, get_opts("Find..."))
-  vim.keymap.set("n", "<leader>ff", builtin.find_files, get_opts("Find files"))
+  vim.keymap.set("n", "<leader>ff", function()
+    builtin.find_files({ follow = true })
+  end, get_opts("Find files"))
   vim.keymap.set("n", "<leader>fb", builtin.buffers, get_opts("Find buffers"))
   vim.keymap.set("n", "<leader>fq", builtin.quickfix, get_opts("Find quickfix"))
   vim.keymap.set("n", "<leader>fq", builtin.loclist, get_opts("Find loclist"))
