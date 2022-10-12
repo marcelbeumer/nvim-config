@@ -91,6 +91,8 @@ M.register = function()
   use("folke/which-key.nvim")
   -- Disabled but here for reference.
   -- use("NvChad/nvim-colorizer.lua")
+  --
+  use("akinsho/toggleterm.nvim")
 end
 
 M.setup = function()
@@ -116,6 +118,7 @@ M.setup = function()
   require("conf.plugins.setup.lsp_lines").setup()
   require("conf.plugins.setup.nvim_dap").setup()
   require("conf.plugins.setup.neotest").setup()
+  require("conf.plugins.setup.toggleterm").setup()
   -- require("go").setup()
 end
 

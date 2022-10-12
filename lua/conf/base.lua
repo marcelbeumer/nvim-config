@@ -69,6 +69,12 @@ M.setup = function()
   vim.keymap.set("n", "<leader>s", ":split<CR>")
   vim.keymap.set("n", "<leader>x", function() end, { desc = "Misc..." })
 
+  vim.keymap.set("t", "<esc><esc>", [[<C-\><C-n>]], {})
+  vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], {})
+  vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], {})
+  vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], {})
+  vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], {})
+
   -- https://vi.stackexchange.com/questions/21260/how-to-clear-neovim-terminal-buffer#21364
   vim.cmd([[
     nmap <c-w><c-l> :set scrollback=1 \| sleep 100m \| set scrollback=10000<cr>
