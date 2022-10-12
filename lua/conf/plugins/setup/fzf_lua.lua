@@ -46,7 +46,11 @@ M.setup = function()
 
   vim.keymap.set("n", "<leader>fp", function()
     local contents = require("project_nvim").get_recent_projects()
-    require("fzf-lua").fzf_exec(contents, {
+    local reverse = {}
+    for i = #contents, 1, -1 do
+      reverse[#reverse + 1] = contents[i]
+    end
+    require("fzf-lua").fzf_exec(reverse, {
       actions = {
         default = function(e)
           vim.cmd.cd(e[1])
