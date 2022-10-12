@@ -3,7 +3,7 @@ local M = {}
 M.setup = function()
   vim.diagnostic.config({
     -- Virtual text is too noisy IMO. Downside is that you have to manually
-    -- trigger showing diagnostics (with K on a specific line).
+    -- trigger showing diagnostics (with <space-e> on a specific line).
     virtual_text = false,
     -- Without noisy virtual text it's ok to update in insert mode.
     update_in_insert = true,
