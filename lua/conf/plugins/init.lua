@@ -54,11 +54,6 @@ M.register = function()
   use("lewis6991/gitsigns.nvim")
   -- Quick file/buffer/lsp/etc pickers.
   use("ibhagwan/fzf-lua")
-  use({ "marcelbeumer/telescope.nvim", branch = "remove-fixed-widths" })
-  use({
-    "nvim-telescope/telescope-fzf-native.nvim",
-    run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-  })
   -- Go specific features.
   -- use("ray-x/go.nvim") -- lots of features
   use("olexsmir/gopher.nvim") -- minimal
@@ -102,7 +97,6 @@ M.setup = function()
   require("conf.plugins.setup.treesitter").setup()
   require("conf.plugins.setup.persisted").setup()
   require("conf.plugins.setup.fzf_lua").setup()
-  require("conf.plugins.setup.telescope").setup()
   require("conf.plugins.setup.project_nvim").setup()
   require("conf.plugins.setup.nvim_comment").setup()
   require("conf.plugins.setup.autopairs").setup()
