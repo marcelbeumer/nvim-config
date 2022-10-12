@@ -43,6 +43,17 @@ M.setup = function()
   vim.keymap.set("n", "<leader>fld", fzf.lsp_definitions, get_opts("Find LSP definitions"))
   vim.keymap.set("n", "<leader>flD", fzf.lsp_declarations, get_opts("Find LSP declarations"))
   vim.keymap.set("n", "<leader>flt", fzf.lsp_typedefs, get_opts("Find LSP type defs"))
+
+  vim.keymap.set("n", "<leader>fp", function()
+    local contents = require("project_nvim").get_recent_projects()
+    require("fzf-lua").fzf_exec(contents, {
+      actions = {
+        default = function(e)
+          vim.cmd.cd(e[1])
+        end,
+      },
+    })
+  end, { silent = true, desc = "Switch project" })
 end
 
 return M
