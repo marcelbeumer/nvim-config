@@ -99,12 +99,9 @@ M.setup = function()
   require("conf.plugins.setup.cmp").setup()
   require("conf.plugins.setup.treesitter").setup()
   require("conf.plugins.setup.persisted").setup()
-  if require("conf.env").NVIM_USE_FZF_LUA == "on" then
-    require("conf.plugins.setup.fzf_lua").setup()
-  else
-    require("conf.plugins.setup.telescope").setup()
-    require("conf.plugins.setup.project_nvim").setup()
-  end
+  require("conf.plugins.setup.fzf_lua").setup()
+  require("conf.plugins.setup.telescope").setup()
+  require("conf.plugins.setup.project_nvim").setup()
   require("conf.plugins.setup.nvim_comment").setup()
   require("conf.plugins.setup.autopairs").setup()
   require("conf.plugins.setup.symbols_outline").setup()
