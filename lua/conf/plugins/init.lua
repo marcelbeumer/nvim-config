@@ -82,10 +82,10 @@ M.register = function()
   use("ThePrimeagen/harpoon")
   use("marcelbeumer/vim-wintabs")
   use("folke/which-key.nvim")
+  -- Terminal.
+  use("akinsho/toggleterm.nvim")
   -- Disabled but here for reference.
   -- use("NvChad/nvim-colorizer.lua")
-  --
-  use("akinsho/toggleterm.nvim")
 end
 
 M.setup = function()
