@@ -61,8 +61,6 @@ M.register = function()
   use("terrortylor/nvim-comment")
   -- Automagically insert closing tags etc.
   use("windwp/nvim-autopairs")
-  -- Netrw enhancements (mainly for `-`)
-  use("tpope/vim-vinegar")
   -- Colorscheme.
   use("marcelbeumer/tokyonight.nvim")
   use({ "catppuccin/nvim", as = "catppuccin" })
