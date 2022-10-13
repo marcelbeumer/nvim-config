@@ -84,6 +84,8 @@ M.register = function()
   use("folke/which-key.nvim")
   -- Terminal.
   use("akinsho/toggleterm.nvim")
+  -- Buffer management.
+  use("kazhala/close-buffers.nvim")
   -- Disabled but here for reference.
   -- use("NvChad/nvim-colorizer.lua")
 end
