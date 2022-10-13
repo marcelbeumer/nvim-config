@@ -7,6 +7,15 @@ M.setup = function()
     pattern = "lua",
     callback = function(data)
       local luadev = require("lua-dev").setup({})
+      local settings = vim.tbl_deep_extend("force", luadev.settings, {
+        Lua = {
+          completion = {
+            showWord = "Disable",
+            callSnippet = "Disable",
+            keywordSnippet = "Disable",
+          },
+        },
+      })
       vim.lsp.start({
         name = "lua-language-server",
         cmd = { "lua-language-server" },
@@ -18,7 +27,7 @@ M.setup = function()
           "selene.toml",
           "lua/",
         }, data.file) or vim.fn.getcwd(),
-        settings = luadev.settings,
+        settings = settings,
         handlers = util.get_handlers(),
         capabilities = util.get_capabilities(),
         on_attach = function(client)
