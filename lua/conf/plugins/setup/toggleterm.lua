@@ -25,9 +25,9 @@ M.setup = function()
   end
 
   vim.keymap.set("n", "<leader>0", function() end, { desc = "Terminal (all)" })
-  vim.keymap.set("n", "<leader>0t", ":ToggleTermToggleAll<cr>", { silent = true })
-  vim.keymap.set("n", "<leader>0r", ":ToggleTermSetName ", {})
-  vim.keymap.set("n", "<leader>0d", toggle_direction, {})
+  vim.keymap.set("n", "<leader>0t", ":ToggleTermToggleAll<cr>", { silent = true, desc = "Toggle all toggleterms" })
+  vim.keymap.set("n", "<leader>0r", ":ToggleTermSetName ", { desc = "Set toggleterm name" })
+  vim.keymap.set("n", "<leader>0d", toggle_direction, { desc = "Toggle terminal direction" })
 
   local nums = { 1, 2, 3, 7, 8, 9 }
   for _, num in ipairs(nums) do
