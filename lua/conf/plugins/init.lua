@@ -37,7 +37,7 @@ M.register = function()
   -- Project switching.
   use({ "marcelbeumer/project.nvim", branch = "remove-fixed-widths" })
   -- Lua dev setup
-  use("folke/lua-dev.nvim")
+  use("folke/neodev.nvim")
   -- Autocompletion and plugins.
   use("hrsh7th/nvim-cmp")
   use("hrsh7th/cmp-nvim-lsp")
@@ -114,6 +114,7 @@ M.setup = function()
   require("conf.plugins.setup.neotest").setup()
   require("conf.plugins.setup.toggleterm").setup()
   -- require("go").setup()
+  require("gopher").setup({})
 end
 
 return M

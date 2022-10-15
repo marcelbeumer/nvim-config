@@ -21,11 +21,7 @@ M.get_handlers = function()
 end
 
 M.get_capabilities = function()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- Our autocomplete plugin will update the default LSP capabilities
-  -- options normally passed to the LSP servers.
-  require("cmp_nvim_lsp").update_capabilities(capabilities)
-  return capabilities
+  return require("cmp_nvim_lsp").default_capabilities()
 end
 
 return M
