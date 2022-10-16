@@ -6,7 +6,8 @@ M.setup = function()
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "lua",
     callback = function(data)
-      local settings = vim.tbl_deep_extend("force", require("neodev").setup({}), {
+      local neodev = require("neodev").setup({})
+      local settings = vim.tbl_deep_extend("force", neodev.settings, {
         Lua = {
           completion = {
             showWord = "Disable",
