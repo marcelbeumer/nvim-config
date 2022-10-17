@@ -74,6 +74,13 @@ M.register = function()
   -- Debugging.
   use("mfussenegger/nvim-dap")
   use("rcarriga/nvim-dap-ui")
+  use("mxsdev/nvim-dap-vscode-js")
+  use({
+    "microsoft/vscode-js-debug",
+    opt = true,
+    run = "npm install --legacy-peer-deps && npm run compile",
+  })
+  use("theHamsta/nvim-dap-virtual-text")
   -- Tests.
   use({ "marcelbeumer/neotest", branch = "output-last" })
   use("haydenmeade/neotest-jest")
