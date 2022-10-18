@@ -33,6 +33,7 @@ M.api.tree = function(value, opts)
   end
 
   yank(tree_cwd, opts)
+  return tree_cwd
 end
 
 M.api.root = function(values, opts)
@@ -42,10 +43,6 @@ M.api.root = function(values, opts)
   end
 
   local patterns = values or { ".git" }
-  if opts and opts.git then
-    patterns = { ".git" }
-  end
-
   local root_dir = vim.fs.dirname(vim.fs.find(patterns, { upward = true, path = from })[1])
   if not root_dir then
     yank("")
@@ -61,6 +58,7 @@ M.api.root = function(values, opts)
   end
 
   yank(root_dir)
+  return root_dir
 end
 
 M.api.cwd = function(value, opts)
@@ -72,26 +70,31 @@ M.api.cwd = function(value, opts)
     M.api.tree(cwd)
   end
   yank(cwd)
+  return cwd
 end
 
 M.api.filePath = function()
   local v = vim.fn.expand("%:p")
   yank(v)
+  return v
 end
 
 M.api.filePathRel = function()
   local v = vim.fn.expand("%:p")
   yank(v)
+  return v
 end
 
 M.api.fileName = function()
   local v = vim.fn.expand("%:t")
   yank(v)
+  return v
 end
 
 M.api.fileExt = function()
   local v = vim.fn.expand("%:e")
   yank(v)
+  return v
 end
 
 M.setup = function()
@@ -129,26 +132,26 @@ M.setup = function()
   local with_opts = function(fn, allowed)
     return function(args)
       local _, opts = parse_opts(args, allowed)
-      fn(opts)
+      print(fn(opts))
     end
   end
 
   local with_values = function(fn, allowed)
     return function(args)
       local values, opts = parse_opts(args, allowed)
-      fn(values, opts)
+      print(fn(values, opts))
     end
   end
 
   local with_value = function(fn, allowed)
     return function(args)
       local values, opts = parse_opts(args, allowed)
-      fn((values or {})[1], opts)
+      print(fn((values or {})[1], opts))
     end
   end
 
   vim.api.nvim_create_user_command("Cwd", with_value(M.api.cwd, { "tree" }), { nargs = "*", complete = "file" })
-  vim.api.nvim_create_user_command("Root", with_values(M.api.root, { "cd", "tree", "cwd", "git" }), { nargs = "*" })
+  vim.api.nvim_create_user_command("Root", with_values(M.api.root, { "cd", "tree", "cwd" }), { nargs = "*" })
   vim.api.nvim_create_user_command("Tree", with_value(M.api.tree, { "cd", "cwd" }), { nargs = "*", complete = "file" })
 
   vim.api.nvim_create_user_command("FilePath", with_opts(M.api.filePath, {}), {})
