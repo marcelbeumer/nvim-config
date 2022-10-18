@@ -43,11 +43,11 @@ M.setup = function()
   -- Too many typos but too stubborn to map to smth else.
   vim.cmd([[command W w]])
   -- FilePath* commands to grab file paths.
-  vim.cmd([[command FilePath let @*=expand("%")]])
-  vim.cmd([[command FilePathAbs let @*=expand("%:p")]])
-  vim.cmd([[command FilePathHead let @*=expand("%:h")]])
-  vim.cmd([[command FilePathTail let @*=expand("%:t")]])
-  vim.cmd([[command Cwd let @*=getcwd()]])
+  -- vim.cmd([[command FilePath let @*=expand("%")]])
+  -- vim.cmd([[command FilePathAbs let @*=expand("%:p")]])
+  -- vim.cmd([[command FilePathHead let @*=expand("%:h")]])
+  -- vim.cmd([[command FilePathTail let @*=expand("%:t")]])
+  -- vim.cmd([[command Cwd let @*=getcwd()]])
 
   vim.keymap.set("n", "]q", ":cnext<CR>")
   vim.keymap.set("n", "[q", ":cprev<CR>")
