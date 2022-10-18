@@ -62,7 +62,7 @@ M.register = function()
   -- Automagically insert closing tags etc.
   use("windwp/nvim-autopairs")
   -- Colorscheme.
-  use("marcelbeumer/tokyonight.nvim")
+  use("folke/tokyonight.nvim")
   use({ "catppuccin/nvim", as = "catppuccin" })
   -- Icons.
   use("kyazdani42/nvim-web-devicons")
