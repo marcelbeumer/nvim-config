@@ -89,16 +89,21 @@ M.register = function()
   use("ThePrimeagen/harpoon")
   use("marcelbeumer/vim-wintabs")
   use("folke/which-key.nvim")
+  use("stevearc/dressing.nvim")
   -- Terminal.
   use("akinsho/toggleterm.nvim")
   -- Buffer management.
   use("kazhala/close-buffers.nvim")
+  -- Improved Yank/put.
+  use("gbprod/yanky.nvim")
   -- Disabled but here for reference.
   -- use("NvChad/nvim-colorizer.lua")
 end
 
 M.setup = function()
   M.register()
+  require("conf.plugins.setup.yanky").setup()
+  require("conf.plugins.setup.dressing").setup()
   require("conf.plugins.setup.colorscheme").setup()
   require("conf.plugins.setup.cmp").setup()
   require("conf.plugins.setup.treesitter").setup()

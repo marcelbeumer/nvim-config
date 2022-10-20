@@ -35,13 +35,6 @@ M.setup = function()
   vim.api.nvim_set_var("netrw_banner", 0)
   vim.api.nvim_set_var("netrw_altv", 1)
 
-  -- Highlight yanked text.
-  vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-      vim.highlight.on_yank()
-    end,
-  })
-
   -- Too many typos but too stubborn to map to smth else.
   vim.cmd([[command W w]])
 
