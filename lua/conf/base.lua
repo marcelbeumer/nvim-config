@@ -28,6 +28,8 @@ M.setup = function()
   vim.o.clipboard = "unnamed"
   -- Keep some space when scrolling.
   vim.o.scrolloff = 5
+  -- Show search result counter
+  vim.opt.shortmess:remove({ "-S" })
 
   -- Netrw settings.
   vim.api.nvim_set_var("netrw_banner", 0)
