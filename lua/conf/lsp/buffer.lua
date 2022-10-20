@@ -1,5 +1,16 @@
 local M = {}
 
+local next_reference = function()
+  local function on_list(options)
+    dump(options)
+    -- vim.uri_to_fname({uri})
+    -- vim.fn.setqflist({}, " ", options)
+    -- vim.api.nvim_command("cfirst")
+  end
+
+  vim.lsp.buf.references(nil, { on_list = on_list })
+end
+
 -- on_attach configures the lsp client for a specific buffer.
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
