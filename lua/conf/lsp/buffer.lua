@@ -1,14 +1,64 @@
 local M = {}
 
-local next_reference = function()
-  local function on_list(options)
-    dump(options)
-    -- vim.uri_to_fname({uri})
-    -- vim.fn.setqflist({}, " ", options)
-    -- vim.api.nvim_command("cfirst")
+local goto_reference = function(is_next)
+  local function on_list(args)
+    local uri = args.context.params.textDocument.uri
+    local position = args.context.params.position
+    local curr_pos = { lnum = position.line + 1, col = position.character + 1 }
+    local fname = vim.uri_to_fname(uri)
+
+    local positions = {}
+    for _, item in pairs(args.items) do
+      if item.filename == fname then
+        positions[#positions + 1] = { lnum = item.lnum, col = item.col }
+      end
+    end
+
+    if #positions == 0 then
+      print("LSP reference [0/0]")
+      return
+    end
+
+    table.sort(positions, is_next)
+
+    local pos_idx = 1
+    for idx, pos in pairs(positions) do
+      if is_next(curr_pos, pos) then
+        pos_idx = idx
+        break
+      end
+    end
+
+    print("LSP reference [" .. pos_idx .. "/" .. #positions .. "]")
+    local item = positions[pos_idx]
+    vim.fn.setpos(".", { 0, item.lnum, item.col })
   end
 
   vim.lsp.buf.references(nil, { on_list = on_list })
+end
+
+local next_reference = function()
+  goto_reference(function(a, b)
+    if a.lnum == b.lnum then
+      return a.col < b.col
+    elseif a.lnum < b.lnum then
+      return true
+    else
+      return false
+    end
+  end)
+end
+
+local prev_reference = function()
+  goto_reference(function(a, b)
+    if a.lnum == b.lnum then
+      return a.col > b.col
+    elseif a.lnum > b.lnum then
+      return true
+    else
+      return false
+    end
+  end)
 end
 
 -- on_attach configures the lsp client for a specific buffer.
@@ -16,27 +66,29 @@ local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  local get_buf_opts = function(desc)
+  local nbuf_opts = function(desc)
     return { noremap = true, silent = true, buffer = bufnr, desc = desc }
   end
 
   -- Buffer specific mappings.
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, get_buf_opts("LSP goto declaration"))
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, get_buf_opts("LSP goto definition"))
-  vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, get_buf_opts("LSP goto type definition"))
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, get_buf_opts("LSP show hover"))
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, get_buf_opts("LSP goto implementation"))
-  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, get_buf_opts("LSP signature help"))
-  vim.keymap.set("i", "<C-y>", vim.lsp.buf.signature_help, get_buf_opts("LSP signature help"))
-  vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, get_buf_opts("LSP add workspace folder"))
-  vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, get_buf_opts("LSP remove workspace folder"))
+  vim.keymap.set("n", "<M-n>", next_reference, nbuf_opts("Next reference"))
+  vim.keymap.set("n", "<M-N>", prev_reference, nbuf_opts("Prev reference"))
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, nbuf_opts("LSP goto declaration"))
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, nbuf_opts("LSP goto definition"))
+  vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, nbuf_opts("LSP goto type definition"))
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, nbuf_opts("LSP show hover"))
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, nbuf_opts("LSP goto implementation"))
+  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, nbuf_opts("LSP signature help"))
+  vim.keymap.set("i", "<C-y>", vim.lsp.buf.signature_help, nbuf_opts("LSP signature help"))
+  vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, nbuf_opts("LSP add workspace folder"))
+  vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, nbuf_opts("LSP remove workspace folder"))
   vim.keymap.set("n", "<space>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, get_buf_opts("LSP list workspace folders"))
-  vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, get_buf_opts("LSP rename"))
-  vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, get_buf_opts("LSP code actions"))
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, get_buf_opts("LSP goto references"))
-  vim.keymap.set("n", "<space>f", vim.lsp.buf.format, get_buf_opts("LSP formatting"))
+  end, nbuf_opts("LSP list workspace folders"))
+  vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, nbuf_opts("LSP rename"))
+  vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, nbuf_opts("LSP code actions"))
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, nbuf_opts("LSP goto references"))
+  vim.keymap.set("n", "<space>f", vim.lsp.buf.format, nbuf_opts("LSP formatting"))
 
   -- Highlight symbol under cursor.
   if client.supports_method("textDocument/documentHighlight") then
