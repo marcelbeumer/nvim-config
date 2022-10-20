@@ -96,21 +96,28 @@ local on_attach = function(client, bufnr)
     local opts = { group = hl, buffer = bufnr }
     vim.api.nvim_clear_autocmds(opts)
 
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = hl,
-      buffer = bufnr,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd("CursorHoldI", {
-      group = hl,
-      buffer = bufnr,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      group = hl,
-      buffer = bufnr,
-      callback = vim.lsp.buf.clear_references,
-    })
+    local enabled = false
+    local update = function()
+      if enabled then
+        vim.lsp.buf.document_highlight()
+      else
+        vim.lsp.buf.clear_references()
+      end
+    end
+    local clear = function()
+      if enabled then
+        vim.lsp.buf.clear_references()
+      end
+    end
+    local toggle = function()
+      enabled = not enabled
+      update()
+    end
+
+    vim.keymap.set("n", "<space>h", toggle, nbuf_opts("LSP highlight"))
+    vim.api.nvim_create_autocmd("CursorHold", { group = hl, buffer = bufnr, callback = update })
+    vim.api.nvim_create_autocmd("CursorHoldI", { group = hl, buffer = bufnr, callback = update })
+    vim.api.nvim_create_autocmd("CursorMoved", { group = hl, buffer = bufnr, callback = clear })
   end
 
   -- Format on save.
