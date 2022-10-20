@@ -71,8 +71,8 @@ local on_attach = function(client, bufnr)
   end
 
   -- Buffer specific mappings.
-  vim.keymap.set("n", "<M-n>", next_reference, nbuf_opts("Next reference"))
-  vim.keymap.set("n", "<M-N>", prev_reference, nbuf_opts("Prev reference"))
+  vim.keymap.set("n", "<M-n>", next_reference, nbuf_opts("Next LSP reference"))
+  vim.keymap.set("n", "<M-N>", prev_reference, nbuf_opts("Prev LSP reference"))
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, nbuf_opts("LSP goto declaration"))
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, nbuf_opts("LSP goto definition"))
   vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, nbuf_opts("LSP goto type definition"))
