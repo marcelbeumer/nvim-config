@@ -3,9 +3,9 @@ local M = {}
 local goto_reference = function(is_next)
   local function on_list(args)
     local uri = args.context.params.textDocument.uri
+    local fname = vim.uri_to_fname(uri)
     local position = args.context.params.position
     local curr_pos = { lnum = position.line + 1, col = position.character + 1 }
-    local fname = vim.uri_to_fname(uri)
 
     local positions = {}
     for _, item in pairs(args.items) do
@@ -30,8 +30,8 @@ local goto_reference = function(is_next)
     end
 
     print("LSP reference [" .. pos_idx .. "/" .. #positions .. "]")
-    local item = positions[pos_idx]
-    vim.fn.setpos(".", { 0, item.lnum, item.col })
+    local pos = positions[pos_idx]
+    vim.fn.setpos(".", { 0, pos.lnum, pos.col })
   end
 
   vim.lsp.buf.references(nil, { on_list = on_list })
