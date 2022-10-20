@@ -6,7 +6,10 @@ M.setup = function()
   end
   local fzf = require("fzf-lua")
 
-  fzf.setup({ winopts = { preview = { layout = "vertical" } } })
+  fzf.setup({
+    winopts = { preview = { layout = "vertical" } },
+    previewers = { builtin = { syntax = false } },
+  })
 
   local args_small = { previewer = false, winopts = { height = 0.20, width = 0.80 } }
   vim.keymap.set("n", "<leader>ff", function()
