@@ -46,7 +46,8 @@ M.register = function()
   -- Snippets (required by cmp autocomplete).
   use("L3MON4D3/LuaSnip")
   -- General purpose LSP server, mostly for linting and formatting.
-  use("jose-elias-alvarez/null-ls.nvim")
+  -- use("jose-elias-alvarez/null-ls.nvim")
+  use({ "marcelbeumer/null-ls.nvim", branch = "fix-golangci-lint" })
   -- Git.
   use("kdheepak/lazygit.nvim")
   use("tpope/vim-fugitive")
