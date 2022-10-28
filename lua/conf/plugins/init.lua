@@ -53,6 +53,7 @@ M.register = function()
   use("tpope/vim-fugitive")
   use("sindrets/diffview.nvim")
   use("lewis6991/gitsigns.nvim")
+  use("akinsho/git-conflict.nvim")
   -- Quick file/buffer/lsp/etc pickers.
   use("ibhagwan/fzf-lua")
   -- Go specific features.
@@ -88,11 +89,12 @@ M.register = function()
   -- UI.
   use("petertriho/nvim-scrollbar")
   use("ThePrimeagen/harpoon")
-  use("marcelbeumer/vim-wintabs")
+  use("akinsho/bufferline.nvim")
+  use("nanozuki/tabby.nvim")
   use("folke/which-key.nvim")
   use("stevearc/dressing.nvim")
-  -- Terminal.
   use("akinsho/toggleterm.nvim")
+  -- use("marcelbeumer/vim-wintabs")
   -- Buffer management.
   use("kazhala/close-buffers.nvim")
   -- Improved Yank/put.
@@ -120,12 +122,18 @@ M.setup = function()
   require("conf.plugins.setup.scrollbar").setup()
   require("conf.plugins.setup.gitsigns").setup()
   require("conf.plugins.setup.harpoon").setup()
-  require("conf.plugins.setup.wintabs").setup()
+  require("conf.plugins.setup.tabby").setup()
   require("conf.plugins.setup.which_key").setup()
   require("conf.plugins.setup.lsp_lines").setup()
   require("conf.plugins.setup.nvim_dap").setup()
   require("conf.plugins.setup.neotest").setup()
-  require("conf.plugins.setup.toggleterm").setup()
+  require("conf.plugins.setup.git_conflict").setup()
+  require("conf.plugins.setup.close_buffers").setup()
+
+  -- require("conf.plugins.setup.wintabs").setup()
+  -- require("conf.plugins.setup.bufferline").setup()
+  -- require("conf.plugins.setup.toggleterm").setup()
+
   -- require("go").setup()
   require("gopher").setup({})
 end

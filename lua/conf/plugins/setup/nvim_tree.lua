@@ -11,6 +11,7 @@ end
 M.setup = function()
   require("nvim-tree").setup({
     view = {
+      preserve_window_proportions = true,
       adaptive_size = true,
       mappings = {
         list = {
