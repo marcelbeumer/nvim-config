@@ -11,13 +11,15 @@ M.setup = function()
     previewers = { builtin = { syntax = false } },
   })
 
-  local args_small = { previewer = false, winopts = { height = 0.20, width = 0.80 } }
+  local args_small = { previewer = false, winopts = { height = 20 } }
+  local args_tall = { previewer = false, winopts = { height = 0.80 } }
+
   vim.keymap.set("n", "<leader>ff", function()
     fzf.files(args_small)
   end, get_opts("Find files"))
 
   vim.keymap.set("n", "<leader>fb", function()
-    fzf.buffers(args_small)
+    fzf.buffers(args_tall)
   end, get_opts("Find buffers"))
   vim.keymap.set("n", "<leader>fq", function()
     fzf.quickfix(args_small)
