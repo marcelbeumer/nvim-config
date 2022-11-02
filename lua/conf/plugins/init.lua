@@ -89,7 +89,7 @@ M.register = function()
   -- UI.
   use("rafcamlet/tabline-framework.nvim")
   use("petertriho/nvim-scrollbar")
-  use("ThePrimeagen/harpoon")
+  use({ "marcelbeumer/harpoon", branch = "fix/no-absolute-path" })
   use("akinsho/bufferline.nvim")
   use("folke/which-key.nvim")
   use("stevearc/dressing.nvim")
