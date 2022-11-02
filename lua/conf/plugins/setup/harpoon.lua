@@ -16,6 +16,9 @@ M.setup = function()
   vim.keymap.set("n", "<space>d", require("harpoon.mark").rm_file, get_opts("Harpoon remove file"))
   vim.keymap.set("n", "<space>p", require("harpoon.ui").toggle_quick_menu, get_opts("Harpoon quick menu"))
 
+  vim.keymap.set("n", "<C-,>", require("harpoon.ui").nav_prev, { silent = true })
+  vim.keymap.set("n", "<C-.>", require("harpoon.ui").nav_next, { silent = true })
+
   for num = 1, 9 do
     vim.keymap.set({ "n", "t" }, "<leader>" .. num, function()
       require("harpoon.term").gotoTerminal(num)

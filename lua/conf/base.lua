@@ -46,9 +46,8 @@ M.setup = function()
   vim.keymap.set("n", "[Q", ":lprev<CR>")
   vim.keymap.set("n", "]t", ":tabnext<CR>")
   vim.keymap.set("n", "[t", ":tabprev<CR>")
-  vim.keymap.set("n", "<C-,>", ":bprevious<CR>", { silent = true })
-  vim.keymap.set("n", "<C-.>", ":bnext<CR>", { silent = true })
-  vim.keymap.set("n", "<C-/>", ":bdelete<CR>", { silent = true })
+  vim.keymap.set("n", "[b", ":bprevious<CR>", { silent = true })
+  vim.keymap.set("n", "]b", ":bnext<CR>", { silent = true })
 
   vim.keymap.set("n", "<C-s>", ":w<CR>")
   vim.keymap.set("n", "<C-w>N", ":vnew<CR>")
@@ -86,6 +85,14 @@ M.setup = function()
       return system('date "+%Y-%m-%d-%H%M-%S" | tr -d "\n"')
     endfunction
   ]])
+
+  -- Tabline show/hide
+  vim.api.nvim_create_user_command("TablineShow", function()
+    vim.o.showtabline = 2
+  end, {})
+  vim.api.nvim_create_user_command("TablineHide", function()
+    vim.o.showtabline = 0
+  end, {})
 
   -- Terraform
   vim.cmd([[au BufNewFile,BufRead *.tf set ft=terraform ]])
