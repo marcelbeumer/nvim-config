@@ -9,7 +9,7 @@ M.set_tree_cwd = function(cwd)
 end
 
 M.setup = function()
-  local use_float = false
+  local use_float = true
 
   local setup_nvim_tree = function()
     require("nvim-tree").setup({
