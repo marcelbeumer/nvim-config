@@ -1,7 +1,12 @@
 local M = {}
 
+M.handleHarpoonClick = function(idx)
+  require("harpoon.ui").nav_file(idx)
+end
+
 M.setup = function()
   vim.o.showtabline = 2
+
   require("tabline_framework").setup({
     render = function(f)
       local hi = require("tabline_framework.highlights")
@@ -10,15 +15,15 @@ M.setup = function()
       local len = marks.get_length()
       local curr = marks.get_current_index()
 
-      for x = 1, len do
-        local current = curr == x
+      for idx = 1, len do
+        local current = curr == idx
         if current then
           f.set_colors(hi.tabline_sel())
         else
           f.set_colors(hi.tabline())
         end
 
-        local fname = marks.get_marked_file_name(x)
+        local fname = marks.get_marked_file_name(idx)
         local short_name = vim.fn.fnamemodify(fname, ":t")
         local exists = vim.fn.bufexists(fname) ~= 0
         if exists then
@@ -28,9 +33,11 @@ M.setup = function()
           end
         end
 
+        f.add("%" .. idx .. "@v:lua.require'conf.plugins.setup.tabline_framework'.handleHarpoonClick@")
         f.add(" ")
         f.add(short_name)
         f.add(" ")
+        f.add("%X")
       end
 
       f.set_colors(hi.tabline())
