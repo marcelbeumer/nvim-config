@@ -16,8 +16,11 @@ M.setup = function()
       view = {
         float = {
           enable = use_float,
+          open_win_config = {
+            border = "shadow",
+          },
         },
-        -- preserve_window_proportions = true,
+        preserve_window_proportions = true,
         adaptive_size = true,
         mappings = {
           list = {

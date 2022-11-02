@@ -30,8 +30,6 @@ M.setup = function()
   vim.o.scrolloff = 5
   -- Show search result counter.
   vim.opt.shortmess:remove({ "-S" })
-  -- Do not resize windows when splitting.
-  vim.o.equalalways = false
 
   -- Netrw settings.
   vim.api.nvim_set_var("netrw_banner", 0)
