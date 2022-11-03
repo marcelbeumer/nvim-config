@@ -51,8 +51,6 @@ M.setup = function()
   local opts = { noremap = true, silent = true }
   vim.keymap.set("n", "<leader>;", ":NvimTreeToggle<cr>", opts)
   vim.keymap.set("n", "<leader>'", ":NvimTreeFindFile<cr>", opts)
-  vim.keymap.set("n", "<leader>,", ":NvimTreePullCwd<cr>", opts)
-  vim.keymap.set("n", "<leader>.", ":NvimTreePushCwd<cr>", opts)
 
   vim.api.nvim_create_user_command("NvimTreeFloatToggle", function()
     use_float = not use_float

@@ -47,23 +47,14 @@ M.setup = function()
   vim.keymap.set("n", "[b", ":bprevious<CR>", { silent = true })
   vim.keymap.set("n", "]b", ":bnext<CR>", { silent = true })
 
-  vim.keymap.set("n", "<C-s>", ":w<CR>")
   vim.keymap.set("n", "<C-w>N", ":vnew<CR>")
 
   vim.keymap.set("n", "<leader>t", function() end, { desc = "Tabs..." })
   vim.api.nvim_set_keymap("n", "<leader>ta", ":tabnew<CR>", { noremap = true })
   vim.api.nvim_set_keymap("n", "<leader>tc", ":tabclose<CR>", { noremap = true })
-  vim.api.nvim_set_keymap("n", "<leader>to", ":tabonly<CR>", { noremap = true })
-  vim.api.nvim_set_keymap("n", "<leader>tn", ":tabn<CR>", { noremap = true })
-  vim.api.nvim_set_keymap("n", "<leader>tp", ":tabp<CR>", { noremap = true })
-  vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { noremap = true })
-  vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { noremap = true })
 
   vim.keymap.set("n", "<leader>n", ":set nu!<CR>")
-  vim.keymap.set("n", "<leader>v", ":vsplit<CR>")
-  vim.keymap.set("n", "<leader>s", ":split<CR>")
   vim.keymap.set("n", "<leader>0", ":botright 20split<CR>")
-
   vim.keymap.set("n", "<leader>x", function() end, { desc = "Misc..." })
 
   -- https://vi.stackexchange.com/questions/21260/how-to-clear-neovim-terminal-buffer#21364
