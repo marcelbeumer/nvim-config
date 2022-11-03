@@ -61,12 +61,6 @@ M.setup = function()
     set foldexpr=nvim_treesitter#foldexpr()
     set foldlevel=99
   ]])
-
-  -- Workaround for slow go files:
-  -- https://github.com/NvChad/NvChad/issues/1415#issuecomment-1203723816
-  -- https://github.com/nvim-treesitter/nvim-treesitter/issues/3263
-  -- https://github.com/nvim-treesitter/nvim-treesitter/issues/3187
-  require("vim.treesitter.query").set_query("go", "injections", "(comment) @comment")
 end
 
 return M
