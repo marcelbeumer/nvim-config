@@ -12,8 +12,15 @@ M.setup = function()
     return { desc = desc }
   end
 
-  vim.keymap.set("n", "<space>a", require("harpoon.mark").add_file, get_opts("Harpoon add file"))
-  vim.keymap.set("n", "<space>d", require("harpoon.mark").rm_file, get_opts("Harpoon remove file"))
+  local with_redraw = function(fn)
+    return function()
+      fn()
+      vim.cmd("redrawtabline")
+    end
+  end
+
+  vim.keymap.set("n", "<space>a", with_redraw(require("harpoon.mark").add_file), get_opts("Harpoon add file"))
+  vim.keymap.set("n", "<space>d", with_redraw(require("harpoon.mark").rm_file), get_opts("Harpoon remove file"))
   vim.keymap.set("n", "<space>p", require("harpoon.ui").toggle_quick_menu, get_opts("Harpoon quick menu"))
 
   vim.keymap.set("n", "<C-,>", require("harpoon.ui").nav_prev, { silent = true })

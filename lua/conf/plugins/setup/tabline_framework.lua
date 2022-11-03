@@ -1,11 +1,25 @@
 local M = {}
 
+local tab_names = {}
+
 M.handleHarpoonClick = function(idx)
   require("harpoon.ui").nav_file(idx)
 end
 
+M.renameTab = function(id, name)
+  if id == 0 then
+    id = vim.api.nvim_get_current_tabpage()
+  end
+  tab_names[id] = name
+  vim.cmd("redrawtabline")
+end
+
 M.setup = function()
   vim.o.showtabline = 2
+
+  vim.api.nvim_create_user_command("TabRename", function(args)
+    M.renameTab(0, args.fargs[1])
+  end, { nargs = "?" })
 
   require("tabline_framework").setup({
     render = function(f)
@@ -44,7 +58,8 @@ M.setup = function()
       f.add_spacer(" ")
 
       f.make_tabs(function(info)
-        f.add(" " .. info.index .. " ")
+        local name = tab_names[info.index] or info.index
+        f.add(" " .. name .. " ")
       end)
 
       f.set_colors(hi.tabline())
