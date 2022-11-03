@@ -4,6 +4,8 @@ M.setup = function()
   local cmp = require("cmp")
   local types = require("cmp.types")
   local luasnip = require("luasnip")
+  local bindings = require("conf.bindings")
+  local keys = bindings.config.cmp
 
   vim.o.completeopt = "menu,menuone,noselect"
   vim.o.pumheight = 5
@@ -23,9 +25,9 @@ M.setup = function()
       { name = "luasnip" },
     },
     mapping = cmp.mapping.preset.insert({
-      ["<C-Space>"] = cmp.mapping.complete({}),
-      ["<C-e>"] = cmp.mapping.abort(),
-      ["<CR>"] = cmp.mapping.confirm({ select = true }),
+      [keys.open.value] = cmp.mapping.complete({}),
+      [keys.abort.value] = cmp.mapping.abort(),
+      [keys.confirm.value] = cmp.mapping.confirm({ select = true }),
     }),
   })
 

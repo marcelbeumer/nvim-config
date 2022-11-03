@@ -91,11 +91,12 @@ M.restore = function()
 end
 
 M.setup = function()
-  local get_opts = function(desc)
-    return { desc = desc }
-  end
-  vim.keymap.set("n", "<C-W>,", M.restore, get_opts("Restore layout"))
-  vim.keymap.set("n", "<C-W>.", M.save, get_opts("Save layout"))
+  local bindings = require("conf.bindings")
+  local key_opts = {}
+  local cmd_opts = {}
+
+  bindings.bind_all("layout.save", M.save, cmd_opts, key_opts)
+  bindings.bind_all("layout.restore", M.restore, cmd_opts, key_opts)
 end
 
 -- M.save()

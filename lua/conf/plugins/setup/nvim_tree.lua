@@ -9,6 +9,11 @@ M.set_tree_cwd = function(cwd)
 end
 
 M.setup = function()
+  local bindings = require("conf.bindings")
+  local keys = bindings.config.tree
+  local bind_all = bindings.bind_all
+  local key_opts = { noremap = true, silent = true }
+  local cmd_opts = {}
   local use_float = true
 
   local setup_nvim_tree = function()
@@ -24,8 +29,8 @@ M.setup = function()
         adaptive_size = true,
         mappings = {
           list = {
-            { key = "[d", action = "prev_diag_item" },
-            { key = "]d", action = "next_diag_item" },
+            { key = keys.prev_diag.value, action = "prev_diag_item" },
+            { key = keys.next_diag.value, action = "next_diag_item" },
           },
         },
       },
@@ -48,15 +53,13 @@ M.setup = function()
     })
   end
 
-  local opts = { noremap = true, silent = true }
-  vim.keymap.set("n", "<leader>;", ":NvimTreeToggle<cr>", opts)
-  vim.keymap.set("n", "<leader>'", ":NvimTreeFindFile<cr>", opts)
-
-  vim.api.nvim_create_user_command("NvimTreeFloatToggle", function()
+  bind_all("tree.toggle", ":NvimTreeToggle<cr>", cmd_opts, key_opts)
+  bind_all("tree.find_file", ":NvimTreeFindFile<cr>", cmd_opts, key_opts)
+  bind_all("tree.toggle_float", function()
     use_float = not use_float
     vim.notify("nvim tree use float: " .. tostring(use_float))
     setup_nvim_tree()
-  end, {})
+  end, cmd_opts, key_opts)
 
   setup_nvim_tree()
 end

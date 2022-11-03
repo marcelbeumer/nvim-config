@@ -65,6 +65,11 @@ end
 
 -- on_attach configures the lsp client for a specific buffer.
 local on_attach = function(client, bufnr)
+  local bindings = require("conf.bindings")
+  local bind_all = bindings.bind_all
+  local key_opts = { noremap = true, silent = true, buffer = bufnr }
+  local cmd_opts = {}
+
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -72,29 +77,26 @@ local on_attach = function(client, bufnr)
     return { noremap = true, silent = true, buffer = bufnr, desc = desc }
   end
 
-  -- Buffer specific mappings.
-  vim.keymap.set("n", "<M-n>", function()
+  -- Buffer specific bindings.
+  bind_all("lsp.next_reference", function()
     next_reference()
-  end, buf_opts("Next LSP reference"))
-  vim.keymap.set("n", "<M-N>", function()
+  end, cmd_opts, key_opts)
+  bind_all("lsp.prev_reference", function()
     next_reference(true)
-  end, buf_opts("Prev LSP reference"))
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, buf_opts("LSP goto declaration"))
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, buf_opts("LSP goto definition"))
-  vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, buf_opts("LSP goto type definition"))
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts("LSP show hover"))
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, buf_opts("LSP goto implementation"))
-  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, buf_opts("LSP signature help"))
-  vim.keymap.set("i", "<C-y>", vim.lsp.buf.signature_help, buf_opts("LSP signature help"))
-  vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, buf_opts("LSP add workspace folder"))
-  vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, buf_opts("LSP remove workspace folder"))
-  vim.keymap.set("n", "<space>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, buf_opts("LSP list workspace folders"))
-  vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, buf_opts("LSP rename"))
-  vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, buf_opts("LSP code actions"))
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts("LSP goto references"))
-  vim.keymap.set("n", "<space>f", vim.lsp.buf.format, buf_opts("LSP formatting"))
+  end, cmd_opts, key_opts)
+
+  bind_all("lsp.goto_definition", vim.lsp.buf.definition, cmd_opts, key_opts)
+  bind_all("lsp.goto_declaration", vim.lsp.buf.declaration, cmd_opts, key_opts)
+  bind_all("lsp.goto_references", vim.lsp.buf.references, cmd_opts, key_opts)
+  bind_all("lsp.goto_implementation", vim.lsp.buf.implementation, cmd_opts, key_opts)
+  bind_all("lsp.hover", vim.lsp.buf.hover, cmd_opts, key_opts)
+  bind_all("lsp.rename", vim.lsp.buf.rename, cmd_opts, key_opts)
+  bind_all("lsp.code_actions", vim.lsp.buf.code_action, cmd_opts, key_opts)
+  bind_all("lsp.format", vim.lsp.buf.format, cmd_opts, key_opts)
+  bind_all("lsp.signature_help", vim.lsp.buf.signature_help, cmd_opts, key_opts)
+  bind_all("lsp.add_workspace_folder", vim.lsp.buf.add_workspace_folder, cmd_opts, key_opts)
+  bind_all("lsp.remove_workspace_folder", vim.lsp.buf.remove_workspace_folder, cmd_opts, key_opts)
+  bind_all("lsp.list_workspace_folders", vim.lsp.buf.list_workspace_folders, cmd_opts, key_opts)
 
   -- Highlight symbol under cursor.
   if client.supports_method("textDocument/documentHighlight") then

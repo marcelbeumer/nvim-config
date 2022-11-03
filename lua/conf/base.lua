@@ -1,6 +1,10 @@
 local M = {}
 
 M.setup = function()
+  local bindings = require("conf.bindings")
+  local bind_all = bindings.bind_all
+  local key_opts = { silent = true }
+
   -- For pretty printing lua objects (`:lua dump(vim.fn)`)
   function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, { ... })
@@ -38,24 +42,19 @@ M.setup = function()
   -- Too many typos but too stubborn to map to smth else.
   vim.cmd([[command W w]])
 
-  vim.keymap.set("n", "]q", ":cnext<CR>")
-  vim.keymap.set("n", "[q", ":cprev<CR>")
-  vim.keymap.set("n", "]Q", ":lnext<CR>")
-  vim.keymap.set("n", "[Q", ":lprev<CR>")
-  vim.keymap.set("n", "]t", ":tabnext<CR>")
-  vim.keymap.set("n", "[t", ":tabprev<CR>")
-  vim.keymap.set("n", "[b", ":bprevious<CR>", { silent = true })
-  vim.keymap.set("n", "]b", ":bnext<CR>", { silent = true })
-
-  vim.keymap.set("n", "<C-w>N", ":vnew<CR>")
-
-  vim.keymap.set("n", "<leader>t", function() end, { desc = "Tabs..." })
-  vim.api.nvim_set_keymap("n", "<leader>ta", ":tabnew<CR>", { noremap = true })
-  vim.api.nvim_set_keymap("n", "<leader>tc", ":tabclose<CR>", { noremap = true })
-
-  vim.keymap.set("n", "<leader>n", ":set nu!<CR>")
-  vim.keymap.set("n", "<leader>0", ":botright 20split<CR>")
-  vim.keymap.set("n", "<leader>x", function() end, { desc = "Misc..." })
+  bind_all("base.toggle_line_numbers", ":set nu!<CR>", {}, key_opts)
+  bind_all("base.open_bottom_panel", ":botright 20split<CR>", {}, key_opts)
+  bind_all("base.open_new_vsplit", ":vnew<CR>", {}, key_opts)
+  bind_all("base.quickfix_next", ":cnext<CR>", {}, key_opts)
+  bind_all("base.quickfix_prev", ":cprev<CR>", {}, key_opts)
+  bind_all("base.loclist_next", ":lnext<CR>", {}, key_opts)
+  bind_all("base.loclist_prev", ":lprev<CR>", {}, key_opts)
+  bind_all("base.tab_next", ":tabnext<CR>", {}, key_opts)
+  bind_all("base.tab_prev", ":tabprev<CR>", {}, key_opts)
+  bind_all("base.tab_add", ":tabnew<CR>", {}, key_opts)
+  bind_all("base.tab_close", ":tabclose<CR>", {}, key_opts)
+  bind_all("base.buf_next", ":bnext<CR>", {}, key_opts)
+  bind_all("base.buf_prev", ":bprevious<CR>", {}, key_opts)
 
   -- https://vi.stackexchange.com/questions/21260/how-to-clear-neovim-terminal-buffer#21364
   vim.cmd([[
