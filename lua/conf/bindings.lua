@@ -449,4 +449,11 @@ M.bind_all = function(lookup, rhs, cmd_opts, key_opts)
   M.bind_keys(lookup, rhs, key_opts)
 end
 
+M.setup = function()
+  vim.api.nvim_create_user_command("Bindings", function()
+    local filepath = debug.getinfo(1, "S").source:sub(2)
+    vim.cmd.edit(filepath)
+  end, {})
+end
+
 return M

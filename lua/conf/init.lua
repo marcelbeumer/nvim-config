@@ -10,6 +10,7 @@ M.setup = function()
   elseif env.NVIM_STARTUP == "plugreg" then
     require("conf.plugins").register()
   elseif env.NVIM_STARTUP == "normal" then
+    require("conf.bindings").setup()
     require("conf.base").setup()
     require("conf.fs").setup()
     require("conf.layout").setup()
