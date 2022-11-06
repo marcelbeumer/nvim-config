@@ -266,7 +266,7 @@ M.config = {
     loclist = {
       desc = "Find in loclist",
       cmd = "FindLoclist",
-      nmap = "<leader>l",
+      nmap = "<leader>Q",
     },
     projects = {
       desc = "Find projects",

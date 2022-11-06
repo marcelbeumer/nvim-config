@@ -39,6 +39,7 @@ M.setup = function()
   bind_all("find.lsp_definitions", fzf.lsp_definitions, cmd_opts, key_opts)
   bind_all("find.lsp_declarations", fzf.lsp_declarations, cmd_opts, key_opts)
   bind_all("find.lsp_typedefs", fzf.lsp_typedefs, cmd_opts, key_opts)
+  bind_all("find.help", fzf.help_tags, cmd_opts, key_opts)
 
   bind_all("find.projects", function()
     local contents = require("project_nvim").get_recent_projects()
