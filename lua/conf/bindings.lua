@@ -186,6 +186,10 @@ M.config = {
       desc = "Git reset buffer",
       nmap = "<space>gR",
     },
+    blame_line = {
+      desc = "Git line blame (preview)",
+      cmd = "GitBlameLine",
+    },
     toggle_line_blame = {
       desc = "Git toggle line blame (virtual text)",
       cmd = "GitToggleLineBlame",
