@@ -11,6 +11,15 @@ M.setup = function()
   vim.api.nvim_create_user_command("LspAutoFormatDisable", function()
     require("conf.env").NVIM_LSP_AUTO_FORMAT = "off"
   end, {})
+  vim.api.nvim_create_user_command("LspStatus", function()
+    dump(vim.lsp.buf_get_clients())
+  end, {})
+  vim.api.nvim_create_user_command("LspShutdown", function()
+    local clients = vim.lsp.get_active_clients()
+    for _, client in ipairs(clients) do
+      client.stop()
+    end
+  end, {})
 end
 
 return M
