@@ -3,10 +3,15 @@ local M = {}
 M.setup = function()
   require("dressing").setup({
     input = {
-      enabled = false,
+      border = "solid",
+      relative = "editor",
+      prompt_align = "left",
     },
     select = {
-      backend = { "fzf_lua", "builtin" },
+      builtin = {
+        border = "solid",
+      },
+      backend = { "builtin" },
     },
   })
 end
