@@ -92,7 +92,6 @@ M.register = function()
   use("petertriho/nvim-scrollbar")
   use({ "marcelbeumer/harpoon", branch = "fix/no-absolute-path" })
   use("folke/which-key.nvim")
-  use("stevearc/dressing.nvim")
   -- Buffer management.
   use("kazhala/close-buffers.nvim")
   -- Improved Yank/put.
@@ -104,7 +103,6 @@ end
 M.setup = function()
   M.register()
   require("conf.plugins.setup.yanky").setup()
-  require("conf.plugins.setup.dressing").setup()
   require("conf.plugins.setup.colorscheme").setup()
   require("conf.plugins.setup.cmp").setup()
   require("conf.plugins.setup.treesitter").setup()
