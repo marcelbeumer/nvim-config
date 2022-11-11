@@ -38,8 +38,22 @@ local make_launch_lua = function()
   end
 end
 
+local launch_lua_mtime = nil
+
 local load_launch_lua = function()
   local dap = require("dap")
+
+  local stat = vim.loop.fs_stat(get_launch_lua_path())
+  if stat == nil then
+    return
+  end
+
+  local last = launch_lua_mtime
+  local mtime = stat.mtime
+  if last and mtime.sec == last.sec and mtime.nsec == last.nsec then
+    return
+  end
+  launch_lua_mtime = mtime
 
   local config = {}
   pcall(function()
