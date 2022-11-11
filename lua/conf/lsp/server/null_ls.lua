@@ -25,12 +25,12 @@ M.setup = function()
       --     end
       --   end,
       -- }),
-      null_ls.builtins.diagnostics.golangci_lint.with({
-        args = {
-          "run",
-          "--out-format=json",
-        },
-      }),
+      -- null_ls.builtins.diagnostics.golangci_lint.with({
+      --   args = {
+      --     "run",
+      --     "--out-format=json",
+      --   },
+      -- }),
     },
     capabilities = util.get_capabilities(),
     handlers = util.get_handlers(),
