@@ -411,6 +411,70 @@ M.config = {
       cmd = "LSPLinesToggleLine",
     },
   },
+
+  dap = {
+    launch_json_edit = {
+      desc = "DAP edit dap-launch.json",
+      cmd = "DAPLaunchJSON",
+    },
+    ui_toggle_all = {
+      desc = "DAP UI toggle",
+      cmd = "DAPUIToggle",
+      nmap = "<leader><leader>u",
+    },
+    ui_toggle_sidebar = {
+      desc = "DAP UI toggle sidebar",
+      cmd = "DAPUIToggleSidebar",
+    },
+    ui_toggle_tray = {
+      desc = "DAP UI toggle tray",
+      cmd = "DAPUIToggleTray",
+    },
+    continue = {
+      desc = "DAP continue/run",
+      nmap = "<leader><leader>r",
+    },
+    terminate = {
+      desc = "DAP terminate",
+      nmap = "<leader><leader>x",
+    },
+    step_over = {
+      desc = "DAP step over",
+      nmap = "<leader><leader>l",
+    },
+    step_into = {
+      desc = "DAP step into",
+      nmap = "<leader><leader>j",
+    },
+    step_out = {
+      desc = "DAP step out",
+      nmap = "<leader><leader>k",
+    },
+    toggle_breakpoint = {
+      desc = "DAP toggle breakpoint",
+      nmap = "<leader><leader>b",
+    },
+    breakpoint_condition = {
+      desc = "DAP set breakpoint condition",
+      nmap = "<leader><leader>B",
+    },
+    breakpoint_log = {
+      desc = "DAP set breakpoint log point",
+      nmap = "<leader><leader>L",
+    },
+    clear_breakpoints = {
+      desc = "DAP clear all breakpoints",
+      cmd = "DAPClearBreakpoints",
+    },
+    repl_toggle = {
+      desc = "DAP toggle REPL",
+      nmap = "<leader><leader>e",
+    },
+    run_last = {
+      desc = "DAP run last",
+      nmap = "<leader><leader>R",
+    },
+  },
 }
 
 local maps = { nmap = "n", imap = "i", vmap = "v", omap = "o", xmap = "x" }

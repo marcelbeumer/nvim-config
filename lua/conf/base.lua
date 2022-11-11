@@ -5,13 +5,6 @@ M.setup = function()
   local bind_all = bindings.bind_all
   local key_opts = { silent = true }
 
-  -- For pretty printing lua objects (`:lua dump(vim.fn)`)
-  function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, { ... })
-    print(unpack(objects))
-    return ...
-  end
-
   -- Line numbers.
   vim.o.number = true
   --Enable mouse mode in all modes.
