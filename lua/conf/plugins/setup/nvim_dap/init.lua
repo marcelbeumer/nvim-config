@@ -23,7 +23,7 @@ end
 
 local get_launch_lua_basedir = function()
   local data_path = vim.fn.stdpath("data")
-  return string.format("%s%s%s", data_path, "/conf-nvim-dap", vim.fn.getcwd())
+  return string.format("%s%s%s", data_path, "/nvim-dap-launch-lua", vim.fn.getcwd())
 end
 
 local get_launch_lua_path = function()
