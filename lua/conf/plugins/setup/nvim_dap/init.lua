@@ -71,6 +71,30 @@ local load_launch_lua = function()
   end
 end
 
+M.prompt_array_fn = function(prompt)
+  local lastargs = nil
+  return function()
+    return coroutine.create(function(co)
+      vim.ui.input({ prompt = prompt, default = lastargs }, function(args)
+        lastargs = args or ""
+        coroutine.resume(co, vim.split(lastargs, " "))
+      end)
+    end)
+  end
+end
+
+M.prompt_string_fn = function(prompt)
+  local lastargs = nil
+  return function()
+    return coroutine.create(function(co)
+      vim.ui.input({ prompt = prompt, default = lastargs }, function(args)
+        lastargs = args or ""
+        coroutine.resume(co, lastargs)
+      end)
+    end)
+  end
+end
+
 M.setup = function()
   local dap = require("dap")
   local dapui = require("dapui")
