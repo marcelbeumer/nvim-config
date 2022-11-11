@@ -57,8 +57,10 @@ M.register = function()
   -- Quick file/buffer/lsp/etc pickers.
   use("ibhagwan/fzf-lua")
   -- Go specific features.
+  -- use("ray-x/guihua.lua")
   -- use("ray-x/go.nvim") -- lots of features
   use("olexsmir/gopher.nvim") -- minimal
+  -- use("crusj/structrue-go.nvim")
   -- Commenting plugin.
   use("terrortylor/nvim-comment")
   -- Automagically insert closing tags etc.
@@ -127,6 +129,7 @@ M.setup = function()
 
   -- require("go").setup()
   require("gopher").setup({})
+  -- require("structrue-go").setup()
 end
 
 return M
