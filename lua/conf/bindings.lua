@@ -413,9 +413,9 @@ M.config = {
   },
 
   dap = {
-    launch_json_edit = {
-      desc = "DAP edit dap-launch.json",
-      cmd = "DAPLaunchJSON",
+    launch_lua_edit = {
+      desc = "DAP edit launch.lua",
+      cmd = "DAPLaunchLua",
     },
     ui_toggle_all = {
       desc = "DAP UI toggle",

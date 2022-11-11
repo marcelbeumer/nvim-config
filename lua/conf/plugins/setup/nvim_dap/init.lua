@@ -21,45 +21,32 @@ local reset_configurations = function()
   end
 end
 
-local get_launch_json_basedir = function()
+local get_launch_lua_basedir = function()
   local data_path = vim.fn.stdpath("data")
   return string.format("%s%s%s", data_path, "/conf-nvim-dap", vim.fn.getcwd())
 end
 
-local get_launch_json_path = function()
-  return string.format("%s/dap-launch.json", get_launch_json_basedir())
+local get_launch_lua_path = function()
+  return string.format("%s/launch.lua", get_launch_lua_basedir())
 end
 
-local make_launch_json = function()
-  vim.fn.system("mkdir -p " .. get_launch_json_basedir())
-  local p = Path:new(get_launch_json_path())
+local make_launch_lua = function()
+  vim.fn.system("mkdir -p " .. get_launch_lua_basedir())
+  local p = Path:new(get_launch_lua_path())
   if not p:exists() then
-    p:write(
-      vim.fn.json_encode({
-        lang = {
-          {
-            type = "lang",
-            name = "Example (file)",
-            request = "launch",
-            program = "${file}",
-          },
-        },
-      }),
-      "w"
-    )
+    p:write("return {}", "w")
   end
 end
 
-local load_launch_json = function()
+local load_launch_lua = function()
   local dap = require("dap")
-  local p = Path:new(get_launch_json_path())
-  if not p:exists() then
-    return
-  end
+
+  local config = {}
+  pcall(function()
+    config = loadfile(get_launch_lua_path())()
+  end)
 
   reset_configurations()
-  local config = vim.fn.json_decode(p:read())
-
   for lang, lang_confs in pairs(config) do
     for _, conf in ipairs(lang_confs) do
       if not dap.configurations[lang] then
@@ -83,9 +70,9 @@ M.setup = function()
   dapui.setup()
   require("nvim-dap-virtual-text").setup({})
 
-  bind_all("dap.launch_json_edit", function()
-    make_launch_json()
-    vim.cmd.edit(get_launch_json_path())
+  bind_all("dap.launch_lua_edit", function()
+    make_launch_lua()
+    vim.cmd.edit(get_launch_lua_path())
   end, cmd_opts, key_opts)
   bind_all("dap.ui_toggle_all", function()
     dapui.toggle()
@@ -97,7 +84,7 @@ M.setup = function()
     dapui.toggle(2)
   end, cmd_opts, key_opts)
   bind_all("dap.continue", function()
-    load_launch_json()
+    load_launch_lua()
     dap.continue()
   end, cmd_opts, key_opts)
   bind_all("dap.terminate", function()
