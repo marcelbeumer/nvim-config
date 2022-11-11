@@ -10,10 +10,28 @@ M.setup = function()
   fzf.setup({
     winopts = { preview = { layout = "vertical" } },
     previewers = { builtin = { syntax = false } },
+    files = {
+      file_icons = false,
+    },
+    fzf_colors = {
+      ["fg"] = { "fg", "CursorLine" },
+      ["bg"] = { "bg", "Normal" },
+      ["hl"] = { "fg", "Comment" },
+      ["fg+"] = { "fg", "Normal" },
+      ["bg+"] = { "bg", "CursorLine" },
+      ["hl+"] = { "fg", "Statement" },
+      ["info"] = { "fg", "PreProc" },
+      ["prompt"] = { "fg", "Conditional" },
+      ["pointer"] = { "fg", "Exception" },
+      ["marker"] = { "fg", "Keyword" },
+      ["spinner"] = { "fg", "Label" },
+      ["header"] = { "fg", "Comment" },
+      ["gutter"] = { "bg", "Normal" },
+    },
   })
 
-  local args_small = { previewer = false, winopts = { height = 20 } }
-  local args_tall = { previewer = false, winopts = { height = 0.80 } }
+  local args_small = { previewer = false, winopts = { width = 0.6, height = 20 } }
+  local args_tall = { previewer = false, winopts = { width = 0.6, height = 0.80 } }
 
   bind_all("find.files", function()
     fzf.files(args_small)
