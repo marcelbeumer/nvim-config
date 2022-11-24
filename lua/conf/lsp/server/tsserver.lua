@@ -16,11 +16,10 @@ M.setup = function()
       vim.lsp.start({
         name = "tsserver",
         cmd = { "typescript-language-server", "--stdio" },
-        root_dir = util.find_root_dir({
+        root_dir = util.find_root_dir({ ".git" }, data.file) or util.find_root_dir({
           "package.json",
           "tsconfig.json",
           "jsconfig.json",
-          ".git",
         }, data.file) or vim.fn.getcwd(),
         init_options = { hostInfo = "neovim" },
         handlers = util.get_handlers(),
