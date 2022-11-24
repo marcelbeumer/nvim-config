@@ -13,6 +13,11 @@ M.setup = function()
     files = {
       file_icons = false,
     },
+    grep = {
+      file_icons = false,
+      git_icons = false,
+      rg_glob = true,
+    },
     fzf_colors = {
       ["fg"] = { "fg", "CursorLine" },
       ["bg"] = { "bg", "Normal" },
@@ -46,7 +51,7 @@ M.setup = function()
     fzf.loclist(args_tall)
   end, cmd_opts, key_opts)
   bind_all("find.commands", fzf.commands, cmd_opts, key_opts)
-  bind_all("find.ripgrep", fzf.live_grep_native, cmd_opts, key_opts)
+  bind_all("find.ripgrep", fzf.live_grep_resume, cmd_opts, key_opts)
   bind_all("find.ripgrep_buffer", fzf.grep_curbuf, cmd_opts, key_opts)
   bind_all("find.diag", fzf.diagnostics_workspace, cmd_opts, key_opts)
   bind_all("find.diag_buffer", fzf.diagnostics_document, cmd_opts, key_opts)
