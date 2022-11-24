@@ -19,7 +19,7 @@ return {
   -- off: disable LSP auto formatting
   NVIM_LSP_AUTO_FORMAT = vim.env.NVIM_LSP_AUTO_FORMAT or "on",
   -- NVIM_GOTMPL_YAML=<on|off>
-  -- on: enable autodetecting yaml as gotmpl (default)
-  -- off: disable autodetecting yaml as gotmpl
-  NVIM_GOTMPL_YAML = vim.env.NVIM_GOTMPL_YAML or "on",
+  -- on: enable autodetecting yaml as gotmpl
+  -- off: disable autodetecting yaml as gotmpl (default)
+  NVIM_GOTMPL_YAML = vim.env.NVIM_GOTMPL_YAML or "off",
 }
