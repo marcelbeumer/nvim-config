@@ -20,7 +20,7 @@ M.config = {
     },
     quickfix_prev = {
       desc = "Prev quickfix",
-      nmap = "]q",
+      nmap = "[q",
     },
     loclist_next = {
       desc = "Next loclist",
@@ -28,7 +28,7 @@ M.config = {
     },
     loclist_prev = {
       desc = "Prev loclist",
-      nmap = "]l",
+      nmap = "[l",
     },
     tab_next = {
       desc = "Next tab",
@@ -36,7 +36,7 @@ M.config = {
     },
     tab_prev = {
       desc = "Prev tab",
-      nmap = "]l",
+      nmap = "[t",
     },
     tab_add = {
       desc = "Add tab",
@@ -52,7 +52,7 @@ M.config = {
     },
     buf_prev = {
       desc = "Prev buffer",
-      nmap = "]b",
+      nmap = "[b",
     },
   },
 
