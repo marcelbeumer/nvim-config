@@ -14,6 +14,14 @@ M.config = {
       desc = "Open new file in vsplit",
       nmap = "<C-w>N",
     },
+    win_fix_width = {
+      desc = "Window fix width",
+      nmap = "<C-w>fw",
+    },
+    win_fix_height = {
+      desc = "Window fix height",
+      nmap = "<C-w>fh",
+    },
     quickfix_next = {
       desc = "Next quickfix",
       nmap = "]q",
