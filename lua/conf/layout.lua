@@ -8,6 +8,8 @@ local function get_buffers(layout, buffers, winstate)
   local value = layout[2]
   if type == "leaf" then
     local win = vim.fn.getwininfo(value)
+    local fixw = vim.fn.getwinvar(value, "&winfixwidth")
+    local fixh = vim.fn.getwinvar(value, "&winfixheight")
     if win and win[1] then
       buffers[value] = win[1].bufnr
     end
@@ -16,6 +18,8 @@ local function get_buffers(layout, buffers, winstate)
       topline = win.topline,
       lnum = cursor[1],
       col = cursor[2],
+      fixw = fixw,
+      fixh = fixh,
     }
   else
     for _, v in ipairs(value) do
@@ -29,6 +33,9 @@ local function rebuild_layout(layout, buffers, winstate)
   local value = layout[2]
   if type == "leaf" then
     local bufnr = buffers[value]
+    vim.fn.setwinvar(0, "&winfixwidth", winstate[value].fixw)
+    vim.fn.setwinvar(0, "&winfixheight", winstate[value].fixh)
+
     if vim.fn.bufexists(bufnr) then
       vim.cmd("b " .. bufnr)
       vim.fn.winrestview({
