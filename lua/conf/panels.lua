@@ -107,15 +107,15 @@ M.setup = function()
   local cmd_opts = {}
   local key_opts = { noremap = true, silent = true }
 
-  bind_all("windows.toggle_bottom_panel", function()
+  bind_all("panels.toggle_bottom", function()
     M.toggle_panel("bottom")
   end, cmd_opts, key_opts)
 
-  bind_all("windows.toggle_right_panel", function()
+  bind_all("panels.toggle_right", function()
     M.toggle_panel("right")
   end, cmd_opts, key_opts)
 
-  bind_all("windows.toggle_top_panel", function()
+  bind_all("panels.toggle_top", function()
     M.toggle_panel("top")
   end, cmd_opts, key_opts)
 end
