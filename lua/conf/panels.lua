@@ -71,7 +71,7 @@ M.toggle_panel = function(direction)
       vim.cmd("normal! G")
     end
 
-    panel.augroup = vim.api.nvim_create_augroup("Panel__" .. direction, {})
+    panel.augroup = vim.api.nvim_create_augroup("Panel__" .. current_tab .. "__" .. direction, {})
     vim.api.nvim_create_autocmd("WinClosed", {
       group = panel.augroup,
       pattern = { tostring(panel.winnr) },
