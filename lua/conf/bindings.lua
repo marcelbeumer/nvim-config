@@ -67,18 +67,18 @@ M.config = {
   panels = {
     toggle_bottom = {
       desc = "Toggle bottom panel",
-      nmap = "<C-`>j",
-      tmap = "<C-`>j",
+      nmap = "<C-1>",
+      tmap = "<C-1>",
     },
     toggle_right = {
       desc = "Toggle right panel",
-      nmap = "<C-`>l",
-      tmap = "<C-`>l",
+      nmap = "<C-2>",
+      tmap = "<C-2>",
     },
     toggle_top = {
       desc = "Toggle top panel",
-      nmap = "<C-`>k",
-      tmap = "<C-`>k",
+      nmap = "<C-3>",
+      tmap = "<C-3>",
     },
   },
 

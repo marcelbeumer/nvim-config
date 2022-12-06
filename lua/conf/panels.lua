@@ -1,51 +1,22 @@
 local M = {}
 
+local create_panel = function(opts)
+  return {
+    winnr = nil,
+    bufnr = nil,
+    pos = nil,
+    size = nil,
+    augroup = nil,
+    auto_scroll = false,
+    default_size = opts.default_size,
+    direction = opts.direction,
+  }
+end
+
 local panels = {
-  top = {
-    winnr = nil,
-    bufnr = nil,
-    pos = nil,
-    size = nil,
-    augroup = nil,
-    auto_scroll = false,
-    default_size = 10,
-    wincmd_dir = "K",
-    fix_dim_cmd = "set winfixheight",
-    resize_cmd = "resize",
-    get_size = function(winnr)
-      return vim.fn.winheight(winnr)
-    end,
-  },
-  right = {
-    winnr = nil,
-    bufnr = nil,
-    pos = nil,
-    size = nil,
-    augroup = nil,
-    auto_scroll = false,
-    default_size = 80,
-    wincmd_dir = "L",
-    fix_dim_cmd = "set winfixwidth",
-    resize_cmd = "vertical resize",
-    get_size = function(winnr)
-      return vim.fn.winwidth(winnr)
-    end,
-  },
-  bottom = {
-    winnr = nil,
-    bufnr = nil,
-    pos = nil,
-    size = nil,
-    augroup = nil,
-    auto_scroll = false,
-    default_size = 10,
-    wincmd_dir = "J",
-    fix_dim_cmd = "set winfixheight",
-    resize_cmd = "resize",
-    get_size = function(winnr)
-      return vim.fn.winheight(winnr)
-    end,
-  },
+  top = create_panel({ default_size = 10, direction = "k" }),
+  right = create_panel({ default_size = 80, direction = "l" }),
+  bottom = create_panel({ default_size = 10, direction = "j" }),
 }
 
 M.toggle_panel = function(side)
@@ -74,9 +45,16 @@ M.toggle_panel = function(side)
       vim.cmd("vnew")
     end
 
-    vim.cmd("wincmd " .. panel.wincmd_dir)
-    vim.cmd(panel.resize_cmd .. tostring(panel.size or panel.default_size))
-    vim.cmd(panel.fix_dim_cmd)
+    vim.cmd("wincmd " .. string.upper(panel.direction))
+
+    local size = tostring(panel.size or panel.default_size)
+    if panel.direction == "j" or panel.direction == "k" then
+      vim.cmd("set winfixheight")
+      vim.cmd("resize" .. size)
+    else
+      vim.cmd("set winfixwidth")
+      vim.cmd("vertical resize" .. size)
+    end
 
     panel.winnr = vim.api.nvim_get_current_win()
     panel.pos = vim.fn.getcurpos()
@@ -85,14 +63,19 @@ M.toggle_panel = function(side)
       vim.cmd("normal! G")
     end
 
-    panel.augroup = vim.api.nvim_create_augroup("Panel" .. side, {})
+    panel.augroup = vim.api.nvim_create_augroup("Panel__" .. side, {})
     vim.api.nvim_create_autocmd("WinClosed", {
       group = panel.augroup,
       pattern = { tostring(panel.winnr) },
       callback = function()
         panel.bufnr = vim.fn.winbufnr(panel.winnr)
         panel.pos = vim.fn.getcurpos(panel.winnr)
-        panel.size = panel.get_size(panel.winnr)
+        if panel.direction == "j" or panel.direction == "k" then
+          panel.size = vim.fn.winheight(panel.winnr)
+        else
+          panel.size = vim.fn.winwidth(panel.winnr)
+        end
+
         local mode = vim.fn.mode(1)
         local is_term = mode == "nt" or mode == "t"
         panel.auto_scroll = is_term and vim.fn.line(".") == vim.fn.line("$")
