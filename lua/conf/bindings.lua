@@ -493,7 +493,7 @@ M.config = {
   },
 }
 
-local maps = { nmap = "n", imap = "i", vmap = "v", omap = "o", xmap = "x" }
+local maps = { nmap = "n", imap = "i", vmap = "v", omap = "o", xmap = "x", tmap = "t" }
 
 local get_config = function(lookup)
   local config = M.config
