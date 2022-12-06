@@ -13,6 +13,7 @@ local bottom_panel = {
   pos = nil,
   size = nil,
   augroup = nil,
+  auto_scroll = false,
 }
 
 M.toggle_bottom_panel = function()
@@ -46,6 +47,10 @@ M.toggle_bottom_panel = function()
     panel.winnr = vim.api.nvim_get_current_win()
     panel.pos = vim.fn.getcurpos()
 
+    if panel.auto_scroll then
+      vim.cmd("normal! G")
+    end
+
     panel.augroup = vim.api.nvim_create_augroup("PanelBottom", {})
     vim.api.nvim_create_autocmd("WinClosed", {
       group = panel.augroup,
@@ -54,6 +59,9 @@ M.toggle_bottom_panel = function()
         panel.bufnr = vim.fn.winbufnr(panel.winnr)
         panel.pos = vim.fn.getcurpos(panel.winnr)
         panel.size = vim.fn.winheight(panel.winnr)
+        local mode = vim.fn.mode(1)
+        local is_term = mode == "nt" or mode == "t"
+        panel.auto_scroll = is_term and vim.fn.line(".") == vim.fn.line("$")
       end,
     })
   end
