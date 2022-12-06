@@ -14,7 +14,7 @@ M.setup = function()
   local bind_all = bindings.bind_all
   local key_opts = { noremap = true, silent = true }
   local cmd_opts = {}
-  local use_float = true
+  local use_float = false
 
   local setup_nvim_tree = function()
     require("nvim-tree").setup({
