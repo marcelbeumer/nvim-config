@@ -1,23 +1,58 @@
 local M = {}
 
-local move_tbl = {
-  top = "K",
-  right = "L",
-  bottom = "J",
-  left = "H",
+local panels = {
+  top = {
+    winnr = nil,
+    bufnr = nil,
+    pos = nil,
+    size = nil,
+    augroup = nil,
+    auto_scroll = false,
+    default_size = 10,
+    wincmd_dir = "K",
+    fix_dim_cmd = "set winfixheight",
+    resize_cmd = "resize",
+    get_size = function(winnr)
+      return vim.fn.winheight(winnr)
+    end,
+  },
+  right = {
+    winnr = nil,
+    bufnr = nil,
+    pos = nil,
+    size = nil,
+    augroup = nil,
+    auto_scroll = false,
+    default_size = 80,
+    wincmd_dir = "L",
+    fix_dim_cmd = "set winfixwidth",
+    resize_cmd = "vertical resize",
+    get_size = function(winnr)
+      return vim.fn.winwidth(winnr)
+    end,
+  },
+  bottom = {
+    winnr = nil,
+    bufnr = nil,
+    pos = nil,
+    size = nil,
+    augroup = nil,
+    auto_scroll = false,
+    default_size = 10,
+    wincmd_dir = "J",
+    fix_dim_cmd = "set winfixheight",
+    resize_cmd = "resize",
+    get_size = function(winnr)
+      return vim.fn.winheight(winnr)
+    end,
+  },
 }
 
-local bottom_panel = {
-  winnr = nil,
-  bufnr = nil,
-  pos = nil,
-  size = nil,
-  augroup = nil,
-  auto_scroll = false,
-}
-
-M.toggle_bottom_panel = function()
-  local panel = bottom_panel
+M.toggle_panel = function(side)
+  local panel = panels[side]
+  if not panel then
+    return
+  end
 
   if panel.winnr and not vim.api.nvim_win_is_valid(panel.winnr) then
     panel.winnr = nil
@@ -39,10 +74,9 @@ M.toggle_bottom_panel = function()
       vim.cmd("vnew")
     end
 
-    local move_to = move_tbl.bottom
-    vim.cmd("wincmd " .. move_to)
-    vim.cmd("resize " .. tostring(panel.size or 10))
-    vim.cmd("set winfixheight")
+    vim.cmd("wincmd " .. panel.wincmd_dir)
+    vim.cmd(panel.resize_cmd .. tostring(panel.size or panel.default_size))
+    vim.cmd(panel.fix_dim_cmd)
 
     panel.winnr = vim.api.nvim_get_current_win()
     panel.pos = vim.fn.getcurpos()
@@ -51,14 +85,14 @@ M.toggle_bottom_panel = function()
       vim.cmd("normal! G")
     end
 
-    panel.augroup = vim.api.nvim_create_augroup("PanelBottom", {})
+    panel.augroup = vim.api.nvim_create_augroup("Panel" .. side, {})
     vim.api.nvim_create_autocmd("WinClosed", {
       group = panel.augroup,
       pattern = { tostring(panel.winnr) },
       callback = function()
         panel.bufnr = vim.fn.winbufnr(panel.winnr)
         panel.pos = vim.fn.getcurpos(panel.winnr)
-        panel.size = vim.fn.winheight(panel.winnr)
+        panel.size = panel.get_size(panel.winnr)
         local mode = vim.fn.mode(1)
         local is_term = mode == "nt" or mode == "t"
         panel.auto_scroll = is_term and vim.fn.line(".") == vim.fn.line("$")
@@ -73,7 +107,17 @@ M.setup = function()
   local cmd_opts = {}
   local key_opts = { noremap = true, silent = true }
 
-  bind_all("windows.toggle_bottom_panel", M.toggle_bottom_panel, cmd_opts, key_opts)
+  bind_all("windows.toggle_bottom_panel", function()
+    M.toggle_panel("bottom")
+  end, cmd_opts, key_opts)
+
+  bind_all("windows.toggle_right_panel", function()
+    M.toggle_panel("right")
+  end, cmd_opts, key_opts)
+
+  bind_all("windows.toggle_top_panel", function()
+    M.toggle_panel("top")
+  end, cmd_opts, key_opts)
 end
 
 return M

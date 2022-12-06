@@ -67,8 +67,18 @@ M.config = {
   windows = {
     toggle_bottom_panel = {
       desc = "Toggle bottom panel",
-      nmap = "<C-`>",
-      tmap = "<C-`>",
+      nmap = "<C-`>j",
+      tmap = "<C-`>j",
+    },
+    toggle_right_panel = {
+      desc = "Toggle right panel",
+      nmap = "<C-`>l",
+      tmap = "<C-`>l",
+    },
+    toggle_top_panel = {
+      desc = "Toggle top panel",
+      nmap = "<C-`>k",
+      tmap = "<C-`>k",
     },
   },
 
