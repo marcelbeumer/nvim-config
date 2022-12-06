@@ -1,38 +1,59 @@
 local M = {}
 
 local move_tbl = {
-  left = "H",
+  top = "K",
   right = "L",
   bottom = "J",
+  left = "H",
 }
 
-local bottom_panel_winr = nil
-local bottom_panel_bufnr = nil
+local bottom_panel = {
+  winnr = nil,
+  bufnr = nil,
+  pos = nil,
+  size = nil,
+  augroup = nil,
+}
 
 M.toggle_bottom_panel = function()
-  local winnr = bottom_panel_winr
+  local panel = bottom_panel
 
-  if not pcall(vim.api.nvim_win_get_number, bottom_panel_winr) then
-    winnr = nil
+  if panel.winnr and not vim.api.nvim_win_is_valid(panel.winnr) then
+    panel.winnr = nil
+  end
+  if panel.bufnr and not vim.api.nvim_buf_is_valid(panel.bufnr) then
+    panel.bufnr = nil
   end
 
-  if winnr then
-    vim.fn.win_execute(winnr, "wincmd c")
-    bottom_panel_winr = nil
+  if panel.winnr then
+    pcall(vim.api.nvim_win_close, panel.winnr, true)
+    vim.api.nvim_clear_autocmds({ group = panel.augroup })
+    panel.winnr = nil
   else
-    vim.cmd("wincmd n")
+    if panel.bufnr then
+      vim.cmd("vsplit")
+      vim.cmd("b" .. panel.bufnr)
+      vim.fn.setpos(".", panel.pos)
+    else
+      vim.cmd("vnew")
+    end
+
     local move_to = move_tbl.bottom
     vim.cmd("wincmd " .. move_to)
-    vim.cmd("resize 10")
+    vim.cmd("resize " .. tostring(panel.size or 10))
     vim.cmd("set winfixheight")
-    if bottom_panel_bufnr then
-      vim.cmd("b" .. bottom_panel_bufnr)
-    end
-    bottom_panel_winr = vim.api.nvim_get_current_win()
+
+    panel.winnr = vim.api.nvim_get_current_win()
+    panel.pos = vim.fn.getcurpos()
+
+    panel.augroup = vim.api.nvim_create_augroup("PanelBottom", {})
     vim.api.nvim_create_autocmd("WinClosed", {
-      pattern = { "" .. bottom_panel_winr },
+      group = panel.augroup,
+      pattern = { tostring(panel.winnr) },
       callback = function()
-        bottom_panel_bufnr = vim.api.nvim_get_current_buf()
+        panel.bufnr = vim.fn.winbufnr(panel.winnr)
+        panel.pos = vim.fn.getcurpos(panel.winnr)
+        panel.size = vim.fn.winheight(panel.winnr)
       end,
     })
   end
