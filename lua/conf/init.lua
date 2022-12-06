@@ -16,6 +16,7 @@ M.setup = function()
     require("conf.base").setup()
     require("conf.fs").setup()
     require("conf.layout").setup()
+    require("conf.panels").setup()
     require("conf.plugins").setup()
     require("conf.diagnostic").setup()
     if env.NVIM_LSP == "on" then

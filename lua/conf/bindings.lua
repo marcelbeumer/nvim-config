@@ -64,6 +64,14 @@ M.config = {
     },
   },
 
+  windows = {
+    toggle_bottom_panel = {
+      desc = "Toggle bottom panel",
+      nmap = "<C-`>",
+      tmap = "<C-`>",
+    },
+  },
+
   tree = {
     toggle = {
       desc = "Tree toggle",
