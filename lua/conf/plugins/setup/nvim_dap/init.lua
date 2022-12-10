@@ -98,6 +98,7 @@ end
 M.setup = function()
   local dap = require("dap")
   local dapui = require("dapui")
+  local icons = require("conf.icons")
   local bindings = require("conf.bindings")
   local bind_all = bindings.bind_all
   local key_opts = { noremap = true, silent = true }
@@ -105,7 +106,29 @@ M.setup = function()
 
   setup_languages()
   reset_configurations()
-  dapui.setup()
+
+  dapui.setup({})
+
+  -- Inspired by LunarVim
+  vim.fn.sign_define("DapBreakpoint", {
+    text = icons.ui.Bug,
+    texthl = "DiagnosticSignError",
+    linehl = "",
+    numhl = "",
+  })
+  vim.fn.sign_define("DapBreakpointRejected", {
+    text = icons.ui.Bug,
+    texthl = "DiagnosticSignError",
+    linehl = "",
+    numhl = "",
+  })
+  vim.fn.sign_define("DapStopped", {
+    text = icons.ui.Bug,
+    texthl = "DiagnosticSignError",
+    linehl = "",
+    numhl = "",
+  })
+
   require("nvim-dap-virtual-text").setup({})
 
   bind_all("dap.launch_lua_edit", function()

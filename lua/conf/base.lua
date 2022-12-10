@@ -7,6 +7,7 @@ M.setup = function()
 
   -- Line numbers.
   vim.o.number = true
+  vim.o.relativenumber = true
   --Enable mouse mode in all modes.
   vim.o.mouse = "a"
   --Enable break indent.
@@ -27,6 +28,8 @@ M.setup = function()
   vim.o.scrolloff = 5
   -- Show search result counter.
   vim.opt.shortmess:remove({ "-S" })
+  -- Highlight current line
+  vim.o.cursorline = true
 
   -- Netrw settings.
   vim.api.nvim_set_var("netrw_banner", 0)

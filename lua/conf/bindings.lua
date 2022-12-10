@@ -235,6 +235,14 @@ M.config = {
   },
 
   diag = {
+    set_verbose = {
+      desc = "Set verbose diagnostics settings",
+      cmd = "DiagVerbose",
+    },
+    set_quiet = {
+      desc = "Set quiet diagnostics settings",
+      cmd = "DiagQuiet",
+    },
     toggle_signs = {
       desc = "Toggle diagnostic signs",
       cmd = "DiagToggleSigns",
