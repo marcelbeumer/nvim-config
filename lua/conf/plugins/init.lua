@@ -35,13 +35,13 @@ M.register = function()
   -- Simple session management.
   use("olimorris/persisted.nvim")
   -- Project switching.
-  use({ "marcelbeumer/project.nvim", branch = "remove-fixed-widths" })
+  use("ahmedkhalf/project.nvim")
   -- Lua dev setup
   use("folke/neodev.nvim")
   -- Autocompletion and plugins.
   use("hrsh7th/nvim-cmp")
   use("hrsh7th/cmp-nvim-lsp")
-  use({ "hrsh7th/cmp-nvim-lsp-signature-help", commit = "57c4db7" })
+  use("hrsh7th/cmp-nvim-lsp-signature-help")
   use("saadparwaiz1/cmp_luasnip")
   -- Snippets (required by cmp autocomplete).
   use("L3MON4D3/LuaSnip")
@@ -78,14 +78,9 @@ M.register = function()
   use("mfussenegger/nvim-dap")
   use("rcarriga/nvim-dap-ui")
   use("mxsdev/nvim-dap-vscode-js")
-  use({
-    "microsoft/vscode-js-debug",
-    opt = true,
-    run = "npm install --legacy-peer-deps && npm run compile",
-  })
   use("theHamsta/nvim-dap-virtual-text")
   -- Tests.
-  use({ "marcelbeumer/neotest", branch = "output-last" })
+  use("nvim-neotest/neotest")
   use("haydenmeade/neotest-jest")
   -- UI.
   use("rafcamlet/tabline-framework.nvim")
