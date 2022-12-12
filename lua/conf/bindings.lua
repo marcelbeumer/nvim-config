@@ -2,6 +2,10 @@ local M = {}
 
 M.config = {
   base = {
+    write = {
+      desc = "Write buffer",
+      nmap = "<C-s>",
+    },
     toggle_line_numbers = {
       desc = "Toggle line number",
       nmap = "<leader>n",

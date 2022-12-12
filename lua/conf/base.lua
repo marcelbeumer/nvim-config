@@ -38,6 +38,7 @@ M.setup = function()
   -- Too many typos but too stubborn to map to smth else.
   vim.cmd([[command W w]])
 
+  bind_all("base.write", ":w<CR>", {}, key_opts)
   bind_all("base.toggle_line_numbers", ":set nu!<CR>", {}, key_opts)
   bind_all("base.open_bottom_panel", ":botright 20split<CR>", {}, key_opts)
   bind_all("base.open_new_vsplit", ":vnew<CR>", {}, key_opts)
