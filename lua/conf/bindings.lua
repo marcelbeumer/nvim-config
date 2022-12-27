@@ -404,6 +404,10 @@ M.config = {
       desc = "LSP goto implementation",
       nmap = "gi",
     },
+    goto_typedef = {
+      desc = "LSP goto typedef",
+      nmap = "gt",
+    },
     hover = {
       desc = "LSP hover",
       nmap = "K",
