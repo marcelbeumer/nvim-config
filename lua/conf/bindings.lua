@@ -443,17 +443,6 @@ M.config = {
     },
   },
 
-  lsp_lines = {
-    toggle = {
-      desc = "Toggle LSP diag lines",
-      cmd = "LSPLinesToggle",
-    },
-    toggle_current_line = {
-      desc = "Toggle LSP diag lines (current line)",
-      cmd = "LSPLinesToggleLine",
-    },
-  },
-
   dap = {
     launch_lua_edit = {
       desc = "DAP edit launch.lua",
