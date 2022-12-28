@@ -20,6 +20,7 @@
   "lazygit.nvim": { "branch": "main", "commit": "32bffdebe273e571588f25c8a708ca7297928617" },
   "neodev.nvim": { "branch": "main", "commit": "8e06acf88e0621badd9499cfcafbce5ca97dfe8e" },
   "neotest": { "branch": "master", "commit": "de2f68fb13a05c361e0c096e167f7f79712f3a5c" },
+  "neotest-go": { "branch": "main", "commit": "981406c12bd3c77eb434211a1b85b964ab5bbdd5" },
   "neotest-jest": { "branch": "main", "commit": "205168630d00bd9eb24870328d3bda5844cc596d" },
   "null-ls.nvim": { "branch": "fix-golangci-lint", "commit": "6f81824674318497e7306be505d986bb624aac78" },
   "nvim-autopairs": { "branch": "master", "commit": "03580d758231956d33c8dd91e2be195106a79fa4" },

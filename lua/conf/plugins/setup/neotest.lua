@@ -1,8 +1,15 @@
 local M = {}
 
 M.setup = function()
-  require("neotest").setup({
+  local neotest = require("neotest")
+  local bindings = require("conf.bindings")
+  local bind_all = bindings.bind_all
+  local key_opts = { noremap = true, silent = true }
+  local cmd_opts = {}
+
+  neotest.setup({
     adapters = {
+      require("neotest-go"),
       require("neotest-jest")({
         jestCommand = "jest",
         env = { CI = true },
@@ -13,39 +20,23 @@ M.setup = function()
     },
   })
 
-  vim.keymap.set("n", "<leader>xt", function() end, { desc = "Test..." })
-
-  vim.keymap.set("n", "<leader>xts", function()
-    require("neotest").summary.toggle()
-  end, { desc = "Toggle test summary" })
-
-  vim.keymap.set("n", "<leader>xto", function()
-    require("neotest").output.open({ enter = true })
-  end, { desc = "Open test output" })
-
-  vim.keymap.set("n", "<leader>xtr", function()
-    require("neotest").run.run()
-  end, { desc = "Run the nearest test" })
-
-  vim.keymap.set("n", "<leader>xtl", function()
-    require("neotest").run.run_last()
-  end, { desc = "Run last test" })
-
-  vim.keymap.set("n", "<leader>xtR", function()
-    require("neotest").run.run(vim.fn.expand("%"))
-  end, { desc = "Run the current file" })
-
-  vim.keymap.set("n", "<leader>xtd", function()
+  bind_all("neotest.output", neotest.output.open, cmd_opts, key_opts)
+  bind_all("neotest.summary", neotest.summary.toggle, cmd_opts, key_opts)
+  bind_all("neotest.output_panel", neotest.output_panel.toggle, cmd_opts, key_opts)
+  bind_all("neotest.run_nearest", neotest.run.run, cmd_opts, key_opts)
+  bind_all("neotest.run_last", neotest.run.run_last, cmd_opts, key_opts)
+  bind_all("neotest.run_file", function()
+    neotest.run.run(vim.fn.expand("%"))
+  end, cmd_opts, key_opts)
+  bind_all("neotest.debug_nearest", function()
     require("neotest").run.run({ strategy = "dap" })
-  end, { desc = "Debug the nearest test" })
-
-  vim.keymap.set("n", "<leader>xtx", function()
+  end, cmd_opts, key_opts)
+  bind_all("neotest.stop_nearest", function()
     require("neotest").run.stop()
-  end, { desc = "Stop the nearest test" })
-
-  vim.keymap.set("n", "<leader>xta", function()
+  end, cmd_opts, key_opts)
+  bind_all("neotest.attach_nearest", function()
     require("neotest").run.attach()
-  end, { desc = "Attach to the nearest test" })
+  end, cmd_opts, key_opts)
 end
 
 return M

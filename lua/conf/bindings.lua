@@ -52,11 +52,11 @@ M.config = {
     },
     tab_add = {
       desc = "Add tab",
-      nmap = "<leader>ta",
+      nmap = "<C-w>ta",
     },
     tab_close = {
       desc = "Close tab",
-      nmap = "<leader>tc",
+      nmap = "<C-w>tc",
     },
     buf_next = {
       desc = "Next buffer",
@@ -440,6 +440,45 @@ M.config = {
     list_workspace_folders = {
       desc = "LSP list workspace folders",
       cmd = "LSPListWorkspaceFolders",
+    },
+  },
+
+  neotest = {
+    summary = {
+      desc = "Neotest test summary",
+      nmap = "<leader>ts",
+    },
+    output = {
+      desc = "Neotest test output float",
+      nmap = "<leader>to",
+    },
+    output_panel = {
+      desc = "Neotest output panel",
+      nmap = "<leader>tp",
+    },
+    run_nearest = {
+      desc = "Neotest run nearest",
+      nmap = "<leader>tr",
+    },
+    run_last = {
+      desc = "Neotest run last test",
+      nmap = "<leader>tl",
+    },
+    run_file = {
+      desc = "Neotest run file",
+      nmap = "<leader>tR",
+    },
+    debug_nearest = {
+      desc = "Neotest debug nearest test",
+      nmap = "<leader>td",
+    },
+    stop_nearest = {
+      desc = "Neotest stop nearest test",
+      nmap = "<leader>tx",
+    },
+    attach_nearest = {
+      desc = "Neotest stop nearest test",
+      nmap = "<leader>ta",
     },
   },
 

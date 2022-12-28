@@ -107,7 +107,9 @@ M.setup = function()
     {
       "nvim-neotest/neotest",
       dependencies = {
+        "nvim-lua/plenary.nvim",
         "haydenmeade/neotest-jest",
+        "nvim-neotest/neotest-go",
       },
       config = require("conf.plugins.setup.neotest").setup,
     },
