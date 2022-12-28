@@ -61,8 +61,10 @@ M.setup = function()
     { "sindrets/diffview.nvim" },
     { "lewis6991/gitsigns.nvim", config = require("conf.plugins.setup.gitsigns").setup },
     { "akinsho/git-conflict.nvim", config = true },
+
     -- Quick file/buffer/lsp/etc pickers.
     { "ibhagwan/fzf-lua", config = require("conf.plugins.setup.fzf_lua").setup },
+
     -- Go specific features.
     { "olexsmir/gopher.nvim" },
 
