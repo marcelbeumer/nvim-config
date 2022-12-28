@@ -13,10 +13,6 @@ M.setup = function()
     },
   })
 
-  local get_opts = function(desc)
-    return { desc = desc }
-  end
-
   local with_redraw = function(fn)
     return function()
       fn()

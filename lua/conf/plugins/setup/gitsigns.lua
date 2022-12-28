@@ -9,15 +9,8 @@ M.setup = function()
   require("gitsigns").setup({
     signcolumn = true,
     numhl = true,
-    on_attach = function(bufnr)
+    on_attach = function()
       local gs = package.loaded.gitsigns
-
-      local function map(mode, l, r, desc)
-        local opts = {}
-        opts.buffer = bufnr
-        opts.desc = desc
-        vim.keymap.set(mode, l, r, opts)
-      end
 
       bind_all("git.next_hunk", function()
         vim.schedule(function()

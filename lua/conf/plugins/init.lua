@@ -1,6 +1,6 @@
 local M = {}
 
-M.register = function()
+M.setup = function()
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
   if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -15,116 +15,116 @@ M.register = function()
   vim.opt.runtimepath:prepend(lazypath)
 
   require("lazy").setup({
-    -- Common plugin dependency.
-    "nvim-lua/plenary.nvim",
-    -- Official LSP setup helper plugin, required by lua-dev.
-    "neovim/nvim-lspconfig",
-    -- LSP
-    -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    -- Editor config support.
     "editorconfig/editorconfig-vim",
-    -- Tresitter.
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
+      config = require("conf.plugins.setup.treesitter").setup,
+    },
+
     -- TypeScript: support different comment styles depending on context.
     "JoosepAlviste/nvim-ts-context-commentstring",
     -- TypeScript: extra LSP features.
     "jose-elias-alvarez/nvim-lsp-ts-utils",
+
     -- File explorer.
-    "kyazdani42/nvim-tree.lua",
+    { "kyazdani42/nvim-tree.lua", config = require("conf.plugins.setup.nvim_tree").setup },
+
     -- Simple session management.
-    "olimorris/persisted.nvim",
+    { "olimorris/persisted.nvim", config = require("conf.plugins.setup.persisted").setup },
+
     -- Project switching.
-    "ahmedkhalf/project.nvim",
+    { "ahmedkhalf/project.nvim", config = require("conf.plugins.setup.project_nvim").setup },
+
     -- Lua dev setup
-    "folke/neodev.nvim",
+    { "folke/neodev.nvim", dependencies = { "neovim/nvim-lspconfig" } },
+
     -- Autocompletion and plugins.
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-    "saadparwaiz1/cmp_luasnip",
-    -- Snippets (required by cmp autocomplete).
-    "L3MON4D3/LuaSnip",
+    {
+      "hrsh7th/nvim-cmp",
+      config = require("conf.plugins.setup.cmp").setup,
+      dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        "saadparwaiz1/cmp_luasnip",
+        "L3MON4D3/LuaSnip",
+      },
+    },
+
     -- General purpose LSP server, mostly for linting and formatting.
     -- "jose-elias-alvarez/null-ls.nvim",
     { "marcelbeumer/null-ls.nvim", branch = "fix-golangci-lint" },
+
     -- Git.
-    "kdheepak/lazygit.nvim",
-    "tpope/vim-fugitive",
-    "sindrets/diffview.nvim",
-    "lewis6991/gitsigns.nvim",
-    "akinsho/git-conflict.nvim",
+    { "tpope/vim-fugitive" },
+    { "kdheepak/lazygit.nvim", config = require("conf.plugins.setup.lazygit").setup },
+    { "sindrets/diffview.nvim" },
+    { "lewis6991/gitsigns.nvim", config = require("conf.plugins.setup.gitsigns").setup },
+    { "akinsho/git-conflict.nvim", config = true },
     -- Quick file/buffer/lsp/etc pickers.
-    "ibhagwan/fzf-lua",
+    { "ibhagwan/fzf-lua", config = require("conf.plugins.setup.fzf_lua").setup },
     -- Go specific features.
-    -- "ray-x/guihua.lua",
-    -- "ray-x/go.nvim", -- lots of features
-    "olexsmir/gopher.nvim", -- minimal
-    -- "crusj/structrue-go.nvim",
+    { "olexsmir/gopher.nvim" },
+
     -- Commenting plugin.
-    "terrortylor/nvim-comment",
+    { "terrortylor/nvim-comment", config = require("conf.plugins.setup.nvim_comment").setup },
+
     -- Automagically insert closing tags etc.
-    "windwp/nvim-autopairs",
+    { "windwp/nvim-autopairs", config = true },
+
     -- Colorscheme.
-    "folke/tokyonight.nvim",
+    { "folke/tokyonight.nvim", config = require("conf.plugins.setup.tokyonight").setup },
     { "catppuccin/nvim", name = "catppuccin" },
+
     -- Icons.
     "kyazdani42/nvim-web-devicons",
+
     -- Code navigation.
-    "simrat39/symbols-outline.nvim",
+    { "simrat39/symbols-outline.nvim", config = require("conf.plugins.setup.symbols_outline").setup },
+
     -- Motion.
-    "phaazon/hop.nvim",
+    { "phaazon/hop.nvim", config = require("conf.plugins.setup.hop").setup },
+
     -- Debugging.
-    "mfussenegger/nvim-dap",
-    "rcarriga/nvim-dap-ui",
-    "mxsdev/nvim-dap-vscode-js",
-    "theHamsta/nvim-dap-virtual-text",
+    {
+      "mfussenegger/nvim-dap",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "rcarriga/nvim-dap-ui",
+        "mxsdev/nvim-dap-vscode-js",
+        "theHamsta/nvim-dap-virtual-text",
+      },
+      config = function()
+        require("conf.plugins.setup.nvim_dap").setup()
+      end,
+    },
+
     -- Tests.
-    "nvim-neotest/neotest",
-    "haydenmeade/neotest-jest",
+    {
+      "nvim-neotest/neotest",
+      dependencies = {
+        "haydenmeade/neotest-jest",
+      },
+      config = require("conf.plugins.setup.neotest").setup,
+    },
+
     -- UI.
-    "rafcamlet/tabline-framework.nvim",
-    "petertriho/nvim-scrollbar",
-    { "marcelbeumer/harpoon", branch = "fix/no-absolute-path" },
-    "folke/which-key.nvim",
+    { "rafcamlet/tabline-framework.nvim", config = require("conf.plugins.setup.tabline_framework").setup },
+    { "petertriho/nvim-scrollbar", config = require("conf.plugins.setup.scrollbar").setup },
+    { "marcelbeumer/harpoon", branch = "fix/no-absolute-path", config = require("conf.plugins.setup.harpoon").setup },
+    { "folke/which-key.nvim", config = require("conf.plugins.setup.which_key").setup },
+
     -- Buffer management.
     "kazhala/close-buffers.nvim",
+
     -- Improved Yank/put.
-    "gbprod/yanky.nvim",
-    -- Disabled but here for reference.
-    -- "NvChad/nvim-colorizer.lua",
+    { "gbprod/yanky.nvim", config = require("conf.plugins.setup.yanky").setup },
+
     -- Misc.
     "github/copilot.vim",
   })
-end
 
-M.setup = function()
-  M.register()
-  require("conf.plugins.setup.yanky").setup()
-  require("conf.plugins.setup.colorscheme").setup()
-  require("conf.plugins.setup.cmp").setup()
-  require("conf.plugins.setup.treesitter").setup()
-  require("conf.plugins.setup.lazygit").setup()
-  require("conf.plugins.setup.persisted").setup()
-  require("conf.plugins.setup.fzf_lua").setup()
-  require("conf.plugins.setup.project_nvim").setup()
-  require("conf.plugins.setup.nvim_comment").setup()
-  require("conf.plugins.setup.autopairs").setup()
-  require("conf.plugins.setup.symbols_outline").setup()
-  require("conf.plugins.setup.nvim_tree").setup()
-  require("conf.plugins.setup.hop").setup()
-  require("conf.plugins.setup.scrollbar").setup()
-  require("conf.plugins.setup.gitsigns").setup()
-  require("conf.plugins.setup.harpoon").setup()
-  require("conf.plugins.setup.tabline_framework").setup()
-  require("conf.plugins.setup.which_key").setup()
-  -- require("conf.plugins.setup.lsp_lines").setup()
-  require("conf.plugins.setup.nvim_dap").setup()
-  require("conf.plugins.setup.neotest").setup()
-  require("conf.plugins.setup.git_conflict").setup()
-
-  -- require("go").setup()
-  require("gopher").setup({})
-  -- require("structrue-go").setup()
+  vim.cmd.colorscheme("tokyonight")
 end
 
 return M
