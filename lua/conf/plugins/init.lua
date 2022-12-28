@@ -72,9 +72,11 @@ M.setup = function()
     -- Automagically insert closing tags etc.
     { "windwp/nvim-autopairs", config = true },
 
-    -- Colorscheme.
+    -- Colorschemes.
     { "folke/tokyonight.nvim", config = require("conf.plugins.setup.tokyonight").setup },
     { "catppuccin/nvim", name = "catppuccin" },
+    { "sainnhe/everforest" },
+    { "rebelot/kanagawa.nvim" },
 
     -- Icons.
     "kyazdani42/nvim-web-devicons",
