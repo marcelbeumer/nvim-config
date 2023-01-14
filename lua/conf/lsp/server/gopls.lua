@@ -12,6 +12,16 @@ M.setup = function()
         root_dir = util.find_root_dir({ "go.work" }, data.file)
           or util.find_root_dir({ "go.mod", ".git" }, data.file)
           or vim.fn.getcwd(),
+        init_options = {
+          hints = {
+            assignVariableTypes = true,
+            compositeLiteralFields = true,
+            constantValues = true,
+            functionTypeParameters = true,
+            parameterNames = true,
+            rangeVariableTypes = true,
+          },
+        },
         handlers = util.get_handlers(),
         capabilities = util.get_capabilities(),
         on_attach = function(client)
