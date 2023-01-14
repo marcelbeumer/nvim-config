@@ -15,7 +15,6 @@ M.setup = function()
   vim.opt.runtimepath:prepend(lazypath)
 
   require("lazy").setup({
-    "editorconfig/editorconfig-vim",
     {
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
