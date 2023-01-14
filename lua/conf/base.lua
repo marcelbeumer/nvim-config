@@ -30,6 +30,8 @@ M.setup = function()
   vim.opt.shortmess:remove({ "-S" })
   -- Highlight current line
   vim.o.cursorline = true
+  -- Enable line based differ
+  vim.opt.diffopt:append({ "linematch:60" })
 
   -- Netrw settings.
   vim.api.nvim_set_var("netrw_banner", 0)
