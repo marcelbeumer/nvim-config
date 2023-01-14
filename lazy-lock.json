@@ -18,6 +18,7 @@
   "kanagawa.nvim": { "branch": "master", "commit": "476eb2289d47d132ebacc1a4d459e3204866599b" },
   "lazy.nvim": { "branch": "main", "commit": "666ed7bf73eb5895253c1155bd29270b066cbdac" },
   "lazygit.nvim": { "branch": "main", "commit": "32bffdebe273e571588f25c8a708ca7297928617" },
+  "lsp-inlayhints.nvim": { "branch": "main", "commit": "a28c51a6362e3faa17f67749436cb5c8b55dcc6d" },
   "neodev.nvim": { "branch": "main", "commit": "0e3f5e763639951f96f9acbdc9f52a9fedf91b46" },
   "neotest": { "branch": "master", "commit": "fee5ce9bdc3dff4706a29b012e75025ab376becb" },
   "neotest-go": { "branch": "main", "commit": "981406c12bd3c77eb434211a1b85b964ab5bbdd5" },

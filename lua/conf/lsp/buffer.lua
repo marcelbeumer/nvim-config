@@ -73,10 +73,6 @@ local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  local buf_opts = function(desc)
-    return { noremap = true, silent = true, buffer = bufnr, desc = desc }
-  end
-
   -- Buffer specific bindings.
   bind_all("lsp.next_reference", function()
     next_reference()
@@ -123,7 +119,8 @@ local on_attach = function(client, bufnr)
       update()
     end
 
-    vim.keymap.set("n", "<space>h", toggle, buf_opts("LSP highlight"))
+    bind_all("lsp.toggle_highlight", toggle, cmd_opts, key_opts)
+
     vim.api.nvim_create_autocmd("CursorHold", { group = hl, buffer = bufnr, callback = update })
     vim.api.nvim_create_autocmd("CursorHoldI", { group = hl, buffer = bufnr, callback = update })
     vim.api.nvim_create_autocmd("CursorMoved", { group = hl, buffer = bufnr, callback = clear })

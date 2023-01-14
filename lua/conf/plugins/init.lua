@@ -22,6 +22,9 @@ M.setup = function()
       config = require("conf.plugins.setup.treesitter").setup,
     },
 
+    -- LSP inlay hint support
+    { "lvimuser/lsp-inlayhints.nvim", config = require("conf.plugins.setup.lsp_inlayhints").setup },
+
     -- TypeScript: support different comment styles depending on context.
     "JoosepAlviste/nvim-ts-context-commentstring",
     -- TypeScript: extra LSP features.

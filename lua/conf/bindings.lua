@@ -441,6 +441,15 @@ M.config = {
       desc = "LSP list workspace folders",
       cmd = "LSPListWorkspaceFolders",
     },
+    toggle_highlight = {
+      desc = "LSP toggle highlight",
+      cmd = "LSPToggleHighlight",
+      nmap = "<space>h",
+    },
+    toggle_inlayhints = {
+      desc = "LSP toggle inlay hints",
+      cmd = "LSPToggleInlayHints",
+    },
   },
 
   neotest = {
