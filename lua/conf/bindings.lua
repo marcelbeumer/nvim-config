@@ -379,6 +379,17 @@ M.config = {
     },
   },
 
+  spectre = {
+    open = {
+      desc = "Open spectre",
+      cmd = "SpectreGlobal",
+    },
+    open_file = {
+      desc = "Open spectre (current file)",
+      cmd = "SpectreFile",
+    },
+  },
+
   lsp = {
     next_reference = {
       desc = "KSP next reference",

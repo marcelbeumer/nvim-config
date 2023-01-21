@@ -122,6 +122,15 @@ M.setup = function()
     { "marcelbeumer/harpoon", branch = "fix/no-absolute-path", config = require("conf.plugins.setup.harpoon").setup },
     { "folke/which-key.nvim", config = require("conf.plugins.setup.which_key").setup },
 
+    -- Search and replace
+    {
+      "nvim-pack/nvim-spectre",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+      },
+      config = require("conf.plugins.setup.nvim_spectre").setup,
+    },
+
     -- Buffer management.
     "kazhala/close-buffers.nvim",
 
