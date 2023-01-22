@@ -27,7 +27,7 @@ M.setup = function()
     -- TypeScript: support different comment styles depending on context.
     "JoosepAlviste/nvim-ts-context-commentstring",
     -- TypeScript: extra LSP features.
-    "jose-elias-alvarez/nvim-lsp-ts-utils",
+    "jose-elias-alvarez/typescript.nvim",
 
     -- File explorer.
     { "kyazdani42/nvim-tree.lua", config = require("conf.plugins.setup.nvim_tree").setup },

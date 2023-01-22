@@ -3,6 +3,8 @@ local util = require("conf.lsp.util")
 local M = {}
 
 M.setup = function()
+  require("typescript/config").setupConfig({})
+
   vim.api.nvim_create_autocmd("FileType", {
     pattern = table.concat({
       "javascript",
@@ -22,7 +24,9 @@ M.setup = function()
           "jsconfig.json",
         }, data.file) or vim.fn.getcwd(),
         init_options = { hostInfo = "neovim" },
-        handlers = util.get_handlers(),
+        handlers = vim.tbl_extend("force", util.get_handlers(), {
+          ["_typescript.rename"] = require("typescript/handlers").renameHandler,
+        }),
         capabilities = util.get_capabilities(),
         on_init = function(client, _)
           client.notify("workspace/didChangeConfiguration", {
@@ -52,17 +56,12 @@ M.setup = function()
             },
           })
         end,
-        on_attach = function(client)
+        on_attach = function(client, bufnr)
           util.disable_formatting(client)
-          -- Add some extra LSP features on top of what the server provides.
-          local lsp_ts_utils = require("nvim-lsp-ts-utils")
-          lsp_ts_utils.setup({
-            eslint_enable_code_actions = false,
-            update_imports_on_move = true,
-            require_confirmation_on_move = true,
-          })
-          lsp_ts_utils.setup_client(client)
-          vim.api.nvim_create_user_command("OrganizeImports", "TSLspOrganize", {})
+
+          if not require("typescript/config").config.disable_commands then
+            require("typescript/commands").setupCommands(bufnr)
+          end
         end,
       })
     end,

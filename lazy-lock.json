@@ -30,7 +30,6 @@
   "nvim-dap-ui": { "branch": "master", "commit": "b80227ea56a48177786904f6322abc8b2dc0bc36" },
   "nvim-dap-virtual-text": { "branch": "master", "commit": "191345947a92a5188d791e9786a5b4f205dcaca3" },
   "nvim-dap-vscode-js": { "branch": "main", "commit": "e7c05495934a658c8aa10afd995dacd796f76091" },
-  "nvim-lsp-ts-utils": { "branch": "main", "commit": "0a6a16ef292c9b61eac6dad00d52666c7f84b0e7" },
   "nvim-lspconfig": { "branch": "master", "commit": "85cd2ecacd8805614efe3fb3a5146ac7d0f88a17" },
   "nvim-scrollbar": { "branch": "main", "commit": "6a2065fbcd032075a06d2ab54508b69842bc4496" },
   "nvim-spectre": { "branch": "master", "commit": "24275beae382e6bd0180b3064cf5729548641a02" },
@@ -45,6 +44,7 @@
   "symbols-outline.nvim": { "branch": "master", "commit": "6a3ed24c5631da7a5d418bced57c16b32af7747c" },
   "tabline-framework.nvim": { "branch": "master", "commit": "8e4c1b426eedafa1f4b10f2426d405dadc0a4c88" },
   "tokyonight.nvim": { "branch": "main", "commit": "4071f7fa984859c5de7a1fd27069b99c3a0d802a" },
+  "typescript.nvim": { "branch": "main", "commit": "f66d4472606cb24615dfb7dbc6557e779d177624" },
   "vim-fugitive": { "branch": "master", "commit": "2febbe1f00be04f16daa6464cb39214a8566ec4b" },
   "which-key.nvim": { "branch": "main", "commit": "e4fa445065a2bb0bbc3cca85346b67817f28e83e" },
   "yanky.nvim": { "branch": "main", "commit": "930493f645ea6b75df5c1007cb7d57767987981b" }
