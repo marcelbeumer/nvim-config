@@ -81,6 +81,7 @@ M.setup = function()
     { "catppuccin/nvim", name = "catppuccin" },
     { "sainnhe/everforest" },
     { "rebelot/kanagawa.nvim" },
+    { "JoosepAlviste/palenightfall.nvim" },
 
     -- Icons.
     "kyazdani42/nvim-web-devicons",
