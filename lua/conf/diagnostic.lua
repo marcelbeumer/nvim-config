@@ -11,7 +11,7 @@ M.setup = function()
     -- Virtual tells you what is wrong without having to do a keypress.
     -- Updating in insert mode then gets too noisy.
     verbose = {
-      virtual_text = true,
+      virtual_text = { prefix = "●" },
       update_in_insert = false,
     },
     -- Virtual text can be noisy. Downside is that you have to manually
