@@ -36,6 +36,7 @@
   "nvim-tree.lua": { "branch": "master", "commit": "96506fee49542f3aedab76368d400a147fea344e" },
   "nvim-treesitter": { "branch": "master", "commit": "405fe27cd1b81faadd08fd5895dc54a34154103e" },
   "nvim-ts-context-commentstring": { "branch": "main", "commit": "a0f89563ba36b3bacd62cf967b46beb4c2c29e52" },
+  "nvim-vtsls": { "branch": "main", "commit": "7a647c73b3685564c61295cf3ebf619e2d3e02c6" },
   "nvim-web-devicons": { "branch": "master", "commit": "13d06d74afad093d8312fe051633b55f24049c16" },
   "palenightfall.nvim": { "branch": "main", "commit": "78cbf05af268c274b523844fde46a307b7db8167" },
   "persisted.nvim": { "branch": "main", "commit": "325cda4fb406601929fbc2084816dc5e49d5e5aa" },

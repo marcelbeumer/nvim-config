@@ -28,6 +28,8 @@ M.setup = function()
     "JoosepAlviste/nvim-ts-context-commentstring",
     -- TypeScript: extra LSP features.
     "jose-elias-alvarez/typescript.nvim",
+    -- TypeScript: vtsls LSP plugin.
+    { "yioneko/nvim-vtsls" },
 
     -- File explorer.
     { "kyazdani42/nvim-tree.lua", config = require("conf.plugins.setup.nvim_tree").setup },

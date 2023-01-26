@@ -11,6 +11,7 @@ return {
   -- NVIM_TS_LSP=<tsserver|volar|none>
   -- tsserver: use `tsserver` LSP server (default)
   -- volar: use `volar` vue LSP server
+  -- vtsls: use `vtsls` LSP server
   -- none: no TS LSP server
   NVIM_TS_LSP = vim.env.NVIM_TS_LSP or "tsserver",
   -- NVIM_LSP_AUTO_FORMAT=<on|off>

@@ -11,6 +11,8 @@ M.setup = function()
 
   if env.NVIM_TS_LSP == "tsserver" then
     require("conf.lsp.server.tsserver").setup()
+  elseif env.NVIM_TS_LSP == "vtsls" then
+    require("conf.lsp.server.vtsls").setup()
   elseif env.NVIM_TS_LSP == "volar" then
     vim.notify("volar lsp not implemented yet", vim.log.levels.WARN)
   end
