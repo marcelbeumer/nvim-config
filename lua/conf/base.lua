@@ -32,6 +32,10 @@ M.setup = function()
   vim.o.cursorline = true
   -- Enable line based differ
   vim.opt.diffopt:append({ "linematch:60" })
+  -- Fold settings recommended by nvim-ufo.
+  vim.o.foldcolumn = "0" -- '0' is not bad
+  vim.o.foldlevel = 99
+  vim.o.foldlevelstart = 99
 
   -- Netrw settings.
   vim.api.nvim_set_var("netrw_banner", 0)

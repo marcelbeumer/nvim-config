@@ -21,6 +21,13 @@ M.setup = function()
       config = require("conf.plugins.setup.treesitter").setup,
     },
 
+    -- Modern folding.
+    {
+      "kevinhwang91/nvim-ufo",
+      dependencies = { "kevinhwang91/promise-async" },
+      config = require("conf.plugins.setup.ufo").setup,
+    },
+
     -- LSP inlay hint support
     { "lvimuser/lsp-inlayhints.nvim", config = require("conf.plugins.setup.lsp_inlayhints").setup },
 
