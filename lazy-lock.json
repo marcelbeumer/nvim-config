@@ -47,6 +47,7 @@
   "symbols-outline.nvim": { "branch": "master", "commit": "512791925d57a61c545bc303356e8a8f7869763c" },
   "tabline-framework.nvim": { "branch": "master", "commit": "8e4c1b426eedafa1f4b10f2426d405dadc0a4c88" },
   "tokyonight.nvim": { "branch": "main", "commit": "e52c41314e83232840d6970e6b072f9fba242eb9" },
+  "trouble.nvim": { "branch": "main", "commit": "fc003424b02109f1453af6b40dadff6019b97187" },
   "typescript.nvim": { "branch": "main", "commit": "f66d4472606cb24615dfb7dbc6557e779d177624" },
   "vim-fugitive": { "branch": "master", "commit": "2019e0e4139390f485a024d7a2411218b004a5b3" },
   "which-key.nvim": { "branch": "main", "commit": "684e96c5e8477f1ee9b3f2e9a12d802fd12c5531" },

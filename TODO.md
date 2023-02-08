@@ -1,6 +1,5 @@
 # TODO
 
-- Try trouble.nvim again.
 - Try telescope again and see if still annoying with fix col widths for search & LSP. If so, file issues.
 - Try neo-tree over nvim-tree, see if it's really better or not.
 - Try mason.nvim again but set install dir manually and update PATH in zshrc.

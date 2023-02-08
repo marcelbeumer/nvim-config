@@ -21,6 +21,9 @@ M.setup = function()
       config = require("conf.plugins.setup.treesitter").setup,
     },
 
+    -- Icons.
+    "nvim-tree/nvim-web-devicons",
+
     -- Modern folding.
     {
       "kevinhwang91/nvim-ufo",
@@ -92,9 +95,6 @@ M.setup = function()
     { "rebelot/kanagawa.nvim" },
     { "JoosepAlviste/palenightfall.nvim" },
 
-    -- Icons.
-    "kyazdani42/nvim-web-devicons",
-
     -- Code navigation.
     { "simrat39/symbols-outline.nvim", config = require("conf.plugins.setup.symbols_outline").setup },
 
@@ -131,6 +131,11 @@ M.setup = function()
     { "petertriho/nvim-scrollbar", config = require("conf.plugins.setup.scrollbar").setup },
     { "marcelbeumer/harpoon", branch = "fix/no-absolute-path", config = require("conf.plugins.setup.harpoon").setup },
     { "folke/which-key.nvim", config = require("conf.plugins.setup.which_key").setup },
+    {
+      "folke/trouble.nvim",
+      dependencies = "nvim-tree/nvim-web-devicons",
+      config = require("conf.plugins.setup.trouble").setup,
+    },
 
     -- Search and replace
     {

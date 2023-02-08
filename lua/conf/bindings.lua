@@ -278,6 +278,41 @@ M.config = {
     },
   },
 
+  trouble = {
+    toggle = {
+      desc = "Trouble toggle",
+      nmap = "<leader>xx",
+    },
+    workspace_diag = {
+      desc = "Trouble workspace diagnostics",
+      nmap = "<leader>xw",
+    },
+    doc_diag = {
+      desc = "Trouble document diagnostics",
+      nmap = "<leader>xd",
+    },
+    loclist = {
+      desc = "Trouble loclist",
+      nmap = "<leader>xl",
+    },
+    quickfix = {
+      desc = "Trouble quickfix list",
+      nmap = "<leader>xq",
+    },
+    lsp_references = {
+      desc = "Trouble LSP references",
+      nmap = "<leader>xr",
+    },
+    lsp_definitions = {
+      desc = "Trouble LSP definitions",
+      nmap = "<leader>xd",
+    },
+    lsp_type_definitions = {
+      desc = "Trouble LSP type definitions",
+      nmap = "<leader>xt",
+    },
+  },
+
   layout = {
     save = {
       desc = "Save layout",
