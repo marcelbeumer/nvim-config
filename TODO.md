@@ -1,6 +1,5 @@
 # TODO
 
-- Try nvim-ufo.
 - Try trouble.nvim again.
 - Try telescope again and see if still annoying with fix col widths for search & LSP. If so, file issues.
 - Try neo-tree over nvim-tree, see if it's really better or not.
