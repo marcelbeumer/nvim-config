@@ -10,6 +10,12 @@ M.setup = function()
         ["cmp.entry.get_documentation"] = true,
       },
     },
+    -- routes = {
+    --   {
+    --     filter = { event = "msg_show", find = " written$" },
+    --     opts = { skip = true },
+    --   },
+    -- },
     presets = {
       command_palette = true, -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
