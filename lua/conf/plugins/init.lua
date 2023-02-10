@@ -136,13 +136,6 @@ M.setup = function()
       dependencies = "nvim-tree/nvim-web-devicons",
       config = require("conf.plugins.setup.trouble").setup,
     },
-    -- {
-    --   "folke/noice.nvim",
-    --   dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-    --   config = require("conf.plugins.setup.noice").setup,
-    -- },
-
-    { "j-hui/fidget.nvim", config = require("conf.plugins.setup.fidget").setup },
 
     -- Search and replace
     {

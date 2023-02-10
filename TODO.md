@@ -12,4 +12,3 @@
 - Try to replace copilot with https://github.com/zbirenbaum/copilot.lua
 - Try https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-move.md
 - Try https://github.com/cbochs/grapple.nvim
-- Try https://github.com/linrongbin16/lsp-progress.nvim
