@@ -16,11 +16,6 @@ M.setup = function()
     },
   }
 
-  -- Terraform
-  vim.cmd([[au BufNewFile,BufRead *.tf set ft=terraform ]])
-  vim.cmd([[au BufNewFile,BufRead *.hcl,*.terraformrc,terraform.rc set ft=hcl ]])
-  vim.cmd([[au BufNewFile,BufRead *.tfstate,*.tfstate.backup set ft=json ]])
-
   -- Treat .tpl and tmpl as gotmpl
   vim.cmd([[au BufNewFile,BufRead *.tpl set ft=gotmpl ]])
   vim.cmd([[au BufNewFile,BufRead *.tmpl set ft=gotmpl ]])
