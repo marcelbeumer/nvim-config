@@ -45,8 +45,6 @@ M.setup = function()
   -- Set up treesitter itself.
   require("nvim-treesitter.configs").setup({
     ensure_installed = "all",
-    -- phpdoc gave errors on darwin-arm64.
-    ignore_install = { "phpdoc" },
     highlight = { enable = true },
     indent = { enable = true },
     context_commentstring = {
