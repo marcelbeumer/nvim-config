@@ -48,12 +48,9 @@ M.setup = function()
     },
   })
 
-  -- TODO: make lua API
-  vim.cmd([[
-    set foldmethod=expr
-    set foldexpr=nvim_treesitter#foldexpr()
-    set foldlevel=99
-  ]])
+  vim.opt.foldmethod = "expr"
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+  vim.opt.foldlevel = 99
 end
 
 return M
