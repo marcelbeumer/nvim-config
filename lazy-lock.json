@@ -22,6 +22,7 @@
   "neotest": { "branch": "master", "commit": "0d17889ce740c83c18577487498a1a8fea144b0b" },
   "neotest-go": { "branch": "main", "commit": "981406c12bd3c77eb434211a1b85b964ab5bbdd5" },
   "neotest-jest": { "branch": "main", "commit": "821bb227e31259307db30c88671a1c3724f78637" },
+  "nordic.nvim": { "branch": "main", "commit": "30b4493f5b860cd740420acfeeec3d4a91420366" },
   "null-ls.nvim": { "branch": "fix-golangci-lint", "commit": "6f81824674318497e7306be505d986bb624aac78" },
   "nvim-autopairs": { "branch": "master", "commit": "bde7a1b4534e0a4c2451a738379cd628ba65eba7" },
   "nvim-cmp": { "branch": "main", "commit": "ea9eaff5739856f3187d228d2c1181ea49fd4697" },

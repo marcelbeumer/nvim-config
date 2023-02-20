@@ -94,6 +94,7 @@ M.setup = function()
     { "sainnhe/everforest" },
     { "rebelot/kanagawa.nvim" },
     { "JoosepAlviste/palenightfall.nvim" },
+    { "AlexvZyl/nordic.nvim" },
 
     -- Code navigation.
     { "simrat39/symbols-outline.nvim", config = require("conf.plugins.setup.symbols_outline").setup },
