@@ -303,6 +303,10 @@ M.config = {
       desc = "Trouble LSP references",
       nmap = "<leader>xr",
     },
+    lsp_implementations = {
+      desc = "Trouble LSP implementations",
+      nmap = "<leader>xi",
+    },
     lsp_definitions = {
       desc = "Trouble LSP definitions",
       nmap = "<leader>xd",

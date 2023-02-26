@@ -14,6 +14,7 @@ M.setup = function()
   bind_all("trouble.loclist", "<cmd>TroubleToggle loclist<cr>", cmd_opts, key_opts)
   bind_all("trouble.quickfix", "<cmd>TroubleToggle quickfix<cr>", cmd_opts, key_opts)
   bind_all("trouble.lsp_references", "<cmd>TroubleToggle lsp_references<cr>", cmd_opts, key_opts)
+  bind_all("trouble.lsp_implementations", "<cmd>TroubleToggle lsp_implementations<cr>", cmd_opts, key_opts)
   bind_all("trouble.lsp_definitions", "<cmd>TroubleToggle lsp_definitions<cr>", cmd_opts, key_opts)
   bind_all("trouble.lsp_type_definitions", "<cmd>TroubleToggle lsp_type_definitions<cr>", cmd_opts, key_opts)
 end
