@@ -2,10 +2,8 @@ local M = {}
 
 M.setup = function()
   local icons = require("conf.icons")
-  local bindings = require("conf.bindings")
-  local bind_all = bindings.bind_all
+  local bind_all = require("conf.bindings").bind_all
   local key_opts = { noremap = true, silent = true }
-  local cmd_opts = {}
 
   local diag_modes = {
     -- Virtual tells you what is wrong without having to do a keypress.
@@ -62,15 +60,15 @@ M.setup = function()
     vim.diagnostic.config(diag_modes.quiet)
   end
 
-  bind_all("diag.set_verbose", set_verbose, cmd_opts, key_opts)
-  bind_all("diag.set_quiet", set_quiet, cmd_opts, key_opts)
-  bind_all("diag.toggle_signs", toggle_signs, cmd_opts, key_opts)
-  bind_all("diag.toggle_virtual_lines", toggle_virtual_lines_all, cmd_opts, key_opts)
-  bind_all("diag.toggle_virtual_lines_current_only", toggle_virtual_lines_current, cmd_opts, key_opts)
-  bind_all("diag.show_line", vim.diagnostic.open_float, cmd_opts, key_opts)
-  bind_all("diag.prev", vim.diagnostic.goto_prev, cmd_opts, key_opts)
-  bind_all("diag.next", vim.diagnostic.goto_next, cmd_opts, key_opts)
-  bind_all("diag.set_loclist", vim.diagnostic.setloclist, cmd_opts, key_opts)
+  bind_all("diag.set_verbose", set_verbose, {}, key_opts)
+  bind_all("diag.set_quiet", set_quiet, {}, key_opts)
+  bind_all("diag.toggle_signs", toggle_signs, {}, key_opts)
+  bind_all("diag.toggle_virtual_lines", toggle_virtual_lines_all, {}, key_opts)
+  bind_all("diag.toggle_virtual_lines_current_only", toggle_virtual_lines_current, {}, key_opts)
+  bind_all("diag.show_line", vim.diagnostic.open_float, {}, key_opts)
+  bind_all("diag.prev", vim.diagnostic.goto_prev, {}, key_opts)
+  bind_all("diag.next", vim.diagnostic.goto_next, {}, key_opts)
+  bind_all("diag.set_loclist", vim.diagnostic.setloclist, {}, key_opts)
 
   -- Configure prettier gutter diagnostic signs.
   local signs = {

@@ -65,10 +65,8 @@ end
 
 -- on_attach configures the lsp client for a specific buffer.
 local on_attach = function(client, bufnr)
-  local bindings = require("conf.bindings")
-  local bind_all = bindings.bind_all
+  local bind_all = require("conf.bindings").bind_all
   local key_opts = { noremap = true, silent = true, buffer = bufnr }
-  local cmd_opts = {}
 
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -76,28 +74,28 @@ local on_attach = function(client, bufnr)
   -- Enable enhanced signature help.
   local signature = require("lsp_signature")
   signature.on_attach({ hint_enable = false }, bufnr)
-  bind_all("lsp.signature_help", signature.toggle_float_win, cmd_opts, key_opts)
+  bind_all("lsp.signature_help", signature.toggle_float_win, {}, key_opts)
 
   -- Buffer specific bindings.
   bind_all("lsp.next_reference", function()
     next_reference()
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
   bind_all("lsp.prev_reference", function()
     next_reference(true)
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
 
-  bind_all("lsp.goto_definition", vim.lsp.buf.definition, cmd_opts, key_opts)
-  bind_all("lsp.goto_declaration", vim.lsp.buf.declaration, cmd_opts, key_opts)
-  bind_all("lsp.goto_references", vim.lsp.buf.references, cmd_opts, key_opts)
-  bind_all("lsp.goto_implementation", vim.lsp.buf.implementation, cmd_opts, key_opts)
-  bind_all("lsp.goto_typedef", vim.lsp.buf.type_definition, cmd_opts, key_opts)
-  bind_all("lsp.hover", vim.lsp.buf.hover, cmd_opts, key_opts)
-  bind_all("lsp.rename", vim.lsp.buf.rename, cmd_opts, key_opts)
-  bind_all("lsp.code_actions", vim.lsp.buf.code_action, cmd_opts, key_opts)
-  bind_all("lsp.format", vim.lsp.buf.format, cmd_opts, key_opts)
-  bind_all("lsp.add_workspace_folder", vim.lsp.buf.add_workspace_folder, cmd_opts, key_opts)
-  bind_all("lsp.remove_workspace_folder", vim.lsp.buf.remove_workspace_folder, cmd_opts, key_opts)
-  bind_all("lsp.list_workspace_folders", vim.lsp.buf.list_workspace_folders, cmd_opts, key_opts)
+  bind_all("lsp.goto_definition", vim.lsp.buf.definition, {}, key_opts)
+  bind_all("lsp.goto_declaration", vim.lsp.buf.declaration, {}, key_opts)
+  bind_all("lsp.goto_references", vim.lsp.buf.references, {}, key_opts)
+  bind_all("lsp.goto_implementation", vim.lsp.buf.implementation, {}, key_opts)
+  bind_all("lsp.goto_typedef", vim.lsp.buf.type_definition, {}, key_opts)
+  bind_all("lsp.hover", vim.lsp.buf.hover, {}, key_opts)
+  bind_all("lsp.rename", vim.lsp.buf.rename, {}, key_opts)
+  bind_all("lsp.code_actions", vim.lsp.buf.code_action, {}, key_opts)
+  bind_all("lsp.format", vim.lsp.buf.format, {}, key_opts)
+  bind_all("lsp.add_workspace_folder", vim.lsp.buf.add_workspace_folder, {}, key_opts)
+  bind_all("lsp.remove_workspace_folder", vim.lsp.buf.remove_workspace_folder, {}, key_opts)
+  bind_all("lsp.list_workspace_folders", vim.lsp.buf.list_workspace_folders, {}, key_opts)
 
   -- Highlight symbol under cursor.
   if client.supports_method("textDocument/documentHighlight") then
@@ -123,7 +121,7 @@ local on_attach = function(client, bufnr)
       update()
     end
 
-    bind_all("lsp.toggle_highlight", toggle, cmd_opts, key_opts)
+    bind_all("lsp.toggle_highlight", toggle, {}, key_opts)
 
     vim.api.nvim_create_autocmd("CursorHold", { group = hl, buffer = bufnr, callback = update })
     vim.api.nvim_create_autocmd("CursorHoldI", { group = hl, buffer = bufnr, callback = update })

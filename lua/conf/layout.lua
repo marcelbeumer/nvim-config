@@ -98,12 +98,9 @@ M.restore = function()
 end
 
 M.setup = function()
-  local bindings = require("conf.bindings")
-  local key_opts = {}
-  local cmd_opts = {}
-
-  bindings.bind_all("layout.save", M.save, cmd_opts, key_opts)
-  bindings.bind_all("layout.restore", M.restore, cmd_opts, key_opts)
+  local bind_all = require("conf.bindings").bind_all
+  bind_all("layout.save", M.save, {}, {})
+  bind_all("layout.restore", M.restore, {}, {})
 end
 
 -- M.save()

@@ -2,9 +2,7 @@ local M = {}
 
 M.setup = function()
   local fzf = require("fzf-lua")
-  local bindings = require("conf.bindings")
-  local bind_all = bindings.bind_all
-  local cmd_opts = {}
+  local bind_all = require("conf.bindings").bind_all
   local key_opts = { noremap = true, silent = true }
 
   fzf.setup({
@@ -40,29 +38,29 @@ M.setup = function()
 
   bind_all("find.files", function()
     fzf.files(args_small)
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
   bind_all("find.buffers", function()
     fzf.buffers(args_tall)
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
   bind_all("find.quickfix", function()
     fzf.quickfix(args_tall)
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
   bind_all("find.loclist", function()
     fzf.loclist(args_tall)
-  end, cmd_opts, key_opts)
-  bind_all("find.commands", fzf.commands, cmd_opts, key_opts)
-  bind_all("find.ripgrep", fzf.live_grep_resume, cmd_opts, key_opts)
-  bind_all("find.ripgrep_buffer", fzf.grep_curbuf, cmd_opts, key_opts)
-  bind_all("find.diag", fzf.diagnostics_workspace, cmd_opts, key_opts)
-  bind_all("find.diag_buffer", fzf.diagnostics_document, cmd_opts, key_opts)
-  bind_all("find.lsp_references", fzf.lsp_references, cmd_opts, key_opts)
-  bind_all("find.lsp_symbols", fzf.lsp_workspace_symbols, cmd_opts, key_opts)
-  bind_all("find.lsp_symbols_buffer", fzf.lsp_document_symbols, cmd_opts, key_opts)
-  bind_all("find.lsp_implementations", fzf.lsp_implementations, cmd_opts, key_opts)
-  bind_all("find.lsp_definitions", fzf.lsp_definitions, cmd_opts, key_opts)
-  bind_all("find.lsp_declarations", fzf.lsp_declarations, cmd_opts, key_opts)
-  bind_all("find.lsp_typedefs", fzf.lsp_typedefs, cmd_opts, key_opts)
-  bind_all("find.help", fzf.help_tags, cmd_opts, key_opts)
+  end, {}, key_opts)
+  bind_all("find.commands", fzf.commands, {}, key_opts)
+  bind_all("find.ripgrep", fzf.live_grep_resume, {}, key_opts)
+  bind_all("find.ripgrep_buffer", fzf.grep_curbuf, {}, key_opts)
+  bind_all("find.diag", fzf.diagnostics_workspace, {}, key_opts)
+  bind_all("find.diag_buffer", fzf.diagnostics_document, {}, key_opts)
+  bind_all("find.lsp_references", fzf.lsp_references, {}, key_opts)
+  bind_all("find.lsp_symbols", fzf.lsp_workspace_symbols, {}, key_opts)
+  bind_all("find.lsp_symbols_buffer", fzf.lsp_document_symbols, {}, key_opts)
+  bind_all("find.lsp_implementations", fzf.lsp_implementations, {}, key_opts)
+  bind_all("find.lsp_definitions", fzf.lsp_definitions, {}, key_opts)
+  bind_all("find.lsp_declarations", fzf.lsp_declarations, {}, key_opts)
+  bind_all("find.lsp_typedefs", fzf.lsp_typedefs, {}, key_opts)
+  bind_all("find.help", fzf.help_tags, {}, key_opts)
 
   bind_all("find.projects", function()
     local contents = require("project_nvim").get_recent_projects()
@@ -86,7 +84,7 @@ M.setup = function()
         end,
       },
     })
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
 end
 
 return M

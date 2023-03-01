@@ -13,7 +13,6 @@ M.setup = function()
   local keys = bindings.config.tree
   local bind_all = bindings.bind_all
   local key_opts = { noremap = true, silent = true }
-  local cmd_opts = {}
   local use_float = false
 
   local setup_nvim_tree = function()
@@ -53,13 +52,13 @@ M.setup = function()
     })
   end
 
-  bind_all("tree.toggle", ":NvimTreeToggle<cr>", cmd_opts, key_opts)
-  bind_all("tree.find_file", ":NvimTreeFindFile<cr>", cmd_opts, key_opts)
+  bind_all("tree.toggle", ":NvimTreeToggle<cr>", {}, key_opts)
+  bind_all("tree.find_file", ":NvimTreeFindFile<cr>", {}, key_opts)
   bind_all("tree.toggle_float", function()
     use_float = not use_float
     vim.notify("nvim tree use float: " .. tostring(use_float))
     setup_nvim_tree()
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
 
   setup_nvim_tree()
 end

@@ -1,10 +1,8 @@
 local M = {}
 
 M.setup = function()
-  local bindings = require("conf.bindings")
-  local bind_all = bindings.bind_all
+  local bind_all = require("conf.bindings").bind_all
   local key_opts = { noremap = true, silent = true }
-  local cmd_opts = {}
 
   require("lsp-inlayhints").setup({ enabled_at_startup = false })
 
@@ -22,7 +20,7 @@ M.setup = function()
     end,
   })
 
-  bind_all("lsp.toggle_inlayhints", require("lsp-inlayhints").toggle, cmd_opts, key_opts)
+  bind_all("lsp.toggle_inlayhints", require("lsp-inlayhints").toggle, {}, key_opts)
 end
 
 return M

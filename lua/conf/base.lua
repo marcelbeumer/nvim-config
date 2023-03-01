@@ -1,8 +1,7 @@
 local M = {}
 
 M.setup = function()
-  local bindings = require("conf.bindings")
-  local bind_all = bindings.bind_all
+  local bind_all = require("conf.bindings").bind_all
   local key_opts = { silent = true }
 
   -- Line numbers.

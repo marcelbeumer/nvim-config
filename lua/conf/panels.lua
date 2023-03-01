@@ -93,22 +93,20 @@ M.toggle_panel = function(direction)
 end
 
 M.setup = function()
-  local bindings = require("conf.bindings")
-  local bind_all = bindings.bind_all
-  local cmd_opts = {}
+  local bind_all = require("conf.bindings").bind_all
   local key_opts = { noremap = true, silent = true }
 
   bind_all("panels.toggle_bottom", function()
     M.toggle_panel("j")
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
 
   bind_all("panels.toggle_right", function()
     M.toggle_panel("l")
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
 
   bind_all("panels.toggle_top", function()
     M.toggle_panel("k")
-  end, cmd_opts, key_opts)
+  end, {}, key_opts)
 end
 
 return M

@@ -1,10 +1,8 @@
 local M = {}
 
 M.setup = function()
-  local bindings = require("conf.bindings")
-  local bind_all = bindings.bind_all
+  local bind_all = require("conf.bindings").bind_all
   local key_opts = { silent = true }
-  local cmd_opts = {}
 
   require("harpoon").setup({
     menu = {
@@ -20,11 +18,11 @@ M.setup = function()
     end
   end
 
-  bind_all("harpoon.next", require("harpoon.ui").nav_next, cmd_opts, key_opts)
-  bind_all("harpoon.prev", require("harpoon.ui").nav_prev, cmd_opts, key_opts)
-  bind_all("harpoon.quick_menu", require("harpoon.ui").toggle_quick_menu, cmd_opts, key_opts)
-  bind_all("harpoon.add", with_redraw(require("harpoon.mark").add_file), cmd_opts, key_opts)
-  bind_all("harpoon.remove", with_redraw(require("harpoon.mark").rm_file), cmd_opts, key_opts)
+  bind_all("harpoon.next", require("harpoon.ui").nav_next, {}, key_opts)
+  bind_all("harpoon.prev", require("harpoon.ui").nav_prev, {}, key_opts)
+  bind_all("harpoon.quick_menu", require("harpoon.ui").toggle_quick_menu, {}, key_opts)
+  bind_all("harpoon.add", with_redraw(require("harpoon.mark").add_file), {}, key_opts)
+  bind_all("harpoon.remove", with_redraw(require("harpoon.mark").rm_file), {}, key_opts)
 
   for num = 1, 9 do
     vim.keymap.set({ "n", "t" }, "<leader>" .. num, function()
