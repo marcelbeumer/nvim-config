@@ -68,6 +68,13 @@ M.config = {
     },
   },
 
+  session = {
+    load = {
+      desc = "Load session",
+      cmd = "SessionLoad",
+    },
+  },
+
   panels = {
     toggle_bottom = {
       desc = "Toggle bottom panel",

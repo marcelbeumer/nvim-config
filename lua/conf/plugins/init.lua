@@ -45,7 +45,12 @@ M.setup = function()
     { "kyazdani42/nvim-tree.lua", config = require("conf.plugins.setup.nvim_tree").setup },
 
     -- Simple session management.
-    { "olimorris/persisted.nvim", config = require("conf.plugins.setup.persisted").setup },
+    {
+      "folke/persistence.nvim",
+      event = "BufReadPre",
+      init = require("conf.plugins.setup.persistence").init,
+      config = require("conf.plugins.setup.persistence").config,
+    },
 
     -- Project switching.
     { "ahmedkhalf/project.nvim", config = require("conf.plugins.setup.project_nvim").setup },

@@ -41,7 +41,7 @@
   "nvim-vtsls": { "branch": "main", "commit": "7a647c73b3685564c61295cf3ebf619e2d3e02c6" },
   "nvim-web-devicons": { "branch": "master", "commit": "c2c2317f356c8b7da0252f5da758f71bb60bb6b2" },
   "palenightfall.nvim": { "branch": "main", "commit": "fdb23e8a1c93c0488d831654b41dbd3826a4be39" },
-  "persisted.nvim": { "branch": "main", "commit": "88f27dcab289b338eed5c3c8119481d9c9e7428f" },
+  "persistence.nvim": { "branch": "main", "commit": "adcf6913693a0434665d162ee45a186230496f8a" },
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
   "project.nvim": { "branch": "main", "commit": "1c2e9c93c7c85126c2197f5e770054f53b1926fb" },
   "promise-async": { "branch": "main", "commit": "7fa127fa80e7d4d447e0e2c78e99af4355f4247b" },
