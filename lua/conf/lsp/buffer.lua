@@ -73,7 +73,7 @@ local on_attach = function(client, bufnr)
 
   -- Enable enhanced signature help.
   local signature = require("lsp_signature")
-  signature.on_attach({ hint_enable = false }, bufnr)
+  signature.on_attach({ hint_enable = false, doc_lines = 0 }, bufnr)
   bind_all("lsp.signature_help", signature.toggle_float_win, {}, key_opts)
 
   -- Buffer specific bindings.
