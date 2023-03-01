@@ -615,7 +615,11 @@ M.config = {
 
 local maps = { nmap = "n", imap = "i", vmap = "v", omap = "o", xmap = "x", tmap = "t" }
 
-local get_config = function(lookup)
+local get_ext_opts = function(config, opts)
+  return vim.tbl_extend("keep", { desc = config.desc }, opts)
+end
+
+M.bind_all = function(lookup, rhs, cmd_opts, key_opts)
   local config = M.config
   for k, _ in string.gmatch(lookup .. ".", "(%S-)(%.)") do
     config = config[k]
@@ -623,34 +627,18 @@ local get_config = function(lookup)
       error('bindings: key "' .. k .. '" not found in "' .. lookup .. '"')
     end
   end
-  return config
-end
 
-local get_ext_opts = function(config, opts)
-  return vim.tbl_extend("keep", { desc = config.desc }, opts)
-end
+  if config.cmd then
+    local ext_opts = get_ext_opts(config, cmd_opts)
+    vim.api.nvim_create_user_command(config.cmd, rhs, ext_opts)
+  end
 
-M.bind_keys = function(lookup, rhs, opts)
-  local config = get_config(lookup)
   for mode, mode_short in pairs(maps) do
-    if config and config[mode] then
-      local ext_opts = get_ext_opts(config, opts)
+    if config[mode] then
+      local ext_opts = get_ext_opts(config, key_opts)
       vim.keymap.set(mode_short, config[mode], rhs, ext_opts)
     end
   end
-end
-
-M.bind_cmd = function(lookup, rhs, opts)
-  local config = get_config(lookup)
-  if config and config.cmd then
-    local ext_opts = get_ext_opts(config, opts)
-    vim.api.nvim_create_user_command(config.cmd, rhs, ext_opts)
-  end
-end
-
-M.bind_all = function(lookup, rhs, cmd_opts, key_opts)
-  M.bind_cmd(lookup, rhs, cmd_opts)
-  M.bind_keys(lookup, rhs, key_opts)
 end
 
 M.setup = function()
