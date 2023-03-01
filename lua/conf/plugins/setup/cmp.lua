@@ -42,15 +42,27 @@ M.setup = function()
     }),
   })
 
+  local compare = cmp.config.compare
   cmp.setup.filetype({ "go" }, {
     -- gopls preselects items which I don't like.
     preselect = types.cmp.PreselectMode.None,
     sorting = {
       -- IMO these comparator settings work better with gopls.
+      priority_weight = 2,
       comparators = {
-        cmp.config.compare.length,
-        cmp.config.compare.locality,
-        cmp.config.compare.sort_text,
+        -- gopls most relevant
+        compare.sort_text,
+        -- cmp defaults:
+        compare.offset,
+        compare.exact,
+        -- compare.scopes,
+        compare.score,
+        compare.recently_used,
+        compare.locality,
+        compare.kind,
+        -- compare.sort_text,
+        compare.length,
+        compare.order,
       },
     },
   })
