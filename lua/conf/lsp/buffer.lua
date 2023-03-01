@@ -73,6 +73,11 @@ local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
+  -- Enable enhanced signature help.
+  local signature = require("lsp_signature")
+  signature.on_attach({ hint_enable = false }, bufnr)
+  bind_all("lsp.signature_help", signature.toggle_float_win, cmd_opts, key_opts)
+
   -- Buffer specific bindings.
   bind_all("lsp.next_reference", function()
     next_reference()
@@ -90,7 +95,6 @@ local on_attach = function(client, bufnr)
   bind_all("lsp.rename", vim.lsp.buf.rename, cmd_opts, key_opts)
   bind_all("lsp.code_actions", vim.lsp.buf.code_action, cmd_opts, key_opts)
   bind_all("lsp.format", vim.lsp.buf.format, cmd_opts, key_opts)
-  bind_all("lsp.signature_help", vim.lsp.buf.signature_help, cmd_opts, key_opts)
   bind_all("lsp.add_workspace_folder", vim.lsp.buf.add_workspace_folder, cmd_opts, key_opts)
   bind_all("lsp.remove_workspace_folder", vim.lsp.buf.remove_workspace_folder, cmd_opts, key_opts)
   bind_all("lsp.list_workspace_folders", vim.lsp.buf.list_workspace_folders, cmd_opts, key_opts)

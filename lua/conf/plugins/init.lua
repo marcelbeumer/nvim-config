@@ -53,13 +53,15 @@ M.setup = function()
     -- Lua dev setup
     { "folke/neodev.nvim", dependencies = { "neovim/nvim-lspconfig" } },
 
+    -- Better LSP signature help.
+    { "ray-x/lsp_signature.nvim" },
+
     -- Autocompletion and plugins.
     {
       "hrsh7th/nvim-cmp",
       config = require("conf.plugins.setup.cmp").setup,
       dependencies = {
         "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
         "saadparwaiz1/cmp_luasnip",
         "L3MON4D3/LuaSnip",
       },
