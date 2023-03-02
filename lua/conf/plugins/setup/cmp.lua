@@ -11,10 +11,6 @@ M.setup = function()
   vim.o.completeopt = "menu,menuone,noselect"
   vim.o.pumheight = 10
   cmp.setup.global({
-    -- view = {
-    --   entries = "wildmenu", -- can be "custom", "wildmenu" or "native"
-    -- },
-    -- experimental = { ghost_text = true },
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
@@ -50,7 +46,7 @@ M.setup = function()
       -- IMO these comparator settings work better with gopls.
       priority_weight = 2,
       comparators = {
-        -- gopls most relevant
+        -- gopls most (only? relevant
         compare.sort_text,
         -- cmp defaults:
         compare.offset,
