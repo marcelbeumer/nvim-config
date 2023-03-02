@@ -93,7 +93,7 @@ M.setup = function()
     { "terrortylor/nvim-comment", config = require("conf.plugins.setup.nvim_comment").setup },
 
     -- Automagically insert closing tags etc.
-    { "windwp/nvim-autopairs", config = true },
+    { "echasnovski/mini.pairs", config = require("conf.plugins.setup.mini_pairs").setup },
 
     -- Colorschemes.
     { "folke/tokyonight.nvim", config = require("conf.plugins.setup.tokyonight").setup },

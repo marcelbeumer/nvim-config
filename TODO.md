@@ -10,4 +10,3 @@
 - Try https://github.com/lukas-reineke/indent-blankline.nvim again, get feel for perf and see if possible to toggle.
 - Try https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-move.md
 - Try https://github.com/cbochs/grapple.nvim
-- Try https://github.com/echasnovski/mini.pairs
