@@ -163,7 +163,7 @@ M.config = {
     },
     abort = {
       desc = "Abort cmp autocomplete",
-      value = "<C-e>",
+      value = "<C-]>",
     },
     confirm = {
       desc = "Confirm cmp selection",
