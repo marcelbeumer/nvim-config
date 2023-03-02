@@ -9,11 +9,11 @@ return {
   -- off: do not setup LSP
   NVIM_LSP = vim.env.NVIM_LSP or "on",
   -- NVIM_TS_LSP=<tsserver|volar|none>
-  -- tsserver: use `tsserver` LSP server (default)
+  -- vtsls: use `vtsls` LSP server (default)
+  -- tsserver: use `tsserver` LSP server
   -- volar: use `volar` vue LSP server
-  -- vtsls: use `vtsls` LSP server
   -- none: no TS LSP server
-  NVIM_TS_LSP = vim.env.NVIM_TS_LSP or "tsserver",
+  NVIM_TS_LSP = vim.env.NVIM_TS_LSP or "vtsls",
   -- NVIM_LSP_AUTO_FORMAT=<on|off>
   -- on: enable LSP auto formatting (default)
   -- off: disable LSP auto formatting
