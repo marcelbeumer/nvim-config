@@ -161,7 +161,12 @@ M.setup = function()
     { "gbprod/yanky.nvim", config = require("conf.plugins.setup.yanky").setup },
 
     -- Misc.
-    "github/copilot.vim",
+    {
+      "zbirenbaum/copilot.lua",
+      cmd = "Copilot",
+      event = "InsertEnter",
+      config = require("conf.plugins.setup.copilot").setup,
+    },
   })
 
   vim.cmd.colorscheme("tokyonight")

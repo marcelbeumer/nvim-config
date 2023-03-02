@@ -4,7 +4,7 @@
   "close-buffers.nvim": { "branch": "master", "commit": "3acbcad1211572342632a6c0151f839e7dead27f" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
-  "copilot.vim": { "branch": "release", "commit": "9e869d29e62e36b7eb6fb238a4ca6a6237e7d78b" },
+  "copilot.lua": { "branch": "master", "commit": "b41d4c9c7d4f5e0272bcf94061b88e244904c56f" },
   "diffview.nvim": { "branch": "main", "commit": "009beb8054e510e7e2df122ee3ddb2b46bef542b" },
   "everforest": { "branch": "master", "commit": "a2e84f3bedd525c6d29332184e2d7c61f710bb2b" },
   "fzf-lua": { "branch": "main", "commit": "d4c2e3f32da453afb55e1becbe4b92357576db9b" },
