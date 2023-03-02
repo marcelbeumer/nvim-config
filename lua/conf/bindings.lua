@@ -296,7 +296,7 @@ M.config = {
     },
     doc_diag = {
       desc = "Trouble document diagnostics",
-      nmap = "<leader>xd",
+      nmap = "<leader>xe",
     },
     loclist = {
       desc = "Trouble loclist",
