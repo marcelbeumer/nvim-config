@@ -16,6 +16,11 @@ M.setup = function()
 
   require("lazy").setup({
     {
+      "williamboman/mason.nvim",
+      config = require("conf.plugins.setup.mason").setup,
+    },
+
+    {
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
       config = require("conf.plugins.setup.treesitter").setup,
