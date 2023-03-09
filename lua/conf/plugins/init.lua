@@ -26,6 +26,12 @@ M.setup = function()
       config = require("conf.plugins.setup.treesitter").setup,
     },
 
+    -- Indent guide lines.
+    {
+      "lukas-reineke/indent-blankline.nvim",
+      config = require("conf.plugins.setup.indent_blankline").setup,
+    },
+
     -- Icons.
     "nvim-tree/nvim-web-devicons",
 

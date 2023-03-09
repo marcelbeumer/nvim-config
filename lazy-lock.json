@@ -13,6 +13,7 @@
   "gopher.nvim": { "branch": "main", "commit": "cc46546a93c7ccea39f1e008e6804b93559bec29" },
   "harpoon": { "branch": "fix/no-absolute-path", "commit": "35343118198e79161e3c160f64d2be5cd55581d8" },
   "hop.nvim": { "branch": "master", "commit": "90db1b2c61b820e230599a04fedcd2679e64bd07" },
+  "indent-blankline.nvim": { "branch": "master", "commit": "018bd04d80c9a73d399c1061fa0c3b14a7614399" },
   "kanagawa.nvim": { "branch": "master", "commit": "1deff96d791338a571e6655074d5c2824ecf15a8" },
   "lazy.nvim": { "branch": "main", "commit": "5b4444f0d7e556deba3f7ca949a2ba0e2c3369fb" },
   "lazygit.nvim": { "branch": "main", "commit": "32bffdebe273e571588f25c8a708ca7297928617" },
