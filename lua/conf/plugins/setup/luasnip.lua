@@ -32,6 +32,10 @@ M.setup = function()
     ls.parser.parse_snippet("lj", 'console.log("$1", JSON.stringify($2, null, 2))$0'),
     ls.parser.parse_snippet("d", "debugger$0"),
   })
+
+  ls.add_snippets("go", {
+    ls.parser.parse_snippet("ir", "if err != nil {\n\treturn $1\n}$0"),
+  })
 end
 
 return M
