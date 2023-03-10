@@ -107,7 +107,7 @@ M.setup = function()
     { "echasnovski/mini.pairs", config = require("conf.plugins.setup.mini_pairs").setup },
 
     -- Colorschemes.
-    { "folke/tokyonight.nvim", config = require("conf.plugins.setup.tokyonight").setup },
+    { "folke/tokyonight.nvim", version = "1.7.0", config = require("conf.plugins.setup.tokyonight").setup },
     { "catppuccin/nvim", name = "catppuccin" },
     { "sainnhe/everforest" },
     { "rebelot/kanagawa.nvim" },
