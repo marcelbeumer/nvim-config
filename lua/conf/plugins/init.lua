@@ -83,6 +83,11 @@ M.setup = function()
       },
     },
 
+    {
+      "L3MON4D3/LuaSnip",
+      config = require("conf.plugins.setup.luasnip").setup,
+    },
+
     -- General purpose LSP server, mostly for linting and formatting.
     -- "jose-elias-alvarez/null-ls.nvim",
     { "marcelbeumer/null-ls.nvim", branch = "fix-golangci-lint" },

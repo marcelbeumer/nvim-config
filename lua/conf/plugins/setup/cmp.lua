@@ -21,8 +21,8 @@ M.setup = function()
       documentation = cmp.config.window.bordered(),
     },
     sources = {
-      { name = "nvim_lsp" },
       { name = "luasnip" },
+      { name = "nvim_lsp" },
     },
     formatting = {
       fields = { "kind", "abbr" },
