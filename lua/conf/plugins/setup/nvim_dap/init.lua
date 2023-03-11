@@ -34,7 +34,33 @@ local make_launch_lua = function()
   vim.fn.system("mkdir -p " .. get_launch_lua_basedir())
   local p = Path:new(get_launch_lua_path())
   if not p:exists() then
-    p:write("return {}", "w")
+    p:write(
+      [[
+local nvim_dap = require("conf.plugins.setup.nvim_dap")
+
+return {
+	go = {
+		{
+			type = "go",
+			name = "App (with args)",
+			request = "launch",
+			cwd = "/Users/user/app",
+			program = "/Users/user/app/main.go",
+			args = nvim_dap.prompt_array_fn("args: "),
+		},
+		{
+			type = "go",
+			name = "App subcommand",
+			request = "launch",
+			cwd = "/Users/user/app",
+			program = "/Users/user/app/main.go",
+			args = { "subcommand" },
+		},
+	},
+}
+    ]],
+      "w"
+    )
   end
 end
 
