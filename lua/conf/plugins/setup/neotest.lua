@@ -5,7 +5,22 @@ M.setup = function()
   local bind_all = require("conf.bindings").bind_all
   local key_opts = { noremap = true, silent = true }
 
+  -- from https://github.com/nvim-neotest/neotest-go
+  -- get neotest namespace (api call creates or returns namespace)
+  local neotest_ns = vim.api.nvim_create_namespace("neotest")
+  vim.diagnostic.config({
+    virtual_text = {
+      format = function(diagnostic)
+        local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+        return message
+      end,
+    },
+  }, neotest_ns)
+
   neotest.setup({
+    quickfix = {
+      open = false,
+    },
     adapters = {
       require("neotest-go"),
       require("neotest-jest")({
