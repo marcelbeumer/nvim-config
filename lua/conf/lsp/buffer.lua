@@ -145,7 +145,20 @@ local on_attach = function(client, bufnr)
   end
 end
 
+local disable_lsp_semantic_highlighting = function()
+  -- based on :help lsp-semantic-highlight
+  vim.api.nvim_set_hl(0, "@lsp.type.function", {})
+  for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+    vim.api.nvim_set_hl(0, group, {})
+  end
+end
+
 M.setup = function()
+  disable_lsp_semantic_highlighting()
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = disable_lsp_semantic_highlighting,
+  })
+
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
       local bufnr = args.buf
