@@ -13,54 +13,44 @@ M.setup = function()
   local keys = bindings.config.tree
   local bind_all = bindings.bind_all
   local key_opts = { noremap = true, silent = true }
-  local use_float = false
 
-  local setup_nvim_tree = function()
-    require("nvim-tree").setup({
-      view = {
-        float = {
-          enable = use_float,
-          open_win_config = {
-            border = "shadow",
-          },
-        },
-        preserve_window_proportions = true,
-        adaptive_size = true,
-        mappings = {
-          list = {
-            { key = keys.prev_diag.value, action = "prev_diag_item" },
-            { key = keys.next_diag.value, action = "next_diag_item" },
-          },
+  require("nvim-tree").setup({
+    view = {
+      preserve_window_proportions = true,
+      width = {
+        min = 30,
+        max = 120,
+      },
+      mappings = {
+        list = {
+          { key = keys.prev_diag.value, action = "prev_diag_item" },
+          { key = keys.next_diag.value, action = "next_diag_item" },
         },
       },
-      diagnostics = {
+    },
+    diagnostics = {
+      enable = true,
+      show_on_dirs = true,
+      icons = { error = "●", warning = "●", hint = "●", info = "●" },
+    },
+    live_filter = {
+      always_show_folders = false,
+    },
+    renderer = {
+      indent_markers = {
         enable = true,
-        show_on_dirs = true,
-        icons = { error = "●", warning = "●", hint = "●", info = "●" },
       },
-      live_filter = {
-        always_show_folders = false,
-      },
-      renderer = {
-        icons = {
-          show = {
-            folder = false,
-            file = false,
-          },
+      icons = {
+        show = {
+          folder = false,
+          file = false,
         },
       },
-    })
-  end
+    },
+  })
 
   bind_all("tree.toggle", ":NvimTreeToggle<cr>", {}, key_opts)
   bind_all("tree.find_file", ":NvimTreeFindFile<cr>", {}, key_opts)
-  bind_all("tree.toggle_float", function()
-    use_float = not use_float
-    vim.notify("nvim tree use float: " .. tostring(use_float))
-    setup_nvim_tree()
-  end, {}, key_opts)
-
-  setup_nvim_tree()
 end
 
 return M
