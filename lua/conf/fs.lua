@@ -1,13 +1,7 @@
 local M = {}
 
-local yank = function(v, _)
-  local result = pcall(function()
-    vim.cmd('let @*="' .. vim.fn.escape(v, '" \\') .. '"')
-  end)
-  if not result then
-    print("Could not set @* with value: " .. v)
-  end
-end
+local util = require("conf.util")
+local yank = util.yank
 
 local cd = function(v, _)
   vim.cmd("cd " .. v)

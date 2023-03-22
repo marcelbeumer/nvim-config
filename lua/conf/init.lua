@@ -9,7 +9,7 @@ M.setup = function()
     require("conf.dev").setup()
     require("conf.base").setup()
   elseif env.NVIM_STARTUP == "normal" then
-    require("conf.dev").setup()
+    require("conf.globals").setup()
     require("conf.bindings").setup()
     require("conf.base").setup()
     require("conf.fs").setup()
