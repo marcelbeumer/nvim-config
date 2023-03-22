@@ -39,8 +39,4 @@ M.root_dir = function(from, patterns)
   return vim.fs.dirname(vim.fs.find(patterns, { upward = true, path = from })[1])
 end
 
-M.setup = function()
-  --
-end
-
 return M
