@@ -6,3 +6,4 @@
 - Try https://github.com/DNLHC/glance.nvim
 - Try https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-move.md
 - Try https://github.com/cbochs/grapple.nvim
+- Try https://github.com/rebelot/terminal.nvim
