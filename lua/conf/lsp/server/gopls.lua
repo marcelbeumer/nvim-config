@@ -21,6 +21,7 @@ M.setup = function()
             parameterNames = true,
             rangeVariableTypes = true,
           },
+          buildFlags = { "-tags=integration" },
         },
         handlers = util.get_handlers(),
         capabilities = util.get_capabilities(),
