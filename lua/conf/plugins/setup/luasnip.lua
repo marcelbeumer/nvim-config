@@ -22,6 +22,12 @@ M.setup = function()
 
   ls.add_snippets("go", {
     ls.parser.parse_snippet("ir", "if err != nil {\n\treturn $1\n}$0"),
+    ls.parser.parse_snippet("pl", "fmt.Println($1)$0"),
+    ls.parser.parse_snippet("pf", 'fmt.Printf("$1", $2)$0'),
+    ls.parser.parse_snippet("sf", 'fmt.Sprintf("$1", $2)$0'),
+    ls.parser.parse_snippet("r", "return $0"),
+    ls.parser.parse_snippet("rn", "return nil$0"),
+    ls.parser.parse_snippet("re", "return err$0"),
   })
 end
 
