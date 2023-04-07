@@ -35,6 +35,8 @@ M.setup = function()
   vim.o.foldcolumn = "0" -- '0' is not bad
   vim.o.foldlevel = 99
   vim.o.foldlevelstart = 99
+  -- Line wrapping.
+  vim.o.showbreak = "+++"
 
   -- Netrw settings.
   vim.api.nvim_set_var("netrw_banner", 0)
