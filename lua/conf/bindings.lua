@@ -68,6 +68,17 @@ M.config = {
     },
   },
 
+  fs = {
+    file_path = {
+      desc = "File path",
+      cmd = "FilePath",
+    },
+    file_path_abs = {
+      desc = "File path",
+      cmd = "FilePathAbs",
+    },
+  },
+
   session = {
     load = {
       desc = "Load session",

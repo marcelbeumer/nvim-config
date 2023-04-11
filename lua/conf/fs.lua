@@ -39,4 +39,18 @@ M.root_dir = function(from, patterns)
   return vim.fs.dirname(vim.fs.find(patterns, { upward = true, path = from })[1])
 end
 
+M.setup = function()
+  local bind_all = require("conf.bindings").bind_all
+  local util = require("conf.util")
+
+  local yank_fn = function(fn)
+    return function()
+      util.yank(fn())
+    end
+  end
+
+  bind_all("fs.file_path", yank_fn(M.file_path), {}, {})
+  bind_all("fs.file_path_abs", yank_fn(M.file_path_abs), {}, {})
+end
+
 return M
