@@ -28,6 +28,9 @@ M.setup = function()
     ls.parser.parse_snippet("r", "return $0"),
     ls.parser.parse_snippet("rn", "return nil$0"),
     ls.parser.parse_snippet("re", "return err$0"),
+    ls.parser.parse_snippet("enn", "err != nil$0"),
+    ls.parser.parse_snippet("een", "err == nil$0"),
+    ls.parser.parse_snippet("ea", "err := $0"),
   })
 end
 
