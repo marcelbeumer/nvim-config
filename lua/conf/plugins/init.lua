@@ -106,7 +106,7 @@ M.setup = function()
     { "olexsmir/gopher.nvim" },
 
     -- Commenting plugin.
-    { "terrortylor/nvim-comment", config = require("conf.plugins.setup.nvim_comment").setup },
+    { "echasnovski/mini.comment", config = require("conf.plugins.setup.mini_comment").setup },
 
     -- Automagically insert closing tags etc.
     { "echasnovski/mini.pairs", config = require("conf.plugins.setup.mini_pairs").setup },
