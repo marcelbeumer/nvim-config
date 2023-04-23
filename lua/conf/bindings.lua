@@ -68,6 +68,13 @@ M.config = {
     },
   },
 
+  colorscheme = {
+    next = {
+      desc = "Next colorscheme",
+      cmd = "ColorSchemeNext",
+    },
+  },
+
   fs = {
     file_path = {
       desc = "File path",
