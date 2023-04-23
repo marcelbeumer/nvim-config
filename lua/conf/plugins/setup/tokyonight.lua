@@ -8,7 +8,6 @@ M.setup = function()
       keywords = "NONE",
     },
   })
-  vim.cmd.colorscheme("tokyonight")
 end
 
 return M

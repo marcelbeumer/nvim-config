@@ -118,6 +118,7 @@ M.setup = function()
     { "rebelot/kanagawa.nvim" },
     { "JoosepAlviste/palenightfall.nvim" },
     { "AlexvZyl/nordic.nvim" },
+    { "felipeagc/fleet-theme-nvim", dependencies = { "rktjmp/lush.nvim" } },
 
     -- Code navigation.
     { "simrat39/symbols-outline.nvim", config = require("conf.plugins.setup.symbols_outline").setup },

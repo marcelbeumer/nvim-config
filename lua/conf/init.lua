@@ -20,6 +20,7 @@ M.setup = function()
     if env.NVIM_LSP == "on" then
       require("conf.lsp").setup()
     end
+    require("conf.colorscheme").setup()
   end
 end
 
