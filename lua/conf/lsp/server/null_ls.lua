@@ -15,16 +15,16 @@ M.setup = function()
       --   -- extra_args = { "-m", "80" },
       -- }),
       -- null_ls.builtins.diagnostics.eslint_d,
-      -- null_ls.builtins.diagnostics.staticcheck.with({
-      --   cwd = function()
-      --     return vim.fn.getcwd()
-      --   end,
-      --   diagnostics_postprocess = function(diagnostic)
-      --     if diagnostic.severity == vim.diagnostic.severity["ERROR"] then
-      --       diagnostic.severity = vim.diagnostic.severity["WARN"]
-      --     end
-      --   end,
-      -- }),
+      null_ls.builtins.diagnostics.staticcheck.with({
+        cwd = function()
+          return vim.fn.getcwd()
+        end,
+        diagnostics_postprocess = function(diagnostic)
+          if diagnostic.severity == vim.diagnostic.severity["ERROR"] then
+            diagnostic.severity = vim.diagnostic.severity["WARN"]
+          end
+        end,
+      }),
       -- null_ls.builtins.diagnostics.golangci_lint.with({
       --   args = {
       --     "run",
