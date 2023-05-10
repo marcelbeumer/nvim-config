@@ -97,8 +97,8 @@ local load_launch_lua = function()
   end
 end
 
-M.prompt_array_fn = function(prompt)
-  local lastargs = nil
+M.prompt_array_fn = function(prompt, default)
+  local lastargs = default
   return function()
     return coroutine.create(function(co)
       vim.ui.input({ prompt = prompt, default = lastargs }, function(args)

@@ -13,6 +13,7 @@ M.setup = function()
 end
 
 M.configurations = function()
+  local nvim_dap = require("conf.plugins.setup.nvim_dap")
   return {
     go = {
       {
@@ -21,9 +22,10 @@ M.configurations = function()
         request = "launch",
         program = "${file}",
       },
+      -- configuration for debugging test files
       {
         type = "go",
-        name = "Debug test (file)", -- configuration for debugging test files
+        name = "Debug test (file)",
         request = "launch",
         mode = "test",
         program = "${file}",
@@ -35,6 +37,14 @@ M.configurations = function()
         request = "launch",
         mode = "test",
         program = "./${relativeFileDirname}",
+      },
+      {
+        type = "go",
+        name = "Debug test w/ args (go.mod)",
+        request = "launch",
+        mode = "test",
+        program = "./${relativeFileDirname}",
+        args = nvim_dap.prompt_array_fn("dlv args:", "-test.run=TestXXX"),
       },
     },
   }
