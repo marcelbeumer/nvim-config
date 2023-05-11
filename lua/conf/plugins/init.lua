@@ -153,7 +153,6 @@ M.setup = function()
 
     -- UI.
     { "rafcamlet/tabline-framework.nvim", config = require("conf.plugins.setup.tabline_framework").setup },
-    { "petertriho/nvim-scrollbar", config = require("conf.plugins.setup.scrollbar").setup },
     { "marcelbeumer/harpoon", branch = "fix/no-absolute-path", config = require("conf.plugins.setup.harpoon").setup },
     { "folke/which-key.nvim", config = require("conf.plugins.setup.which_key").setup },
     {
