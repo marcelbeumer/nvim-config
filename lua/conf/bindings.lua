@@ -68,6 +68,12 @@ M.config = {
     },
   },
 
+  treesitter_context = {
+    goto = {
+      nmap = "gx"
+    }
+  },
+
   colorscheme = {
     next = {
       desc = "Next colorscheme",
