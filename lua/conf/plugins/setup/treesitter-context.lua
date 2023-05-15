@@ -6,7 +6,9 @@ M.setup = function()
   local key_opts = { noremap = true, silent = true }
 
   context.setup({
+    enable = false,
     separator = " ",
+    -- mode = "topline",
   })
 
   bind_all("treesitter_context.goto", function()

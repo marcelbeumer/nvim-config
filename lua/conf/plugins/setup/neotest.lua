@@ -33,11 +33,19 @@ M.setup = function()
     },
   })
 
+  local function clear_and_call(fn)
+    return function()
+      neotest.output_panel.clear()
+      fn()
+    end
+  end
+
   bind_all("neotest.output", neotest.output.open, {}, key_opts)
   bind_all("neotest.summary", neotest.summary.toggle, {}, key_opts)
+  bind_all("neotest.clear", neotest.output_panel.clear, {}, key_opts)
   bind_all("neotest.output_panel", neotest.output_panel.toggle, {}, key_opts)
   bind_all("neotest.run_nearest", neotest.run.run, {}, key_opts)
-  bind_all("neotest.run_last", neotest.run.run_last, {}, key_opts)
+  bind_all("neotest.run_last", clear_and_call(neotest.run.run_last), {}, key_opts)
   bind_all("neotest.run_file", function()
     neotest.run.run(vim.fn.expand("%"))
   end, {}, key_opts)

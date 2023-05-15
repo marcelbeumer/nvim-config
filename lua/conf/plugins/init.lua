@@ -28,6 +28,7 @@ M.setup = function()
 
     {
       "nvim-treesitter/nvim-treesitter-context",
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
       config = require("conf.plugins.setup.treesitter-context").setup,
     },
 
@@ -147,7 +148,7 @@ M.setup = function()
 
     -- Tests.
     {
-      "nvim-neotest/neotest",
+      "marcelbeumer/neotest",
       dependencies = {
         "nvim-lua/plenary.nvim",
         "haydenmeade/neotest-jest",
@@ -164,6 +165,15 @@ M.setup = function()
       "folke/trouble.nvim",
       dependencies = "nvim-tree/nvim-web-devicons",
       config = require("conf.plugins.setup.trouble").setup,
+    },
+    {
+      "stevearc/aerial.nvim",
+      opts = {},
+      -- Optional dependencies
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+      },
+      config = require("conf.plugins.setup.aerial").setup,
     },
 
     -- Search and replace

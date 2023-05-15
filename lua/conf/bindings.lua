@@ -546,12 +546,16 @@ M.config = {
       desc = "Neotest output panel",
       nmap = "<leader>tp",
     },
+    clear = {
+      desc = "Neotest clear output panel",
+      nmap = "<leader>tc",
+    },
     run_nearest = {
       desc = "Neotest run nearest",
       nmap = "<leader>tr",
     },
     run_last = {
-      desc = "Neotest run last test",
+      desc = "Neotest clear and run last test",
       nmap = "<leader>tl",
     },
     run_file = {
