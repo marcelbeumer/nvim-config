@@ -21,12 +21,6 @@ M.setup = function()
         min = 30,
         max = 120,
       },
-      mappings = {
-        list = {
-          { key = keys.prev_diag.value, action = "prev_diag_item" },
-          { key = keys.next_diag.value, action = "next_diag_item" },
-        },
-      },
     },
     diagnostics = {
       enable = true,
@@ -47,6 +41,23 @@ M.setup = function()
         },
       },
     },
+    on_attach = function(bufnr)
+      local api = require("nvim-tree.api")
+
+      local function opts(desc)
+        return {
+          desc = "nvim-tree: " .. desc,
+          buffer = bufnr,
+          noremap = true,
+          silent = true,
+          nowait = true,
+        }
+      end
+
+      api.config.mappings.default_on_attach(bufnr)
+      vim.keymap.set("n", keys.prev_diag.value, api.node.navigate.diagnostics.prev, opts("Prev Diagnostic"))
+      vim.keymap.set("n", keys.next_diag.value, api.node.navigate.diagnostics.next, opts("Next Diagnostic"))
+    end,
   })
 
   bind_all("tree.toggle", ":NvimTreeToggle<cr>", {}, key_opts)
