@@ -35,10 +35,17 @@ M.setup = function()
   vim.o.foldcolumn = "0" -- '0' is not bad
   vim.o.foldlevel = 99
   vim.o.foldlevelstart = 99
+
   -- Line wrapping.
   vim.o.linebreak = true
-  -- vim.o.showbreak = ">>>"
-  vim.o.showbreak = "↪"
+  vim.cmd([[
+    set showbreak=\ 
+    augroup ShowbreakToggle
+      autocmd!
+      autocmd InsertEnter * set showbreak=↪
+      autocmd InsertLeave * set showbreak=\ 
+    augroup END
+  ]])
 
   -- Netrw settings.
   vim.api.nvim_set_var("netrw_banner", 0)

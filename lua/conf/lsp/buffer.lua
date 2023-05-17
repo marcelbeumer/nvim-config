@@ -1,3 +1,5 @@
+local util = require("conf.lsp.util")
+
 local M = {}
 
 local sort_pos_asc = function(a, b)
@@ -138,7 +140,7 @@ local on_attach = function(client, bufnr)
       buffer = bufnr,
       callback = function()
         if require("conf.env").NVIM_LSP_AUTO_FORMAT == "on" then
-          vim.lsp.buf.format({ bufnr = bufnr })
+          util.format_buffer(bufnr)
         end
       end,
     })

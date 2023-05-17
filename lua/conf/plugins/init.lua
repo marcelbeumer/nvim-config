@@ -94,6 +94,8 @@ M.setup = function()
       config = require("conf.plugins.setup.luasnip").setup,
     },
 
+    { "LeonHeidelbach/trailblazer.nvim", config = require("conf.plugins.setup.trailblazer").setup },
+
     -- General purpose LSP server, mostly for linting and formatting.
     -- "jose-elias-alvarez/null-ls.nvim",
     { "marcelbeumer/null-ls.nvim", branch = "fix-golangci-lint" },

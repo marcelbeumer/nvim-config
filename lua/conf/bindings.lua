@@ -647,9 +647,20 @@ local get_ext_opts = function(config, opts)
   return vim.tbl_extend("keep", { desc = config.desc }, opts)
 end
 
+local function split_lookup(lookup)
+  local base, suffix = lookup:match("^(.-)%+(.*)$")
+  if base and suffix then
+    return base, suffix
+  else
+    return lookup, ""
+  end
+end
+
 M.bind_all = function(lookup, rhs, cmd_opts, key_opts)
   local config = M.config
-  for k, _ in string.gmatch(lookup .. ".", "(%S-)(%.)") do
+  local base, suffix = split_lookup(lookup)
+
+  for k, _ in string.gmatch(base .. ".", "(%S-)(%.)") do
     config = config[k]
     if not config then
       error('bindings: key "' .. k .. '" not found in "' .. lookup .. '"')
@@ -664,7 +675,7 @@ M.bind_all = function(lookup, rhs, cmd_opts, key_opts)
   for mode, mode_short in pairs(maps) do
     if config[mode] then
       local ext_opts = get_ext_opts(config, key_opts)
-      vim.keymap.set(mode_short, config[mode], rhs, ext_opts)
+      vim.keymap.set(mode_short, config[mode] .. suffix, rhs, ext_opts)
     end
   end
 end

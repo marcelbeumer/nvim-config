@@ -57,10 +57,19 @@ M.setup = function()
       f.set_colors(hi.tabline())
       f.add_spacer(" ")
 
-      f.make_tabs(function(info)
-        local name = tab_names[info.index] or info.index
-        f.add(" " .. name .. " ")
-      end)
+      local tabs = vim.api.nvim_list_tabpages()
+      for i, v in ipairs(tabs) do
+        local current = vim.api.nvim_get_current_tabpage() == v
+        if current then
+          f.set_colors(hi.tabline_sel())
+        else
+          f.set_colors(hi.tabline())
+        end
+
+        f.add("%" .. i .. "T")
+        f.add(" " .. i .. " ")
+        f.add("%X")
+      end
 
       f.set_colors(hi.tabline())
     end,
