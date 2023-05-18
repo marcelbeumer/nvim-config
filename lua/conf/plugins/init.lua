@@ -193,6 +193,13 @@ M.setup = function()
     -- Improved Yank/put.
     { "gbprod/yanky.nvim", config = require("conf.plugins.setup.yanky").setup },
 
+    -- Editing
+    {
+      "kylechui/nvim-surround",
+      event = "VeryLazy",
+      config = require("conf.plugins.setup.nvim_surround").setup,
+    },
+
     -- Misc.
     {
       "zbirenbaum/copilot.lua",
