@@ -38,6 +38,7 @@ M.setup = function()
 
   -- Line wrapping.
   vim.o.linebreak = true
+  vim.o.breakat = " ^I!@-+;:,./?" -- removed "*" from default
   vim.cmd([[
     set showbreak=\ 
     augroup ShowbreakToggle
