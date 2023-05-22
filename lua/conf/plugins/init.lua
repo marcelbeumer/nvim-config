@@ -207,6 +207,12 @@ M.setup = function()
       event = "InsertEnter",
       config = require("conf.plugins.setup.copilot").setup,
     },
+  }, {
+    performance = {
+      cache = {
+        enabled = false,
+      },
+    },
   })
 
   vim.cmd.colorscheme("tokyonight")
