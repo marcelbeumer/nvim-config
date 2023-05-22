@@ -442,10 +442,12 @@ M.config = {
     lsp_symbols = {
       desc = "Find in LSP symbols",
       cmd = "FindLSPSymbols",
+      nmap = "<leader>ls",
     },
     lsp_symbols_buffer = {
       desc = "Find in LSP symbols",
       cmd = "FindLSPSymbolsBuffer",
+      nmap = "<leader>lS",
     },
   },
 
