@@ -9,6 +9,7 @@ M.setup = function()
     winopts = { preview = { layout = "vertical" } },
     previewers = { builtin = { syntax = false } },
     files = {
+      cwd_prompt = false,
       file_icons = false,
     },
     grep = {
