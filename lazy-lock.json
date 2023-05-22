@@ -23,7 +23,7 @@
   "lsp_signature.nvim": { "branch": "master", "commit": "7a26ebaa7e36aa2aefa6c1994b2b866c96de32e6" },
   "lush.nvim": { "branch": "main", "commit": "fb148c0082488ba048f681792c4044e3229fd1a6" },
   "mason.nvim": { "branch": "main", "commit": "08b2fd308e0107eab9f0b59d570b69089fd0b522" },
-  "mini.comment": { "branch": "main", "commit": "923cc39dc2d276e988268c353feb8c24627d180d" },
+  "mini.comment": { "branch": "main", "commit": "40c1172c9ddb55b30dfaf7dad9f7663cb6bb438e" },
   "mini.pairs": { "branch": "main", "commit": "963b800d0524eadd297199207011b98684205ada" },
   "neodev.nvim": { "branch": "main", "commit": "781a090a30868373b37357a582b4fa7e7383298b" },
   "neotest": { "branch": "master", "commit": "4fc01368c28935a5d2ec394921a6651424cff637" },
