@@ -106,7 +106,7 @@ local on_attach = function(client, bufnr)
     local opts = { group = hl, buffer = bufnr }
     vim.api.nvim_clear_autocmds(opts)
 
-    local enabled = false
+    local enabled = true
     local update = function()
       if enabled then
         vim.lsp.buf.document_highlight()
