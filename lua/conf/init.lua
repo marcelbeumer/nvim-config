@@ -21,7 +21,6 @@ M.setup = function()
       require("conf.lsp").setup()
     end
     require("conf.colorscheme").setup()
-    require("conf.statusline").setup()
   end
 end
 

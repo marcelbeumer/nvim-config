@@ -148,6 +148,10 @@ M.setup = function()
       event = "InsertEnter",
       config = require("conf.plugins.setup.copilot").setup,
     },
+    {
+      "nvim-lualine/lualine.nvim",
+      config = require("conf.plugins.setup.lualine").setup,
+    },
 
     -- ======================================
     -- Language support.
