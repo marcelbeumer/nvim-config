@@ -29,9 +29,11 @@ local lsp_window_opts = {
 local function hover_handler(err, result, ctx, config)
   local final_config = vim.tbl_deep_extend("force", config or {}, lsp_window_opts)
   local buf_id, win_id = vim.lsp.handlers.hover(err, result, ctx, final_config)
-  vim.api.nvim_win_set_option(win_id, "linebreak", true)
-  vim.api.nvim_win_set_option(win_id, "showbreak", "NONE")
-  return buf_id, win_id
+  if win_id ~= nil then
+    vim.api.nvim_win_set_option(win_id, "linebreak", true)
+    vim.api.nvim_win_set_option(win_id, "showbreak", "NONE")
+    return buf_id, win_id
+  end
 end
 
 M.get_handlers = function()
