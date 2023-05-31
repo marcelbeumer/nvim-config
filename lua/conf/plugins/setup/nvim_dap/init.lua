@@ -153,7 +153,7 @@ M.setup = function()
     numhl = "",
   })
 
-  require("nvim-dap-virtual-text").setup({})
+  -- require("nvim-dap-virtual-text").setup({})
 
   bind_all("dap.launch_lua_edit", function()
     make_launch_lua()

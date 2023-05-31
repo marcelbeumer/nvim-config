@@ -182,7 +182,7 @@ M.setup = function()
         "nvim-lua/plenary.nvim",
         "rcarriga/nvim-dap-ui",
         "mxsdev/nvim-dap-vscode-js",
-        "theHamsta/nvim-dap-virtual-text",
+        -- "theHamsta/nvim-dap-virtual-text",
       },
       config = function()
         require("conf.plugins.setup.nvim_dap").setup()
