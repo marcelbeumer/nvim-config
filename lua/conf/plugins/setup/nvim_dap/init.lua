@@ -202,6 +202,7 @@ M.setup = function()
   bind_all("dap.run_last", function()
     dap.run_last()
   end, {}, key_opts)
+  bind_all("dap.eval", dapui.eval, {}, key_opts)
 end
 
 return M

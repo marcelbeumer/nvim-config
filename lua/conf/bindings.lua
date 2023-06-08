@@ -636,6 +636,10 @@ M.config = {
       desc = "DAP toggle REPL",
       nmap = "<leader><leader>e",
     },
+    eval = {
+      desc = "Evaluate visually selected",
+      vmap = "<M-k>"
+    },
     run_last = {
       desc = "DAP run last",
       nmap = "<leader><leader>R",
