@@ -15,7 +15,7 @@ M.renameTab = function(id, name)
 end
 
 M.setup = function()
-  vim.o.showtabline = 2
+  vim.o.showtabline = 1
 
   vim.api.nvim_create_user_command("TabRename", function(args)
     M.renameTab(0, args.fargs[1])
@@ -66,8 +66,10 @@ M.setup = function()
           f.set_colors(hi.tabline())
         end
 
+        local name = tab_names[i] or i
+
         f.add("%" .. i .. "T")
-        f.add(" " .. i .. " ")
+        f.add(" " .. name .. " ")
         f.add("%X")
       end
 
