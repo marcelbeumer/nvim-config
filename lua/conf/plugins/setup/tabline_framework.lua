@@ -14,6 +14,64 @@ M.renameTab = function(id, name)
   vim.cmd("redrawtabline")
 end
 
+local function render_harpoon(f)
+  local hi = require("tabline_framework.highlights")
+
+  local marks = require("harpoon.mark")
+  local len = marks.get_length()
+  local curr = marks.get_current_index()
+
+  for idx = 1, len do
+    local current = curr == idx
+    if current then
+      f.set_colors(hi.tabline_sel())
+    else
+      f.set_colors(hi.tabline())
+    end
+
+    local fname = marks.get_marked_file_name(idx)
+    local short_name = vim.fn.fnamemodify(fname, ":t")
+    local exists = vim.fn.bufexists(fname) ~= 0
+    if exists then
+      local bufnr = vim.fn.bufnr(fname)
+      if vim.api.nvim_buf_get_option(bufnr, "modified") then
+        f.add("[+]")
+      end
+    end
+
+    f.add("%" .. idx .. "@v:lua.require'conf.plugins.setup.tabline_framework'.handleHarpoonClick@")
+    f.add(" ")
+    f.add(short_name)
+    f.add(" ")
+    f.add("%X")
+  end
+end
+
+local function render_tabs(f)
+  local hi = require("tabline_framework.highlights")
+
+  local tabs = vim.api.nvim_list_tabpages()
+  for i, v in ipairs(tabs) do
+    local current = vim.api.nvim_get_current_tabpage() == v
+    if current then
+      f.set_colors(hi.tabline_sel())
+    else
+      f.set_colors(hi.tabline())
+    end
+
+    local name = tab_names[i] or i
+
+    f.add("%" .. i .. "T")
+    f.add(" " .. name .. " ")
+    f.add("%X")
+  end
+end
+
+local function reset_colors(f)
+  local hi = require("tabline_framework.highlights")
+  f.set_colors(hi.tabline())
+end
+
 M.setup = function()
   vim.o.showtabline = 1
 
@@ -23,57 +81,10 @@ M.setup = function()
 
   require("tabline_framework").setup({
     render = function(f)
-      local hi = require("tabline_framework.highlights")
-
-      local marks = require("harpoon.mark")
-      local len = marks.get_length()
-      local curr = marks.get_current_index()
-
-      for idx = 1, len do
-        local current = curr == idx
-        if current then
-          f.set_colors(hi.tabline_sel())
-        else
-          f.set_colors(hi.tabline())
-        end
-
-        local fname = marks.get_marked_file_name(idx)
-        local short_name = vim.fn.fnamemodify(fname, ":t")
-        local exists = vim.fn.bufexists(fname) ~= 0
-        if exists then
-          local bufnr = vim.fn.bufnr(fname)
-          if vim.api.nvim_buf_get_option(bufnr, "modified") then
-            f.add("[+]")
-          end
-        end
-
-        f.add("%" .. idx .. "@v:lua.require'conf.plugins.setup.tabline_framework'.handleHarpoonClick@")
-        f.add(" ")
-        f.add(short_name)
-        f.add(" ")
-        f.add("%X")
-      end
-
-      f.set_colors(hi.tabline())
+      render_harpoon(f)
+      reset_colors(f)
       f.add_spacer(" ")
-
-      local tabs = vim.api.nvim_list_tabpages()
-      for i, v in ipairs(tabs) do
-        local current = vim.api.nvim_get_current_tabpage() == v
-        if current then
-          f.set_colors(hi.tabline_sel())
-        else
-          f.set_colors(hi.tabline())
-        end
-
-        local name = tab_names[i] or i
-
-        f.add("%" .. i .. "T")
-        f.add(" " .. name .. " ")
-        f.add("%X")
-      end
-
-      f.set_colors(hi.tabline())
+      reset_colors(f)
     end,
   })
 end
