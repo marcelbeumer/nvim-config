@@ -67,8 +67,7 @@ M.setup = function()
       config = require("conf.plugins.setup.tabline_framework").setup,
     },
     {
-      "marcelbeumer/harpoon",
-      branch = "fix/no-absolute-path",
+      "ThePrimeagen/harpoon",
       config = require("conf.plugins.setup.harpoon").setup,
     },
     {
@@ -116,6 +115,7 @@ M.setup = function()
     { "LeonHeidelbach/trailblazer.nvim", config = require("conf.plugins.setup.trailblazer").setup },
     {
       "hrsh7th/nvim-cmp",
+      version = false,
       event = "BufEnter",
       config = function()
         require("conf.plugins.setup.luasnip").setup()

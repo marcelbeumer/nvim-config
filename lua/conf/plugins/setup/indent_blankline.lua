@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-  require("indent_blankline").setup({
+  require("ibl").setup({
     enabled = false,
     -- for example, context is off by default, use this to turn it on
     -- show_current_context = true,
