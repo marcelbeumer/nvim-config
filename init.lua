@@ -1,1 +1,1 @@
-require("conf").setup()
+require("conf0").setup()
