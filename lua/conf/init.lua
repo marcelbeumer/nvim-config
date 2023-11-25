@@ -21,7 +21,11 @@ if env.NVIM_STARTUP ~= "safe" then
       })
     end
     vim.opt.runtimepath:prepend(lazypath)
-    require("lazy").setup("conf.plugins")
+    require("lazy").setup("conf.plugins", {
+      change_detection = {
+        enabled = false,
+      },
+    })
     vim.cmd([[colorscheme tokyonight]])
   end
 end
