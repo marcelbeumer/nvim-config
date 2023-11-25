@@ -1,12 +1,12 @@
 return {
   {
     "folke/neodev.nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
     opts = {},
   },
 
   {
     "neovim/nvim-lspconfig",
+    dependencies = { "folke/neodev.nvim" },
     opts = {
       servers = {
         lua_ls = {},
