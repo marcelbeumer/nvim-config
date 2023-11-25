@@ -102,7 +102,6 @@ M.restore = function(id)
 end
 
 M.setup = function()
-  local bind_all = require("conf.bindings").bind_all
   local ids = {
     "a",
     "b",
@@ -133,16 +132,13 @@ M.setup = function()
   }
 
   for _, id in ipairs(ids) do
-    bind_all("layout.save+" .. id, function()
+    vim.keymap.set("n", "<C-W>." .. id, function()
       M.save(id)
-    end, {}, {})
-    bind_all("layout.restore+" .. id, function()
+    end, {})
+    vim.keymap.set("n", "<C-W>," .. id, function()
       M.restore(id)
-    end, {}, {})
+    end, {})
   end
 end
-
--- M.save()
--- M.restore()
 
 return M

@@ -3,11 +3,11 @@ local env = require("conf.env")
 if env.NVIM_STARTUP ~= "safe" then
   require("conf.base")
   require("conf.globals")
-  require("conf.bindings")
 
   if env.NVIM_STARTUP ~= "base" then
-    require("conf.extra.layout")
-    require("conf.extra.panels")
+    require("conf.extra.layout").setup()
+    require("conf.extra.panels").setup()
+    require("conf.extra.filepath").setup()
 
     local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
     if not vim.loop.fs_stat(lazypath) then

@@ -93,20 +93,15 @@ M.toggle_panel = function(direction)
 end
 
 M.setup = function()
-  local bind_all = require("conf.bindings").bind_all
-  local key_opts = { noremap = true, silent = true }
-
-  bind_all("panels.toggle_bottom", function()
+  vim.keymap.set("n", "<C-1>", function()
     M.toggle_panel("j")
-  end, {}, key_opts)
-
-  bind_all("panels.toggle_right", function()
+  end, {})
+  vim.keymap.set("n", "<C-2>", function()
     M.toggle_panel("l")
-  end, {}, key_opts)
-
-  bind_all("panels.toggle_top", function()
+  end, {})
+  vim.keymap.set("n", "<C-3>", function()
     M.toggle_panel("k")
-  end, {}, key_opts)
+  end, {})
 end
 
 return M

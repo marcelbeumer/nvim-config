@@ -22,7 +22,7 @@ return {
 
       util.disable_lsp_semantic_highlighting()
 
-      map("n", "<space>e", vim.diagnostic.open_float)
+      map("n", "<space>d", vim.diagnostic.open_float)
       map("n", "[d", vim.diagnostic.goto_prev)
       map("n", "]d", vim.diagnostic.goto_next)
       map("n", "<space>q", vim.diagnostic.setloclist)
