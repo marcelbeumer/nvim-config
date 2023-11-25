@@ -6,11 +6,9 @@ return {
     init = function()
       vim.o.updatetime = 250
     end,
-
     opts = {
       servers = {},
     },
-
     config = function(_, opts)
       if require("conf.env").NVIM_LSP == "off" then
         return
@@ -21,11 +19,6 @@ return {
       local map = vim.keymap.set
 
       util.disable_lsp_semantic_highlighting()
-
-      map("n", "<space>d", vim.diagnostic.open_float)
-      map("n", "[d", vim.diagnostic.goto_prev)
-      map("n", "]d", vim.diagnostic.goto_next)
-      map("n", "<space>q", vim.diagnostic.setloclist)
 
       lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
         handlers = {
