@@ -213,12 +213,9 @@ return {
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
     opts = {
-      formatters_by_ft = {
-        lua = { "stylua" },
-        python = { "isort", "black" },
-        javascript = { { "prettierd", "prettier" } },
-        go = { "gofumpt" },
-      },
+      -- Formatters are configured in plugins/lang/*
+      formatters_by_ft = {},
+
       format_on_save = function(bufnr)
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return

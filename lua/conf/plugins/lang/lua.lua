@@ -15,9 +15,9 @@ return {
   },
 
   {
-    "mfussenegger/nvim-lint",
+    "stevearc/conform.nvim",
     opts = {
-      linters_by_ft = {
+      formatters_by_ft = {
         lua = { "stylua" },
       },
     },
