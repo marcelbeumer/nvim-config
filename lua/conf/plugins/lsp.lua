@@ -65,7 +65,7 @@ return {
 
             map("n", "<space>h", function()
               enabled = not enabled
-              clear()
+              vim.lsp.buf.clear_references()
               update()
             end, { buffer = bufnr })
 
