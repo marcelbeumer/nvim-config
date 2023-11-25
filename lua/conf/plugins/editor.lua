@@ -52,7 +52,10 @@ return {
     end,
   },
 
-  { "echasnovski/mini.comment" },
+  {
+    "echasnovski/mini.comment",
+    opts = {},
+  },
 
   {
     "echasnovski/mini.pairs",
