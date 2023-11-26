@@ -18,8 +18,6 @@ return {
       local util = require("conf.util.lsp")
       local map = vim.keymap.set
 
-      util.disable_lsp_semantic_highlighting()
-
       lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
         handlers = {
           ["textDocument/hover"] = function(err, result, ctx, config)
@@ -41,6 +39,8 @@ return {
         callback = function(args)
           local bufnr = args.buf
           local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+          util.disable_lsp_semantic_highlighting()
 
           if client.server_capabilities.completionProvider then
             vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
