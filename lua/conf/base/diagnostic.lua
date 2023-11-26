@@ -13,6 +13,9 @@ vim.diagnostic.config({
   -- to update in insert mode.
   -- virtual_text = false,
   -- update_in_insert = true,
+  float = {
+    border = "rounded",
+  },
 })
 
 -- Configure prettier gutter diagnostic signs.
