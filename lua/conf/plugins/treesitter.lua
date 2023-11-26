@@ -1,3 +1,5 @@
+local env = require("conf.env")
+
 return {
   -- Based on LazyVim.
   {
@@ -11,9 +13,12 @@ return {
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
       vim.opt.foldlevel = 99
+      if env.NVIM_SYNTAX_HIGHLIGHT == "off" then
+        vim.cmd.syntax("off")
+      end
     end,
     opts = {
-      highlight = { enable = true },
+      highlight = { enable = env.NVIM_SYNTAX_HIGHLIGHT == "on" },
       indent = { enable = true },
       ensure_installed = {
         "bash",

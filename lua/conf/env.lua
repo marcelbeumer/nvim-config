@@ -6,6 +6,12 @@ return {
   -- safe: nvim without any user config
   NVIM_STARTUP = vim.env.NVIM_STARTUP or "normal",
 
+  -- NVIM_SYNTAX_HIGHLIGHT=<on|off>
+  -- Configures having syntax highlighting or not.
+  -- on
+  -- off (default)
+  NVIM_SYNTAX_HIGHLIGHT = vim.env.NVIM_SYNTAX_HIGHLIGHT or "off",
+
   -- NVIM_LSP=<on|off>
   -- Configures using LSP or not.
   -- on (default)
