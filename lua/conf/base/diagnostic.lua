@@ -21,7 +21,7 @@ vim.diagnostic.config({
 -- Configure prettier gutter diagnostic signs.
 local signs = {
   Error = icons.diagnostics.Error,
-  Warn = icons.diagnostics.Warn,
+  Warn = icons.diagnostics.Warning,
   Hint = icons.diagnostics.Hint,
   Info = icons.diagnostics.Information,
 }
