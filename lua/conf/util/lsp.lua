@@ -71,4 +71,63 @@ M.disable_lsp_semantic_highlighting = function()
   end
 end
 
+-- based on https://github.com/ray-x/go.nvim/blob/b119217e8324f13a2be12935f5d2d15a1df09b09/lua/go/lsp.lua
+M.codeaction_sync = function(client, action, only, wait_ms)
+  wait_ms = wait_ms or 1000
+
+  local params = vim.lsp.util.make_range_params()
+  if only then
+    params.context = { only = { only } }
+  end
+
+  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+  if not result or next(result) == nil then
+    return
+  end
+
+  for _, res in pairs(result) do
+    for _, r in pairs(res.result or {}) do
+      if r.edit and not vim.tbl_isempty(r.edit) then
+        vim.lsp.util.apply_workspace_edit(r.edit, client.offset_encoding)
+      end
+      if type(r.command) == "table" then
+        if type(r.command) == "table" and r.command.arguments then
+          for _, arg in pairs(r.command.arguments) do
+            if action == nil or arg["Fix"] == action then
+              vim.lsp.buf.execute_command(r.command)
+              return
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+function M.client()
+  local clients = vim.lsp.get_active_clients()
+  for _, cl in pairs(clients) do
+    if cl.name == "gopls" then
+      return cl
+    end
+  end
+end
+
+M.organize_imports = function()
+  vim.lsp.buf.code_action({
+    context = {
+      only = { "source.organizeImports" },
+    },
+    apply = true,
+  })
+end
+
+M.organize_imports_sync = function()
+  local c = M.client()
+  if not c then
+    return
+  end
+  M.codeaction_sync(c, "", "source.organizeImports", 1000)
+end
+
 return M

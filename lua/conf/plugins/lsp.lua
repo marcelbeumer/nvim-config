@@ -96,6 +96,7 @@ return {
           map("n", "<space>f", function()
             vim.lsp.buf.format({ async = true })
           end, mopts)
+          map("n", "<space>I", util.organize_imports)
 
           map("n", "[r", function()
             util.next_reference(true)
