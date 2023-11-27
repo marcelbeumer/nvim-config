@@ -50,7 +50,7 @@ return {
           end
 
           if client.supports_method("textDocument/documentHighlight") then
-            local enabled = true
+            local enabled = false
             local update = function()
               if enabled then
                 vim.lsp.buf.document_highlight()
