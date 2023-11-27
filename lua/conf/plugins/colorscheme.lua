@@ -29,6 +29,11 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
+      -- color_overrides = {
+      --   latte = {
+      --     base = "#FFFFDB", -- acme
+      --   },
+      -- },
       custom_highlights = function(colors)
         return {
           FloatBorder = { fg = colors.overlay2 },
