@@ -129,17 +129,25 @@ return {
       -- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
-      local icons = require("conf.util.icons")
+      -- local icons = require("conf.util.icons")
 
       vim.o.pumheight = 10
 
       return {
+        performance = {
+          max_view_entries = 10,
+        },
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
+        },
+        view = {
+          docs = {
+            auto_open = false,
+          },
         },
         snippet = {
           expand = function(args)
@@ -163,19 +171,24 @@ return {
             fallback()
           end,
         }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
+        -- sources = cmp.config.sources({
+        --   { name = "nvim_lsp" },
+        --   { name = "luasnip" },
+        --   { name = "path" },
+        -- }, {
+        --   { name = "buffer" },
+        -- }),
+        sources = {
           { name = "luasnip" },
-          { name = "path" },
-        }, {
-          { name = "buffer" },
-        }),
+          { name = "nvim_lsp" },
+        },
         formatting = {
-          fields = { "kind", "abbr" },
-          format = function(_, item)
-            item.kind = icons.kind[item.kind]
-            return item
-          end,
+          fields = { "abbr" },
+          -- fields = { "kind", "abbr" },
+          -- format = function(_, item)
+          --   item.kind = icons.kind[item.kind]
+          --   return item
+          -- end,
         },
         -- experimental = {
         --   ghost_text = {
