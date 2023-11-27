@@ -120,23 +120,15 @@ return {
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "L3MON4D3/LuaSnip",
     },
     opts = function()
-      -- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
-      -- local icons = require("conf.util.icons")
-
       vim.o.pumheight = 10
 
       return {
-        performance = {
-          max_view_entries = 10,
-        },
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
@@ -171,55 +163,21 @@ return {
             fallback()
           end,
         }),
-        -- sources = cmp.config.sources({
-        --   { name = "nvim_lsp" },
-        --   { name = "luasnip" },
-        --   { name = "path" },
-        -- }, {
-        --   { name = "buffer" },
-        -- }),
         sources = {
           { name = "luasnip" },
           { name = "nvim_lsp" },
         },
         formatting = {
           fields = { "abbr" },
-          -- fields = { "kind", "abbr" },
-          -- format = function(_, item)
-          --   item.kind = icons.kind[item.kind]
-          --   return item
-          -- end,
         },
-        -- experimental = {
-        --   ghost_text = {
-        --     hl_group = "CmpGhostText",
-        --   },
-        -- },
         sorting = defaults.sorting,
       }
     end,
     config = function(_, opts)
       local cmp = require("cmp")
-      local compare = cmp.config.compare
-
       cmp.setup(opts)
       cmp.setup.filetype({ "go" }, {
         preselect = "None", -- gopls preselects which annoys
-        sorting = {
-          priority_weight = 2,
-          comparators = {
-            compare.offset,
-            compare.exact,
-            compare.length,
-            -- compare.scopes,
-            compare.score,
-            compare.recently_used,
-            compare.locality,
-            compare.kind,
-            -- compare.sort_text,
-            compare.order,
-          },
-        },
       })
     end,
   },
