@@ -19,7 +19,7 @@ return {
     end,
     opts = {
       highlight = { enable = env.NVIM_SYNTAX_HIGHLIGHT == "on" },
-      indent = { enable = true },
+      indent = { enable = false },
       ensure_installed = {
         "bash",
         "c",
