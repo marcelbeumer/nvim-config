@@ -18,6 +18,9 @@ return {
           min = 30,
           max = 120,
         },
+        float = {
+          enable = true,
+        },
       },
       diagnostics = {
         enable = true,
