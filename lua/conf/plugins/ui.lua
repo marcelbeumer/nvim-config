@@ -59,7 +59,7 @@ return {
       { "<leader>lq", fzfUtil.handler("diagnostics_workspace", fzfUtil.default), "Find in diagnostics (workspace)" },
       { "<leader>lQ", fzfUtil.handler("diagnostics_document", fzfUtil.default), "Find in diagnostics (buffer)" },
       { "<leader>lr", fzfUtil.handler("lsp_references", fzfUtil.default), "Find in LSP references" },
-      { "<leader>li", fzfUtil.handler("lsp_implementation", fzfUtil.default), "Find in LSP implementations" },
+      { "<leader>li", fzfUtil.handler("lsp_implementations", fzfUtil.default), "Find in LSP implementations" },
       { "<leader>ld", fzfUtil.handler("lsp_definitions", fzfUtil.default), "Find in LSP definitions" },
       { "<leader>lD", fzfUtil.handler("lsp_declarations", fzfUtil.default), "Find in LSP declarations" },
       { "<leader>lt", fzfUtil.handler("lsp_typedefs", fzfUtil.default), "Find in LSP typedefs" },
