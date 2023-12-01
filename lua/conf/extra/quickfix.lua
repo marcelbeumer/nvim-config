@@ -24,6 +24,8 @@ local entry_from_qfitem = function(item)
   return { filename = filename, lnum = item.lnum, col = item.col, text = item.text or "" }
 end
 
+M.bookmarks = {}
+
 M.remove_idx = function(idx)
   local qflist = vim.fn.getqflist()
   local newlist = {}
@@ -54,6 +56,7 @@ end
 M.add_from_pos = function()
   local entry = M.entry_from_pos()
   vim.fn.setqflist({ entry }, "a")
+  vim.notify("quickfix added (" .. entry.lnum .. ":" .. entry.col .. ")")
 end
 
 M.remove_current = function()
@@ -97,6 +100,7 @@ M.save = function(filepath)
   else
     print("Unable to open file for writing: " .. filepath)
   end
+  vim.notify("quickfix saved to " .. filepath)
 end
 
 M.load = function(filepath)
@@ -112,6 +116,28 @@ M.load = function(filepath)
   else
     print("Unable to open file for reading: " .. filepath)
   end
+  vim.notify("quickfix loaded")
+end
+
+M.add_bookmark_from_pos = function()
+  local entry = M.entry_from_pos()
+  M.bookmarks[#M.bookmarks + 1] = entry
+  vim.notify("bookmark added (" .. entry.lnum .. ":" .. entry.col .. ")")
+end
+
+M.save_to_bookmarks = function()
+  local qflist = vim.fn.getqflist()
+  M.bookmarks = {}
+  for i, item in ipairs(qflist) do
+    local entry = entry_from_qfitem(item)
+    M.bookmarks[i] = entry
+  end
+  vim.notify("quickfix saved as bookmarks")
+end
+
+M.load_bookmarks = function()
+  vim.fn.setqflist(M.bookmarks)
+  vim.notify("bookmarks loaded into quickfix")
 end
 
 M.setup = function()
@@ -125,9 +151,9 @@ M.setup = function()
   end, {})
 
   vim.keymap.set("n", "<leader>qa", M.add_from_pos, {})
-  -- vim.keymap.set("n", "<leader>qb", M.bookmark, {})
-  -- vim.keymap.set("n", "<leader>ql", M.loadBookmarks, {})
-  -- vim.keymap.set("n", "<leader>qs", M.saveBookmarks, {})
+  vim.keymap.set("n", "<leader>qb", M.add_bookmark_from_pos, {})
+  vim.keymap.set("n", "<leader>ql", M.load_bookmarks, {})
+  vim.keymap.set("n", "<leader>qs", M.save_to_bookmarks, {})
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "qf",
