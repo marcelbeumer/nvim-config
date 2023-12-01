@@ -48,6 +48,45 @@ M.moveCurrDown = function()
   end
 end
 
+M.save = function(filepath)
+  local qflist = vim.fn.getqflist()
+  local file = io.open(filepath, "w")
+  if file then
+    for _, item in ipairs(qflist) do
+      local filename = ""
+      if item.bufnr and item.bufnr > 0 then
+        filename = vim.fn.bufname(item.bufnr)
+      end
+
+      if not filename or filename == "" then
+        filename = "nofile"
+      else
+        filename = vim.fn.fnameescape(filename)
+      end
+
+      file:write(filename .. ":" .. item.lnum .. ":" .. item.col .. ":" .. (item.text or "") .. "\n")
+    end
+    file:close()
+  else
+    print("Unable to open file for writing: " .. filepath)
+  end
+end
+
+M.load = function(filepath)
+  local file = io.open(filepath, "r")
+  if file then
+    local lines = {}
+    for line in file:lines() do
+      local filename, lnum, col, text = line:match("([^:]+):(%d+):(%d+):(.+)")
+      table.insert(lines, { filename = filename, lnum = tonumber(lnum), col = tonumber(col), text = text })
+    end
+    vim.fn.setqflist(lines)
+    file:close()
+  else
+    print("Unable to open file for reading: " .. filepath)
+  end
+end
+
 M.setup = function()
   vim.keymap.set("n", "<leader>qa", M.addCursor, {})
   vim.keymap.set("n", "<leader>qd", M.removeCursor, {})
@@ -61,6 +100,24 @@ M.setup = function()
       vim.keymap.set("n", "<C-k>", M.moveCurrUp, opts)
     end,
   })
+
+  vim.api.nvim_create_user_command("QuickfixSave", function(args)
+    local filepath = args.args
+    if filepath == "" then
+      print("Please provide a filename.")
+      return
+    end
+    M.save(filepath)
+  end, { nargs = 1 })
+
+  vim.api.nvim_create_user_command("QuickfixLoad", function(args)
+    local filepath = args.args
+    if filepath == "" then
+      print("Please provide a filename.")
+      return
+    end
+    M.load(filepath)
+  end, { nargs = 1 })
 end
 
 return M
