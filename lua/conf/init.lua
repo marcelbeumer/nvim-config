@@ -8,6 +8,7 @@ if env.NVIM_STARTUP ~= "safe" then
     require("conf.extra.layout").setup()
     require("conf.extra.panels").setup()
     require("conf.extra.filepath").setup()
+    require("conf.extra.quickfix").setup()
 
     local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
     if not vim.loop.fs_stat(lazypath) then
