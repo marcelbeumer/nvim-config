@@ -1,4 +1,5 @@
 local fzfUtil = require("conf.util.fzf")
+local icons = require("conf.util.icons")
 
 return {
   -- Dev icon support.
@@ -7,10 +8,10 @@ return {
   -- File tree.
   {
     "kyazdani42/nvim-tree.lua",
-    keys = {
-      { "<leader>;", "<cmd>NvimTreeToggle<cr>", desc = "Tree toggle" },
-      { "<leader>'", "<cmd>NvimTreeFindFile<cr>", desc = "Tree find file" },
-    },
+    -- keys = {
+    --   { "<leader>;", "<cmd>NvimTreeToggle<cr>", desc = "Tree toggle" },
+    --   { "<leader>'", "<cmd>NvimTreeFindFile<cr>", desc = "Tree find file" },
+    -- },
     opts = {
       view = {
         preserve_window_proportions = true,
@@ -18,9 +19,9 @@ return {
           min = 30,
           max = 120,
         },
-        float = {
-          enable = true,
-        },
+        -- float = {
+        --   enable = true,
+        -- },
       },
       diagnostics = {
         enable = true,
@@ -40,6 +41,24 @@ return {
             file = false,
           },
         },
+      },
+    },
+  },
+
+  {
+    "echasnovski/mini.files",
+    keys = {
+      { "<leader>;", "<cmd>lua MiniFiles.open()<cr>", desc = "Files toggle" },
+      { "<leader>'", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", desc = "Files find file" },
+    },
+    opts = {
+      content = {
+        prefix = function(fs_entry)
+          if fs_entry.fs_type == "directory" then
+            return icons.ui.ChevronShortRight .. " ", "MiniFilesDirectory"
+          end
+          return " ", "MiniFilesFile"
+        end,
       },
     },
   },
