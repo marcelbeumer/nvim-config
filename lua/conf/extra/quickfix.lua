@@ -11,51 +11,77 @@ local M = {}
 -- * or bookmarks in memory? can always Load/Save
 -- * Workflow, add to bookmarks (mem), add to bookmarks (mem), (clear/set qf for lsp or whatever), call .loadBookmarks, modify qf list... (adding to bookmarks will not show in qf automatically)... .saveBookmarks saves current qf as bookmarks.
 
-M.addCursor = function()
+local entry_from_qfitem = function(item)
+  local filename = ""
+  if item.bufnr and item.bufnr > 0 then
+    filename = vim.fn.bufname(item.bufnr)
+  end
+  if not filename or filename == "" then
+    filename = "nofile"
+  else
+    filename = vim.fn.fnameescape(filename)
+  end
+  return { filename = filename, lnum = item.lnum, col = item.col, text = item.text or "" }
+end
+
+M.remove_idx = function(idx)
+  local qflist = vim.fn.getqflist()
+  local newlist = {}
+  for i, item in ipairs(qflist) do
+    if i ~= idx then
+      newlist[#newlist + 1] = item
+    end
+  end
+  vim.fn.setqflist(newlist, "r")
+end
+
+M.entry_at_idx = function(idx)
+  local qflist = vim.fn.getqflist()
+  local item = qflist[idx]
+  if not item then
+    return nil
+  end
+  return entry_from_qfitem(item)
+end
+
+M.entry_from_pos = function()
   local line = vim.fn.getline(".")
   local col = vim.fn.col(".")
   local bufnr = vim.fn.bufnr("%")
-  local entry = { filename = vim.fn.bufname(bufnr), lnum = vim.fn.line("."), col = col, text = line }
+  return { filename = vim.fn.bufname(bufnr), lnum = vim.fn.line("."), col = col, text = line }
+end
+
+M.add_from_pos = function()
+  local entry = M.entry_from_pos()
   vim.fn.setqflist({ entry }, "a")
 end
 
-M.removeCursor = function()
-  local current_line = vim.fn.line(".")
-  local qflist = vim.fn.getqflist()
-  local new_qflist = vim.tbl_filter(function(item)
-    return item.lnum ~= current_line
-  end, qflist)
-  vim.fn.setqflist(new_qflist)
+M.remove_current = function()
+  local idx = vim.fn.getqflist({ idx = 0 }).idx
+  M.remove_idx(idx)
 end
 
-M.removeCurr = function()
-  local qf_idx = vim.fn.getqflist({ idx = 0 }).idx
-  if qf_idx > 0 then
-    local qflist = vim.fn.getqflist()
-    table.remove(qflist, qf_idx)
-    vim.fn.setqflist(qflist, "r")
+M.move_current_up = function()
+  local line = vim.fn.line(".")
+  local qflist = vim.fn.getqflist()
+  if line > 1 and line <= #qflist then
+    local temp = qflist[line]
+    qflist[line] = qflist[line - 1]
+    qflist[line - 1] = temp
+    vim.fn.setqflist({}, "r", { items = qflist })
+    vim.fn.setpos(".", { 0, line - 1, 0, 0 })
   end
 end
 
-M.moveCurrUp = function()
-  local qf_idx = vim.fn.getqflist({ idx = 0 }).idx
+M.move_current_down = function()
+  local line = vim.fn.line(".")
   local qflist = vim.fn.getqflist()
-  if qf_idx > 1 and qf_idx <= #qflist then
-    local temp = qflist[qf_idx - 1]
-    qflist[qf_idx - 1] = qflist[qf_idx - 2]
-    qflist[qf_idx - 2] = temp
-    vim.fn.setqflist({}, "r", { items = qflist, idx = qf_idx - 1 })
-  end
-end
-
-M.moveCurrDown = function()
-  local qf_idx = vim.fn.getqflist({ idx = 0 }).idx
-  local qflist = vim.fn.getqflist()
-  if qf_idx > 0 and qf_idx < #qflist then
-    local temp = qflist[qf_idx]
-    qflist[qf_idx] = qflist[qf_idx + 1]
-    qflist[qf_idx + 1] = temp
-    vim.fn.setqflist({}, "r", { items = qflist, idx = qf_idx + 1 })
+  if line > 0 and line < #qflist then
+    local temp = qflist[line]
+    qflist[line] = qflist[line + 1]
+    qflist[line + 1] = temp
+    vim.fn.setqflist({}, "r", { items = qflist })
+    vim.fn.setpos(".", { 0, line + 1, 0, 0 })
   end
 end
 
@@ -64,18 +90,8 @@ M.save = function(filepath)
   local file = io.open(filepath, "w")
   if file then
     for _, item in ipairs(qflist) do
-      local filename = ""
-      if item.bufnr and item.bufnr > 0 then
-        filename = vim.fn.bufname(item.bufnr)
-      end
-
-      if not filename or filename == "" then
-        filename = "nofile"
-      else
-        filename = vim.fn.fnameescape(filename)
-      end
-
-      file:write(filename .. ":" .. item.lnum .. ":" .. item.col .. ":" .. (item.text or "") .. "\n")
+      local entry = entry_from_qfitem(item)
+      file:write(entry.filename .. ":" .. entry.lnum .. ":" .. entry.col .. ":" .. entry.text .. "\n")
     end
     file:close()
   else
@@ -108,7 +124,7 @@ M.setup = function()
     end
   end, {})
 
-  vim.keymap.set("n", "<leader>qa", M.addCursor, {})
+  vim.keymap.set("n", "<leader>qa", M.add_from_pos, {})
   -- vim.keymap.set("n", "<leader>qb", M.bookmark, {})
   -- vim.keymap.set("n", "<leader>ql", M.loadBookmarks, {})
   -- vim.keymap.set("n", "<leader>qs", M.saveBookmarks, {})
@@ -117,9 +133,9 @@ M.setup = function()
     pattern = "qf",
     callback = function()
       local opts = { buffer = 0 }
-      vim.keymap.set("n", "dd", M.removeCurr, opts)
-      vim.keymap.set("n", "<C-j>", M.moveCurrDown, opts)
-      vim.keymap.set("n", "<C-k>", M.moveCurrUp, opts)
+      vim.keymap.set("n", "<C-d>", M.remove_current, opts)
+      vim.keymap.set("n", "<C-j>", M.move_current_down, opts)
+      vim.keymap.set("n", "<C-k>", M.move_current_up, opts)
     end,
   })
 
