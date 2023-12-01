@@ -1,5 +1,16 @@
 local M = {}
 
+-- IDEAS:
+-- * add cursor line to bookmarks, storing in bookmarks *file*
+-- * remove cursor line from bookmarks, removing in bookmarks *file*
+-- * load bookmarks file in quickfix
+-- * bookmarks file per cwd (in stddata) or global?
+-- * be able to yank (ctrl-y rather) from quickfix and get good qf items
+-- * be able to put (ctrl-p rather) to quickfix and add good qf items
+-- * or be able to edit the quickfix in another window and bring back the results
+-- * or bookmarks in memory? can always Load/Save
+-- * Workflow, add to bookmarks (mem), add to bookmarks (mem), (clear/set qf for lsp or whatever), call .loadBookmarks, modify qf list... (adding to bookmarks will not show in qf automatically)... .saveBookmarks saves current qf as bookmarks.
+
 M.addCursor = function()
   local line = vim.fn.getline(".")
   local col = vim.fn.col(".")
@@ -88,8 +99,19 @@ M.load = function(filepath)
 end
 
 M.setup = function()
+  vim.keymap.set("n", "<leader>qq", function()
+    local open = vim.fn.getqflist({ winid = 0 }).winid ~= 0
+    if open then
+      vim.cmd("cclose")
+    else
+      vim.cmd("copen")
+    end
+  end, {})
+
   vim.keymap.set("n", "<leader>qa", M.addCursor, {})
-  vim.keymap.set("n", "<leader>qd", M.removeCursor, {})
+  -- vim.keymap.set("n", "<leader>qb", M.bookmark, {})
+  -- vim.keymap.set("n", "<leader>ql", M.loadBookmarks, {})
+  -- vim.keymap.set("n", "<leader>qs", M.saveBookmarks, {})
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "qf",
