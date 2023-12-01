@@ -163,4 +163,15 @@ return {
     cmd = { "Spectre", "Spectre" },
     opts = {},
   },
+
+  {
+    "kevinhwang91/nvim-bqf",
+    dependencies = {
+      "junegunn/fzf",
+    },
+    ft = "qf",
+    setup = function(_, opts)
+      vim.fn["fzf#install"]()
+    end,
+  },
 }
