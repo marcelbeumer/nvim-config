@@ -34,6 +34,12 @@ return {
         },
       })
 
+      vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+        callback = function()
+          util.organize_imports_sync()
+        end,
+      })
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(args)
