@@ -31,4 +31,23 @@ return {
       },
     },
   },
+
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/neotest-go",
+    },
+    opts = {
+      adapters = {
+        go = function()
+          return require("neotest-go")({
+            experimental = {
+              test_table = true,
+            },
+            -- args = { "-count=1", "-timeout=60s" },
+          })
+        end,
+      },
+    },
+  },
 }
