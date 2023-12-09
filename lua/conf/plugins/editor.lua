@@ -28,6 +28,31 @@ return {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPost" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    keys = {
+      {
+        "<leader>ut",
+        "<cmd>TSContextToggle<cr>",
+        desc = "Treesitter context toggle",
+      },
+      {
+        "<leader>uc",
+        function()
+          require("treesitter-context").go_to_context()
+        end,
+        desc = "Treesitter context toggle",
+      },
+    },
+    opts = {
+      enable = false,
+    },
+  },
+
+  {
     "kevinhwang91/nvim-ufo",
     event = { "BufReadPost" },
     dependencies = {
