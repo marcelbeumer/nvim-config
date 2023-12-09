@@ -134,6 +134,7 @@ return {
   -- And remember the last position in the harpoon UI too.
   -- And be able to open all files/pos into the quickfix list, for this I want to get the code on the current line and store it too.
   -- This way I would have a true bookmarking system where I can also make notes.
+  -- It should be doable with harpoon2, it seems.
   {
     "marcelbeumer/harpoon",
     branch = "harpoon2",
