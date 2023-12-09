@@ -96,8 +96,9 @@ return {
             program = "./${relativeFileDirname}",
             args = function()
               return coroutine.create(function(co)
-                vim.ui.input({ prompt = "dlv args:", default = _G.__go_dlv_last_args }, function(args)
-                  _G.__go_dlv_last_args = args or "-test.run=TestXXX"
+                local default = _G.__go_dlv_last_args or "-test.run=TestXXX"
+                vim.ui.input({ prompt = "dlv args:", default = default }, function(args)
+                  _G.__go_dlv_last_args = args
                   coroutine.resume(co, vim.split(_G.__go_dlv_last_args, " "))
                 end)
               end)
