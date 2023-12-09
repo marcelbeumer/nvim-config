@@ -97,7 +97,7 @@ return {
             args = function()
               return coroutine.create(function(co)
                 vim.ui.input({ prompt = "dlv args:", default = _G.__go_dlv_last_args }, function(args)
-                  _G.__go_dlv_last_args = args or ""
+                  _G.__go_dlv_last_args = args or "-test.run=TestXXX"
                   coroutine.resume(co, vim.split(_G.__go_dlv_last_args, " "))
                 end)
               end)
