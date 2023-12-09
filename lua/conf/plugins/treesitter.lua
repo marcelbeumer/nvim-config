@@ -6,9 +6,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     version = false,
     build = ":TSUpdate",
-    dependencies = {
-      { "nvim-treesitter/nvim-treesitter-textobjects" },
-    },
     init = function()
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -54,31 +51,12 @@ return {
           node_decremental = "<bs>",
         },
       },
-      textobjects = {
-        move = {
-          enable = true,
-          goto_next_start = {
-            ["]f"] = "@function.outer",
-            ["[s"] = "@block.outer",
-          },
-          goto_next_end = {
-            ["]F"] = "@function.outer",
-            ["]S"] = "@block.outer",
-          },
-          goto_previous_start = {
-            ["[f"] = "@function.outer",
-            ["[s"] = "@block.outer",
-            ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-          },
-          goto_previous_end = {
-            ["[F"] = "@function.outer",
-            ["]S"] = "@block.outer",
-          },
-        },
-      },
     },
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
+      vim.keymap.set("n", "[s", function()
+        require("conf.util.treesitter").jump_to_parent_node()
+      end, {})
     end,
   },
 }
