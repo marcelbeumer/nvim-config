@@ -124,21 +124,97 @@ return {
 
   -- File bookmark/picker.
   {
-    "ThePrimeagen/harpoon",
+    "marcelbeumer/harpoon",
+    branch = "harpoon2",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
     keys = {
-      { "<C-.>", [[<cmd>lua require("harpoon.ui").nav_next()<cr>]], "Harpoon next" },
-      { "<C-,>", [[<cmd>lua require("harpoon.ui").nav_prev()<cr>]], "Harpoon prev" },
-      { "<leader>p", [[<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>]], "Harpoon quick menu" },
-      { "<leader>a", [[<cmd>lua require("harpoon.mark").add_file()<cr>]], "Harpoon add file" },
-      { "<leader>d", [[<cmd>lua require("harpoon.mark").rm_file()<cr>]], "Harpoon remove file" },
-      { "<leader>1", [[<cmd>lua require("harpoon.term").gotoTerminal(1)<cr>]], "Harpoon terminal #1" },
-      { "<leader>2", [[<cmd>lua require("harpoon.term").gotoTerminal(2)<cr>]], "Harpoon terminal #2" },
-      { "<leader>3", [[<cmd>lua require("harpoon.term").gotoTerminal(3)<cr>]], "Harpoon terminal #3" },
+      {
+        "<leader>p",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list("bookmarks"))
+        end,
+        "Harpoon quick menu",
+      },
+      {
+        "<leader>a",
+        function()
+          local harpoon = require("harpoon")
+          harpoon:list("bookmarks"):append()
+        end,
+        "Harpoon add file",
+      },
+      {
+        "<leader>d",
+        function()
+          local harpoon = require("harpoon")
+          harpoon:list("bookmarks"):remove()
+        end,
+        "Harpoon prev",
+      },
+      {
+        "<C-.>",
+        function()
+          local harpoon = require("harpoon")
+          harpoon:list("bookmarks"):next()
+        end,
+        "Harpoon next",
+      },
+      {
+        "<C-,>",
+        function()
+          local harpoon = require("harpoon")
+          harpoon:list("bookmarks"):prev()
+        end,
+        "Harpoon prev",
+      },
     },
     opts = {
-      menu = {
-        width = 120,
-        height = 20,
+      bookmarks = {
+        select = function(list_item, _, options)
+          options = options or {}
+          if list_item == nil then
+            return
+          end
+
+          local pattern = "(.-):(%d+):(%d+)"
+          local path, row, col = list_item.value:match(pattern)
+
+          local bufnr = vim.fn.bufnr(path)
+          if bufnr == -1 then
+            bufnr = vim.fn.bufnr(path, true)
+          end
+
+          vim.api.nvim_set_current_buf(bufnr)
+          vim.api.nvim_win_set_cursor(0, {
+            row and tonumber(row) or 1,
+            col and tonumber(col) or 0,
+          })
+        end,
+
+        create_list_item = function(config, name)
+          if name then
+            return { value = name }
+          end
+
+          local Path = require("plenary.path")
+          local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+          local root = config.get_root_dir()
+          name = Path:new(bufname):make_relative(root)
+          local bufnr = vim.fn.bufnr(name, false)
+
+          local pos = { 1, 0 }
+          if bufnr ~= -1 then
+            pos = vim.api.nvim_win_get_cursor(0)
+          end
+
+          local value = name .. ":" .. pos[1] .. ":" .. pos[2]
+          return { value = value }
+        end,
+
+        BufLeave = function() end,
       },
     },
   },

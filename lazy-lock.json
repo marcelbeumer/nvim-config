@@ -11,7 +11,7 @@
   "git-blame.nvim": { "branch": "master", "commit": "f07e913b7143f19edd6787229f2d51759b478600" },
   "gitsigns.nvim": { "branch": "main", "commit": "87640f5a877b18bdd49884dbcac220fed924b867" },
   "gopher.nvim": { "branch": "main", "commit": "ac27f4b6794c872140fb205313d79ab166892fe9" },
-  "harpoon": { "branch": "master", "commit": "867e212ac153e793f95b316d1731f3ca1894625e" },
+  "harpoon": { "branch": "harpoon2", "commit": "b6f7d943d630762d494dd2bf20df38f470c92303" },
   "lazy.nvim": { "branch": "main", "commit": "96584866b9c5e998cbae300594d0ccfd0c464627" },
   "lazygit.nvim": { "branch": "main", "commit": "de35012036d43bca03628d40d083f7c02a4cda3f" },
   "mason.nvim": { "branch": "main", "commit": "41e75af1f578e55ba050c863587cffde3556ffa6" },
