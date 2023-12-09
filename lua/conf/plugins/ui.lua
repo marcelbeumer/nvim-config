@@ -123,6 +123,17 @@ return {
   },
 
   -- File bookmark/picker.
+  -- What I would really like w/ harpoon2 is to have a window like:
+  --   path/to/file:23:2 // some comment
+  --   path/to/file:23:2 -- some comment
+  --   path/to/file:23:2 # some comment
+  --   # Comment block not a file at all
+  --   // Comment block not a file at all
+  --   -- Comment block not a file at all
+  --   path/to/file:1:1
+  -- And remember the last position in the harpoon UI too.
+  -- And be able to open all files/pos into the quickfix list, for this I want to get the code on the current line and store it too.
+  -- This way I would have a true bookmarking system where I can also make notes.
   {
     "marcelbeumer/harpoon",
     branch = "harpoon2",
@@ -195,6 +206,7 @@ return {
         end,
 
         create_list_item = function(config, name)
+          -- TODO: should support comment parsing
           if name then
             return { value = name }
           end
