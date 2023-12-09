@@ -5,13 +5,12 @@ return {
   -- Dev icon support.
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
-  -- File tree.
   {
     "kyazdani42/nvim-tree.lua",
-    -- keys = {
-    --   { "<leader>;", "<cmd>NvimTreeToggle<cr>", desc = "Tree toggle" },
-    --   { "<leader>'", "<cmd>NvimTreeFindFile<cr>", desc = "Tree find file" },
-    -- },
+    cmd = {
+      "NvimTreeToggle",
+      "NvimTreeFindFile",
+    },
     opts = {
       view = {
         preserve_window_proportions = true,

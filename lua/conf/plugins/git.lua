@@ -1,6 +1,12 @@
 return {
   {
+    "tpope/vim-fugitive",
+    event = "VeryLazy",
+  },
+
+  {
     "lewis6991/gitsigns.nvim",
+    event = "BufRead",
     opts = {
       signcolumn = true,
       numhl = true,
@@ -46,7 +52,18 @@ return {
     },
   },
 
-  { "sindrets/diffview.nvim" },
+  {
+    "sindrets/diffview.nvim",
+    cmd = {
+      "DiffviewClose",
+      "DiffviewFileHistory",
+      "DiffviewFocusFiles",
+      "DiffviewLog",
+      "DiffviewOpen",
+      "DiffviewRefresh",
+      "DiffviewToggleFiles",
+    },
+  },
 
   {
     "f-person/git-blame.nvim",
