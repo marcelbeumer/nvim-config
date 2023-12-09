@@ -57,14 +57,23 @@ return {
       textobjects = {
         move = {
           enable = true,
-          -- goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
-          -- goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
-          -- goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
-          -- goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
-          goto_next_start = { ["]f"] = "@function.outer" },
-          goto_next_end = { ["]F"] = "@function.outer" },
-          goto_previous_start = { ["[f"] = "@function.outer" },
-          goto_previous_end = { ["[F"] = "@function.outer" },
+          goto_next_start = {
+            ["]f"] = "@function.outer",
+            ["[s"] = "@block.outer",
+          },
+          goto_next_end = {
+            ["]F"] = "@function.outer",
+            ["]S"] = "@block.outer",
+          },
+          goto_previous_start = {
+            ["[f"] = "@function.outer",
+            ["[s"] = "@block.outer",
+            ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+          },
+          goto_previous_end = {
+            ["[F"] = "@function.outer",
+            ["]S"] = "@block.outer",
+          },
         },
       },
     },
