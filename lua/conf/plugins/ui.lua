@@ -45,6 +45,21 @@ return {
   },
 
   {
+    "stevearc/oil.nvim",
+    lazy = false,
+    keys = {
+      { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
+    },
+    opts = {
+      columns = {
+        -- "permissions",
+        -- "size",
+        -- "mtime",
+      },
+    },
+  },
+
+  {
     "echasnovski/mini.files",
     keys = {
       { "<leader>;", "<cmd>lua MiniFiles.open()<cr>", desc = "Files toggle" },
