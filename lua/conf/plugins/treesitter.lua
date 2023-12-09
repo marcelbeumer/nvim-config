@@ -10,9 +10,6 @@ return {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
     },
     init = function()
-      vim.opt.foldmethod = "expr"
-      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-      vim.opt.foldlevel = 99
       if env.NVIM_SYNTAX_HIGHLIGHT == "off" then
         vim.cmd.syntax("off")
       end
