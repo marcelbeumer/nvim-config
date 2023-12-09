@@ -1,10 +1,6 @@
 # nvim-config
 
-Personal nvim config. Known to work for [neovim 0.9.4](https://github.com/neovim/neovim/tree/v0.9.4). Implicit system dependencies may cause errors on other machines. I put effort in keeping the config clean and documented, mostly as a hobby and a bit of OCD, but maybe it benefits other nvimmers too.
-
-> While neovim users are in search of their perfect config, others are doing actual work using VS Code.
->
-> -- <cite>Zen monk, long time ago.</cite>
+Personal nvim config for neovim. Implicit system dependencies may cause errors on other machines.
 
 ## Install
 
