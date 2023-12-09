@@ -72,8 +72,12 @@ return {
     },
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
-      vim.keymap.set("n", "[s", function()
+
+      vim.keymap.set("n", "[p", function()
         require("conf.util.treesitter").jump_to_parent_node()
+      end, {})
+      vim.keymap.set("n", "[i", function()
+        require("conf.util.treesitter").jump_to_less_indented_line()
       end, {})
     end,
   },
