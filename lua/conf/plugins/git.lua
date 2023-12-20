@@ -8,7 +8,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
     opts = {
-      signcolumn = true,
+      signcolumn = false,
       numhl = true,
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
