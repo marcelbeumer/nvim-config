@@ -1,3 +1,4 @@
+require("conf.base.neovide")
 require("conf.base.options")
 require("conf.base.autocmds")
 require("conf.base.cmds")
