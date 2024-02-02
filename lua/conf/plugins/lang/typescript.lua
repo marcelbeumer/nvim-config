@@ -3,11 +3,26 @@ return {
 
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "yioneko/nvim-vtsls",
+    },
     opts = {
       servers = {
-        tsserver = {},
+        vtsls = function()
+          if require("conf.env").NVIM_TS_LSP == "vtsls" then
+            return {}
+          end
+        end,
       },
     },
+  },
+
+  {
+    "yioneko/nvim-vtsls",
+    opts = {},
+    config = function()
+      require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+    end,
   },
 
   {

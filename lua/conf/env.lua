@@ -18,6 +18,13 @@ return {
   -- off
   NVIM_LSP = vim.env.NVIM_LSP or "on",
 
+  -- NVIM_TS_LSP=<volar|vtsls>
+  -- Configures which LSP to use for TypeScript.
+  -- vtsls (default)
+  -- volar
+  -- astro
+  NVIM_TS_LSP = vim.env.NVIM_TS_LSP or "vtsls",
+
   -- NVIM_AUTOFORMAT=<on|off>
   -- Configures using autoformatting on save not.
   -- on (default)

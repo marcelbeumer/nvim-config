@@ -121,8 +121,15 @@ return {
       })
 
       -- Servers are configured in plugins/lang/*
-      for name, cfg in pairs(opts.servers) do
-        lspconfig[name].setup(cfg)
+      for name, conf in pairs(opts.servers) do
+        if type(conf) == "function" then
+          local result = conf()
+          if result then
+            lspconfig[name].setup(result)
+          end
+        else
+          lspconfig[name].setup(conf)
+        end
       end
     end,
   },

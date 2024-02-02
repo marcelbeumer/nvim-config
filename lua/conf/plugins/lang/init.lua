@@ -5,6 +5,7 @@ for _, item in ipairs({
   require("conf.plugins.lang.python"),
   require("conf.plugins.lang.terraform"),
   require("conf.plugins.lang.typescript"),
+  require("conf.plugins.lang.vue"),
   require("conf.plugins.lang.go"),
   require("conf.plugins.lang.yaml"),
 }) do
