@@ -106,6 +106,10 @@ return {
             vim.lsp.buf.format({ async = true })
           end, mopts)
           map("n", "<space>I", util.organize_imports)
+          map("n", "<space>H", function()
+            local enabled = not vim.lsp.inlay_hint.is_enabled(0)
+            vim.lsp.inlay_hint.enable(0, enabled)
+          end, mopts)
 
           map("n", "[r", function()
             util.next_reference(true)
