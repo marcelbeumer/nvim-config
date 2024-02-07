@@ -28,8 +28,9 @@ if env.NVIM_STARTUP ~= "safe" then
       },
     })
     -- vim.cmd([[colorscheme tokyonight]])
-    vim.cmd([[set background=light]])
     -- vim.cmd([[colorscheme melange]])
+    vim.cmd([[set background=light]])
     vim.cmd([[colorscheme catppuccin]])
+    -- vim.cmd([[colorscheme default]])
   end
 end
