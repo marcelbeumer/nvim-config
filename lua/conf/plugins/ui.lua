@@ -77,56 +77,76 @@ return {
     },
   },
 
-  -- Quick file/buffer/lsp/etc pickers.
   {
-    "ibhagwan/fzf-lua",
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.5",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
     keys = {
-      { "<leader>f", fzfUtil.handler("files", fzfUtil.np_small), "Find files" },
-      { "<leader>b", fzfUtil.handler("buffers", fzfUtil.np_large), "Find buffers" },
-      { "<leader>q", fzfUtil.handler("quickfix", fzfUtil.np_large), "Find in quickfix" },
-      { "<leader>Q", fzfUtil.handler("loclist", fzfUtil.np_large), "Find in loclist" },
-      { "<leader>c", fzfUtil.handler("commands", fzfUtil.default), "Find command" },
-      { "<leader>g", fzfUtil.handler("live_grep_resume", fzfUtil.default), "Find with ripgrep" },
-      { "<leader>G", fzfUtil.handler("grep_curbuf", fzfUtil.default), "Find with ripgrep (buffer only)" },
-      { "<leader>h", fzfUtil.handler("help_tags", fzfUtil.default), "Find in help" },
-      { "<leader>lq", fzfUtil.handler("diagnostics_workspace", fzfUtil.default), "Find in diagnostics (workspace)" },
-      { "<leader>lQ", fzfUtil.handler("diagnostics_document", fzfUtil.default), "Find in diagnostics (buffer)" },
-      { "<leader>lr", fzfUtil.handler("lsp_references", fzfUtil.default), "Find in LSP references" },
-      { "<leader>li", fzfUtil.handler("lsp_implementations", fzfUtil.default), "Find in LSP implementations" },
-      { "<leader>ld", fzfUtil.handler("lsp_definitions", fzfUtil.default), "Find in LSP definitions" },
-      { "<leader>lD", fzfUtil.handler("lsp_declarations", fzfUtil.default), "Find in LSP declarations" },
-      { "<leader>lt", fzfUtil.handler("lsp_typedefs", fzfUtil.default), "Find in LSP typedefs" },
-      { "<leader>ls", fzfUtil.handler("lsp_workspace_symbols", fzfUtil.default), "Find in LSP symbols (workspace)" },
-      { "<leader>lS", fzfUtil.handler("lsp_document_symbols", fzfUtil.default), "Find in LSP symbols (buffer)" },
-    },
-    opts = {
-      winopts = { preview = { layout = "vertical" } },
-      previewers = { builtin = { syntax = false } },
-      files = {
-        cwd_prompt = false,
-        file_icons = false,
+      {
+        "<leader>f",
+        "<cmd>lua require('telescope.builtin').find_files({ file_ignore_patterns = { '^vendor/' } })<cr>",
+        "Find files (filtered)",
       },
-      grep = {
-        file_icons = false,
-        git_icons = false,
-        rg_glob = true,
+      {
+        "<leader>F",
+        "<cmd>lua require('telescope.builtin').find_files()<cr>",
+        "Find files (all)",
       },
-      fzf_colors = {
-        ["fg"] = { "fg", "CursorLine" },
-        ["bg"] = { "bg", "Normal" },
-        ["hl"] = { "fg", "Comment" },
-        ["fg+"] = { "fg", "Normal" },
-        ["bg+"] = { "bg", "CursorLine" },
-        ["hl+"] = { "fg", "Statement" },
-        ["info"] = { "fg", "PreProc" },
-        ["prompt"] = { "fg", "Conditional" },
-        ["pointer"] = { "fg", "Exception" },
-        ["marker"] = { "fg", "Keyword" },
-        ["spinner"] = { "fg", "Label" },
-        ["header"] = { "fg", "Comment" },
-        ["gutter"] = { "bg", "Normal" },
+      {
+        "<leader>g",
+        "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",
+        "Live grep",
+      },
+      {
+        "<leader>b",
+        "<cmd>lua require('telescope.builtin').buffers()<cr>",
+        "Buffers",
       },
     },
+    opts = function()
+      return {
+        defaults = {
+          mappings = {
+            i = {
+              ["<C-j>"] = require("telescope.actions").cycle_history_next,
+              ["<C-k>"] = require("telescope.actions").cycle_history_prev,
+              ["<C-p>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+            },
+          },
+        },
+        pickers = {
+          find_files = {
+            disable_devicons = true,
+          },
+          buffers = {
+            disable_devicons = true,
+          },
+          live_grep = {
+            disable_devicons = true,
+          },
+        },
+        extensions = {
+          live_grep_args = {
+            disable_devicons = true,
+          },
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
+        },
+      }
+    end,
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension("live_grep_args")
+      require("telescope").load_extension("fzf")
+    end,
   },
 
   {
