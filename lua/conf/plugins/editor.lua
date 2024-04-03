@@ -219,6 +219,10 @@ return {
           docs = {
             auto_open = false,
           },
+          entries = {
+            -- native = true,
+            -- follow_cursor = true,
+          },
         },
         snippet = {
           expand = function(args)
