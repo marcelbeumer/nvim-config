@@ -10,12 +10,12 @@ return {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
     },
     init = function()
-      if env.NVIM_SYNTAX_HIGHLIGHT == "off" then
+      if env.NVIM_SYNTAX == "off" then
         vim.cmd.syntax("off")
       end
     end,
     opts = {
-      highlight = { enable = env.NVIM_SYNTAX_HIGHLIGHT == "on" },
+      highlight = { enable = env.NVIM_SYNTAX == "on" },
       indent = { enable = false },
       ensure_installed = {
         "bash",

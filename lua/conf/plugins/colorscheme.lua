@@ -12,7 +12,7 @@ return {
         keywords = "NONE",
       },
       on_highlights = function(hl)
-        if env.NVIM_SYNTAX_HIGHLIGHT == "off" then
+        if env.NVIM_SYNTAX == "off" then
           hl.FloatBorder = hl.Normal
         end
       end,
