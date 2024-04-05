@@ -10,7 +10,3 @@ Personal nvim config for neovim. Implicit system dependencies may cause errors o
 ## Usage
 
 Just `nvim`. Optionally use environment variables [defined here](./lua/conf/env.lua). For example: `NVIM_AUTOFORMAT=off NVIM_LSP=off nvim`.
-
-## TODO
-
-- Use harpoon2 and make bookmarks with line:col and to-quickfix command. Then remove bookmarks from own quickfix utils.

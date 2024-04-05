@@ -9,7 +9,8 @@ M.cwd = function()
 end
 
 M.file_path = function()
-  return vim.fn.expand("%")
+  local Path = require("plenary.path")
+  return Path:new(vim.fn.expand("%")):make_relative(vim.loop.cwd())
 end
 
 M.file_path_abs = function()

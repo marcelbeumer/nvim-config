@@ -157,23 +157,69 @@ return {
     opts = {},
   },
 
-  -- File bookmark/picker.
   {
     "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = function()
+      local parse_bookmark = function(value)
+        local filepath, row, col, postfix = string.match(value or "", "(.-):(%d+):(%d+)(.*)")
+
+        if not filepath then
+          -- We received a postfix or no value at all.
+          -- Take information from current window.
+          local pos = vim.api.nvim_win_get_cursor(0)
+          filepath = require("conf.util.fs").file_path()
+          row = pos[1]
+          col = pos[2]
+          postfix = value or ""
+        end
+
+        return {
+          value = filepath .. ":" .. row .. ":" .. col .. postfix,
+          filepath = filepath,
+          row = tonumber(row),
+          col = tonumber(col),
+        }
+      end
+
+      return {
+        bookmarks = {
+          create_list_item = function(_, name)
+            return { value = parse_bookmark(name).value }
+          end,
+
+          select = function(list_item, _, _)
+            local bookmark = parse_bookmark(list_item.value)
+            vim.cmd.edit(bookmark.filepath)
+            vim.api.nvim_win_set_cursor(0, { bookmark.row, bookmark.col })
+          end,
+        },
+      }
+    end,
+
     keys = {
-      { "<C-.>", [[<cmd>lua require("harpoon.ui").nav_next()<cr>]], "Harpoon next" },
-      { "<C-,>", [[<cmd>lua require("harpoon.ui").nav_prev()<cr>]], "Harpoon prev" },
-      { "<leader>p", [[<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>]], "Harpoon quick menu" },
-      { "<leader>a", [[<cmd>lua require("harpoon.mark").add_file()<cr>]], "Harpoon add file" },
-      { "<leader>d", [[<cmd>lua require("harpoon.mark").rm_file()<cr>]], "Harpoon remove file" },
-      { "<leader>1", [[<cmd>lua require("harpoon.term").gotoTerminal(1)<cr>]], "Harpoon terminal #1" },
-      { "<leader>2", [[<cmd>lua require("harpoon.term").gotoTerminal(2)<cr>]], "Harpoon terminal #2" },
-      { "<leader>3", [[<cmd>lua require("harpoon.term").gotoTerminal(3)<cr>]], "Harpoon terminal #3" },
-    },
-    opts = {
-      menu = {
-        width = 120,
-        height = 20,
+      {
+        "<leader>a",
+        function()
+          local postfix = vim.fn.input("Note: ")
+          if postfix ~= "" then
+            postfix = " -- " .. postfix
+          end
+          local harpoon = require("harpoon")
+          local bookmarks = harpoon:list("bookmarks")
+          local item = bookmarks.config.create_list_item(bookmarks.config, postfix)
+          bookmarks:prepend(item)
+        end,
+        desc = "Add bookmark",
+      },
+      {
+        "<C-e>",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list("bookmarks"), { title = "Bookmarks" })
+        end,
+        desc = "Show bookmarks",
       },
     },
   },
