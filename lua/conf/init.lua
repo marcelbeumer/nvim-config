@@ -29,10 +29,12 @@ if env.NVIM_STARTUP ~= "safe" then
     })
     if env.NVIM_DARK == "on" then
       vim.cmd([[colorscheme tokyonight]])
+      -- vim.cmd([[colorscheme retrobox]])
       -- vim.cmd([[colorscheme default]])
     else
       vim.cmd([[set background=light]])
       vim.cmd([[colorscheme catppuccin]])
+      -- vim.cmd([[colorscheme retrobox]])
     end
   end
 end

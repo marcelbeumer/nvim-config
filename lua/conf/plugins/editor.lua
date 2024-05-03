@@ -221,7 +221,7 @@ return {
           },
           entries = {
             -- native = true,
-            -- follow_cursor = true,
+            follow_cursor = true,
           },
         },
         snippet = {

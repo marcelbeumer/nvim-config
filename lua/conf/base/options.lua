@@ -24,7 +24,7 @@ vim.opt.shortmess:remove({ "-S" })
 -- Highlight current line
 vim.o.cursorline = true
 -- Enable line based differ
-vim.opt.diffopt:append({ "linematch:60" })
+-- vim.opt.diffopt:append({ "linematch:60" })
 
 -- Line wrapping.
 vim.o.linebreak = true
