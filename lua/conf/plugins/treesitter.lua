@@ -9,11 +9,6 @@ return {
     dependencies = {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
     },
-    init = function()
-      if env.NVIM_SYNTAX == "off" then
-        vim.cmd.syntax("off")
-      end
-    end,
     opts = {
       highlight = { enable = env.NVIM_SYNTAX == "on" },
       indent = { enable = false },
@@ -71,6 +66,10 @@ return {
       },
     },
     config = function(_, opts)
+      if env.NVIM_TREESITTER ~= "on" then
+        return
+      end
+
       require("nvim-treesitter.configs").setup(opts)
 
       vim.keymap.set("n", "[p", function()

@@ -9,7 +9,7 @@ return {
     event = "BufRead",
     opts = {
       signcolumn = false,
-      numhl = true,
+      numhl = false,
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 

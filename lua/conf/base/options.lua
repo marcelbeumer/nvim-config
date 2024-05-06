@@ -1,3 +1,5 @@
+local env = require("conf.env")
+
 -- Line numbers.
 vim.o.number = true
 vim.o.relativenumber = true
@@ -25,6 +27,13 @@ vim.opt.shortmess:remove({ "-S" })
 vim.o.cursorline = true
 -- Enable line based differ
 -- vim.opt.diffopt:append({ "linematch:60" })
+-- Simple folding
+vim.o.foldmethod = "indent"
+vim.o.foldlevel = 99
+
+-- Perf
+-- vim.o.lazyredraw = true -- may cause issues
+vim.o.ttyfast = true
 
 -- Line wrapping.
 vim.o.linebreak = true
@@ -32,3 +41,7 @@ vim.o.breakat = " ^I!@-+;:,./?" -- removed "*" from default
 
 vim.api.nvim_set_var("netrw_banner", 0)
 vim.api.nvim_set_var("netrw_altv", 1)
+
+if env.NVIM_SYNTAX == "off" then
+  vim.cmd.syntax("off")
+end
