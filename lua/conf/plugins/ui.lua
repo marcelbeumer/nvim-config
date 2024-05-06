@@ -6,45 +6,6 @@ return {
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
   {
-    "kyazdani42/nvim-tree.lua",
-    cmd = {
-      "NvimTreeToggle",
-      "NvimTreeFindFile",
-    },
-    opts = {
-      view = {
-        preserve_window_proportions = true,
-        width = {
-          min = 30,
-          max = 120,
-        },
-        -- float = {
-        --   enable = true,
-        -- },
-      },
-      diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-        icons = { error = "●", warning = "●", hint = "●", info = "●" },
-      },
-      live_filter = {
-        always_show_folders = false,
-      },
-      renderer = {
-        indent_markers = {
-          enable = true,
-        },
-        icons = {
-          show = {
-            folder = false,
-            file = false,
-          },
-        },
-      },
-    },
-  },
-
-  {
     "stevearc/oil.nvim",
     lazy = false,
     keys = {
@@ -55,24 +16,6 @@ return {
         -- "permissions",
         -- "size",
         -- "mtime",
-      },
-    },
-  },
-
-  {
-    "echasnovski/mini.files",
-    keys = {
-      { "<leader>;", "<cmd>lua MiniFiles.open()<cr>", desc = "Files toggle" },
-      { "<leader>'", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", desc = "Files find file" },
-    },
-    opts = {
-      content = {
-        prefix = function(fs_entry)
-          if fs_entry.fs_type == "directory" then
-            return icons.ui.ChevronShortRight .. " ", "MiniFilesDirectory"
-          end
-          return " ", "MiniFilesFile"
-        end,
       },
     },
   },
