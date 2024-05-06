@@ -15,3 +15,11 @@ map("<C-w>ta", ":tabnew<CR>", "Add tab")
 map("<C-w>tc", ":tabclose<CR>", "Close tab")
 map("]b", ":bnext<CR>", "Next buffer")
 map("[b", ":bprev<CR>", "Previous buffer")
+
+vim.keymap.set("n", "<leader>c", function() 
+  if vim.o.colorcolumn == "" then
+  vim.o.colorcolumn = "80"
+  else
+  vim.o.colorcolumn = ""
+  end
+end, { desc = "Toggle colorcolumn (ruler)" })
