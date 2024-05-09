@@ -41,4 +41,8 @@ return {
       end,
     },
   },
+
+  {
+    "ptdewey/darkearth-nvim",
+  },
 }
