@@ -18,7 +18,7 @@ vim.o.updatetime = 250
 vim.o.signcolumn = "yes"
 vim.o.termguicolors = true
 -- Copy paste from and to nvim.
-vim.o.clipboard = "unnamed"
+vim.o.clipboard = "unnamedplus"
 -- Keep some space when scrolling.
 vim.o.scrolloff = 5
 -- Show search result counter.

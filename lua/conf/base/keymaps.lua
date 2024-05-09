@@ -18,8 +18,12 @@ map("[b", ":bprev<CR>", "Previous buffer")
 
 vim.keymap.set("n", "<leader>c", function() 
   if vim.o.colorcolumn == "" then
-  vim.o.colorcolumn = "80"
+    vim.o.colorcolumn = "80"
   else
-  vim.o.colorcolumn = ""
+    vim.o.colorcolumn = ""
   end
 end, { desc = "Toggle colorcolumn (ruler)" })
+
+vim.keymap.set("n", "<leader>s", function() 
+    vim.o.spell = not vim.o.spell
+end, { desc = "Toggle spell checker" })
