@@ -1,3 +1,5 @@
+local env = require("conf.env")
+
 return {
   { "olexsmir/gopher.nvim" },
 
@@ -16,6 +18,11 @@ return {
               functionTypeParameters = true,
               parameterNames = true,
               rangeVariableTypes = true,
+            },
+          },
+          settings = {
+            gopls = {
+              ["local"] = env.NVIM_GOPLS_LOCAL,
             },
           },
         },

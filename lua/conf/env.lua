@@ -49,4 +49,8 @@ return {
   -- wildmenu (default): show completions at bottom of window
   -- off: no cmp at all
   NVIM_CMP = vim.env.NVIM_CMP or "wildmenu",
+
+  -- NVIM_GOPLS_LOCAL="git.company.com"
+  -- Configures gopls local packages for importing grouping to work.
+  NVIM_GOPLS_LOCAL = vim.env.NVIM_GOPLS_LOCAL or "",
 }
