@@ -67,29 +67,35 @@ return {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
     event = "InsertEnter",
+    enabled = env.NVIM_CMP ~= "off",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "saadparwaiz1/cmp_luasnip",
       "L3MON4D3/LuaSnip",
     },
     opts = function()
-      if env.NVIM_CMP == "off" then
-        return
-      end
-
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
       vim.o.pumheight = 10
 
-      local entries = {}
-
+      local entries
+      local performance
       if env.NVIM_CMP == "wildmenu" then
-          entries = {name = 'wildmenu', separator = '|' }
+        entries = { name = "wildmenu", separator = " | " }
+        performance = {
+          debounce = 100,
+          throttle = 100,
+          max_view_entries = 10,
+        }
       elseif env.NVIM_CMP == "menu" then
-          entries = { follow_cursor = true }
+        entries = { native = true }
+        performance = {
+          max_view_entries = 10,
+        }
       end
 
       return {
+        performance = performance,
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
@@ -115,31 +121,40 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
+          ["<C-g>"] = function()
+            if cmp.visible_docs() then
+              cmp.close_docs()
+            else
+              cmp.open_docs()
+            end
+          end,
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<S-CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          }),
           ["<C-CR>"] = function(fallback)
             cmp.abort()
             fallback()
           end,
         }),
         sources = {
-          { name = "luasnip" },
           { name = "nvim_lsp" },
         },
         formatting = {
           fields = { "abbr" },
         },
-        sorting = defaults.sorting,
       }
     end,
     config = function(_, opts)
       local cmp = require("cmp")
+      local compare = require("cmp.config.compare")
+
       cmp.setup(opts)
       cmp.setup.filetype({ "go" }, {
-        preselect = "None", -- gopls preselects which annoys
+        -- preselect = "None", -- gopls preselects which annoys
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            compare.order, -- gopls ordering is ok as it is
+          },
+        },
       })
     end,
   },
