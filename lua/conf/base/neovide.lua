@@ -1,4 +1,26 @@
-if vim.g.neovide then
+local M = {}
+
+M.setup_keymaps = function()
+  vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
+  vim.keymap.set("v", "<D-c>", '"+y') -- Copy
+  vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
+  vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
+  vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
+  vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
+  vim.api.nvim_set_keymap("t", "<D-v>", '<C-\\><C-o>"+p', { noremap = true, silent = true }) -- Terminal paste
+
+  local change_scale_factor = function(delta)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
+  end
+  vim.keymap.set("n", "<C-=>", function()
+    change_scale_factor(0.1)
+  end)
+  vim.keymap.set("n", "<C-->", function()
+    change_scale_factor(-0.1)
+  end)
+end
+
+M.setup = function()
   vim.g.neovide_remember_window_size = true
   vim.g.neovide_window_blurred = false
   vim.g.neovide_floating_shadow = false
@@ -14,23 +36,11 @@ if vim.g.neovide then
   vim.g.neovide_padding_left = 0
   vim.g.neovide_cursor_animate_command_line = false
   vim.o.guifont = "JetBrainsMonoNL Nerd Font:h13:w-1"
-
-  vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
-  vim.keymap.set("v", "<D-c>", '"+y') -- Copy
-  vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
-  vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
-  vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
-  vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
-  vim.api.nvim_set_keymap("t", "<D-v>", '<C-\\><C-o>"+p', { noremap = true, silent = true }) -- Terminal paste
-
   vim.g.neovide_scale_factor = 1.0
-  local change_scale_factor = function(delta)
-    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
+
+  if vim.g.neovide then
+    M.setup_keymaps()
   end
-  vim.keymap.set("n", "<C-=>", function()
-    change_scale_factor(0.1)
-  end)
-  vim.keymap.set("n", "<C-->", function()
-    change_scale_factor(-0.1)
-  end)
 end
+
+return M
