@@ -5,7 +5,7 @@ if env.NVIM_STARTUP ~= "safe" then
   require("conf.globals")
 
   if env.NVIM_STARTUP ~= "base" then
-    require("conf.extra.osc52").setup()
+    -- require("conf.extra.osc52").setup()
     require("conf.extra.layout").setup()
     require("conf.extra.panels").setup()
     require("conf.extra.filepath").setup()
