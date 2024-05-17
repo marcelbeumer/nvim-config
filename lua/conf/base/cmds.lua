@@ -18,7 +18,3 @@ end, {})
 vim.api.nvim_create_user_command("TablineHide", function()
   vim.o.showtabline = 0
 end, {})
-
-vim.api.nvim_create_user_command("ColorSchemeNext", function()
-  require("conf.util.theme_cycler")()
-end, {})
