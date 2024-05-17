@@ -16,14 +16,16 @@ map("<C-w>tc", ":tabclose<CR>", "Close tab")
 map("]b", ":bnext<CR>", "Next buffer")
 map("[b", ":bprev<CR>", "Previous buffer")
 
-vim.keymap.set("n", "<leader>c", function() 
+map("<leader>c", function()
   if vim.o.colorcolumn == "" then
     vim.o.colorcolumn = "80"
   else
     vim.o.colorcolumn = ""
   end
-end, { desc = "Toggle colorcolumn (ruler)" })
+end, "Toggle colorcolumn (ruler)")
 
-vim.keymap.set("n", "<leader>s", function() 
-    vim.o.spell = not vim.o.spell
-end, { desc = "Toggle spell checker" })
+map("<leader>s", function()
+  vim.o.spell = not vim.o.spell
+end, "Toggle spell checker")
+
+map("<leader>d", vim.diagnostic.setqflist, "Set diagnostics to quickfix")

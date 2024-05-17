@@ -3,12 +3,11 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    init = function()
-      vim.o.updatetime = 250
-    end,
     opts = {
+      -- Servers are configured in plugins/lang/*
       servers = {},
     },
+
     config = function(_, opts)
       if require("conf.env").NVIM_LSP == "off" then
         return
@@ -34,89 +33,47 @@ return {
         },
       })
 
-      vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-        callback = function()
-          util.organize_imports_sync()
-        end,
-      })
-
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(args)
-          local bufnr = args.buf
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if client == nil then
             return
           end
 
-          util.disable_lsp_semantic_highlighting()
-
-          if client.server_capabilities.completionProvider then
-            vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-          end
-          if client.server_capabilities.definitionProvider then
-            vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
-          end
-
-          if client.supports_method("textDocument/documentHighlight") then
-            local enabled = false
-            local update = function()
-              if enabled then
-                vim.lsp.buf.document_highlight()
-              end
-            end
-
-            local clear = function()
-              if enabled then
-                vim.lsp.buf.clear_references()
-              end
-            end
-
-            map("n", "<space>h", function()
-              enabled = not enabled
-              vim.lsp.buf.clear_references()
-              update()
-            end, { buffer = bufnr })
-
-            local hl = vim.api.nvim_create_augroup("LspHighlight", { clear = false })
-            vim.api.nvim_clear_autocmds({ group = hl, buffer = bufnr })
-            vim.api.nvim_create_autocmd("CursorHold", { group = hl, buffer = bufnr, callback = update })
-            vim.api.nvim_create_autocmd("CursorHoldI", { group = hl, buffer = bufnr, callback = update })
-            vim.api.nvim_create_autocmd("CursorMoved", { group = hl, buffer = bufnr, callback = clear })
-          end
-
-          local mopts = { buffer = bufnr }
-          map("n", "gD", vim.lsp.buf.declaration, mopts)
-          map("n", "gd", vim.lsp.buf.definition, mopts)
-          map("n", "gt", vim.lsp.buf.type_definition, mopts)
-          map("n", "K", vim.lsp.buf.hover, mopts)
-          map("n", "gi", vim.lsp.buf.implementation, mopts)
-          map("n", "<C-k>", vim.lsp.buf.signature_help, mopts)
-          map("i", "<C-y>", vim.lsp.buf.signature_help, mopts)
-          map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, mopts)
-          map("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, mopts)
+          local opts = { buffer = args.buf }
+          map("n", "<leader>q", vim.lsp.buf.document_highlight, opts)
+          map("n", "<space>h", vim.lsp.buf.document_highlight, opts)
+          map("n", "gD", vim.lsp.buf.declaration, opts)
+          map("n", "gd", vim.lsp.buf.definition, opts)
+          map("n", "gt", vim.lsp.buf.type_definition, opts)
+          map("n", "K", vim.lsp.buf.hover, opts)
+          map("n", "gi", vim.lsp.buf.implementation, opts)
+          map("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+          map("i", "<C-y>", vim.lsp.buf.signature_help, opts)
+          map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+          map("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
           map("n", "<space>wl", function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, mopts)
-          map("n", "<space>D", vim.lsp.buf.type_definition, mopts)
-          map("n", "<space>rn", vim.lsp.buf.rename, mopts)
-          map({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, mopts)
-          map("n", "gr", vim.lsp.buf.references, mopts)
+          end, opts)
+          map("n", "<space>rn", vim.lsp.buf.rename, opts)
+          map({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+          map("n", "gr", vim.lsp.buf.references, opts)
           map("n", "<space>f", function()
             vim.lsp.buf.format({ async = true })
-          end, mopts)
+          end, opts)
           map("n", "<space>I", util.organize_imports)
           map("n", "<space>H", function()
-            local enabled = not vim.lsp.inlay_hint.is_enabled(0)
-            vim.lsp.inlay_hint.enable(0, enabled)
-          end, mopts)
+            local enabled = not vim.lsp.inlay_hint.is_enabled()
+            vim.lsp.inlay_hint.enable(enabled)
+          end, opts)
 
           map("n", "[r", function()
             util.next_reference(true)
-          end, mopts)
+          end, opts)
           map("n", "]r", function()
             util.next_reference()
-          end, mopts)
+          end, opts)
         end,
       })
 

@@ -90,13 +90,11 @@ M.codeaction_sync = function(client, action, only, wait_ms)
       if r.edit and not vim.tbl_isempty(r.edit) then
         vim.lsp.util.apply_workspace_edit(r.edit, client.offset_encoding)
       end
-      if type(r.command) == "table" then
-        if type(r.command) == "table" and r.command.arguments then
-          for _, arg in pairs(r.command.arguments) do
-            if action == nil or arg["Fix"] == action then
-              vim.lsp.buf.execute_command(r.command)
-              return
-            end
+      if type(r.command) == "table" and r.command.arguments then
+        for _, arg in pairs(r.command.arguments) do
+          if action == nil or arg["Fix"] == action then
+            vim.lsp.buf.execute_command(r.command)
+            return
           end
         end
       end

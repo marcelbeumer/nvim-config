@@ -1,5 +1,7 @@
 local env = require("conf.env")
 
+-- Use clipboard provider.
+vim.o.clipboard = "unnamedplus"
 -- Line numbers.
 vim.o.number = true
 vim.o.relativenumber = true
@@ -19,11 +21,6 @@ vim.o.cursorline = true
 -- Simple folding
 vim.o.foldmethod = "indent"
 vim.o.foldlevel = 99
-
-vim.o.ttyfast = true
-
--- Copy paste from and to nvim.
-vim.o.clipboard = "unnamedplus"
 
 -- Line wrapping.
 vim.o.linebreak = true

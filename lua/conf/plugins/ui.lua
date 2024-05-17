@@ -167,7 +167,6 @@ return {
     },
   },
 
-  -- See which key bindings work.
   {
     "folke/which-key.nvim",
     opts = {
@@ -180,23 +179,6 @@ return {
     init = function()
       vim.o.timeoutlen = 500
     end,
-  },
-
-  {
-    "folke/trouble.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>", "Trouble toggle" },
-      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble workspace diagnostics" },
-      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble buffer diagnostics" },
-      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", "Trouble loclist" },
-      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", "Trouble quickfix" },
-      { "<leader>xlr", "<cmd>TroubleToggle lsp_references<cr>", "Trouble LSP references" },
-      { "<leader>xli", "<cmd>TroubleToggle lsp_implementations<cr>", "Trouble LSP implementations" },
-      { "<leader>xld", "<cmd>TroubleToggle lsp_definitions<cr>", "Trouble LSP definitions" },
-      { "<leader>xlt", "<cmd>TroubleToggle lsp_type_definitions<cr>", "Trouble LSP type definitions" },
-    },
-    opts = {},
   },
 
   {

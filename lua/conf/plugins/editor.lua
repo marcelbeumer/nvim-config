@@ -180,6 +180,7 @@ return {
         end
         return { timeout_ms = 500, lsp_fallback = true }
       end,
+
       formatters = {
         shfmt = {
           prepend_args = { "-i", "2" },
