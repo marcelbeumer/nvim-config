@@ -43,7 +43,8 @@ return {
 
           local opts = { buffer = args.buf }
           map("n", "<leader>q", vim.lsp.buf.document_highlight, opts)
-          map("n", "<space>h", vim.lsp.buf.document_highlight, opts)
+          map("n", "<space>ha", vim.lsp.buf.document_highlight, opts)
+          map("n", "<space>hc", vim.lsp.buf.clear_references, opts)
           map("n", "gD", vim.lsp.buf.declaration, opts)
           map("n", "gd", vim.lsp.buf.definition, opts)
           map("n", "gt", vim.lsp.buf.type_definition, opts)
