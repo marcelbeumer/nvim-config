@@ -29,3 +29,4 @@ map("<leader>s", function()
 end, "Toggle spell checker")
 
 map("<leader>d", vim.diagnostic.setqflist, "Set diagnostics to quickfix")
+map("<space>d", vim.diagnostic.open_float, "Show diagnostics in floating window")
