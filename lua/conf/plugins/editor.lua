@@ -2,11 +2,6 @@ local env = require("conf.env")
 
 return {
   {
-    "echasnovski/mini.comment",
-    opts = {},
-  },
-
-  {
     "echasnovski/mini.pairs",
     event = "InsertEnter",
     keys = {
