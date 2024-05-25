@@ -47,13 +47,27 @@ M.statusline = function()
   return string.format("%s %%=%s %s %s", file_path, diagnostics(), line_col, position)
 end
 
+local function debounce(callback, delay)
+  local timer = nil
+  return function()
+    if timer then
+      return
+    end
+    timer = vim.defer_fn(function()
+      timer = nil
+      callback()
+    end, delay)
+  end
+end
+
 M.setup = function()
   vim.o.statusline = "%!v:lua.require('conf.extra.statusline').statusline()"
+
   vim.api.nvim_create_autocmd("DiagnosticChanged", {
-    callback = function()
+    callback = debounce(function()
       diagnostics_cached = ""
-      vim.cmd("redrawstatus")
-    end,
+      vim.cmd.redrawstatus()
+    end, 200),
     group = vim.api.nvim_create_augroup("UpdateStatusline", { clear = true }),
   })
 end
