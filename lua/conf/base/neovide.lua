@@ -35,8 +35,6 @@ M.setup = function()
   vim.g.neovide_padding_right = 0
   vim.g.neovide_padding_left = 0
   vim.g.neovide_cursor_animate_command_line = false
-  vim.o.guifont = "JetBrainsMonoNL Nerd Font:h13:w-1"
-  vim.g.neovide_scale_factor = 1.0
 
   if vim.g.neovide then
     M.setup_keymaps()
