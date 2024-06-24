@@ -75,6 +75,7 @@ return {
 
       local entries
       local performance
+      local autocomplete
       if env.NVIM_CMP == "wildmenu" then
         entries = { name = "wildmenu", separator = " | " }
         performance = {
@@ -87,11 +88,18 @@ return {
         performance = {
           max_view_entries = 10,
         }
+      elseif env.NVIM_CMP == "triggermenu" then
+        autocomplete = false
+        entries = { native = true }
+        performance = {
+          max_view_entries = 10,
+        }
       end
 
       return {
         performance = performance,
         completion = {
+          autocomplete = autocomplete,
           completeopt = "menu,menuone,noinsert",
         },
         window = {
@@ -115,6 +123,7 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-CR>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<C-g>"] = function()
             if cmp.visible_docs() then

@@ -20,9 +20,9 @@ return {
 
   -- NVIM_DARK=<on|off>
   -- Configures having a dark colortheme.
-  -- on
-  -- off (default)
-  NVIM_DARK = vim.env.NVIM_DARK or "off",
+  -- on (default)
+  -- off
+  NVIM_DARK = vim.env.NVIM_DARK or "on",
 
   -- NVIM_LSP=<on|off>
   -- Configures using LSP or not.
@@ -46,9 +46,10 @@ return {
   -- NVIM_CMP=<off|on|silent>
   -- Configures cmp "mode".
   -- menu: regular autocomplete popup menu
-  -- wildmenu (default): show completions at bottom of window
-  -- off: no cmp at all
-  NVIM_CMP = vim.env.NVIM_CMP or "wildmenu",
+  -- wildmenu: show completions at bottom of window
+  -- triggermenu: manual trigger of popup menu
+  -- off (default): no cmp at all
+  NVIM_CMP = vim.env.NVIM_CMP or "off",
 
   -- NVIM_GOPLS_LOCAL="git.company.com"
   -- Configures gopls local packages for importing grouping to work.
