@@ -1,5 +1,6 @@
 local env = require("conf.env")
 
+vim.o.termguicolors = true
 -- Use clipboard provider.
 vim.o.clipboard = "unnamedplus"
 -- Line numbers.
