@@ -64,6 +64,7 @@ return {
         pickers = {
           find_files = {
             disable_devicons = true,
+            follow = true,
           },
           buffers = {
             disable_devicons = true,
