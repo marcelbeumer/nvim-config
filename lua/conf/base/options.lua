@@ -23,7 +23,7 @@ vim.o.cursorline = true
 vim.o.foldmethod = "indent"
 vim.o.foldlevel = 99
 -- Omnicomplete
-vim.o.completeopt = "menu,menuone,noinsert"
+vim.o.completeopt = "menu,menuone,noinsert,fuzzy"
 
 -- Line wrapping.
 vim.o.linebreak = true
