@@ -36,9 +36,7 @@ require("lazy").setup("conf.plugins", {
   },
 })
 
-if env.NVIM_DARK == "on" then
-  vim.cmd([[colorscheme default]])
-else
+vim.cmd([[colorscheme default]])
+if env.NVIM_DARK == "off" then
   vim.cmd([[set background=light]])
-  vim.cmd([[colorscheme catppuccin]])
 end
