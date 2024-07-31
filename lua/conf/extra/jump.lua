@@ -20,10 +20,10 @@ local function jump_to_less_indented_line(line_match)
 end
 
 M.setup = function()
-  vim.keymap.set("n", "<leader>jp", function()
+  vim.keymap.set("n", "gp", function()
     jump_to_less_indented_line("%S")
   end, {})
-  vim.keymap.set("n", "<leader>jP", function()
+  vim.keymap.set("n", "gP", function()
     jump_to_less_indented_line("%s?func%s")
   end, {})
 end
