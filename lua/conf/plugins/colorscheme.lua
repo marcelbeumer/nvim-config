@@ -22,4 +22,13 @@ return {
       end,
     },
   },
+
+  {
+    "jackplus-xyz/binary.nvim",
+    opts = {
+      colors = {
+        bg = "#00CA9E",
+      },
+    },
+  },
 }
