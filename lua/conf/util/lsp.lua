@@ -22,10 +22,9 @@ end
 
 M.next_reference = function(reverse)
   local on_list = function(args)
-    local uri = args.context.params.textDocument.uri
-    local fname = vim.uri_to_fname(uri)
-    local position = args.context.params.position
-    local curr_pos = { lnum = position.line + 1, col = position.character + 1 }
+    local fname = vim.api.nvim_buf_get_name(0)
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    local curr_pos = { lnum = cursor_pos[1], col = cursor_pos[2] + 1 }
 
     local items = vim.tbl_extend("keep", {}, args.items)
     table.sort(items, sort_pos_asc)
