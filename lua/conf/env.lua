@@ -8,9 +8,9 @@ return {
 
   -- NVIM_TREESITTER=<on|off>
   -- Configures using treesitter or not.
-  -- on
-  -- off (default)
-  NVIM_TREESITTER = vim.env.NVIM_TREESITTER or "off",
+  -- on (default)
+  -- off
+  NVIM_TREESITTER = vim.env.NVIM_TREESITTER or "on",
 
   -- NVIM_SYNTAX=<on|off>
   -- Configures having syntax highlighting or not.
