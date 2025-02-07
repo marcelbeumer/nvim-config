@@ -17,21 +17,21 @@ return {
       local util = require("conf.util.lsp")
       local map = vim.keymap.set
 
-      lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
-        handlers = {
-          ["textDocument/hover"] = function(err, result, ctx, config)
-            local final_config = vim.tbl_deep_extend("force", config or {}, { border = "rounded" })
-            local buf_id, win_id = vim.lsp.handlers.hover(err, result, ctx, final_config)
-
-            if win_id ~= nil then
-              vim.api.nvim_win_set_option(win_id, "linebreak", true)
-              vim.api.nvim_win_set_option(win_id, "showbreak", "NONE")
-              return buf_id, win_id
-            end
-          end,
-          ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-        },
-      })
+      -- lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+      --   handlers = {
+      --     ["textDocument/hover"] = function(err, result, ctx, config)
+      --       local final_config = vim.tbl_deep_extend("force", config or {}, { border = "rounded" })
+      --       local buf_id, win_id = vim.lsp.handlers.hover(err, result, ctx, final_config)
+      --
+      --       if win_id ~= nil then
+      --         vim.api.nvim_win_set_option(win_id, "linebreak", true)
+      --         vim.api.nvim_win_set_option(win_id, "showbreak", "NONE")
+      --         return buf_id, win_id
+      --       end
+      --     end,
+      --     ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+      --   },
+      -- })
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
