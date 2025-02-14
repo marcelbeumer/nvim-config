@@ -10,11 +10,3 @@ vim.cmd([[
     return system('date "+%Y-%m-%d-%H%M-%S" | tr -d "\n"')
   endfunction
 ]])
-
--- Tabline show/hide
-vim.api.nvim_create_user_command("TablineShow", function()
-  vim.o.showtabline = 2
-end, {})
-vim.api.nvim_create_user_command("TablineHide", function()
-  vim.o.showtabline = 0
-end, {})
