@@ -8,21 +8,15 @@ return {
 
   -- NVIM_TREESITTER=<on|off>
   -- Configures using treesitter or not.
-  -- on (default)
-  -- off
-  NVIM_TREESITTER = vim.env.NVIM_TREESITTER or "on",
+  -- on
+  -- off (default)
+  NVIM_TREESITTER = vim.env.NVIM_TREESITTER or "off",
 
   -- NVIM_SYNTAX=<on|off>
   -- Configures having syntax highlighting or not.
   -- on
   -- off (default)
   NVIM_SYNTAX = vim.env.NVIM_SYNTAX or "off",
-
-  -- NVIM_DARK=<on|off>
-  -- Configures having a dark colortheme.
-  -- on (default)
-  -- off
-  NVIM_DARK = vim.env.NVIM_DARK or "on",
 
   -- NVIM_LSP=<on|off>
   -- Configures using LSP or not.
@@ -42,14 +36,6 @@ return {
   -- on (default)
   -- off
   NVIM_AUTOFORMAT = vim.env.NVIM_AUTOFORMAT or "on",
-
-  -- NVIM_CMP=<off|on|silent>
-  -- Configures cmp "mode".
-  -- menu: regular autocomplete popup menu
-  -- wildmenu: show completions at bottom of window
-  -- triggermenu: manual trigger of popup menu
-  -- off (default): no cmp at all
-  NVIM_CMP = vim.env.NVIM_CMP or "off",
 
   -- NVIM_GOPLS_LOCAL="git.company.com"
   -- Configures gopls local packages for importing grouping to work.

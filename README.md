@@ -10,3 +10,8 @@ Personal nvim config for neovim. Implicit system dependencies may cause errors o
 ## Usage
 
 Just `nvim`. Optionally use environment variables [defined here](./lua/conf/env.lua). For example: `NVIM_AUTOFORMAT=off NVIM_LSP=off nvim`.
+
+## Notable plugins no longer used
+
+- "jackplus-xyz/binary.nvim": awesome single color colorscheme, but unpractical with UI (selection etc).
+

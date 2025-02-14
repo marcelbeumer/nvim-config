@@ -5,6 +5,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     version = false,
     build = ":TSUpdate",
+    enabled = env.NVIM_TREESITTER == "on",
     opts = {
       highlight = { enable = env.NVIM_SYNTAX == "on" },
       indent = { enable = false },
@@ -35,9 +36,7 @@ return {
       },
     },
     config = function(_, opts)
-      if env.NVIM_TREESITTER == "on" then
-        require("nvim-treesitter.configs").setup(opts)
-      end
+      require("nvim-treesitter.configs").setup(opts)
     end,
   },
 }
