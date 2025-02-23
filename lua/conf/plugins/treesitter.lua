@@ -5,10 +5,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     version = false,
     build = ":TSUpdate",
-    enabled = env.NVIM_TREESITTER == "on",
     opts = {
-      highlight = { enable = env.NVIM_SYNTAX == "on" },
-      indent = { enable = false },
+      highlight = {
+        enable = true,
+      },
+      indent = {
+        enable = false,
+      },
       ensure_installed = {
         "bash",
         "c",

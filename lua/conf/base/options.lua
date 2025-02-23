@@ -28,7 +28,3 @@ vim.o.completeopt = "menu,menuone,noinsert,fuzzy"
 -- Line wrapping.
 vim.o.linebreak = true
 vim.o.breakat = " ^I!@-+;:,./?" -- removed "*" from default
-
-if env.NVIM_SYNTAX == "off" then
-  vim.cmd.syntax("off")
-end

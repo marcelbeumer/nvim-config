@@ -17,6 +17,7 @@ require("conf.extra.layout").setup()
 require("conf.extra.panels").setup()
 require("conf.extra.filepath").setup()
 require("conf.extra.quickfix").setup()
+require("conf.extra.colorscheme").setup()
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -35,5 +36,3 @@ require("lazy").setup("conf.plugins", {
     enabled = false,
   },
 })
-
-vim.cmd([[set background=light]])

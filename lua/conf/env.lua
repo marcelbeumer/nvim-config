@@ -6,18 +6,6 @@ return {
   -- safe: nvim without any user config
   NVIM_STARTUP = vim.env.NVIM_STARTUP or "normal",
 
-  -- NVIM_TREESITTER=<on|off>
-  -- Configures using treesitter or not.
-  -- on
-  -- off (default)
-  NVIM_TREESITTER = vim.env.NVIM_TREESITTER or "off",
-
-  -- NVIM_SYNTAX=<on|off>
-  -- Configures having syntax highlighting or not.
-  -- on
-  -- off (default)
-  NVIM_SYNTAX = vim.env.NVIM_SYNTAX or "off",
-
   -- NVIM_LSP=<on|off>
   -- Configures using LSP or not.
   -- on (default)
