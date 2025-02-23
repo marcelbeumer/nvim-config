@@ -124,4 +124,11 @@ return {
       },
     },
   },
+
+  {
+    "fredrikaverpil/godoc.nvim",
+    build = "go install github.com/lotusirous/gostdsym/stdsym@latest",
+    cmd = { "GoDoc" },
+    opts = {},
+  },
 }
