@@ -93,13 +93,13 @@ M.toggle_panel = function(direction)
 end
 
 M.setup = function()
-  vim.keymap.set("n", "<C-1>", function()
+  vim.keymap.set("n", "<leader>pj", function()
     M.toggle_panel("j")
   end, {})
-  vim.keymap.set("n", "<C-2>", function()
+  vim.keymap.set("n", "<leader>pl", function()
     M.toggle_panel("l")
   end, {})
-  vim.keymap.set("n", "<C-3>", function()
+  vim.keymap.set("n", "<leader>pk", function()
     M.toggle_panel("k")
   end, {})
 end
