@@ -1,11 +1,4 @@
 return {
-  -- NVIM_STARTUP=<normal|base|safe|plugreg>
-  -- Starts nvim in different modes:
-  -- normal: normal startup (default)
-  -- base: only base settings, no plugin/lsp setup
-  -- safe: nvim without any user config
-  NVIM_STARTUP = vim.env.NVIM_STARTUP or "normal",
-
   -- NVIM_LSP=<on|off>
   -- Configures using LSP or not.
   -- on (default)
