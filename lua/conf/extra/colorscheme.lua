@@ -26,6 +26,7 @@ end
 M.setup = function()
   vim.api.nvim_create_user_command("LessColors", less_colors, {})
   vim.cmd([[set background=light]])
+  vim.cmd([[highlight! link ColorColumn CursorLine]])
   less_colors()
 end
 
