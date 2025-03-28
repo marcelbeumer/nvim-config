@@ -24,6 +24,9 @@ vim.o.foldmethod = "indent"
 vim.o.foldlevel = 99
 -- Omnicomplete
 vim.o.completeopt = "menu,menuone,noinsert,fuzzy"
+-- Formatting
+vim.o.textwidth = 79
+vim.o.formatoptions = "croqj" -- use gw; gq will be set by lsp/conform
 
 -- Line wrapping.
 vim.o.linebreak = true
