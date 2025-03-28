@@ -14,7 +14,7 @@ return {
       end
 
       local lspconfig = require("lspconfig")
-      local util = require("conf.util.lsp")
+      local util = require("conf.lsp")
       local map = vim.keymap.set
 
       vim.api.nvim_create_autocmd("LspAttach", {

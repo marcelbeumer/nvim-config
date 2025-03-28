@@ -34,7 +34,7 @@ return {
       { "<leader><leader>k", "<cmd>lua require('dap').step_out()<cr>", desc = "DAP step out" },
     },
     config = function(_, opts)
-      local icons = require("conf.util.icons")
+      local icons = require("conf.icons")
       local dap = require("dap")
       dap.adapters = opts.adapters
       dap.configurations = opts.configurations

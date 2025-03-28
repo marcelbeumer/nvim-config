@@ -1,6 +1,0 @@
-require("conf.base.neovide").setup()
-require("conf.base.options")
-require("conf.base.autocmds")
-require("conf.base.cmds")
-require("conf.base.keymaps")
-require("conf.base.diagnostic")

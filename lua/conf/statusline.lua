@@ -1,4 +1,4 @@
-local icons = require("conf.util.icons")
+local icons = require("conf.icons")
 
 local M = {}
 
@@ -61,7 +61,7 @@ local function debounce(callback, delay)
 end
 
 M.setup = function()
-  vim.o.statusline = "%!v:lua.require('conf.extra.statusline').statusline()"
+  vim.o.statusline = "%!v:lua.require('conf.statusline').statusline()"
 
   vim.api.nvim_create_autocmd("DiagnosticChanged", {
     callback = debounce(function()

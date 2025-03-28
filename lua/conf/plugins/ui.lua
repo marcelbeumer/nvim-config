@@ -438,7 +438,7 @@ return {
           -- We received a postfix or no value at all.
           -- Take information from current window.
           local pos = vim.api.nvim_win_get_cursor(0)
-          filepath = require("conf.util.fs").file_path()
+          filepath = require("conf.fs").file_path()
           row = pos[1]
           col = pos[2]
           postfix = value or ""

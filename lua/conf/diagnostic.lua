@@ -1,4 +1,4 @@
-local icons = require("conf.util.icons")
+local icons = require("conf.icons")
 
 vim.diagnostic.config({
   severity_sort = true,

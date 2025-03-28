@@ -1,14 +1,19 @@
 local env = require("conf.env")
 
 require("conf.globals")
-require("conf.base")
-require("conf.extra.statusline").setup()
-require("conf.extra.jump").setup()
-require("conf.extra.layout").setup()
-require("conf.extra.panels").setup()
-require("conf.extra.filepath").setup()
-require("conf.extra.quickfix").setup()
-require("conf.extra.colorscheme").setup()
+require("conf.neovide").setup()
+require("conf.options")
+require("conf.autocmds")
+require("conf.cmds")
+require("conf.keymaps")
+require("conf.diagnostic")
+require("conf.statusline").setup()
+require("conf.jump").setup()
+require("conf.layout").setup()
+require("conf.panels").setup()
+require("conf.filepath").setup()
+require("conf.quickfix").setup()
+require("conf.colorscheme").setup()
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

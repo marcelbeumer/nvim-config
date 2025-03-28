@@ -1,8 +1,8 @@
 local M = {}
 
 M.setup = function()
-  local yank = require("conf.util.yank")
-  local fs = require("conf.util.fs")
+  local yank = require("conf.yank")
+  local fs = require("conf.fs")
 
   local yank_fn = function(fn)
     return function()
