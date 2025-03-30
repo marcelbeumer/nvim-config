@@ -11,27 +11,26 @@ local diagnostics = function()
 
   local diagnostics = vim.diagnostic.get(0, {})
   local severity = vim.diagnostic.severity
-  local icons = icons.diagnostics
-  local icons = {
-    [severity.ERROR] = icons.Error,
-    [severity.WARN] = icons.Warning,
-    [severity.HINT] = icons.Hint,
-    [severity.INFO] = icons.Information,
+  local diag_icon = {
+    [severity.ERROR] = icons.diagnostics.Error,
+    [severity.WARN] = icons.diagnostics.Warning,
+    [severity.HINT] = icons.diagnostics.Hint,
+    [severity.INFO] = icons.diagnostics.Information,
   }
-  local counts = {
+  local totals = {
     [severity.ERROR] = 0,
     [severity.WARN] = 0,
     [severity.HINT] = 0,
     [severity.INFO] = 0,
   }
   for _, d in ipairs(diagnostics) do
-    counts[d.severity] = counts[d.severity] + 1
+    totals[d.severity] = totals[d.severity] + 1
   end
 
   local status = ""
-  for severity, count in pairs(counts) do
-    if count > 0 then
-      status = status .. string.format("%s %d ", icons[severity], count)
+  for level, total in pairs(totals) do
+    if total > 0 then
+      status = status .. string.format("%s %d ", diag_icon[level], total)
     end
   end
 
