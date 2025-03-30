@@ -1,10 +1,5 @@
 return {
   {
-    "tpope/vim-fugitive",
-    event = "VeryLazy",
-  },
-
-  {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
     opts = {
@@ -42,34 +37,6 @@ return {
           gs.diffthis("~")
         end, "Diff This ~")
       end,
-    },
-  },
-
-  {
-    "kdheepak/lazygit.nvim",
-    keys = {
-      { "<leader>L", "<cmd>LazyGit<cr>", "Open lazygit" },
-    },
-  },
-
-  {
-    "sindrets/diffview.nvim",
-    cmd = {
-      "DiffviewClose",
-      "DiffviewFileHistory",
-      "DiffviewFocusFiles",
-      "DiffviewLog",
-      "DiffviewOpen",
-      "DiffviewRefresh",
-      "DiffviewToggleFiles",
-    },
-  },
-
-  {
-    "f-person/git-blame.nvim",
-    cmd = "GitBlameToggle",
-    opts = {
-      enabled = false,
     },
   },
 }

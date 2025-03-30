@@ -6,8 +6,58 @@ return {
       "nvim-neotest/nvim-nio",
     },
     opts = {
-      adapters = {},
-      configurations = {},
+      adapters = {
+        go = {
+          type = "server",
+          port = "${port}",
+          executable = {
+            command = "dlv",
+            args = { "dap", "-l", "127.0.0.1:${port}" },
+          },
+        },
+      },
+      configurations = {
+        go = {
+          {
+            type = "go",
+            name = "Debug (file)",
+            request = "launch",
+            program = "${file}",
+          },
+          -- configuration for debugging test files
+          {
+            type = "go",
+            name = "Debug test (file)",
+            request = "launch",
+            mode = "test",
+            program = "${file}",
+          },
+          -- works with go.mod packages and sub packages
+          {
+            type = "go",
+            name = "Debug test (go.mod)",
+            request = "launch",
+            mode = "test",
+            program = "./${relativeFileDirname}",
+          },
+          {
+            type = "go",
+            name = "Debug test w/ args (go.mod)",
+            request = "launch",
+            mode = "test",
+            program = "./${relativeFileDirname}",
+            args = function()
+              return coroutine.create(function(co)
+                local default = _G.__go_dlv_last_args or "-test.run=TestXXX"
+                vim.ui.input({ prompt = "dlv args:", default = default }, function(args)
+                  _G.__go_dlv_last_args = args
+                  coroutine.resume(co, vim.split(_G.__go_dlv_last_args, " "))
+                end)
+              end)
+            end,
+          },
+        },
+      },
     },
     keys = {
       { "<leader><leader>u", "<cmd>lua require('dapui').toggle()<cr>", desc = "DAP toggle UI" },
