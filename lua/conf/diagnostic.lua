@@ -2,20 +2,12 @@ local icons = require("conf.icons")
 
 vim.diagnostic.config({
   severity_sort = true,
-  virtual_text = false,
-  float = {
-    border = "rounded",
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+      [vim.diagnostic.severity.WARN] = icons.diagnostics.Warning,
+      [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+      [vim.diagnostic.severity.INFO] = icons.diagnostics.Information,
+    },
   },
 })
-
--- Configure prettier gutter diagnostic signs.
-local signs = {
-  Error = icons.diagnostics.Error,
-  Warn = icons.diagnostics.Warning,
-  Hint = icons.diagnostics.Hint,
-  Info = icons.diagnostics.Information,
-}
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl })
-end
