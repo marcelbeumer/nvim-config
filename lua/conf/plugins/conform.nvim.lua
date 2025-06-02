@@ -7,6 +7,16 @@ return {
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
     opts = {
+      formatters = {
+        ["google-java-format"] = {
+          command = "java",
+          args = {
+            "-jar",
+            vim.fn.expand("~") .. "/dev/dl/google-java-format-1.27.0-all-deps.jar",
+            "-",
+          },
+        },
+      },
       formatters_by_ft = {
         astro = { { "prettierd", "prettier" } },
         go = { "gofumpt" },
@@ -15,6 +25,7 @@ return {
         javascript = { { "prettierd", "prettier" } },
         typescript = { { "prettierd", "prettier" } },
         vue = { { "prettierd", "prettier" } },
+        java = { "google-java-format" },
         -- yaml = { "yamlfmt" },
       },
 
