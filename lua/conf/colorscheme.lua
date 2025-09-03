@@ -1,3 +1,5 @@
+local env = require("conf.env")
+
 local M = {}
 
 local function less_colors()
@@ -24,9 +26,12 @@ local function less_colors()
 end
 
 M.setup = function()
-  vim.api.nvim_create_user_command("LessColors", less_colors, {})
-  vim.cmd([[set background=light]])
+  if env.NVIM_DARK == "off" then
+    vim.cmd([[set background=light]])
+  end
+
   vim.cmd([[highlight! link ColorColumn CursorLine]])
+  vim.api.nvim_create_user_command("LessColors", less_colors, {})
   less_colors()
 end
 
