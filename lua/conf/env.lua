@@ -1,9 +1,9 @@
 return {
   -- NVIM_DARK=<on|off>
   -- Configures using dark theme or not.
-  -- on
-  -- off (default)
-  NVIM_DARK = vim.env.NVIM_DARK or "off",
+  -- on (default)
+  -- off
+  NVIM_DARK = vim.env.NVIM_DARK or "on",
 
   -- NVIM_LSP=<on|off>
   -- Configures using LSP or not.
