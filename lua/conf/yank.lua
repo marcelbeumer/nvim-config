@@ -1,8 +1,8 @@
 return function(v, _)
-  local result = pcall(function()
-    vim.cmd('let @*="' .. vim.fn.escape(v, '" \\') .. '"')
+  local ok = pcall(function()
+    vim.fn.setreg("+", v)
   end)
-  if not result then
-    print("Could not set @* with value: " .. v)
+  if not ok then
+    print("Could not set @+ with value: " .. v)
   end
 end
