@@ -1,5 +1,0 @@
-return {
-  {
-    "oneslash/helix-nvim",
-  },
-}
