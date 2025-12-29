@@ -57,6 +57,12 @@ vim.cmd([[
   endfunction
 ]])
 
+vim.api.nvim_create_user_command("YankPath", function()
+  local path = vim.fn.expand("%h")
+  vim.fn.setreg("+", path)
+  print("Yanked: " .. path)
+end, {})
+
 vim.diagnostic.config({
   severity_sort = true,
   signs = {
@@ -228,7 +234,11 @@ end)
 
 vim.keymap.set("n", "<leader>g", "<cmd>LazyGit<cr>", { desc = "Lazgit" })
 
-require("oil").setup()
+require("oil").setup({
+  keymaps = {
+    ["gy"] = { "actions.yank_entry", mode = "n" },
+  },
+})
 
 vim.keymap.set("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
 
