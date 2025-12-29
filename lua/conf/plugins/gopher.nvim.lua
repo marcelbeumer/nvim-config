@@ -1,3 +1,0 @@
-return {
-  { "olexsmir/gopher.nvim" },
-}
