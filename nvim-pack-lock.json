@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "boring-statusline.nvim": {
+      "rev": "184c77e7ec911ba8e2fd2f454daabf6c6bdeeb5b",
+      "src": "https://github.com/marcelbeumer/boring-statusline.nvim"
+    },
     "conform.nvim": {
       "rev": "5420c4b5ea0aeb99c09cfbd4fd0b70d257b44f25",
       "src": "https://github.com/stevearc/conform.nvim"
@@ -43,6 +47,10 @@
     "persistence.nvim": {
       "rev": "b20b2a7887bd39c1a356980b45e03250f3dce49c",
       "src": "https://github.com/folke/persistence.nvim"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
+      "src": "https://github.com/tpope/vim-fugitive"
     }
   }
 }
