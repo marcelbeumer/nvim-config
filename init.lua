@@ -77,19 +77,20 @@ vim.diagnostic.config({
 -- Plugins.
 
 vim.pack.add({
+  "https://github.com/nvim-treesitter/nvim-treesitter", -- treesitter
   "https://github.com/stevearc/oil.nvim", -- file browser
   "https://github.com/neovim/nvim-lspconfig", -- lsp
   "https://github.com/stevearc/conform.nvim", -- formatters
-  "https://github.com/nvim-mini/mini.pick", -- files/grep
+  "https://github.com/nvim-mini/mini.pairs", -- auto pairs
   "https://github.com/kevinhwang91/nvim-bqf", -- better quickfix
+  "https://github.com/marcelbeumer/boring-statusline.nvim", -- better statusline
+  "https://github.com/folke/persistence.nvim", -- restore session
+  "https://github.com/nvim-mini/mini.pick", -- files/grep
   "https://github.com/kdheepak/lazygit.nvim", -- git
   "https://github.com/tpope/vim-fugitive", -- git
-  "https://github.com/folke/persistence.nvim", -- restore session
-  "https://github.com/nvim-treesitter/nvim-treesitter", -- treesitter
   "https://github.com/mason-org/mason.nvim", -- install/update external tools
   "https://github.com/marcelbeumer/next-lsp-reference.nvim", -- lsp util
   "https://github.com/marcelbeumer/less-indented-line.nvim", -- jump util
-  "https://github.com/marcelbeumer/boring-statusline.nvim", -- better statusline
 })
 
 local treesitter_langs = {
@@ -110,8 +111,6 @@ local treesitter_langs = {
   "zig",
 }
 
-require("mason").setup()
-
 require("nvim-treesitter").install(treesitter_langs)
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -123,9 +122,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-require("persistence").setup({})
-
+require("mini.pairs").setup({})
+require("mason").setup()
 require("boring-statusline").setup()
+
+require("persistence").setup({})
 
 vim.keymap.set("n", "<leader>qs", function()
   require("persistence").load()
