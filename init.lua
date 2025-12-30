@@ -148,8 +148,6 @@ vim.keymap.set("n", "gP", function()
   require("less-indented-line").jump("%s?func%s")
 end, {})
 
-vim.keymap.set("n", "<leader>g", "<cmd>LazyGit<cr>", { desc = "Lazgit" })
-
 require("oil").setup({
   keymaps = {
     ["gy"] = { "actions.yank_entry", mode = "n" },
