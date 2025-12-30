@@ -12,6 +12,10 @@
       "rev": "a04ad0dbc725134edbee3a5eea29290976695357",
       "src": "https://github.com/kdheepak/lazygit.nvim"
     },
+    "less-colors.nvim": {
+      "rev": "1447fbcd14b1871387793812b29233340be2db27",
+      "src": "https://github.com/marcelbeumer/less-colors.nvim"
+    },
     "less-indented-line.nvim": {
       "rev": "e9fcbbae9074b9aa362233ebb19dd7c4f78b6ed0",
       "src": "https://github.com/marcelbeumer/less-indented-line.nvim"

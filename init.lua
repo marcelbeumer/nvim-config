@@ -78,6 +78,7 @@ vim.diagnostic.config({
 -- Plugins.
 
 vim.pack.add({
+  "https://github.com/marcelbeumer/less-colors.nvim", -- disable syntax highlighting
   "https://github.com/stevearc/oil.nvim", -- better netrw
   "https://github.com/kevinhwang91/nvim-bqf", -- better quickfix
   "https://github.com/marcelbeumer/qfctl.nvim", -- quickfix control
@@ -93,6 +94,10 @@ vim.pack.add({
   "https://github.com/mason-org/mason.nvim", -- install/update external tools
   "https://github.com/marcelbeumer/next-lsp-reference.nvim", -- lsp util
   "https://github.com/marcelbeumer/less-indented-line.nvim", -- jump util
+})
+
+require("less-colors").setup({
+  enabled = vim.env.NVIM_LESS_COLORS ~= "0",
 })
 
 local treesitter_langs = {
@@ -243,24 +248,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "[r", require("next-lsp-reference").prev, opts)
   end,
 })
-
--- Colors and colorscheme.
-
-local function less_colors()
-  local normal_fg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "fg", "gui")
-  vim.api.nvim_set_hl(0, "Comment", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "String", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "Character", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "Number", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "Boolean", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "Float", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "Identifier", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "Function", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "Statement", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "Type", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "Special", { fg = normal_fg })
-  vim.api.nvim_set_hl(0, "@spell", { fg = normal_fg })
-end
-
-vim.api.nvim_create_user_command("LessColors", less_colors, {})
-less_colors()
