@@ -16,6 +16,7 @@ vim.o.textwidth = 79
 vim.o.formatoptions = "croqj" -- use gw; gq will be set by lsp/conform
 vim.o.completeopt = "menu,menuone,noinsert,fuzzy"
 vim.o.foldlevel = 99 -- no default collapse with treesitter
+vim.o.winborder = "rounded"
 
 vim.keymap.set("n", "]t", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "[t", ":tabprev<CR>", { desc = "Previous tab" })
