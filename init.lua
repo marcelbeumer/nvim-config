@@ -77,15 +77,15 @@ vim.diagnostic.config({
 -- Plugins.
 
 vim.pack.add({
+  "https://github.com/stevearc/oil.nvim", -- better netrw
+  "https://github.com/kevinhwang91/nvim-bqf", -- better quickfix
+  "https://github.com/marcelbeumer/boring-statusline.nvim", -- better statusline
   "https://github.com/nvim-treesitter/nvim-treesitter", -- treesitter
-  "https://github.com/stevearc/oil.nvim", -- file browser
   "https://github.com/neovim/nvim-lspconfig", -- lsp
   "https://github.com/stevearc/conform.nvim", -- formatters
   "https://github.com/nvim-mini/mini.pairs", -- auto pairs
-  "https://github.com/kevinhwang91/nvim-bqf", -- better quickfix
-  "https://github.com/marcelbeumer/boring-statusline.nvim", -- better statusline
   "https://github.com/folke/persistence.nvim", -- restore session
-  "https://github.com/nvim-mini/mini.pick", -- files/grep
+  "https://github.com/nvim-mini/mini.pick", -- quick files/grep
   "https://github.com/kdheepak/lazygit.nvim", -- git
   "https://github.com/tpope/vim-fugitive", -- git
   "https://github.com/mason-org/mason.nvim", -- install/update external tools
