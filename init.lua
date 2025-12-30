@@ -143,34 +143,6 @@ vim.api.nvim_create_autocmd("DiagnosticChanged", {
   group = vim.api.nvim_create_augroup("UpdateStatusline", { clear = true }),
 })
 
--- Jump to less indented lines.
-
-local function jump_to_less_indented_line(line_match)
-  local current_line_num = vim.api.nvim_win_get_cursor(0)[1]
-  local current_indent = vim.fn.indent(current_line_num)
-
-  for line_num = current_line_num - 1, 1, -1 do
-    local line_content = tostring(vim.fn.getline(line_num))
-    local indent = vim.fn.indent(line_num)
-    if line_content:match(line_match) and indent < current_indent then
-      vim.cmd("normal! m'")
-      vim.api.nvim_win_set_cursor(0, { line_num, 0 })
-      if indent > 0 then
-        vim.cmd("normal! w")
-      end
-      vim.cmd("normal! m'")
-      break
-    end
-  end
-end
-
-vim.keymap.set("n", "gp", function()
-  jump_to_less_indented_line("%S")
-end, {})
-vim.keymap.set("n", "gP", function()
-  jump_to_less_indented_line("%s?func%s")
-end, {})
-
 -- Plugins.
 
 vim.pack.add({
@@ -184,6 +156,7 @@ vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter", -- treesitter
   "https://github.com/mason-org/mason.nvim", -- install/update external tools
   "https://github.com/marcelbeumer/next-lsp-reference.nvim", -- lsp util
+  "https://github.com/marcelbeumer/less-indented-line.nvim", -- jump util
 })
 
 local treesitter_langs = {
@@ -231,6 +204,13 @@ end)
 vim.keymap.set("n", "<leader>qd", function()
   require("persistence").stop()
 end)
+
+vim.keymap.set("n", "gp", function()
+  require("less-indented-line").jump("%S")
+end, {})
+vim.keymap.set("n", "gP", function()
+  require("less-indented-line").jump("%s?func%s")
+end, {})
 
 vim.keymap.set("n", "<leader>g", "<cmd>LazyGit<cr>", { desc = "Lazgit" })
 
