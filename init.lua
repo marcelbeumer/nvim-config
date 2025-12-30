@@ -1,5 +1,4 @@
 -- TODO:
--- * LSP prev/next reference?
 -- * formatoption, formatexpr, gw, gq, ok like this? Can be simpler?
 
 vim.o.clipboard = "unnamedplus"
@@ -175,16 +174,16 @@ end, {})
 -- Plugins.
 
 vim.pack.add({
-  "https://github.com/stevearc/oil.nvim",
-  "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/stevearc/conform.nvim",
-  "https://github.com/nvim-mini/mini.pick",
-  "https://github.com/kevinhwang91/nvim-bqf",
-  "https://github.com/kdheepak/lazygit.nvim",
-  "https://github.com/folke/persistence.nvim",
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/mason-org/mason.nvim",
-  "https://github.com/marcelbeumer/next-lsp-reference.nvim",
+  "https://github.com/stevearc/oil.nvim", -- file browser
+  "https://github.com/neovim/nvim-lspconfig", -- lsp
+  "https://github.com/stevearc/conform.nvim", -- formatters
+  "https://github.com/nvim-mini/mini.pick", -- files/grep
+  "https://github.com/kevinhwang91/nvim-bqf", -- better quickfix
+  "https://github.com/kdheepak/lazygit.nvim", -- git
+  "https://github.com/folke/persistence.nvim", -- restore session
+  "https://github.com/nvim-treesitter/nvim-treesitter", -- treesitter
+  "https://github.com/mason-org/mason.nvim", -- install/update external tools
+  "https://github.com/marcelbeumer/next-lsp-reference.nvim", -- lsp util
 })
 
 local treesitter_langs = {
