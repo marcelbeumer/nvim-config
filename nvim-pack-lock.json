@@ -52,6 +52,10 @@
       "rev": "b20b2a7887bd39c1a356980b45e03250f3dce49c",
       "src": "https://github.com/folke/persistence.nvim"
     },
+    "qfctl.nvim": {
+      "rev": "d6feb48d8afe2f5defa90b5b1f384bd827cb0af7",
+      "src": "https://github.com/marcelbeumer/qfctl.nvim"
+    },
     "vim-fugitive": {
       "rev": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
       "src": "https://github.com/tpope/vim-fugitive"

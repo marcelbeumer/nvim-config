@@ -80,6 +80,7 @@ vim.diagnostic.config({
 vim.pack.add({
   "https://github.com/stevearc/oil.nvim", -- better netrw
   "https://github.com/kevinhwang91/nvim-bqf", -- better quickfix
+  "https://github.com/marcelbeumer/qfctl.nvim", -- quickfix control
   "https://github.com/marcelbeumer/boring-statusline.nvim", -- better statusline
   "https://github.com/nvim-treesitter/nvim-treesitter", -- treesitter
   "https://github.com/neovim/nvim-lspconfig", -- lsp
@@ -162,6 +163,8 @@ require("bqf").setup({
     auto_preview = false,
   },
 })
+
+require("qfctl").setup({})
 
 local pick = require("mini.pick")
 pick.setup({ source = { show = pick.default_show } })
