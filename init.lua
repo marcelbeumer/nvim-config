@@ -95,7 +95,15 @@ vim.pack.add({
   "https://github.com/mason-org/mason.nvim", -- install/update external tools
   "https://github.com/marcelbeumer/next-lsp-reference.nvim", -- lsp util
   "https://github.com/marcelbeumer/less-indented-line.nvim", -- jump util
+  { src = "https://github.com/Saghen/blink.cmp", version = "v1.8.0" }, -- autocomplete
 })
+
+local lsp_capabilities -- pass nil by default
+
+if vim.env.NVIM_AUTOCOMPLETE == "1" then
+  require("blink.cmp").setup()
+  lsp_capabilties = require("blink.cmp").get_lsp_capabilities()
+end
 
 require("less-colors").setup({
   enabled = vim.env.NVIM_LESS_COLORS ~= "0",
@@ -217,6 +225,7 @@ vim.lsp.config("gopls", {
       rangeVariableTypes = true,
     },
   },
+  capabilities = lsp_capabilities,
   settings = {
     gopls = {
       ["local"] = vim.env.NVIM_GOPLS_LOCAL or "",
