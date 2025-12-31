@@ -1,19 +1,19 @@
 -- Env vars.
 
--- NVIM_DARK=1 (default true) for dark background.
+-- NVIM_DARK=1 (default 1) for dark background.
 local dark = vim.env.NVIM_DARK ~= "0"
 
--- NVIM_AUTOCOMPLETE=1 (default false) to setup autocompletion plugin.
+-- NVIM_AUTOCOMPLETE=1 (default 0) to setup autocompletion plugin.
 -- Rarely used, generally prefer manual omnicomplete with <C-x><C-o>.
-local autocomplete = vim.env.NVIM_AUTOCOMPLETE == "1" -- default false
+local autocomplete = vim.env.NVIM_AUTOCOMPLETE == "1"
 
--- NVIM_LESS_COLORS=1 to remove colors from syntax highlighting.
+-- NVIM_LESS_COLORS=1 (default 1) to remove colors from syntax highlighting.
 -- Especially with Go code is pretty as it is.
-local less_colors = vim.env.NVIM_LESS_COLORS ~= "0" -- default true
+local less_colors = vim.env.NVIM_LESS_COLORS ~= "0"
 
--- NVIM_GOPLS_LOCAL=<prefixes> to group packages together when tidying imports
--- with the gopls language server.
-local gopls_local = vim.env.NVIM_GOPLS_LOCAL or "" -- default ""
+-- NVIM_GOPLS_LOCAL=<prefixes> (default "") to group packages together when
+-- tidying imports with the gopls language server.
+local gopls_local = vim.env.NVIM_GOPLS_LOCAL or ""
 
 -- Builtins.
 
@@ -32,7 +32,7 @@ vim.o.completeopt = "menu,menuone,noinsert,fuzzy" -- nicest <c-x><c-o>
 vim.o.foldlevel = 99 -- no default collapse with treesitter
 vim.o.winborder = "rounded"
 
--- formatoptions in a sequence of letters which describes how automatic
+-- formatoptions is a sequence of letters which describes how automatic
 -- formatting is to be done. Default value tcqj.
 -- t: auto-wrap using textwidth; not nice with Go code which allows >79
 -- c: same for comments
@@ -88,9 +88,9 @@ vim.diagnostic.config({
 })
 
 -- Send diagnostics to quickfix.
-vim.keymap.set("n", "<leader>qd", vim.diagnostic.setqflist, { desc = "Set diagnostics to quickfix" }) --
+vim.keymap.set("n", "<leader>qd", vim.diagnostic.setqflist, { desc = "Set diagnostics to quickfix" })
 
--- Easier access to diagnostic than with default <c-w>d
+-- Easier access to diagnostic than with default <c-w>d binding.
 vim.keymap.set("n", "<space>d", vim.diagnostic.open_float, { desc = "Show diagnostics in floating window" })
 
 -- For pretty printing lua objects (`:lua dump(vim.fn)`).
