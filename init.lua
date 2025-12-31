@@ -15,7 +15,7 @@ local less_colors = vim.env.NVIM_LESS_COLORS ~= "0" -- default true
 -- with the gopls language server.
 local gopls_local = vim.env.NVIM_GOPLS_LOCAL or "" -- default ""
 
--- Basic options.
+-- Builtins.
 
 vim.o.clipboard = "unnamedplus" -- always system clipboard
 vim.o.swapfile = false
@@ -46,8 +46,6 @@ if not dark then
   vim.o.background = "light"
 end
 
--- Basic keymaps.
-
 vim.keymap.set("n", "]t", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "[t", ":tabprev<CR>", { desc = "Previous tab" })
 
@@ -59,6 +57,10 @@ vim.keymap.set("n", "<leader>c", function()
     vim.o.colorcolumn = ""
   end
 end, { desc = "Toggle colorcolumn (ruler)" })
+
+vim.keymap.set("n", "<leader>z", function()
+  vim.o.spell = not vim.o.spell
+end, { desc = "Toggle spell checker" })
 
 -- Inspired by JetBrains editors, show linebreaks with an arrow indicator.
 -- But only in insert mode, otherwise add an empty char.
@@ -84,6 +86,12 @@ vim.diagnostic.config({
     },
   },
 })
+
+-- Send diagnostics to quickfix.
+vim.keymap.set("n", "<leader>qd", vim.diagnostic.setqflist, { desc = "Set diagnostics to quickfix" }) --
+
+-- Easier access to diagnostic than with default <c-w>d
+vim.keymap.set("n", "<space>d", vim.diagnostic.open_float, { desc = "Show diagnostics in floating window" })
 
 -- For pretty printing lua objects (`:lua dump(vim.fn)`).
 _G.dump = function(...)
@@ -172,16 +180,16 @@ require("boring-statusline").setup()
 
 require("persistence").setup({})
 
-vim.keymap.set("n", "<leader>qs", function()
+vim.keymap.set("n", "<leader>ss", function()
   require("persistence").load()
 end)
-vim.keymap.set("n", "<leader>qS", function()
+vim.keymap.set("n", "<leader>sS", function()
   require("persistence").select()
 end)
-vim.keymap.set("n", "<leader>ql", function()
+vim.keymap.set("n", "<leader>sl", function()
   require("persistence").load({ last = true })
 end)
-vim.keymap.set("n", "<leader>qd", function()
+vim.keymap.set("n", "<leader>sd", function()
   require("persistence").stop()
 end)
 
