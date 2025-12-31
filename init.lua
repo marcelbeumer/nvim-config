@@ -1,6 +1,3 @@
--- TODO:
--- * revisit and document formatexpr, formatoptions, and usage of gq/gw
-
 vim.o.clipboard = "unnamedplus"
 vim.o.swapfile = false
 vim.o.termguicolors = true
