@@ -1,27 +1,57 @@
-vim.o.clipboard = "unnamedplus"
+-- Env vars.
+
+-- NVIM_DARK=1 (default true) for dark background.
+local dark = vim.env.NVIM_DARK ~= "0"
+
+-- NVIM_AUTOCOMPLETE=1 (default false) to setup autocompletion plugin.
+-- Rarely used, generally prefer manual omnicomplete with <C-x><C-o>.
+local autocomplete = vim.env.NVIM_AUTOCOMPLETE == "1" -- default false
+
+-- NVIM_LESS_COLORS=1 to remove colors from syntax highlighting.
+-- Especially with Go code is pretty as it is.
+local less_colors = vim.env.NVIM_LESS_COLORS ~= "0" -- default true
+
+-- NVIM_GOPLS_LOCAL=<prefixes> to group packages together when tidying imports
+-- with the gopls language server.
+local gopls_local = vim.env.NVIM_GOPLS_LOCAL or "" -- default ""
+
+-- Basic options.
+
+vim.o.clipboard = "unnamedplus" -- always system clipboard
 vim.o.swapfile = false
-vim.o.termguicolors = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.signcolumn = "yes" -- space for LSP signs
-vim.o.breakindent = true
+vim.o.breakindent = true -- continue break on same col
 vim.o.linebreak = true
 vim.o.breakat = " ^I!@-+;:,./?" -- removed "*" from default
 vim.o.textwidth = 79
-vim.o.formatoptions = "croqj" -- use gw; gq will be set by lsp/conform
-vim.o.completeopt = "menu,menuone,noinsert,fuzzy"
+vim.o.completeopt = "menu,menuone,noinsert,fuzzy" -- nicest <c-x><c-o>
 vim.o.foldlevel = 99 -- no default collapse with treesitter
 vim.o.winborder = "rounded"
 
-if vim.env.NVIM_DARK == "0" then
+-- formatoptions in a sequence of letters which describes how automatic
+-- formatting is to be done. Default value tcqj.
+-- t: auto-wrap using textwidth; not nice with Go code which allows >79
+-- c: same for comments
+-- q: allow formatting of comments with gq
+-- j: join lines where makes sense
+-- o: automatically insert comment leader after hitting o/O
+-- r: automatically insert comment leader after hitting enter
+vim.o.formatoptions = "cqjro"
+
+if not dark then
   vim.o.background = "light"
 end
+
+-- Basic keymaps.
 
 vim.keymap.set("n", "]t", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "[t", ":tabprev<CR>", { desc = "Previous tab" })
 
+-- Colorcolumn is not pretty enough to see at all times.
 vim.keymap.set("n", "<leader>c", function()
   if vim.o.colorcolumn == "" then
     vim.o.colorcolumn = "80"
@@ -30,6 +60,8 @@ vim.keymap.set("n", "<leader>c", function()
   end
 end, { desc = "Toggle colorcolumn (ruler)" })
 
+-- Inspired by JetBrains editors, show linebreaks with an arrow indicator.
+-- But only in insert mode, otherwise add an empty char.
 vim.cmd([[
   set showbreak=\ 
   augroup ShowbreakToggle
@@ -39,34 +71,11 @@ vim.cmd([[
   augroup END
 ]])
 
-vim.cmd([[command W w]])
-
--- For pretty printing lua objects (`:lua dump(vim.fn)`)
-_G.dump = function(...)
-  local objects = vim.tbl_map(vim.inspect, { ... })
-  print(unpack(objects))
-  return ...
-end
-
-vim.cmd([[
-  function! DateStrPretty() range
-    return system('date "+%Y-%m-%d %H:%M:%S" | tr -d "\n"')
-  endfunction
-
-  function! DateStrFs() range
-    return system('date "+%Y-%m-%d-%H%M-%S" | tr -d "\n"')
-  endfunction
-]])
-
-vim.api.nvim_create_user_command("YankPath", function()
-  local path = vim.fn.expand("%h")
-  vim.fn.setreg("+", path)
-  print("Yanked: " .. path)
-end, {})
+vim.cmd([[command W w]]) -- happens
 
 vim.diagnostic.config({
-  severity_sort = true,
-  signs = {
+  severity_sort = true, -- see errors first
+  signs = { -- icons
     text = {
       [vim.diagnostic.severity.ERROR] = "",
       [vim.diagnostic.severity.WARN] = "",
@@ -76,10 +85,36 @@ vim.diagnostic.config({
   },
 })
 
+-- For pretty printing lua objects (`:lua dump(vim.fn)`).
+_G.dump = function(...)
+  local objects = vim.tbl_map(vim.inspect, { ... })
+  print(unpack(objects))
+  return ...
+end
+
+-- Paste datetime like "2025-12-31 13:30:23".
+vim.api.nvim_create_user_command("PastePrettyDateTime", function()
+  local date = os.date("%Y-%m-%d %H:%M:%S")
+  vim.api.nvim_paste(date, true, -1)
+end, {})
+
+-- Paste datetime like "20251231-133023".
+vim.api.nvim_create_user_command("PasteDateTime", function()
+  local date = os.date("%Y%m%d-%H%M%S")
+  vim.api.nvim_paste(date, true, -1)
+end, {})
+
+-- Yank current file path as expanded by "%h".
+vim.api.nvim_create_user_command("YankPath", function()
+  local path = vim.fn.expand("%h")
+  vim.fn.setreg("+", path)
+  print("Yanked: " .. path)
+end, {})
+
 -- Plugins.
 
 vim.pack.add({
-  "https://github.com/marcelbeumer/less-colors.nvim", -- disable syntax highlighting
+  "https://github.com/marcelbeumer/less-colors.nvim", -- hide syntax highlighting
   "https://github.com/stevearc/oil.nvim", -- better netrw
   "https://github.com/kevinhwang91/nvim-bqf", -- better quickfix
   "https://github.com/marcelbeumer/qfctl.nvim", -- quickfix control
@@ -98,15 +133,8 @@ vim.pack.add({
   { src = "https://github.com/Saghen/blink.cmp", version = "v1.8.0" }, -- autocomplete
 })
 
-local lsp_capabilities -- pass nil by default
-
-if vim.env.NVIM_AUTOCOMPLETE == "1" then
-  require("blink.cmp").setup()
-  lsp_capabilties = require("blink.cmp").get_lsp_capabilities()
-end
-
 require("less-colors").setup({
-  enabled = vim.env.NVIM_LESS_COLORS ~= "0",
+  enabled = less_colors,
 })
 
 local treesitter_langs = {
@@ -184,6 +212,7 @@ local pick = require("mini.pick")
 pick.setup({ source = { show = pick.default_show } })
 
 vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>", { desc = "Pick files" })
+vim.keymap.set("n", "<leader>b", "<cmd>Pick buffers<cr>", { desc = "Pick buffers" })
 vim.keymap.set("n", "<leader>/", "<cmd>Pick grep_live<cr>", { desc = "Grep live (rg)" })
 
 require("conform").setup({
@@ -192,10 +221,9 @@ require("conform").setup({
     lua = { "stylua" },
   },
   format_on_save = function(bufnr)
-    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-      return
+    if not vim.g.disable_autoformat then
+      return { timeout_ms = 500, lsp_format = "fallback" }
     end
-    return { timeout_ms = 500, lsp_format = "fallback" }
   end,
 })
 
@@ -209,6 +237,15 @@ vim.api.nvim_create_user_command("AutoformatToggle", function()
 end, {})
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+local lsp_capabilities
+
+if autocomplete then
+  require("blink.cmp").setup()
+  lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
+else
+  lsp_capabilities = vim.lsp.protocol.make_client_capabilities() -- defaults
+end
 
 -- LSP.
 
@@ -228,7 +265,7 @@ vim.lsp.config("gopls", {
   capabilities = lsp_capabilities,
   settings = {
     gopls = {
-      ["local"] = vim.env.NVIM_GOPLS_LOCAL or "",
+      ["local"] = gopls_local,
     },
   },
 })
