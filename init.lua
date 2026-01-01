@@ -249,7 +249,11 @@ vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 local lsp_capabilities
 
 if autocomplete then
-  require("blink.cmp").setup()
+  require("blink.cmp").setup({
+    keymap = {
+      preset = "enter",
+    },
+  })
   lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
 else
   lsp_capabilities = vim.lsp.protocol.make_client_capabilities() -- defaults
