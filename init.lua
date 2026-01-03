@@ -131,6 +131,7 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig", -- lsp
   "https://github.com/stevearc/conform.nvim", -- formatters
   "https://github.com/nvim-mini/mini.pairs", -- auto pairs
+  "https://github.com/nvim-mini/mini.surround", -- surround operations
   "https://github.com/folke/persistence.nvim", -- restore session
   "https://github.com/nvim-mini/mini.pick", -- quick files/grep
   "https://github.com/kdheepak/lazygit.nvim", -- git
@@ -174,7 +175,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-require("mini.pairs").setup({})
+require("mini.pairs").setup()
+require("mini.surround").setup()
 require("mason").setup()
 require("boring-statusline").setup()
 
