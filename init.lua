@@ -132,6 +132,8 @@ vim.pack.add({
   "https://github.com/stevearc/conform.nvim", -- formatters
   "https://github.com/nvim-mini/mini.pairs", -- auto pairs
   "https://github.com/nvim-mini/mini.surround", -- surround operations
+  "https://github.com/nvim-mini/mini.ai", -- custom textobjects
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" }, -- more textobjects
   "https://github.com/folke/persistence.nvim", -- restore session
   "https://github.com/nvim-mini/mini.pick", -- quick files/grep
   "https://github.com/kdheepak/lazygit.nvim", -- git
@@ -154,7 +156,6 @@ local treesitter_langs = {
   "html",
   "javascript",
   "json",
-  "jsonc",
   "lua",
   "markdown",
   "python",
@@ -177,6 +178,15 @@ vim.api.nvim_create_autocmd("FileType", {
 
 require("mini.pairs").setup()
 require("mini.surround").setup()
+
+local gen_spec = require("mini.ai").gen_spec
+require("mini.ai").setup({
+  custom_textobjects = {
+    F = gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+    C = gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
+  },
+})
+
 require("mason").setup()
 require("boring-statusline").setup()
 
