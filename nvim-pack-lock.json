@@ -6,7 +6,7 @@
       "version": "'v1.8.0'"
     },
     "boring-statusline.nvim": {
-      "rev": "184c77e7ec911ba8e2fd2f454daabf6c6bdeeb5b",
+      "rev": "36746b7ae563dd24600f4307f3e92eb58141cef1",
       "src": "https://github.com/marcelbeumer/boring-statusline.nvim"
     },
     "conform.nvim": {
@@ -18,15 +18,15 @@
       "src": "https://github.com/kdheepak/lazygit.nvim"
     },
     "less-colors.nvim": {
-      "rev": "1447fbcd14b1871387793812b29233340be2db27",
+      "rev": "8003d7c2bc432e330f27740fc57ae8b9901a0b55",
       "src": "https://github.com/marcelbeumer/less-colors.nvim"
     },
     "less-indented-line.nvim": {
-      "rev": "e9fcbbae9074b9aa362233ebb19dd7c4f78b6ed0",
+      "rev": "d6344609db9100d8ba47b3254b695bdc73744ce9",
       "src": "https://github.com/marcelbeumer/less-indented-line.nvim"
     },
     "mason.nvim": {
-      "rev": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800",
+      "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.ai": {
@@ -38,7 +38,7 @@
       "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "mini.pick": {
-      "rev": "8cb40ee55dd156957b1116eded6135e6aeaa078b",
+      "rev": "aa242acc17683515d8f749552aebe061bced9132",
       "src": "https://github.com/nvim-mini/mini.pick"
     },
     "mini.surround": {
@@ -46,7 +46,7 @@
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "next-lsp-reference.nvim": {
-      "rev": "8503b4282346734336ad02eee93dc17c7fe3e333",
+      "rev": "06f42edaba11cf9d2279b7d4435b5bef24910ce1",
       "src": "https://github.com/marcelbeumer/next-lsp-reference.nvim"
     },
     "nvim-bqf": {
@@ -58,7 +58,7 @@
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "b033ab331ca0bccbd93c3c2b4f886fdfc09abec0",
+      "rev": "de878155ca66c49b027b1380e4e60a6c665b2630",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
@@ -75,8 +75,12 @@
       "src": "https://github.com/folke/persistence.nvim"
     },
     "qfctl.nvim": {
-      "rev": "d6feb48d8afe2f5defa90b5b1f384bd827cb0af7",
+      "rev": "58415b97711dfbb7b07db9206ffdc8b9c6e87bcd",
       "src": "https://github.com/marcelbeumer/qfctl.nvim"
+    },
+    "tokyonight.nvim": {
+      "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
+      "src": "https://github.com/folke/tokyonight.nvim"
     },
     "vim-fugitive": {
       "rev": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
