@@ -17,6 +17,7 @@ local gopls_local = vim.env.NVIM_GOPLS_LOCAL or ""
 
 -- Builtins.
 
+vim.o.termguicolors = true -- required for macOS alacritty -> lima setup
 vim.o.clipboard = "unnamedplus" -- always system clipboard
 vim.o.swapfile = false
 vim.o.number = true
