@@ -32,6 +32,7 @@ vim.o.textwidth = 79
 vim.o.completeopt = "menu,menuone,noinsert,fuzzy" -- nicest <c-x><c-o>
 vim.o.foldlevel = 99 -- no default collapse with treesitter
 vim.o.winborder = "rounded"
+vim.o.cursorline = true -- highlight the text line of the cursor
 
 -- formatoptions is a sequence of letters which describes how automatic
 -- formatting is to be done. Default value tcqj.
