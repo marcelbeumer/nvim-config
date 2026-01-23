@@ -102,24 +102,20 @@ _G.dump = function(...)
   return ...
 end
 
--- Paste datetime like "2025-12-31 13:30:23".
-vim.api.nvim_create_user_command("PastePrettyDateTime", function()
-  local date = os.date("%Y-%m-%d %H:%M:%S")
-  vim.api.nvim_paste(date, true, -1)
-end, {})
+_G.yank = function(v)
+  vim.fn.setreg("+", v)
+  print("Yanked: " .. v)
+end
 
--- Paste datetime like "20251231-133023".
-vim.api.nvim_create_user_command("PasteDateTime", function()
-  local date = os.date("%Y%m%d-%H%M%S")
-  vim.api.nvim_paste(date, true, -1)
-end, {})
+-- Yank datetime like "2025-12-31 13:30:23".
+vim.keymap.set("n", "<leader>yt", function()
+  yank(os.date("%Y-%m-%d %H:%M:%S"))
+end)
 
--- Yank current file path as expanded by "%h".
-vim.api.nvim_create_user_command("YankPath", function()
-  local path = vim.fn.expand("%h")
-  vim.fn.setreg("+", path)
-  print("Yanked: " .. path)
-end, {})
+-- Yank filepath:linenumber.
+vim.keymap.set("n", "<leader>yy", function()
+  yank(vim.fn.expand("%h") .. ":" .. vim.fn.line("."))
+end)
 
 -- Plugins.
 
