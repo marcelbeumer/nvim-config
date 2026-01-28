@@ -11,6 +11,10 @@ local autocomplete = vim.env.NVIM_AUTOCOMPLETE == "1"
 -- Especially with Go code is pretty as it is.
 local less_colors = vim.env.NVIM_LESS_COLORS ~= "0"
 
+-- NVIM_COLORSCHEME=<colorscheme> (default "") to set a colorscheme.
+-- Used for presenting. Otherwise stays at default colorscheme.
+local colorscheme = vim.env.NVIM_COLORSCHEME
+
 -- NVIM_GOPLS_LOCAL=<prefixes> (default "") to group packages together when
 -- tidying imports with the gopls language server.
 local gopls_local = vim.env.NVIM_GOPLS_LOCAL or ""
@@ -139,7 +143,13 @@ vim.pack.add({
   "https://github.com/marcelbeumer/next-lsp-reference.nvim", -- lsp util
   "https://github.com/marcelbeumer/less-indented-line.nvim", -- jump util
   { src = "https://github.com/Saghen/blink.cmp", version = "v1.8.0" }, -- autocomplete
+  { src = "https://github.com/catppuccin/nvim", name = "catppuccin" }, -- for presenting
+  "https://github.com/folke/tokyonight.nvim", -- for presenting
 })
+
+if colorscheme then
+  vim.cmd("colorscheme " .. colorscheme)
+end
 
 require("less-colors").setup({
   enabled = less_colors,
