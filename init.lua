@@ -54,6 +54,8 @@ end
 
 vim.keymap.set("n", "]t", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "[t", ":tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<c-w>tc", ":tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<c-w>tn", ":tabnew<CR>", { desc = "New tab" })
 
 -- Colorcolumn is not pretty enough to see at all times.
 vim.keymap.set("n", "<leader>c", function()
