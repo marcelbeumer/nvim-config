@@ -260,9 +260,17 @@ pick.setup({
 vim.keymap.set("n", "<leader>/", "<cmd>Pick grep_live<cr>", { desc = "Grep live (rg)" })
 vim.keymap.set("n", "<leader>b", "<cmd>Pick buffers<cr>", { desc = "Pick buffers" })
 vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>", { desc = "Pick files" })
+vim.keymap.set("n", "<leader>d", function()
+  local command = { "fd", "-t", "d", "-L" }
+  MiniPick.builtin.cli({ command = command }, { source = { name = "Pick dirs (follow)" } })
+end)
 vim.keymap.set("n", "<leader>l", function()
-  local command = { "rg", "--files", "--follow", "--hidden", "-g", "!.git" }
-  MiniPick.builtin.cli({ command = command }, { source = { name = "Files files (follow)" } })
+  local command = { "fd", "-t", "f", "-L" }
+  MiniPick.builtin.cli({ command = command }, { source = { name = "Pick files (follow)" } })
+end)
+vim.keymap.set("n", "<leader>L", function()
+  local command = { "fd", "-t", "f", "-L", "--hidden", "--exclude", ".git" }
+  MiniPick.builtin.cli({ command = command }, { source = { name = "Pick files (follow, hidden)" } })
 end)
 
 require("conform").setup({
