@@ -66,9 +66,23 @@ vim.keymap.set("n", "<leader>c", function()
   end
 end, { desc = "Toggle colorcolumn (ruler)" })
 
-vim.keymap.set("n", "<leader>z", function()
+vim.keymap.set("n", "<leader>zz", function()
   vim.o.spell = not vim.o.spell
 end, { desc = "Toggle spell checker" })
+
+-- Fold on search.
+vim.keymap.set("n", "<leader>zs", function()
+  vim.wo.foldmethod = "expr"
+  vim.wo.foldexpr = "getline(v:lnum)=~@/?0:1"
+  vim.cmd("norm zM")
+end, { desc = "Fold on search" })
+
+vim.keymap.set("n", "<leader>zr", function()
+  vim.wo.foldmethod = "manual"
+  vim.wo.foldexpr = "0"
+  vim.cmd("doautocmd FileType") -- treesitter
+  vim.cmd("norm zR")
+end, { desc = "Restore folds" })
 
 -- Inspired by JetBrains editors, show linebreaks with an arrow indicator.
 -- But only in insert mode, otherwise add an empty char.
