@@ -252,11 +252,18 @@ require("bqf").setup({
 require("qfctl").setup({})
 
 local pick = require("mini.pick")
-pick.setup({ source = { show = pick.default_show } })
+pick.setup({
+  source = { show = pick.default_show },
+  window = { config = { width = 80 } },
+})
 
-vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>", { desc = "Pick files" })
-vim.keymap.set("n", "<leader>b", "<cmd>Pick buffers<cr>", { desc = "Pick buffers" })
 vim.keymap.set("n", "<leader>/", "<cmd>Pick grep_live<cr>", { desc = "Grep live (rg)" })
+vim.keymap.set("n", "<leader>b", "<cmd>Pick buffers<cr>", { desc = "Pick buffers" })
+vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>", { desc = "Pick files" })
+vim.keymap.set("n", "<leader>l", function()
+  local command = { "rg", "--files", "--follow", "--hidden", "-g", "!.git" }
+  MiniPick.builtin.cli({ command = command }, { source = { name = "Files files (follow)" } })
+end)
 
 require("conform").setup({
   formatters_by_ft = {
