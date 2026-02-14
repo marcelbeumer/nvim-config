@@ -155,6 +155,7 @@ vim.pack.add({
   "https://github.com/nvim-mini/mini.pick", -- quick files/grep
   "https://github.com/kdheepak/lazygit.nvim", -- git
   "https://github.com/tpope/vim-fugitive", -- git
+  "https://github.com/sindrets/diffview.nvim", -- git
   "https://github.com/mason-org/mason.nvim", -- install/update external tools
   "https://github.com/marcelbeumer/next-lsp-reference.nvim", -- lsp util
   "https://github.com/marcelbeumer/less-indented-line.nvim", -- jump util
