@@ -71,6 +71,12 @@ vim.keymap.set("n", "<leader>zz", function()
   vim.o.spell = not vim.o.spell
 end, { desc = "Toggle spell checker" })
 
+-- Foldlevel shortcuts.
+vim.keymap.set("n", "<leader>z0", ":set foldlevel=0<CR>", { desc = "Set foldlevel 0" })
+vim.keymap.set("n", "<leader>z1", ":set foldlevel=0<CR>", { desc = "Set foldlevel 0" })
+vim.keymap.set("n", "<leader>z3", ":set foldlevel=0<CR>", { desc = "Set foldlevel 0" })
+vim.keymap.set("n", "<leader>z9", ":set foldlevel=99<CR>", { desc = "Set foldlevel 99" })
+
 -- Fold on search.
 vim.keymap.set("n", "<leader>zs", function()
   vim.wo.foldmethod = "expr"
