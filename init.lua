@@ -73,8 +73,9 @@ end, { desc = "Toggle spell checker" })
 
 -- Foldlevel shortcuts.
 vim.keymap.set("n", "<leader>z0", ":set foldlevel=0<CR>", { desc = "Set foldlevel 0" })
-vim.keymap.set("n", "<leader>z1", ":set foldlevel=0<CR>", { desc = "Set foldlevel 0" })
-vim.keymap.set("n", "<leader>z3", ":set foldlevel=0<CR>", { desc = "Set foldlevel 0" })
+vim.keymap.set("n", "<leader>z1", ":set foldlevel=1<CR>", { desc = "Set foldlevel 1" })
+vim.keymap.set("n", "<leader>z2", ":set foldlevel=2<CR>", { desc = "Set foldlevel 2" })
+vim.keymap.set("n", "<leader>z3", ":set foldlevel=3<CR>", { desc = "Set foldlevel 3" })
 vim.keymap.set("n", "<leader>z9", ":set foldlevel=99<CR>", { desc = "Set foldlevel 99" })
 
 -- Fold on search.
