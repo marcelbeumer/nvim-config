@@ -141,9 +141,14 @@ vim.keymap.set("n", "<leader>yt", function()
   yank(os.date("%Y-%m-%d %H:%M:%S"))
 end)
 
--- Yank filepath:linenumber.
+-- Yank filepath:L<linenumber>.
 vim.keymap.set("n", "<leader>yy", function()
-  yank(vim.fn.expand("%h") .. ":" .. vim.fn.line("."))
+  yank(vim.fn.expand("%:~:.") .. ":L" .. vim.fn.line("."))
+end)
+
+-- Yank filepath:L<linenumber>-L<linenumber>.
+vim.keymap.set("v", "<leader>yy", function()
+  yank(vim.fn.expand("%:~:.") .. ":L" .. vim.fn.line("'<") .. "-L" .. vim.fn.line("'>"))
 end)
 
 -- Plugins.
