@@ -154,6 +154,7 @@ end)
 -- Plugins.
 
 vim.pack.add({
+  "https://github.com/rodolfo-arg/neotype",
   "https://github.com/marcelbeumer/less-colors.nvim", -- hide syntax highlighting
   "https://github.com/stevearc/oil.nvim", -- better netrw
   "https://github.com/kevinhwang91/nvim-bqf", -- better quickfix
