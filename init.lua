@@ -297,6 +297,9 @@ require("conform").setup({
   formatters_by_ft = {
     go = { "gofumpt" },
     lua = { "stylua" },
+    json = { "oxfmt" },
+    jsonc = { "biome" },
+    css = { "oxfmt" },
   },
   format_on_save = function(bufnr)
     if not vim.g.disable_autoformat then
