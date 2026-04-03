@@ -369,7 +369,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function(ev)
     vim.lsp.start({
       name = "gonotes",
-      cmd = { "gonotes", "lsp" },
+      cmd = { "gonotes", "lsp", "-flat-tags" },
       root_dir = vim.fs.root(ev.buf, { ".git" }),
     })
   end,
