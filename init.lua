@@ -358,6 +358,17 @@ vim.lsp.config("gopls", {
 vim.lsp.enable("gopls")
 vim.lsp.enable("terraformls")
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function(ev)
+    vim.lsp.start({
+      name = "gonotes",
+      cmd = { "gonotes", "lsp" },
+      root_dir = vim.fs.root(ev.buf, { ".git" }),
+    })
+  end,
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("my.lsp", {}),
   callback = function(args)
