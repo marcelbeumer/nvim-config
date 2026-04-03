@@ -159,6 +159,7 @@ vim.pack.add({
   "https://github.com/stevearc/oil.nvim", -- better netrw
   "https://github.com/kevinhwang91/nvim-bqf", -- better quickfix
   "https://github.com/marcelbeumer/qfctl.nvim", -- quickfix control
+  "https://github.com/catgoose/nvim-colorizer.lua", -- inline colorizing of hex etc
   "https://github.com/marcelbeumer/boring-statusline.nvim", -- better statusline
   "https://github.com/nvim-treesitter/nvim-treesitter", -- treesitter
   "https://github.com/neovim/nvim-lspconfig", -- lsp
@@ -292,6 +293,11 @@ vim.keymap.set("n", "<leader>L", function()
   local command = { "fd", "-t", "f", "-L", "--hidden", "--exclude", ".git" }
   MiniPick.builtin.cli({ command = command }, { source = { name = "Pick files (follow, hidden)" } })
 end)
+
+require("colorizer").setup({
+  filetypes = {}, -- do not auto-attach
+  options = { parsers = { css = true } },
+})
 
 require("conform").setup({
   formatters_by_ft = {
