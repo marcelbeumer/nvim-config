@@ -151,6 +151,28 @@ vim.keymap.set("v", "<leader>yy", function()
   yank(vim.fn.expand("%:~:.") .. ":L" .. vim.fn.line("'<") .. "-L" .. vim.fn.line("'>"))
 end)
 
+-- Keybinding for https://github.com/marcelbeumer/gonotes wiki links.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    local dir = "./notes/by/id"
+    if vim.fn.isdirectory(dir) == 0 then
+      return
+    end
+    vim.keymap.set("n", "gl", function()
+      vim.cmd('normal! F[l"zyt]')
+      local link = vim.fn.getreg("z")
+      local id = vim.fn.matchstr(link, [[\d\{8}-\d\{1,}]])
+      local files = vim.fn.globpath(dir, id .. "-?*.md", false, true)
+      if #files > 0 then
+        vim.cmd("edit " .. files[1])
+      else
+        print('Link "' .. link .. '" (id "' .. id .. '") not found')
+      end
+    end, { buffer = true })
+  end,
+})
+
 -- Plugins.
 
 vim.pack.add({
