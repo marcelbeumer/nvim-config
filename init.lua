@@ -201,6 +201,7 @@ vim.pack.add({
   { src = "https://github.com/Saghen/blink.cmp", version = "v1.8.0" }, -- autocomplete
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" }, -- for presenting
   "https://github.com/folke/tokyonight.nvim", -- for presenting
+  "https://github.com/MeanderingProgrammer/render-markdown.nvim",
 })
 
 if colorscheme then
@@ -257,6 +258,13 @@ require("mini.ai").setup()
 require("mason").setup()
 require("boring-statusline").setup()
 require("persistence").setup()
+
+require("render-markdown").setup({
+  enabled = false,
+  anti_conceal = { enabled = false },
+  code = { highlight = { "CursorLine" } },
+  heading = { backgrounds = { "ColorColumn" } },
+})
 
 vim.keymap.set("n", "<leader>ss", function()
   require("persistence").load()
