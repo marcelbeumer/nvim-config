@@ -194,7 +194,7 @@ vim.pack.add({
   "https://github.com/kdheepak/lazygit.nvim", -- git
   "https://github.com/tpope/vim-fugitive", -- git
   "https://github.com/sindrets/diffview.nvim", -- git
-  "https://github.com/nvim-mini/mini.diff", -- git
+  "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/mason-org/mason.nvim", -- install/update external tools
   "https://github.com/marcelbeumer/next-lsp-reference.nvim", -- lsp util
   "https://github.com/marcelbeumer/less-indented-line.nvim", -- jump util
@@ -249,9 +249,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-require("mini.diff").setup()
-vim.keymap.set("n", "<leader>hh", MiniDiff.toggle, { desc = "Toggle mini.diff" })
-vim.keymap.set("n", "<leader>ho", MiniDiff.toggle_overlay, { desc = "Toggle mini.diff overlay" })
+require("gitsigns").setup({})
 
 require("mini.surround").setup()
 require("mini.ai").setup()
@@ -304,8 +302,12 @@ require("qfctl").setup({})
 
 local pick = require("mini.pick")
 pick.setup({
-  source = { show = pick.default_show },
-  window = { config = { width = 80 } },
+  source = { show = pick.default_show }, -- no icons
+  window = {
+    config = function()
+      return { width = vim.o.columns }
+    end,
+  },
 })
 
 vim.keymap.set("n", "<leader>/", "<cmd>Pick grep_live<cr>", { desc = "Grep live (rg)" })
