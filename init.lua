@@ -285,6 +285,7 @@ vim.keymap.set("n", "gP", function()
 end, {})
 
 require("oil").setup({
+  cleanup_delay_ms = false, -- keep oil buffers (for jumplist convenience)
   keymaps = {
     ["gy"] = { "actions.yank_entry", mode = "n" },
   },
