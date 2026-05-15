@@ -328,7 +328,7 @@ vim.keymap.set("n", "<leader>L", function()
 end)
 
 require("colorizer").setup({
-  filetypes = {}, -- do not auto-attach
+  filetypes = { "_" }, -- non-existing filetype; do not auto-attach
   options = { parsers = { css = true } },
 })
 
