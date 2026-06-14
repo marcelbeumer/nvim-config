@@ -114,6 +114,10 @@
       "rev": "41622312d5d8fb074699c1d5d96f089286191376",
       "src": "https://github.com/nickjvandyke/opencode.nvim"
     },
+    "osaka-jade.nvim": {
+      "rev": "583df123546b00c03ab713daec2fec4a9043d88d",
+      "src": "https://github.com/st-eez/osaka-jade.nvim"
+    },
     "persistence.nvim": {
       "rev": "b20b2a7887bd39c1a356980b45e03250f3dce49c",
       "src": "https://github.com/folke/persistence.nvim"
