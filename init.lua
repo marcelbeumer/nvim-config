@@ -198,7 +198,7 @@ vim.pack.add({
   "https://github.com/mason-org/mason.nvim", -- install/update external tools
   "https://github.com/marcelbeumer/next-lsp-reference.nvim", -- lsp util
   "https://github.com/marcelbeumer/less-indented-line.nvim", -- jump util
-  { src = "https://github.com/Saghen/blink.cmp", version = "v1.8.0" }, -- autocomplete
+  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") }, -- autocomplete
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" }, -- for presenting
   "https://github.com/folke/tokyonight.nvim", -- for presenting
   "https://github.com/MeanderingProgrammer/render-markdown.nvim",
@@ -362,9 +362,19 @@ local lsp_capabilities
 
 if autocomplete then
   require("blink.cmp").setup({
-    keymap = {
-      preset = "enter",
+    keymap = { preset = "enter" },
+    appearance = { nerd_font_variant = "mono" },
+    completion = {
+      documentation = { auto_show = false },
+      ghost_text = { enabled = true },
+      menu = {
+        auto_show = true,
+        border = "rounded",
+      },
     },
+    sources = { default = { "lsp", "path", "snippets", "buffer" } },
+    signature = { enabled = true, window = { border = "rounded" } },
+    fuzzy = { implementation = "prefer_rust_with_warning" },
   })
   lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
 else
