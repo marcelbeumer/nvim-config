@@ -249,7 +249,32 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-require("gitsigns").setup({})
+require("gitsigns").setup({
+ on_attach = function(bufnr)
+    local gitsigns = require('gitsigns')
+    local function map(mode, l, r, desc)
+      vim.keymap.set(mode, l, r, {buffer = bufnr, desc = desc})
+    end
+    map('n', ']c', function() if vim.wo.diff then vim.cmd.normal({']c', bang = true}) else gitsigns.nav_hunk('next') end end, "next hunk")
+    map('n', '[c', function() if vim.wo.diff then vim.cmd.normal({'[c', bang = true}) else gitsigns.nav_hunk('prev') end end, "prev hunk")
+    map('n', '<leader>hs', gitsigns.stage_hunk, "stage hunk")
+    map('n', '<leader>hr', gitsigns.reset_hunk, "reset hunk")
+    map('v', '<leader>hs', function() gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, "stage hunk")
+    map('v', '<leader>hr', function() gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, "reset hunk")
+    map('n', '<leader>hS', gitsigns.stage_buffer, "stage buffer")
+    map('n', '<leader>hR', gitsigns.reset_buffer, "reset buffer")
+    map('n', '<leader>hp', gitsigns.preview_hunk, "preview hunk")
+    map('n', '<leader>hi', gitsigns.preview_hunk_inline, "preview hunk inline")
+    map('n', '<leader>hb', function() gitsigns.blame_line({ full = true }) end, "blame line")
+    map('n', '<leader>hd', gitsigns.diffthis, "diffthis")
+    map('n', '<leader>hD', function() gitsigns.diffthis('~') end, "diffthis cwd")
+    map('n', '<leader>hQ', function() gitsigns.setqflist('all') end, "set all in qflist")
+    map('n', '<leader>hq', gitsigns.setqflist, "set in qflist")
+    map('n', '<leader>tb', gitsigns.toggle_current_line_blame, "toggle line blame")
+    map('n', '<leader>tw', gitsigns.toggle_word_diff, "toggle word fif")
+    map({'o', 'x'}, 'ih', gitsigns.select_hunk, "select hunk")
+  end
+})
 
 require("mini.surround").setup()
 require("mini.ai").setup()
@@ -405,6 +430,7 @@ vim.lsp.config("gopls", {
 })
 
 vim.lsp.enable("gopls")
+vim.lsp.enable("zls")
 vim.lsp.enable("terraformls")
 
 vim.api.nvim_create_autocmd("LspAttach", {
