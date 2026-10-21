@@ -451,7 +451,10 @@ vim.lsp.config("gopls", {
   },
 })
 
+vim.lsp.config("ts_ls", { capabilities = lsp_capabilities, })
+
 vim.lsp.enable("gopls")
+vim.lsp.enable("ts_ls")
 vim.lsp.enable("zls")
 vim.lsp.enable("terraformls")
 
